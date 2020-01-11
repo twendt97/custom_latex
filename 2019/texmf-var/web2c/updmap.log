@@ -1,5 +1,5 @@
 updmap version r51338 (2019-06-07 18:36:59 +0200)
-Sat Jan 11 19:06:05 2020
+Sat Jan 11 19:30:06 2020
 
 Using the following config files:
   /home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg
@@ -44,9 +44,10 @@ Scanning for Map entries
 /home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/dummy-space/dummy-space.map
 /home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/amsfonts/euler.map
 /home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/lm/lm.map
+/home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/marvosym/marvosym.map
 /home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/tetex/mathpple.map
 
-         [  4 files]
+         [  5 files]
 
 
 
@@ -1607,21 +1608,24 @@ ts1-lmvtlo10
 ts1-lmvtt10
 ts1-lmvtto10
 
+/home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/marvosym/marvosym.map:
+umvs
+
 /home/thilo_wendt/.texlive/2019/texmf-dist/fonts/map/dvips/tetex/mathpple.map:
 eurbo10
 eurmo10
 
 Files generated:
   /home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/dvips/updmap:
-       15812 2020-01-11 19:06:05 builtin35.map
-       21285 2020-01-11 19:06:05 download35.map
-       70601 2020-01-11 19:06:05 psfonts_pk.map
-       74452 2020-01-11 19:06:05 psfonts_t1.map
-       74447 2020-01-11 19:06:05 ps2pk.map
-          14 2020-01-11 19:06:06 psfonts.map -> psfonts_t1.map
+       15812 2020-01-11 19:30:06 builtin35.map
+       21285 2020-01-11 19:30:06 download35.map
+       70644 2020-01-11 19:30:06 psfonts_pk.map
+       74495 2020-01-11 19:30:06 psfonts_t1.map
+       74490 2020-01-11 19:30:06 ps2pk.map
+          14 2020-01-11 19:30:06 psfonts.map -> psfonts_t1.map
   /home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/pdftex/updmap:
-       74454 2020-01-11 19:06:05 pdftex_dl14.map
-       72789 2020-01-11 19:06:05 pdftex_ndl14.map
-          15 2020-01-11 19:06:06 pdftex.map -> pdftex_dl14.map
+       74497 2020-01-11 19:30:06 pdftex_dl14.map
+       72832 2020-01-11 19:30:06 pdftex_ndl14.map
+          15 2020-01-11 19:30:06 pdftex.map -> pdftex_dl14.map
   /home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/dvipdfmx/updmap:
-         335 2020-01-11 19:06:05 kanjix.map
+         335 2020-01-11 19:30:06 kanjix.map

@@ -1046,6 +1046,8 @@ ts1-lmvtl10 LMMonoPropLt10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtl1
 ts1-lmvtlo10 LMMonoPropLt10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtlo10.pfb
 ts1-lmvtt10 LMMonoProp10-Regular " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtt10.pfb
 ts1-lmvtto10 LMMonoProp10-Oblique " enclmts1 ReEncodeFont " <lm-ts1.enc <lmvtto10.pfb
+% marvosym.map
+umvs MarVoSym <marvosym.pfb
 % mathpple.map
 eurbo10 EURB10 " .167 SlantFont " <eurb10.pfb
 eurmo10 EURM10 " .167 SlantFont " <eurm10.pfb

@@ -1,0 +1,44 @@
+name graphics
+category Package
+revision 52663
+catalogue latex-graphics
+shortdesc The LaTeX standard graphics bundle
+longdesc This is a collection of LaTeX packages for: producing colour
+longdesc including graphics (eg PostScript) files rotation and scaling
+longdesc of text in LaTeX documents. It comprises the packages color,
+longdesc graphics, graphicx, trig, epsfig, keyval, and lscape.
+depend graphics-cfg
+depend graphics-def
+containersize 15040
+containerchecksum 644fb04d471819b976df0ead918a6f9d4c73affdf45ef19f905462713578be9eff4d487f97423e801651ab352bd49f275b89433ad8b5d5068c2aee7839d003f5
+doccontainersize 2001436
+doccontainerchecksum 194a3ab2ecead492a89c2a50a6afa1764348fa8dc70d2c00fd8eca9dd68aba71361732c9c01b760f4a2e3e5d5f5550fa37e2d42c8fc72cab33f1014ea10bd213
+srccontainersize 51852
+srccontainerchecksum f54ff0eec5c381518003d4203ac8d92a33aa8c18937aec8e74f89ce081710110deb649c359230b8b50036469376722718726ca87616ccbd596f78be0107696a4
+runfiles size=36
+ texmf-dist/tex/latex/graphics/color.sty
+ texmf-dist/tex/latex/graphics/dvipdf.def
+ texmf-dist/tex/latex/graphics/dvipsnam.def
+ texmf-dist/tex/latex/graphics/dvipsone.def
+ texmf-dist/tex/latex/graphics/dviwin.def
+ texmf-dist/tex/latex/graphics/emtex.def
+ texmf-dist/tex/latex/graphics/epsfig.sty
+ texmf-dist/tex/latex/graphics/graphics-2017-06-25.sty
+ texmf-dist/tex/latex/graphics/graphics.sty
+ texmf-dist/tex/latex/graphics/graphicx.sty
+ texmf-dist/tex/latex/graphics/keyval.sty
+ texmf-dist/tex/latex/graphics/lscape.sty
+ texmf-dist/tex/latex/graphics/pctex32.def
+ texmf-dist/tex/latex/graphics/pctexhp.def
+ texmf-dist/tex/latex/graphics/pctexps.def
+ texmf-dist/tex/latex/graphics/pctexwin.def
+ texmf-dist/tex/latex/graphics/rotating.sty
+ texmf-dist/tex/latex/graphics/tcidvi.def
+ texmf-dist/tex/latex/graphics/trig.sty
+ texmf-dist/tex/latex/graphics/truetex.def
+catalogue-contact-bugs https://www.latex-project.org/bugs/
+catalogue-contact-home https://www.latex-project.org/
+catalogue-ctan /macros/latex/required/graphics
+catalogue-license lppl1.3c
+catalogue-topics graphics collection
+catalogue-version 2019-10-01 PL1

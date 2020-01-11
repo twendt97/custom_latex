@@ -666,6 +666,67 @@ catalogue-license ofl
 catalogue-topics font font-maths font-symbol-maths font-bbd font-type1 font-mf
 catalogue-version 3.04
 
+name amsmath
+category Package
+revision 52854
+catalogue latex-amsmath
+shortdesc AMS mathematical facilities for LaTeX
+longdesc The package provides the principal packages in the AMS-LaTeX
+longdesc distribution. It adapts for use in LaTeX most of the
+longdesc mathematical features found in AMS-TeX; it is highly
+longdesc recommended as an adjunct to serious mathematical typesetting
+longdesc in LaTeX. When amsmath is loaded, AMS-LaTeX packages amsbsy
+longdesc (for bold symbols), amsopn (for operator names) and amstext
+longdesc (for text embedded in mathematics) are also loaded. amsmath is
+longdesc part of the LaTeX required distribution; however, several
+longdesc contributed packages add still further to its appeal; examples
+longdesc are empheq, which provides functions for decorating and
+longdesc highlighting mathematics, and ntheorem, for specifying theorem
+longdesc (and similar) definitions.
+containersize 30296
+containerchecksum 8ac6aa268beda34c926104c42245fdba795cb24ed2fd4ef7d8283522fe761ad226a532f03535d912337651f9fe093c729dfc5c355d176852d7863978b74b1621
+doccontainersize 2345548
+doccontainerchecksum b499e7788568b886612af56380cd33bad54d8ca21e52a36c729e6d319ba02d0f27ad9bccb2fb5cbeb4e86d9a9c4100616c656d43ae1f56ff3eb8e9938b482279
+srccontainersize 64088
+srccontainerchecksum bee8cbee4dcceb50dda09cbdbd71ca707aa963cbcf012cc7e8ef96ef71646fc08ac6ef9e0346ed47e5cb3e324b9ccfa1928e9a1f6ee9c48f1ea174d927660997
+runfiles size=69
+ texmf-dist/tex/latex/amsmath/amsbsy.sty
+ texmf-dist/tex/latex/amsmath/amscd.sty
+ texmf-dist/tex/latex/amsmath/amsgen.sty
+ texmf-dist/tex/latex/amsmath/amsmath-2018-12-01.sty
+ texmf-dist/tex/latex/amsmath/amsmath.sty
+ texmf-dist/tex/latex/amsmath/amsopn.sty
+ texmf-dist/tex/latex/amsmath/amstex.sty
+ texmf-dist/tex/latex/amsmath/amstext.sty
+ texmf-dist/tex/latex/amsmath/amsxtra.sty
+catalogue-also nath mathtools
+catalogue-contact-home http://www.ams.org/tex/amslatex.html
+catalogue-ctan /macros/latex/required/amsmath
+catalogue-license lppl1.3c
+catalogue-topics maths
+catalogue-version 2019-10-01 PL1
+
+name auxhook
+category Package
+revision 53173
+shortdesc Hooks for auxiliary files
+longdesc This package auxhook provides hooks for adding stuff at the
+longdesc begin of .aux files.
+containersize 1660
+containerchecksum 8ea845a19818df2df7939031e7b251b4b4d99a17c0d1b8177a592275bed6efdc660266964e0639222b86cfdd897bcf13302f1477b997ea1a06179cdd44aff0d1
+doccontainersize 285640
+doccontainerchecksum 7c4f850d93f8a6d25a35e762bdb2df26384c75ba1cbaba06806964737badb2f7c8ba3192c62df7e7f3de12c6fa117ebc525c735e696a9cafdad943a8cfeedabd
+srccontainersize 5240
+srccontainerchecksum f378f365c8fdee267224d092b35cd2bde971302cba003edd24b3f0a06bbd59e077096580e65480cb66adc6488aefb688ea423d74334976dfc92168688514e0b4
+runfiles size=1
+ texmf-dist/tex/latex/auxhook/auxhook.sty
+catalogue-contact-bugs https://github.com/ho-tex/auxhook/issues
+catalogue-contact-repository https://github.com/ho-tex/auxhook
+catalogue-ctan /macros/latex/contrib/auxhook
+catalogue-license lppl1.3
+catalogue-topics defer-stuff
+catalogue-version 1.6
+
 name babel
 category Package
 revision 53072
@@ -1394,6 +1455,38 @@ containerchecksum 5052866f519b8e5468e89120815ab40c793d55405d65a07a958815dc6d8cac
 binfiles arch=x86_64-linux size=42
  bin/x86_64-linux/bibtex
 
+name carlisle
+category Package
+revision 47876
+shortdesc David Carlisle's small packages
+longdesc Many of David Carlisle's more substantial packages stand on
+longdesc their own, or as part of the LaTeX latex-tools set; this set
+longdesc contains: Making dotless 'j' characters for fonts that don't
+longdesc have them; A method for combining the capabilities of longtable
+longdesc and tabularx; A proforma for building personalised LaTeX
+longdesc formats; An environment for including Plain TeX in LaTeX
+longdesc documents; A jiffy to remove counters from other counters'
+longdesc reset lists (now obsolete as it has been incorporated into the
+longdesc LaTeX format); A jiffy to create 'slashed' characters for
+longdesc physicists.
+containersize 11400
+containerchecksum d3e743a5e614479167ead02eabfefeffc8006e27c486fb5c57f1cb94278418f86db0431c752310bc1f7cda6dad22b1610edf4d24742391f6b743cad4ea050344
+doccontainersize 72752
+doccontainerchecksum 8d49c9d72669bffa042defaa53b4bdacf2e107753608747162947f05ad8438b9463afd905a376e462e6491293cf0c4a202e0b76db965854c19b97641d0a7d295
+srccontainersize 2884
+srccontainerchecksum 83417675f97cd8235ad3a38f3e333596188e717573a8739e41c1041d1641e1e53d48f189f6c01a58509ea8ca1c5d755c56aeeb9842e205c9aa8a01cfc7f688e9
+runfiles size=11
+ texmf-dist/tex/latex/carlisle/dotlessj.sty
+ texmf-dist/tex/latex/carlisle/ltxtable.sty
+ texmf-dist/tex/latex/carlisle/mylatex.ltx
+ texmf-dist/tex/latex/carlisle/plain.sty
+ texmf-dist/tex/latex/carlisle/remreset.sty
+ texmf-dist/tex/latex/carlisle/scalefnt.sty
+ texmf-dist/tex/latex/carlisle/slashed.sty
+catalogue-ctan /macros/latex/contrib/carlisle
+catalogue-license lppl
+catalogue-topics collection
+
 name cm
 category Package
 revision 49028
@@ -1881,6 +1974,1266 @@ binfiles arch=x86_64-linux size=92
  bin/x86_64-linux/afm2tfm
  bin/x86_64-linux/dvips
 
+name ec
+category Package
+revision 25033
+shortdesc Computer modern fonts in T1 and TS1 encodings
+longdesc The EC fonts are European Computer Modern Fonts, supporting the
+longdesc complete LaTeX T1 encoding defined at the 1990 TUG conference
+longdesc hold at Cork/Ireland. These fonts are intended to be stable
+longdesc with no changes being made to the tfm files. The set also
+longdesc contains a Text Companion Symbol font, called tc, featuring
+longdesc many useful characters needed in text typesetting, for example
+longdesc oldstyle digits, currency symbols (including the newly created
+longdesc Euro symbol), the permille sign, copyright, trade mark and
+longdesc servicemark as well as a copyleft sign, and many others. Recent
+longdesc releases of LaTeX2e support the EC fonts. The EC fonts
+longdesc supersede the preliminary version released as the DC fonts. The
+longdesc fonts are available in (traced) Adobe Type 1 format, as part of
+longdesc the cm-super bundle. The other Computer Modern-style T1-encoded
+longdesc Type 1 set, Latin Modern, is not actually a direct development
+longdesc of the EC set, and differs from the EC in a number of
+longdesc particulars.
+containersize 263716
+containerchecksum a967804b42bcc11e766d5b74de28c54d167625d2b108a34bc5e49351533ddcfe3334e4a7a34966f8d159bbde6a80f84b4d216553ce03fbcfb7a4b6267574538f
+doccontainersize 22856
+doccontainerchecksum bcf6617cf66af91312aea98f6c4a034f3af4ada14687414e7c3572e319fa4bd957dd25ebf557078297950d8ba8fd02229c5ad53464077feda462263b52536f29
+runfiles size=1445
+ texmf-dist/fonts/source/jknappen/ec/ecbi.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbi3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbl3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbm.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecbx3583.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc0500.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc0600.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc0700.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc0800.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc0900.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc1000.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc1095.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc1200.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc1440.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc1728.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc2074.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc2488.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc2986.mf
+ texmf-dist/fonts/source/jknappen/ec/eccc3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecci3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecdh3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecfb.mf
+ texmf-dist/fonts/source/jknappen/ec/ecff.mf
+ texmf-dist/fonts/source/jknappen/ec/ecfi.mf
+ texmf-dist/fonts/source/jknappen/ec/ecfs.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecit3583.mf
+ texmf-dist/fonts/source/jknappen/ec/eclb8.mf
+ texmf-dist/fonts/source/jknappen/ec/ecli8.mf
+ texmf-dist/fonts/source/jknappen/ec/eclo8.mf
+ texmf-dist/fonts/source/jknappen/ec/eclq8.mf
+ texmf-dist/fonts/source/jknappen/ec/ecltt8.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecoc3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecqi8.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrb3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecrm3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsc3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsi3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsl3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecso3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsq8.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecss3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecssdc10.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecst3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecsx3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ectc3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecti3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ectt3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecui3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvi3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecvt3583.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc0500.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc0600.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc0700.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc0800.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc0900.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc1000.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc1095.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc1200.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc1440.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc1728.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc2074.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc2488.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc2986.mf
+ texmf-dist/fonts/source/jknappen/ec/ecxc3583.mf
+ texmf-dist/fonts/source/jknappen/ec/exaccent.mf
+ texmf-dist/fonts/source/jknappen/ec/exaccess.mf
+ texmf-dist/fonts/source/jknappen/ec/exbase.mf
+ texmf-dist/fonts/source/jknappen/ec/exbraces.mf
+ texmf-dist/fonts/source/jknappen/ec/excligtb.mf
+ texmf-dist/fonts/source/jknappen/ec/excsc.mf
+ texmf-dist/fonts/source/jknappen/ec/excspl.mf
+ texmf-dist/fonts/source/jknappen/ec/exidigit.mf
+ texmf-dist/fonts/source/jknappen/ec/exileast.mf
+ texmf-dist/fonts/source/jknappen/ec/exilig.mf
+ texmf-dist/fonts/source/jknappen/ec/exiligtb.mf
+ texmf-dist/fonts/source/jknappen/ec/exillett.mf
+ texmf-dist/fonts/source/jknappen/ec/exilwest.mf
+ texmf-dist/fonts/source/jknappen/ec/exisixts.mf
+ texmf-dist/fonts/source/jknappen/ec/exitalp.mf
+ texmf-dist/fonts/source/jknappen/ec/exmligtb.mf
+ texmf-dist/fonts/source/jknappen/ec/expseudo.mf
+ texmf-dist/fonts/source/jknappen/ec/expunct.mf
+ texmf-dist/fonts/source/jknappen/ec/exrdigit.mf
+ texmf-dist/fonts/source/jknappen/ec/exrleast.mf
+ texmf-dist/fonts/source/jknappen/ec/exrlig.mf
+ texmf-dist/fonts/source/jknappen/ec/exrligtb.mf
+ texmf-dist/fonts/source/jknappen/ec/exrllett.mf
+ texmf-dist/fonts/source/jknappen/ec/exrlwest.mf
+ texmf-dist/fonts/source/jknappen/ec/exroman.mf
+ texmf-dist/fonts/source/jknappen/ec/exromp.mf
+ texmf-dist/fonts/source/jknappen/ec/exrueast.mf
+ texmf-dist/fonts/source/jknappen/ec/exrulett.mf
+ texmf-dist/fonts/source/jknappen/ec/exruwest.mf
+ texmf-dist/fonts/source/jknappen/ec/exsign.mf
+ texmf-dist/fonts/source/jknappen/ec/exsixtst.mf
+ texmf-dist/fonts/source/jknappen/ec/extextit.mf
+ texmf-dist/fonts/source/jknappen/ec/ieclb8.mf
+ texmf-dist/fonts/source/jknappen/ec/iecli8.mf
+ texmf-dist/fonts/source/jknappen/ec/ieclo8.mf
+ texmf-dist/fonts/source/jknappen/ec/ieclq8.mf
+ texmf-dist/fonts/source/jknappen/ec/iecltt8.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbi3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbl3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbm.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcbx3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcci3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcdh.mf
+ texmf-dist/fonts/source/jknappen/ec/tcfb.mf
+ texmf-dist/fonts/source/jknappen/ec/tcff.mf
+ texmf-dist/fonts/source/jknappen/ec/tcfi.mf
+ texmf-dist/fonts/source/jknappen/ec/tcfs.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcit3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrb3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcrm3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsi3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsl3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcso3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcss3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcst3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcsx3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcti3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tctt3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui0500.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui0600.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui0700.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcui3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvi3583.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt0800.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt0900.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt1000.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt1095.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt1200.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt1440.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt1728.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt2074.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt2488.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt2986.mf
+ texmf-dist/fonts/source/jknappen/ec/tcvt3583.mf
+ texmf-dist/fonts/source/jknappen/ec/txaccent.mf
+ texmf-dist/fonts/source/jknappen/ec/txgen.mf
+ texmf-dist/fonts/source/jknappen/ec/txifract.mf
+ texmf-dist/fonts/source/jknappen/ec/txisuper.mf
+ texmf-dist/fonts/source/jknappen/ec/txitlod.mf
+ texmf-dist/fonts/source/jknappen/ec/txpseudo.mf
+ texmf-dist/fonts/source/jknappen/ec/txrfract.mf
+ texmf-dist/fonts/source/jknappen/ec/txromod.mf
+ texmf-dist/fonts/source/jknappen/ec/txrsuper.mf
+ texmf-dist/fonts/source/jknappen/ec/txsymb.mf
+ texmf-dist/fonts/source/jknappen/ec/txsymbol.mf
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbi3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbl3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecbx3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eccc3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecci3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecdh3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecit3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eclb8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecli8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eclo8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/eclq8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecltt8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecoc3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrb3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecrm3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsc3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsi3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsl3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecso3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecss3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecst3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecsx3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectc3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecti3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ectt3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecui3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvi3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecvt3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ecxc3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ieclb8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/iecli8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ieclo8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/ieclq8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/iecltt8.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbi3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbl3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcbx3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcci3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcit3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrb3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcrm3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsi3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsl3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcso3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcss3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcst3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcsx3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcti3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tctt3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui0500.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui0600.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui0700.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcui3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvi3583.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt0800.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt0900.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt1000.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt1095.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt1200.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt1440.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt1728.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt2074.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt2488.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt2986.tfm
+ texmf-dist/fonts/tfm/jknappen/ec/tcvt3583.tfm
+catalogue-also eco
+catalogue-ctan /fonts/ec
+catalogue-license other-free
+catalogue-topics font font-mf font-serif font-sans font-proportional font-mono font-cm
+catalogue-version 1.0
+
 name enctex
 category Package
 revision 34957
@@ -1986,6 +3339,40 @@ catalogue-license lppl1.3
 catalogue-topics macro-supp
 catalogue-version 2.7
 
+name geometry
+category Package
+revision 53299
+shortdesc Flexible and complete interface to document dimensions
+longdesc The package provides an easy and flexible user interface to
+longdesc customize page layout, implementing auto-centering and
+longdesc auto-balancing mechanisms so that the users have only to give
+longdesc the least description for the page layout. For example, if you
+longdesc want to set each margin 2cm without header space, what you need
+longdesc is just \usepackage[margin=2cm,nohead]{geometry}. The package
+longdesc knows about all the standard paper sizes, so that the user need
+longdesc not know what the nominal 'real' dimensions of the paper are,
+longdesc just its standard name (such as a4, letter, etc.). An important
+longdesc feature is the package's ability to communicate the paper size
+longdesc it's set up to the output (whether via DVI \specials or via
+longdesc direct interaction with pdf(La)TeX).
+depend graphics
+depend iftex
+containersize 8700
+containerchecksum 991f8b0da99e4d7ecd2966cbc1e8a9ec3ce085ba18030492fdba5068111816e077f284ba782160265ef3f7f0fe436242a5b31f411bdf8db198f15af9d09c3a6a
+doccontainersize 864532
+doccontainerchecksum 046d18d86f13dac1ddf0171bd54bb38d09e5537a202a32de52e801816ed72438809b8f2e82f9d00c0af887e5373f23c2593e0aeb834f04b1e19c849435a913c7
+srccontainersize 47936
+srccontainerchecksum 5296e913b7ee92a1dd26798a1082ee4c01f08a1a75fa389a60505854c556be6b7acf34fbbde832465cb1312bf1cb9428b2d13f8ff4cb3f0ade68a1b4f371d646
+runfiles size=11
+ texmf-dist/tex/latex/geometry/geometry.sty
+catalogue-also vmargin typearea geometry-de
+catalogue-contact-bugs https://github.com/davidcarlisle/geometry/issues
+catalogue-contact-repository https://github.com/davidcarlisle/geometry
+catalogue-ctan /macros/latex/contrib/geometry
+catalogue-license lppl1.3c
+catalogue-topics geometry
+catalogue-version 5.9
+
 name glyphlist
 category Package
 revision 45696
@@ -1999,6 +3386,74 @@ runfiles size=24
  texmf-dist/fonts/map/glyphlist/glyphlist.txt
  texmf-dist/fonts/map/glyphlist/pdfglyphlist.txt
  texmf-dist/fonts/map/glyphlist/texglyphlist.txt
+
+name graphics
+category Package
+revision 52663
+catalogue latex-graphics
+shortdesc The LaTeX standard graphics bundle
+longdesc This is a collection of LaTeX packages for: producing colour
+longdesc including graphics (eg PostScript) files rotation and scaling
+longdesc of text in LaTeX documents. It comprises the packages color,
+longdesc graphics, graphicx, trig, epsfig, keyval, and lscape.
+depend graphics-cfg
+depend graphics-def
+containersize 15040
+containerchecksum 644fb04d471819b976df0ead918a6f9d4c73affdf45ef19f905462713578be9eff4d487f97423e801651ab352bd49f275b89433ad8b5d5068c2aee7839d003f5
+doccontainersize 2001436
+doccontainerchecksum 194a3ab2ecead492a89c2a50a6afa1764348fa8dc70d2c00fd8eca9dd68aba71361732c9c01b760f4a2e3e5d5f5550fa37e2d42c8fc72cab33f1014ea10bd213
+srccontainersize 51852
+srccontainerchecksum f54ff0eec5c381518003d4203ac8d92a33aa8c18937aec8e74f89ce081710110deb649c359230b8b50036469376722718726ca87616ccbd596f78be0107696a4
+runfiles size=36
+ texmf-dist/tex/latex/graphics/color.sty
+ texmf-dist/tex/latex/graphics/dvipdf.def
+ texmf-dist/tex/latex/graphics/dvipsnam.def
+ texmf-dist/tex/latex/graphics/dvipsone.def
+ texmf-dist/tex/latex/graphics/dviwin.def
+ texmf-dist/tex/latex/graphics/emtex.def
+ texmf-dist/tex/latex/graphics/epsfig.sty
+ texmf-dist/tex/latex/graphics/graphics-2017-06-25.sty
+ texmf-dist/tex/latex/graphics/graphics.sty
+ texmf-dist/tex/latex/graphics/graphicx.sty
+ texmf-dist/tex/latex/graphics/keyval.sty
+ texmf-dist/tex/latex/graphics/lscape.sty
+ texmf-dist/tex/latex/graphics/pctex32.def
+ texmf-dist/tex/latex/graphics/pctexhp.def
+ texmf-dist/tex/latex/graphics/pctexps.def
+ texmf-dist/tex/latex/graphics/pctexwin.def
+ texmf-dist/tex/latex/graphics/rotating.sty
+ texmf-dist/tex/latex/graphics/tcidvi.def
+ texmf-dist/tex/latex/graphics/trig.sty
+ texmf-dist/tex/latex/graphics/truetex.def
+catalogue-contact-bugs https://www.latex-project.org/bugs/
+catalogue-contact-home https://www.latex-project.org/
+catalogue-ctan /macros/latex/required/graphics
+catalogue-license lppl1.3c
+catalogue-topics graphics collection
+catalogue-version 2019-10-01 PL1
+
+name graphics-cfg
+category Package
+revision 41448
+shortdesc Sample configuration files for LaTeX color and graphics
+longdesc This bundle includes color.cfg and graphics.cfg files that set
+longdesc default "driver" options for the color and graphics packages.
+longdesc It contains support for defaulting the new LuaTeX option which
+longdesc was added to graphics and color in the 2016-02-01 release. The
+longdesc LuaTeX option is only used for LuaTeX versions from 0.87, older
+longdesc versions use the pdfTeX option as before.
+containersize 1160
+containerchecksum e1015d360b56f63f1b9790daf16e2101e6af995bd1e45288ea604ae94e20196cab22e7e54d318aa79fa386123032a928be70a57154d409321e04f03ecf97ab75
+doccontainersize 876
+doccontainerchecksum dbcfdf635c2816f305205915119e1f6acba816c17b683622a8a32c361d75338376426b258c1fa3271abc1d7ad2a520ac85092a7b3bfbac6463106449bc906ae4
+runfiles size=2
+ texmf-dist/tex/latex/graphics-cfg/color.cfg
+ texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+catalogue-also color graphics
+catalogue-contact-repository https://github.com/latex3/graphics-cfg
+catalogue-ctan /macros/latex/contrib/graphics-cfg
+catalogue-license pd
+catalogue-topics graphics colour
 
 name graphics-def
 category Package
@@ -2027,6 +3482,54 @@ catalogue-contact-repository https://github.com/latex3/graphics-def
 catalogue-ctan /macros/latex/contrib/graphics-def
 catalogue-license lppl1.3c
 catalogue-topics graphics-drv
+
+name grfext
+category Package
+revision 53024
+shortdesc Manipulate the graphics package's list of extensions
+longdesc This package provides macros for adding to, and reordering the
+longdesc list of graphics file extensions recognised by package
+longdesc graphics.
+containersize 2340
+containerchecksum a5f68f2bb2ea26d4b8f963a1b8fb8adfb3bd32e3a139dca57e6b45d80fcdd94c5e846549b1292224b9d845fd6a4d0ee56d4c2d2fbfc12c24806eca8551b9dc96
+doccontainersize 308376
+doccontainerchecksum 4337ae578d9e524e2da8564a1b736eac1dd50c1e4495d027c44f3841eb65c6c494527109e32f00844c17a5973a94572569a429ceb95beec98d2b19e84735eaaa
+srccontainersize 6144
+srccontainerchecksum cb7dcf9b3860b90bc8618c6d964fb7e9f5e056882bd5e6739a57564224f970ab9cf0ba136ebd88072541b8d169245ccaae90f714392a30f83c73e82281a07359
+runfiles size=2
+ texmf-dist/tex/latex/grfext/grfext.sty
+catalogue-contact-bugs https://github.com/ho-tex/grfext/issues
+catalogue-contact-repository https://github.com/ho-tex/grfext
+catalogue-ctan /macros/latex/contrib/grfext
+catalogue-license lppl1.3
+catalogue-topics graphics-supp
+catalogue-version 1.3
+
+name grffile
+category Package
+revision 52756
+shortdesc Extended file name support for graphics (legacy package)
+longdesc The original package extended the file name processing of
+longdesc package graphics to support a larger range of file names. The
+longdesc base LaTeX code now supports multiple dots and spaces, and this
+longdesc package by default is a stub that just loads graphicx. However,
+longdesc \usepackage{grffile}[=v1] may be used to access version 1(.18)
+longdesc of the package if that is needed.
+containersize 3868
+containerchecksum 3f1f5e4f258e4ab1f51fdb44fa0b49e80df21a6c35dccad16a6b70ad76489cb4fdfff7e6c4dd07821c54543fdaeecae32cfd8037d4920ce60db02be9a2f8fa07
+doccontainersize 350320
+doccontainerchecksum 2f2285ad44d0c585cd02b85359eb31f885f7c704f6da5f906240c1094ef8d347d33ba6beb31cf34e09a5e39e618a27a7ea263a63d6a887638d8f761e3cd4b61b
+srccontainersize 11228
+srccontainerchecksum 6538e5cf13f8212b5b231637a4abb68bc97330e123432922e403ae7321439bef910a0d1839abf394518ad274ed232c4c2e19671c8e6aaa55e2525708f305c679
+runfiles size=5
+ texmf-dist/tex/latex/grffile/grffile-2017-06-30.sty
+ texmf-dist/tex/latex/grffile/grffile.sty
+catalogue-contact-bugs https://github.com/ho-tex/grffile/issues
+catalogue-contact-repository https://github.com/ho-tex/grffile
+catalogue-ctan /macros/latex/contrib/grffile
+catalogue-license lppl1.3c
+catalogue-topics file-mgmt
+catalogue-version 2.1
 
 name gsftopk
 category TLCore
@@ -2058,6 +3561,64 @@ containersize 40840
 containerchecksum 5b4cc6976f7d0c4a895895688f4d320dd543981470a456945420cc8d426bb551ba4d0c1fca0f2589b03237fa28770ca4e7a330358094e8cb6b1d634ee53b450d
 binfiles arch=x86_64-linux size=23
  bin/x86_64-linux/gsftopk
+
+name hyperref
+category Package
+revision 53004
+shortdesc Extensive support for hypertext in LaTeX
+longdesc The hyperref package is used to handle cross-referencing
+longdesc commands in LaTeX to produce hypertext links in the document.
+longdesc The package provides backends for the \special set defined for
+longdesc HyperTeX DVI processors; for embedded pdfmark commands for
+longdesc processing by Acrobat Distiller (dvips and Y&Y's dvipsone); for
+longdesc Y&Y's dviwindo; for PDF control within pdfTeX and dvipdfm; for
+longdesc TeX4ht; and for VTeX's pdf and HTML backends. The package is
+longdesc distributed with the backref and nameref packages, which make
+longdesc use of the facilities of hyperref. The package depends on the
+longdesc author's kvoptions, ltxcmds and refcount packages.
+depend url
+depend stringenc
+containersize 108788
+containerchecksum fe21577aedd87184b459fae696234ea46cbb686c6a5f2d6cea5571b5ac77eff271c3c7f5f063e4ca4aa03ec3838a1b64e29a2b9d172b3feee37e88707df4211b
+doccontainersize 3213732
+doccontainerchecksum 078981c76f882f6f97185127b9ef8304b536f71bf2d89e62a5d2fe86f298f3f3d0bc207facf9dd27c5a3b2be71d5dd42caacf9944ae4527236754f760c95907b
+srccontainersize 448456
+srccontainerchecksum 37c18dd02f154242f62e831adafebcce83318c803dae49ed6e126ba940b4790a2ca73afc3e1bac65bf97dfe8b36256e9764dcace17f74a073e83a721155652fb
+runfiles size=237
+ texmf-dist/tex/latex/hyperref/backref.sty
+ texmf-dist/tex/latex/hyperref/hdvipdfm.def
+ texmf-dist/tex/latex/hyperref/hdvips.def
+ texmf-dist/tex/latex/hyperref/hdvipson.def
+ texmf-dist/tex/latex/hyperref/hdviwind.def
+ texmf-dist/tex/latex/hyperref/hluatex.def
+ texmf-dist/tex/latex/hyperref/hpdftex.def
+ texmf-dist/tex/latex/hyperref/htex4ht.cfg
+ texmf-dist/tex/latex/hyperref/htex4ht.def
+ texmf-dist/tex/latex/hyperref/htexture.def
+ texmf-dist/tex/latex/hyperref/hvtex.def
+ texmf-dist/tex/latex/hyperref/hvtexhtm.def
+ texmf-dist/tex/latex/hyperref/hvtexmrk.def
+ texmf-dist/tex/latex/hyperref/hxetex.def
+ texmf-dist/tex/latex/hyperref/hylatex.ltx
+ texmf-dist/tex/latex/hyperref/hyperref.sty
+ texmf-dist/tex/latex/hyperref/hypertex.def
+ texmf-dist/tex/latex/hyperref/minitoc-hyper.sty
+ texmf-dist/tex/latex/hyperref/nameref.sty
+ texmf-dist/tex/latex/hyperref/nohyperref.sty
+ texmf-dist/tex/latex/hyperref/ntheorem-hyper.sty
+ texmf-dist/tex/latex/hyperref/pd1enc.def
+ texmf-dist/tex/latex/hyperref/pdfmark.def
+ texmf-dist/tex/latex/hyperref/psdextra.def
+ texmf-dist/tex/latex/hyperref/puarenc.def
+ texmf-dist/tex/latex/hyperref/puenc.def
+ texmf-dist/tex/latex/hyperref/puvnenc.def
+ texmf-dist/tex/latex/hyperref/xr-hyper.sty
+catalogue-contact-bugs https://github.com/latex3/hyperref/issues
+catalogue-contact-home https://github.com/latex3/hyperref
+catalogue-ctan /macros/latex/contrib/hyperref
+catalogue-license lppl1.3
+catalogue-topics hyper pdf-feat adobe-distiller form-fillin
+catalogue-version 7.00c
 
 name hyph-utf8
 category Package
@@ -2198,6 +3759,29 @@ catalogue-ctan /macros/latex/contrib/iftex
 catalogue-license lppl1.3c
 catalogue-topics env-query
 catalogue-version 1.0c
+
+name infwarerr
+category Package
+revision 53023
+shortdesc Complete set of information/warning/error message macros
+longdesc This package provides a complete set of macros for information,
+longdesc warning and error messages. Under LaTeX, the commands are
+longdesc wrappers for the corresponding LaTeX commands; under Plain TeX
+longdesc they are available as complete implementations.
+containersize 2668
+containerchecksum a41fd6f2ee199e460950fdd31484be7e949a5e36ca740daaf3a1ffa01103d865f573c8ffe0859a8629456786cabf2f1751dbd828cb5d26356b1973960c854261
+doccontainersize 284912
+doccontainerchecksum 2830f622e2ea8e5b3427a9d924dd5f45f0c63a8a6de82e261102ca2c3f3afd7b781a7e0d50903dc8d8c1bee0674503f3ab935fe81dd9490d4310650097c4ffa6
+srccontainersize 5712
+srccontainerchecksum ccc6e1f7a63c10fed449c390b2283ac44b94c33a453f1146658082c888723ad8223bea01b71545d7f57f89fb8c8373f1a8329aab7255b7d17fd36853456cfbe9
+runfiles size=3
+ texmf-dist/tex/generic/infwarerr/infwarerr.sty
+catalogue-contact-bugs https://github.com/ho-tex/infwarerr/issues
+catalogue-contact-repository https://github.com/ho-tex/infwarerr
+catalogue-ctan /macros/latex/contrib/infwarerr
+catalogue-license lppl1.3
+catalogue-topics messages
+catalogue-version 1.5
 
 name knuth-lib
 category Package
@@ -2353,6 +3937,28 @@ binfiles arch=x86_64-linux size=30
  bin/x86_64-linux/kpsewhich
  bin/x86_64-linux/mkocp
  bin/x86_64-linux/mkofm
+
+name kvoptions
+category Package
+revision 52985
+shortdesc Key value format for package options
+longdesc This package offers support for package authors who want to use
+longdesc options in key-value format for their package options.
+containersize 7072
+containerchecksum af26d9fcf6f3afbd4e4dc105aa84e77bd737649864b3a8b4ba822e1dc62f4fc95e916df704249757d1ba4ec3b8281b510a6c5278b1f82b1a3af558b67790a781
+doccontainersize 478292
+doccontainerchecksum 6f567a5310250dff8d15de8d0fcda8c6eaf392fd9e221b5ea50c0de0bab44324ffcc42902a9d3b6f13cf6090f5e8ca513b5abb218b0f1827e953d76d377ff1ab
+srccontainersize 22516
+srccontainerchecksum ccb433710f2337e3663cf295b951e7d83e1fd46420a7dab127ff3f0c78f0f8e82ec064639f9c071f2a1e4ccb454776560bc25399e22fb6621c53c984c75f34bb
+runfiles size=10
+ texmf-dist/tex/latex/kvoptions/kvoptions-patch.sty
+ texmf-dist/tex/latex/kvoptions/kvoptions.sty
+catalogue-contact-bugs https://github.com/ho-tex/kvoptions/issues
+catalogue-contact-repository https://github.com/ho-tex/kvoptions
+catalogue-ctan /macros/latex/contrib/kvoptions
+catalogue-license lppl1.3
+catalogue-topics keyval
+catalogue-version 3.13
 
 name latex
 category Package
@@ -4060,6 +5666,39 @@ binfiles arch=x86_64-linux size=37
  bin/x86_64-linux/makeindex
  bin/x86_64-linux/mkindex
 
+name marvosym
+category Package
+revision 29349
+shortdesc Martin Vogel's Symbols (marvosym) font
+longdesc Martin Vogel's Symbol font (marvosym) contains the Euro
+longdesc currency symbol as defined by the European commission, along
+longdesc with symbols for structural engineering; symbols for steel
+longdesc cross-sections; astronomy signs (sun, moon, planets); the 12
+longdesc signs of the zodiac; scissor symbols; CE sign and others. The
+longdesc package contains both the original TrueType font and the
+longdesc derived Type 1 font, together with support files for TeX
+longdesc (LaTeX).
+execute addMap marvosym.map
+containersize 133476
+containerchecksum 64093dc5de012c6a50762ef34001ff2305e6b59b667ac7b1ef72cc53f8b0ed3852b4d307a8d421ece996e78f2e32c8871038b6b66659b0866dbdc536445dc7a3
+doccontainersize 426608
+doccontainerchecksum d6f72ee7ed64404acce5c37c216a7e23193f2053c18910d80fc6d5fde73ba86c07045102488f17f4cbeb9e1d148567973713bb4d9ce2cdd3cb166936ba5623e1
+srccontainersize 1256
+srccontainerchecksum c28a69567c593160c7d04b4fc0fe7f0106db12ab588d3f02139e55ad99a1b4e33f1bba92f5af103b6f2a7e720d243b919d1f39f28031ad95dde3ae7e723f6e36
+runfiles size=51
+ texmf-dist/fonts/afm/public/marvosym/marvosym.afm
+ texmf-dist/fonts/map/dvips/marvosym/marvosym.map
+ texmf-dist/fonts/tfm/public/marvosym/umvs.tfm
+ texmf-dist/fonts/truetype/public/marvosym/marvosym.ttf
+ texmf-dist/fonts/type1/public/marvosym/marvosym.pfb
+ texmf-dist/tex/latex/marvosym/marvosym.sty
+ texmf-dist/tex/latex/marvosym/umvs.fd
+catalogue-contact-home http://www.marvosym.de
+catalogue-ctan /fonts/marvosym
+catalogue-license ofl
+catalogue-topics font font-mf font-ttf font-symbol font-supp
+catalogue-version 2.2a
+
 name metafont
 category Package
 revision 52851
@@ -4172,6 +5811,145 @@ binfiles arch=x86_64-linux size=145
  bin/x86_64-linux/pktogf
  bin/x86_64-linux/pktype
 
+name oberdiek
+category Package
+revision 53283
+shortdesc A bundle of packages submitted by Heiko Oberdiek
+longdesc The bundle comprises packages to provide: aliascnt: 'alias
+longdesc counters'; bmpsize: get bitmap size and resolution data;
+longdesc centernot: a horizontally-centred \not symbol; chemarr:
+longdesc extensible chemists' reaction arrows; classlist: record
+longdesc information about document class(es) used; colonequals: poor
+longdesc man's mathematical relation symbols; dvipscol: dvips colour
+longdesc stack management; engord: define counter-printing operations
+longdesc producing English ordinals; eolgrab: collect arguments
+longdesc delimited by end of line; flags: setting and clearing flags in
+longdesc bit fields and converting the bit field into a decimal number;
+longdesc holtxdoc: extra documentation macros; hopatch: safely apply
+longdesc package patches; hypbmsec: bookmarks in sectioning commands;
+longdesc hypcap: anjusting anchors of captions; hypdestopt: optimising
+longdesc hyperref's pdfTeX driver destinations; hypdoc: hyper-references
+longdesc in the LaTeX standard doc package; hypgotoe: experimental
+longdesc package for links to embedded files; hyphsubst: substitute
+longdesc hyphenation patterns; ifdraft: switch for option draft; iflang:
+longdesc provides expandable checks for the current language; pagegrid:
+longdesc prints a page grid in the background; pagesel: select pages of
+longdesc a document for output; pdfcolfoot: using pdfTeX's color stack
+longdesc for footnotes; pdfcol: macros for setting and maintaining new
+longdesc color stacks; pdfcolparallel: fixes colour problems in package
+longdesc parallel; pdfcolparcolumns: fixes colour problems in package
+longdesc parcolumns; pdfcrypt: setting PDF encryption; pdfrender:
+longdesc control PDF rendering modes; protecteddef: define a command
+longdesc that protected against expansion; resizegather: automatically
+longdesc resize overly large equations; rotchiffre: performs simple
+longdesc rotation cyphers; scrindex: redefines environment 'theindex' of
+longdesc package 'index', if a class from KOMA-Script is loaded;
+longdesc setouterhbox: set \hbox in outer horizontal mode; settobox:
+longdesc getting box sizes; soul and adds some support for UTF-8;
+longdesc stackrel: extensions of the \stackrel command; stampinclude:
+longdesc selects the files for \include by inspecting the timestamp of
+longdesc the .aux file(s); tabularht: tabulars with height
+longdesc specification; tabularkv: key value interface for tabular
+longdesc parameters; telprint: print German telephone numbers;
+longdesc thepdfnumber: canonical numbers for use in PDF files and
+longdesc elsewhere; twoopt: commands with two optional arguments; Each
+longdesc of the packages is represented by two files, a .dtx (documented
+longdesc source) and a PDF file; the .ins file necessary for
+longdesc installation is extracted by running the .dtx file with Plain
+longdesc TeX.
+depend auxhook
+depend grfext
+depend grffile
+depend iftex
+depend kvoptions
+depend infwarerr
+depend pdftexcmds
+containersize 48116
+containerchecksum 6e3aeb760239bd3f8ee92655703b6155f9f096f4baf0cd8efa3b6cdfb67f96ca16149ea3e11dd851960d98304eb88c78373241d0b00948b3d717ed92e32d858c
+doccontainersize 9330492
+doccontainerchecksum 76baac4bb06b595e05bf235a6436e8d59b06ea6917ffa66d6e82ccba994975b6992caf422b40d864ecf7ba7152446859299cb158eadef3c37a6d96354649f6e0
+srccontainersize 127840
+srccontainerchecksum 79b9c0a1e6c01cd20f8d9d7fbba82b0f4779d1724cc8b777e537e289833cb6a712de8ad4b2fa44083e3b3fdfee375ffa68c518779ceb7944091cb3e3a1e1d207
+runfiles size=115
+ texmf-dist/bibtex/bib/oberdiek/oberdiek-bundle.bib
+ texmf-dist/bibtex/bib/oberdiek/oberdiek-source.bib
+ texmf-dist/tex/generic/oberdiek/engord.sty
+ texmf-dist/tex/generic/oberdiek/eolgrab.sty
+ texmf-dist/tex/generic/oberdiek/fibnum.sty
+ texmf-dist/tex/generic/oberdiek/hyphsubst.sty
+ texmf-dist/tex/generic/oberdiek/iflang.sty
+ texmf-dist/tex/generic/oberdiek/pdfcol.sty
+ texmf-dist/tex/generic/oberdiek/pdfcrypt.sty
+ texmf-dist/tex/generic/oberdiek/pdfrender.sty
+ texmf-dist/tex/generic/oberdiek/protecteddef.sty
+ texmf-dist/tex/generic/oberdiek/rotchiffre.sty
+ texmf-dist/tex/generic/oberdiek/setouterhbox.sty
+ texmf-dist/tex/generic/oberdiek/telprint.sty
+ texmf-dist/tex/generic/oberdiek/thepdfnumber.sty
+ texmf-dist/tex/latex/oberdiek/aliascnt.sty
+ texmf-dist/tex/latex/oberdiek/bmpsize-base.sty
+ texmf-dist/tex/latex/oberdiek/bmpsize-dvipdfm.def
+ texmf-dist/tex/latex/oberdiek/bmpsize-dvipdfmx.def
+ texmf-dist/tex/latex/oberdiek/bmpsize-dvips.def
+ texmf-dist/tex/latex/oberdiek/bmpsize-test.tex
+ texmf-dist/tex/latex/oberdiek/bmpsize.sty
+ texmf-dist/tex/latex/oberdiek/centernot.sty
+ texmf-dist/tex/latex/oberdiek/chemarr.sty
+ texmf-dist/tex/latex/oberdiek/classlist.sty
+ texmf-dist/tex/latex/oberdiek/colonequals.sty
+ texmf-dist/tex/latex/oberdiek/dvipscol.sty
+ texmf-dist/tex/latex/oberdiek/enparen.sty
+ texmf-dist/tex/latex/oberdiek/flags.sty
+ texmf-dist/tex/latex/oberdiek/holtxdoc.sty
+ texmf-dist/tex/latex/oberdiek/hopatch.sty
+ texmf-dist/tex/latex/oberdiek/hypbmsec.sty
+ texmf-dist/tex/latex/oberdiek/hypcap.sty
+ texmf-dist/tex/latex/oberdiek/hypdestopt.sty
+ texmf-dist/tex/latex/oberdiek/hypdoc.sty
+ texmf-dist/tex/latex/oberdiek/hypgotoe.sty
+ texmf-dist/tex/latex/oberdiek/ifdraft.sty
+ texmf-dist/tex/latex/oberdiek/pagegrid.sty
+ texmf-dist/tex/latex/oberdiek/pagesel.sty
+ texmf-dist/tex/latex/oberdiek/pdfcolfoot.sty
+ texmf-dist/tex/latex/oberdiek/pdfcolparallel.sty
+ texmf-dist/tex/latex/oberdiek/pdfcolparcolumns.sty
+ texmf-dist/tex/latex/oberdiek/resizegather.sty
+ texmf-dist/tex/latex/oberdiek/scrindex.sty
+ texmf-dist/tex/latex/oberdiek/settobox.sty
+ texmf-dist/tex/latex/oberdiek/stackrel.sty
+ texmf-dist/tex/latex/oberdiek/stampinclude.sty
+ texmf-dist/tex/latex/oberdiek/tabularht.sty
+ texmf-dist/tex/latex/oberdiek/tabularkv.sty
+ texmf-dist/tex/latex/oberdiek/twoopt.sty
+catalogue-contact-bugs https://github.com/ho-tex/oberdiek/issues
+catalogue-contact-repository https://github.com/ho-tex/oberdiek
+catalogue-ctan /macros/latex/contrib/oberdiek
+catalogue-license lppl1.3c
+catalogue-topics collection
+
+name parskip
+category Package
+revision 49730
+shortdesc Layout with zero \parindent, non-zero \parskip
+longdesc Simply changing \parskip and \parindent leaves a layout that is
+longdesc untidy; this package (though it is no substitute for a
+longdesc properly-designed class) helps alleviate this untidiness.
+containersize 2852
+containerchecksum 7a157e443317d05b31cdbb34a07e69b9496116d52aedbd021c710751fcf1f5db4565803e26a824166d283e043ba52a865638e739a6e81dd48623cd7230e86731
+doccontainersize 309408
+doccontainerchecksum fc4484eb846ea726e69e890f5ef3e0f64479739aae3929f663935a6b26597fa706a34e1e2eb86284c79dce2bbc7a9c13f2d7e8285d7bb9a0148eab1a150aa584
+srccontainersize 5504
+srccontainerchecksum 41c3dbec891e1b6589f9d8cc2f54622df45cc56fa5d8ccce6e7b57c974ce6499477ce589b43dfd2b572cc636cbd850ff25e944e285faa0ea5d16487f5a7f3a8f
+runfiles size=3
+ texmf-dist/tex/latex/parskip/parskip-2001-04-09.sty
+ texmf-dist/tex/latex/parskip/parskip.sty
+catalogue-contact-bugs https://github.com/FrankMittelbach/fmitex/issues
+catalogue-contact-repository https://github.com/FrankMittelbach/fmitex
+catalogue-ctan /macros/latex/contrib/parskip
+catalogue-license lppl1.3c
+catalogue-topics layout parshape
+catalogue-version 2.0c
+
 name pdftex
 category TLCore
 revision 52874
@@ -4225,6 +6003,30 @@ binfiles arch=x86_64-linux size=545
  bin/x86_64-linux/pdfetex
  bin/x86_64-linux/pdftex
  bin/x86_64-linux/simpdftex
+
+name pdftexcmds
+category Package
+revision 52913
+shortdesc LuaTeX support for pdfTeX utility functions
+longdesc LuaTeX provides most of the commands of pdfTeX 1.40. However, a
+longdesc number of utility functions are not available. This package
+longdesc tries to fill the gap and implements some of the missing
+longdesc primitives using Lua.
+containersize 6300
+containerchecksum 04bccf5df6e3d0e70673cad77a778c47eaa3e733ee3b30062bde6f19126aec573bd8bb3e669b98ad61a5a3e04af4a92fc038340761ec5da955254c2874a669ba
+doccontainersize 403868
+doccontainerchecksum 932a1d8224152e54b34e5dce7f2a2ebb36d7816e3791b3d95399fe34a2c2dcd2a9487caed2e082c5e5e215e64ebc8a095a2ac6e1ee898546ea1f906634dd1ec7
+srccontainersize 16672
+srccontainerchecksum 628dad73557d9bcf1debd807618e6954ff6a844ca1d89cb3c96119ba6ba42b7cd88cba9035bd1ac43f34499b811aef1f503c4fb9f52de47137afe037df6a8c69
+runfiles size=8
+ texmf-dist/scripts/pdftexcmds/pdftexcmds.lua
+ texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+catalogue-contact-bugs https://github.com/ho-tex/pdftexcmds/issues
+catalogue-contact-repository https://github.com/ho-tex/pdftexcmds
+catalogue-ctan /macros/latex/contrib/pdftexcmds
+catalogue-license lppl1.3c
+catalogue-topics macro-supp
+catalogue-version 0.31
 
 name plain
 category Package
@@ -4289,6 +6091,68 @@ longdesc corresponds exactly to collection-basic.
 depend collection-basic
 containersize 428
 containerchecksum 8ae04d142c738142753b4601cc327721cb59689948c2c953f79ff1c4364aa6a449e3862d206223ef1ac1efc3fdfdb1f542c32c8049327662d4ddbe77fe7edbce
+
+name stringenc
+category Package
+revision 52982
+shortdesc Converting a string between different encodings
+longdesc This package provides \StringEncodingConvert for converting a
+longdesc string between different encodings. Both LaTeX and plain-TeX
+longdesc are supported.
+containersize 23376
+containerchecksum a776ddb2378bea0880d7c17e1a87db5f66645c5856243e49de1c56bc427213098afbca34773a44ad955a0014b969c59454d3a0c0ec371d213481668f5f784ca4
+doccontainersize 664768
+doccontainerchecksum a4f182559d37e45ca8b6c50656d2d520e3f0bf1ab63dc6477cd6e3abe6cbb5c4b89d779c380997b167019aae6fb12ae68d5fe37ea0c08945e3383f5d9905bf31
+srccontainersize 30628
+srccontainerchecksum 3febbaa990eb691af640df745f36e289a7f2bfe6f52259d6693c6c9991d719e79edbd14b35c1eba5a9033b203531fceb4164303bd6a3dbab7238b814bdb5eda6
+runfiles size=108
+ texmf-dist/tex/generic/stringenc/se-ascii-print.def
+ texmf-dist/tex/generic/stringenc/se-ascii.def
+ texmf-dist/tex/generic/stringenc/se-clean7bit.def
+ texmf-dist/tex/generic/stringenc/se-cp1250.def
+ texmf-dist/tex/generic/stringenc/se-cp1251.def
+ texmf-dist/tex/generic/stringenc/se-cp1252.def
+ texmf-dist/tex/generic/stringenc/se-cp1257.def
+ texmf-dist/tex/generic/stringenc/se-cp437.def
+ texmf-dist/tex/generic/stringenc/se-cp850.def
+ texmf-dist/tex/generic/stringenc/se-cp852.def
+ texmf-dist/tex/generic/stringenc/se-cp855.def
+ texmf-dist/tex/generic/stringenc/se-cp858.def
+ texmf-dist/tex/generic/stringenc/se-cp865.def
+ texmf-dist/tex/generic/stringenc/se-cp866.def
+ texmf-dist/tex/generic/stringenc/se-dec-mcs.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-1.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-10.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-11.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-13.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-14.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-15.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-16.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-2.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-3.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-4.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-5.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-6.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-7.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-8.def
+ texmf-dist/tex/generic/stringenc/se-iso-8859-9.def
+ texmf-dist/tex/generic/stringenc/se-koi8-r.def
+ texmf-dist/tex/generic/stringenc/se-mac-centeuro.def
+ texmf-dist/tex/generic/stringenc/se-mac-cyrillic.def
+ texmf-dist/tex/generic/stringenc/se-mac-roman.def
+ texmf-dist/tex/generic/stringenc/se-nextstep.def
+ texmf-dist/tex/generic/stringenc/se-pdfdoc.def
+ texmf-dist/tex/generic/stringenc/se-utf16le.def
+ texmf-dist/tex/generic/stringenc/se-utf32be.def
+ texmf-dist/tex/generic/stringenc/se-utf32le.def
+ texmf-dist/tex/generic/stringenc/se-utf8.def
+ texmf-dist/tex/generic/stringenc/stringenc.sty
+catalogue-contact-bugs https://github.com/ho-tex/stringenc/issues
+catalogue-contact-repository https://github.com/ho-tex/stringenc
+catalogue-ctan /macros/latex/contrib/stringenc
+catalogue-license lppl1.3
+catalogue-topics enc-juggle
+catalogue-version 1.12
 
 name tetex
 category TLCore
@@ -4718,6 +6582,33 @@ runfiles size=8052
  texmf-dist/fonts/map/pdftex/updmap/pdftex.map
  texmf-dist/fonts/map/pdftex/updmap/pdftex_dl14.map
  texmf-dist/fonts/map/pdftex/updmap/pdftex_ndl14.map
+
+name url
+category Package
+revision 32528
+shortdesc Verbatim with URL-sensitive line breaks
+longdesc The command \url is a form of verbatim command that allows
+longdesc linebreaks at certain characters or combinations of characters,
+longdesc accepts reconfiguration, and can usually be used in the
+longdesc argument to another command. (The \urldef command provides
+longdesc robust commands that serve in cases when \url doesn't work in
+longdesc an argument.) The command is intended for email addresses,
+longdesc hypertext links, directories/paths, etc., which normally have
+longdesc no spaces, so by default the package ignores spaces in its
+longdesc argument. However, a package option "allows spaces", which is
+longdesc useful for operating systems where spaces are a common part of
+longdesc file names.
+containersize 5528
+containerchecksum 164fb94cb128e997031bfdf8c602892d78813694f39f4b95bfead8a5b7e3cd9a0d9596dbe697e012bdf84b89c2551c2f2f1c7f99d4543e357edfaf2076b9cfba
+doccontainersize 266856
+doccontainerchecksum 65596e0ce813233491959ef161be8570450c6c71c787b3253d0bce503558e63902137a6d337ad1e7cd2499feacbba4a93b7b75559750d05d7898ff2527f1240c
+runfiles size=4
+ texmf-dist/tex/latex/url/url.sty
+catalogue-also path
+catalogue-ctan /macros/latex/contrib/url
+catalogue-license lppl
+catalogue-topics verbatim
+catalogue-version 3.4
 
 name xdvi
 category TLCore
