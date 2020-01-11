@@ -706,6 +706,55 @@ catalogue-license lppl1.3c
 catalogue-topics maths
 catalogue-version 2019-10-01 PL1
 
+name atbegshi
+category Package
+revision 53051
+shortdesc Execute stuff at \shipout time
+longdesc This package is a modern reimplementation of package everyshi,
+longdesc providing various commands to be executed before a \shipout
+longdesc command. It makes use of e-TeX's facilities if they are
+longdesc available. The package may be used either with LaTeX or with
+longdesc plain TeX.
+containersize 4748
+containerchecksum 7e03a9a73d8790f6603d53c11aacd01fb7108546e2d3b6ddbd5fce1e42d68ed9c23dfe41794b943eeea67ce0c598851132dd23faa95289789911cd059a8caad8
+doccontainersize 400452
+doccontainerchecksum 8f6402dd0f36d4cc4a4674c0d0b37f012a7d6e557174ca3b58a7a2b33d89475d1e47028cc39d2b77c496bfae0751275369c5f4f49cf53b8c36fb60fce47a6bd3
+srccontainersize 13348
+srccontainerchecksum 8eee629abbe71332a00a7ffd41f8def262baef4bdfe9e314a4afa90015b30c77e291634f3e83d904646cdbe4820e3c6e0e6398383892ea26f62ad348ac2f3409
+runfiles size=7
+ texmf-dist/tex/generic/atbegshi/atbegshi.sty
+catalogue-also everyshi
+catalogue-contact-repository https://github.com/ho-tex/atbegshi
+catalogue-ctan /macros/latex/contrib/atbegshi
+catalogue-license lppl1.3
+catalogue-topics defer-stuff
+catalogue-version 1.19
+
+name atveryend
+category Package
+revision 53108
+shortdesc Hooks at the very end of a document
+longdesc This LaTeX packages provides two hooks for \end{document} that
+longdesc are executed after the hook of \AtEndDocument:
+longdesc \AfterLastShipout can be used for code that is to be executed
+longdesc right after the last \clearpage before the `.aux' file is
+longdesc closed. \AtVeryEndDocument is used for code after closing and
+longdesc final reading of the `.aux' file.
+containersize 3908
+containerchecksum 2a546be6d2109de9db60e94bea3a63a3c7af8ae892c8540a1513fbe4bfa505dcbdde9913b7a4449727df0ccf6957f8010c5b76abd8d6310c118b269bdc7334e4
+doccontainersize 376388
+doccontainerchecksum 5c5948ab7f0ca213bb5fe3ae056cddd392461911e2af7dfff133253f6aae970d525fc752f154921de2186c8a443fa4f90b18d23896a016ebc9ea177d6826613b
+srccontainersize 8600
+srccontainerchecksum 1ec0c4752df403e47c4f8d4186167ccb59d2269012d904e9de1ec54acacbdb84b571f5bd1e6b645f7f86972178db2793853701cfa180b66ae7edc1d1488958b2
+runfiles size=5
+ texmf-dist/tex/latex/atveryend/atveryend.sty
+catalogue-contact-bugs https://github.com/ho-tex/atveryend/issues
+catalogue-contact-repository https://github.com/ho-tex/atveryend
+catalogue-ctan /macros/latex/contrib/atveryend
+catalogue-license lppl1.3
+catalogue-topics defer-stuff
+catalogue-version 1.11
+
 name auxhook
 category Package
 revision 53173
@@ -1403,6 +1452,37 @@ catalogue-license lppl1.3
 catalogue-topics multilingual
 catalogue-version 3.37
 
+name babel-german
+category Package
+revision 49391
+shortdesc Babel support for documents written in German
+longdesc This bundle is an extension to the babel package for
+longdesc multilingual typesetting. It provides all the necessary macros,
+longdesc definitions and settings to typeset German documents. The
+longdesc bundle includes support for the traditional and reformed German
+longdesc orthography as well as for the Austrian and Swiss varieties of
+longdesc German.
+containersize 3880
+containerchecksum 2aa32e3cd0deb815a559e1722cb2ee423d605449af766a8b7c36c67a0e9081fa0402b88ef5c171186d353a8a57d0ae630fd7eedca1d795bd8130189bf05ab2f3
+doccontainersize 495632
+doccontainerchecksum fcee15f9b0123fd6c5cac11143f6ade9e770f4a3dab07e45bd5cebb30e020be58bb9e43cafee6b4dbc96f8037a84012f900eb33836f7e48607c5424ebfa61947
+srccontainersize 14728
+srccontainerchecksum a1fc8b8134042079b7cf5d2497b7802397ab7fd43dc354a7bd9ef3c9a9cc3e2e6f84cdb193653d0147fcbe9a6859e9ddb2aff7f5e25093771c7ce76024eb0b7a
+runfiles size=11
+ texmf-dist/tex/generic/babel-german/austrian.ldf
+ texmf-dist/tex/generic/babel-german/german.ldf
+ texmf-dist/tex/generic/babel-german/germanb.ldf
+ texmf-dist/tex/generic/babel-german/naustrian.ldf
+ texmf-dist/tex/generic/babel-german/ngerman.ldf
+ texmf-dist/tex/generic/babel-german/ngermanb.ldf
+ texmf-dist/tex/generic/babel-german/nswissgerman.ldf
+ texmf-dist/tex/generic/babel-german/swissgerman.ldf
+catalogue-contact-repository https://github.com/jspitz/babel-german
+catalogue-ctan /macros/latex/contrib/babel-contrib/german
+catalogue-license lppl1.3
+catalogue-topics german multilingual-addon
+catalogue-version 2.11
+
 name bibtex
 category Package
 revision 50602
@@ -1454,6 +1534,79 @@ containersize 73656
 containerchecksum 5052866f519b8e5468e89120815ab40c793d55405d65a07a958815dc6d8cacdcc1d61818585aa12e7947b6698e2f772b12b916d193f720dd5a74f485964d0a22
 binfiles arch=x86_64-linux size=42
  bin/x86_64-linux/bibtex
+
+name bigintcalc
+category Package
+revision 53172
+shortdesc Integer calculations on very large numbers
+longdesc This package provides expandable arithmetic operations with big
+longdesc integers that can exceed TeX's number limits.
+containersize 6504
+containerchecksum c801e5953008e8cd8521886496238f4f7a86a6c65a160255beb3fd6a41a48dd7bfa2da438f8e1ae4c79b51f769f0e07bcaa7c3c8aa6e1204ea656aca3d1f4620
+doccontainersize 456956
+doccontainerchecksum f5e7cc163157e429906489cb3cb94d8694c01be3c720e03b85bb24c7bd757391cf09e08f3d88df4ae7485978042e9d408fc5af0d93e016c82912479d40457079
+srccontainersize 14244
+srccontainerchecksum e829ad1e3a118e8fd0ea0e632740ed49db65603d6fdcc7d40126a048db5cc0f73c9f4aa64d81902794ed308ca31a153044a56ef37ac179918b24be71ae168f64
+runfiles size=10
+ texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+catalogue-contact-bugs https://github.com/ho-tex/bigintcalc/issues
+catalogue-contact-repository https://github.com/ho-tex/bigintcalc
+catalogue-ctan /macros/latex/contrib/bigintcalc
+catalogue-license lppl1.3
+catalogue-topics arithmetic calculation
+catalogue-version 1.5
+
+name bitset
+category Package
+revision 53085
+shortdesc Handle bit-vector datatype
+longdesc This package defines and implements the data type bit set, a
+longdesc vector of bits. The size of the vector may grow dynamically.
+longdesc Individual bits can be manipulated.
+containersize 5720
+containerchecksum 54c4520f5241bf1efb22b619b90918c466332ff0d9985f4be4f08351dab28c76e078d0f44f67c56c4cf9801ce70621ccdf647e8c3c9196b24eb91fa73d332f53
+doccontainersize 616520
+doccontainerchecksum e0b50576838f10acbd31a884e448f82743ecec4427853cfd00fa7b9f481b4d0d8a8207fe4fbb9a8b29ea96e6d9c21980327d301f6b41cc2b5e1e7a91e9a27842
+srccontainersize 14628
+srccontainerchecksum d9a1ec1223a1d62f3417d87119bee95cce5d8b1258953e237ef34a9902aea5948f43c3d56dfd550d9f1a043b166d330f397c11e1e8b5ef404c2c5532dd68745e
+runfiles size=9
+ texmf-dist/tex/generic/bitset/bitset.sty
+catalogue-contact-bugs https://github.com/ho-tex/bitset/issues
+catalogue-contact-repository https://github.com/ho-tex/bitset
+catalogue-ctan /macros/latex/contrib/bitset
+catalogue-license lppl1.3
+catalogue-topics data-manip
+catalogue-version 1.3
+
+name bookmark
+category Package
+revision 53026
+shortdesc A new bookmark (outline) organization for hyperref
+longdesc This package implements a new bookmark (outline) organization
+longdesc for package hyperref. Bookmark properties such as style and
+longdesc color can now be set. Other action types are available (URI,
+longdesc GoToR, Named). The bookmarks are generated in the first compile
+longdesc run. Package hyperref uses two runs.
+containersize 8116
+containerchecksum 29f24d431958caf824b8a3af098f9b8712315ac98ed7c1b4969b1a650cb8a9732341ea3af42c154e28aff35fa6a0abe8b3cfd24772662027912f355f3f5cd16e
+doccontainersize 465408
+doccontainerchecksum 39ff86ed5dace26339bf93b83e9d41a8d89cf17ba6abbf07be9f9ec72232dd27e88e88291d54c09b2bc1ff8b88bcc40a04c75767ba2f9b35a192dfbb8b6b9100
+srccontainersize 18372
+srccontainerchecksum 411587deb4d6e436928dfe318166735444c178c777b2124e2479b993e4b00240060569bb95f56ff12d421e73ec191a203186318057b649bb3a48ca5cfd7ebbd5
+runfiles size=21
+ texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
+ texmf-dist/tex/latex/bookmark/bkm-dvips.def
+ texmf-dist/tex/latex/bookmark/bkm-dvipsone.def
+ texmf-dist/tex/latex/bookmark/bkm-pdftex.def
+ texmf-dist/tex/latex/bookmark/bkm-textures.def
+ texmf-dist/tex/latex/bookmark/bkm-vtex.def
+ texmf-dist/tex/latex/bookmark/bookmark.sty
+catalogue-contact-bugs https://github.com/ho-tex/bookmark/issues
+catalogue-contact-repository https://github.com/ho-tex/bookmark
+catalogue-ctan /macros/latex/contrib/bookmark
+catalogue-license lppl1.3
+catalogue-topics hyper
+catalogue-version 1.28
 
 name carlisle
 category Package
@@ -3291,6 +3444,107 @@ catalogue-ctan /systems/enctex
 catalogue-license gpl
 catalogue-topics engine
 
+name epspdf
+category Package
+revision 49952
+shortdesc Converter for PostScript, EPS and PDF
+longdesc Epspdftk.tcl is a GUI ps/eps/pdf converter. Epspdf.tlu, its
+longdesc command-line backend, can be used by itself. Options include
+longdesc grayscaling, cropping margins and single-page selection. Some
+longdesc conversion options are made possible by converting in multiple
+longdesc steps.
+depend epspdf.ARCH
+containersize 31484
+containerchecksum a8d2e4cdf1b3e4439ce8c96b18cc7182bf29f745b8a35942623575951ddf179964536f72ec58a357e7544d861bcf624d7b35ed3a0932d758e011e56633aba078
+doccontainersize 235256
+doccontainerchecksum f2c5ed08890388bc064af0bfe31f540c126b9bab4a5b262a5e44f6cbb4e4511ed43ef0fdd2945b01bfb1ff4aba15aaa7e7fa373f7cf93827fa352226a423d8dd
+runfiles size=32
+ texmf-dist/scripts/epspdf/epspdf.help
+ texmf-dist/scripts/epspdf/epspdf.tlu
+ texmf-dist/scripts/epspdf/epspdf4tk.cmd
+ texmf-dist/scripts/epspdf/epspdftk.tcl
+catalogue-also epstopdf
+catalogue-ctan /support/epspdf
+catalogue-license gpl2
+catalogue-topics graphics-epspdf
+catalogue-version 0.6.4
+
+name epspdf.x86_64-linux
+category Package
+revision 29050
+shortdesc x86_64-linux files of epspdf
+containersize 364
+containerchecksum 560f1d59ac8ec0807e6f413a354b2ea7c282cda847e2f942538eabe04db2bc95de5479f09dee870d85193d55354322ed745ea7f341ac5dc6a04dace016055287
+binfiles arch=x86_64-linux size=2
+ bin/x86_64-linux/epspdf
+ bin/x86_64-linux/epspdftk
+
+name epstopdf
+category Package
+revision 48684
+shortdesc Convert EPS to PDF using Ghostscript
+longdesc Epstopdf is a Perl script that converts an EPS file to an
+longdesc 'encapsulated' PDF file (a single page file whose media box is
+longdesc the same as the original EPS's bounding box). The resulting
+longdesc file suitable for inclusion by pdfTeX as an image. The script
+longdesc is adapted to run both on Windows and on Unix-alike systems.
+longdesc The script makes use of Ghostscript for the actual conversion
+longdesc to PDF. It assumes Ghostscript version 6.51 or later, and (by
+longdesc default) suppresses its automatic rotation of pages where most
+longdesc of the text is not horizontal. LaTeX users may make use of the
+longdesc epstopdf package, which will run the epstopdf script "on the
+longdesc fly", thus giving the illusion that pdfLaTeX is accepting EPS
+longdesc graphic files.
+depend epstopdf.ARCH
+containersize 12460
+containerchecksum 6412bb97554b271cf5412dbccd316f3d69d7bcf2f524a5d6d1a75f69cfa11a981fc4ab063b6ea8302c2a0236ff93c59f1ee2f8f2b7f33dc466324080fc5016f4
+doccontainersize 30444
+doccontainerchecksum 7fef59ad3bc72b2e3fc10021216b88b8d5465f42503d9938031c3d40d93fbaf637094fdfc87b19ccc1da4d9a28c9890beccee7c30b915a513a909edbac6e0a25
+runfiles size=9
+ texmf-dist/scripts/epstopdf/epstopdf.pl
+catalogue-also epstopdf-pkg
+catalogue-contact-home http://tug.org/epstopdf/
+catalogue-ctan /support/epstopdf
+catalogue-license other-free
+catalogue-topics graphics-epspdf
+catalogue-version 2.28
+
+name epstopdf-pkg
+category Package
+revision 53070
+shortdesc Call epstopdf "on the fly"
+longdesc The package adds support for EPS files in the graphicx package
+longdesc when running under pdfTeX. If an EPS graphic is detected, the
+longdesc package spawns a process to convert the EPS to PDF, using the
+longdesc script epstopdf. This of course requires that shell escape is
+longdesc enabled for the pdfTeX run.
+containersize 4200
+containerchecksum 92c2c7cbe4ad5c02a41522ef1d938d8ea1a9a30d0b7cd8a92b1fa4b9404690c00695a92ce951456460cae5c73f66fd2694fc63089ed05f8ea49a7ce9cb003dee
+doccontainersize 353844
+doccontainerchecksum 7b641b38853600e893e336b1b5333acc22a01ef060ec0636b5fd54ec63f29e14633e1fbfd3e88e6a10792e7415889a6e41cefde19b7ac2d1a6112591bf69e8b4
+srccontainersize 11944
+srccontainerchecksum 13667a0d7ec0e7e7b82a374c35f05ef4f1b0083499eab02107b430c8a4ebe21904d0004ed33a9c807497f4ae06a2c830eb8bb26bfafb298d8cd6a10c7ab89adb
+runfiles size=6
+ texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+ texmf-dist/tex/latex/epstopdf-pkg/epstopdf.sty
+catalogue-also epstopdf
+catalogue-contact-bugs https://github.com/ho-tex/epstopdf/issues
+catalogue-contact-repository https://github.com/ho-tex/epstopdf
+catalogue-ctan /macros/latex/contrib/epstopdf-pkg
+catalogue-license lppl1.3
+catalogue-topics graphics-epspdf callback
+catalogue-version 2.10
+
+name epstopdf.x86_64-linux
+category Package
+revision 18365
+shortdesc x86_64-linux files of epstopdf
+containersize 364
+containerchecksum a14c6953be481ae60c1b6ff8657a26cc13cb7c994ca2f003f3c3c4da98032cf77ba51298bb11391654b9d2547d6070d287384521956e5132a13142ff7bcbfeb9
+binfiles arch=x86_64-linux size=2
+ bin/x86_64-linux/epstopdf
+ bin/x86_64-linux/repstopdf
+
 name etex
 category Package
 revision 37057
@@ -3339,6 +3593,78 @@ catalogue-license lppl1.3
 catalogue-topics macro-supp
 catalogue-version 2.7
 
+name etexcmds
+category Package
+revision 53171
+shortdesc Avoid name clashes with e-TeX commands
+longdesc New primitive commands are introduced in e-TeX; sometimes the
+longdesc names collide with existing macros. This package solves the
+longdesc name clashes by adding a prefix to e-TeX's commands. For
+longdesc example, eTeX's \unexpanded is provided as \etex@unexpanded.
+containersize 2448
+containerchecksum b0be75d3c8eb92407f21111e6c9d397ab5de39b96b99403a149a9554eff523e99cdacc9c1c37ef47cd190487511c6fc6b7c91b617e889eac1d6d8b6aa61c0c6b
+doccontainersize 300584
+doccontainerchecksum 841ff47f9cefecefb241cb81602b825c07d4d0eaf143343eb9bf6c35ca66194c98f851e4aa27a369d60927fe96968bf7a1c1d8dfc7bb5be092e77330ad8ac6f2
+srccontainersize 5440
+srccontainerchecksum 057bd48b4c4455f3641c961b6337127c6f84c72dd89615197c095b13846599f1fd8016ffb7fe22be820f16f7b012ee0991d8e959e59a3393694239c1abd610e7
+runfiles size=2
+ texmf-dist/tex/generic/etexcmds/etexcmds.sty
+catalogue-contact-bugs https://github.com/ho-tex/etexcmds/issues
+catalogue-contact-repository https://github.com/ho-tex/etexcmds
+catalogue-ctan /macros/latex/contrib/etexcmds
+catalogue-license lppl1.3
+catalogue-topics macro-supp
+catalogue-version 1.7
+
+name eurosym
+category Package
+revision 17265
+shortdesc Metafont and macros for Euro sign
+longdesc The European currency symbol for the Euro implemented in
+longdesc Metafont, using the official European Commission dimensions,
+longdesc and providing several shapes (normal, slanted, bold, outline).
+longdesc The package also includes a LaTeX package which defines the
+longdesc macro, pre-compiled tfm files, and documentation.
+execute addMixedMap eurosym.map
+containersize 139880
+containerchecksum 9624b0a91a8491d4178051e8e8264e506725ace0eb1b4e4ee9f3cf38cf7868d392f0f4fae92947c74182a6cdf7d4cfb46319a269e4e3aac686ecf4a4cd2f7b3d
+doccontainersize 277732
+doccontainerchecksum db226757ec82087da3e67fe69b5e9c2429e3cc2addb126bc528dda8bc421a4e9da2a367e64f119eb109e8898409a4e50177b81f9035ed1e0672bb902836bb61f
+runfiles size=72
+ texmf-dist/fonts/map/dvips/eurosym/eurosym.map
+ texmf-dist/fonts/source/public/eurosym/fey.mf
+ texmf-dist/fonts/source/public/eurosym/feybl10.mf
+ texmf-dist/fonts/source/public/eurosym/feybo10.mf
+ texmf-dist/fonts/source/public/eurosym/feybr10.mf
+ texmf-dist/fonts/source/public/eurosym/feyml10.mf
+ texmf-dist/fonts/source/public/eurosym/feymo10.mf
+ texmf-dist/fonts/source/public/eurosym/feymr10.mf
+ texmf-dist/fonts/tfm/public/eurosym/feybl10.tfm
+ texmf-dist/fonts/tfm/public/eurosym/feybo10.tfm
+ texmf-dist/fonts/tfm/public/eurosym/feybr10.tfm
+ texmf-dist/fonts/tfm/public/eurosym/feyml10.tfm
+ texmf-dist/fonts/tfm/public/eurosym/feymo10.tfm
+ texmf-dist/fonts/tfm/public/eurosym/feymr10.tfm
+ texmf-dist/fonts/type1/public/eurosym/feybl10.pfb
+ texmf-dist/fonts/type1/public/eurosym/feybo10.pfb
+ texmf-dist/fonts/type1/public/eurosym/feybr10.pfb
+ texmf-dist/fonts/type1/public/eurosym/feyml10.pfb
+ texmf-dist/fonts/type1/public/eurosym/feymo10.pfb
+ texmf-dist/fonts/type1/public/eurosym/feymr10.pfb
+ texmf-dist/fonts/type1/public/eurosym/geybl10.pfb
+ texmf-dist/fonts/type1/public/eurosym/geybo10.pfb
+ texmf-dist/fonts/type1/public/eurosym/geybr10.pfb
+ texmf-dist/fonts/type1/public/eurosym/geyml10.pfb
+ texmf-dist/fonts/type1/public/eurosym/geymo10.pfb
+ texmf-dist/fonts/type1/public/eurosym/geymr10.pfb
+ texmf-dist/tex/latex/eurosym/eurosym.sty
+catalogue-also europs marvosym
+catalogue-contact-home http://www.theiling.de/eurosym.html
+catalogue-ctan /fonts/eurosym
+catalogue-license other-free
+catalogue-topics font font-specialist font-mf
+catalogue-version 1.4-subrfix
+
 name geometry
 category Package
 revision 53299
@@ -3372,6 +3698,27 @@ catalogue-ctan /macros/latex/contrib/geometry
 catalogue-license lppl1.3c
 catalogue-topics geometry
 catalogue-version 5.9
+
+name gettitlestring
+category Package
+revision 53170
+shortdesc Clean up title references
+longdesc Cleans up the title string (removing \label commands) for
+longdesc packages (such as nameref) that typeset such strings.
+containersize 2780
+containerchecksum 101ad92c2fba5c43321d8e12754190e09b0442508799dbb6bac23d5cbe96c470425a4cc10a28441408ac5a1c406e18aab7567f2464e48c2692fa38af1e23a16f
+doccontainersize 317824
+doccontainerchecksum f9e33fbe89df368c4c5dfd855f2fc0fa8c4d1eec5c0ab925b0a28b9f021fd2d88521895233d12783a023e40d70b05a0e849d4551f79fd4b8d0af72fb60a1af32
+srccontainersize 6424
+srccontainerchecksum 9bddc79e0f839a21ebb76e21e20ba5a26971f4192ebc2209468a780a15e5e5f61a328df5f033c115452751a31d1e6dc2e6e238097d2cbdbffa33f56ca420b602
+runfiles size=3
+ texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+catalogue-contact-bugs https://github.com/ho-tex/gettitlestring/issues
+catalogue-contact-repository https://github.com/ho-tex/gettitlestring
+catalogue-ctan /macros/latex/contrib/gettitlestring
+catalogue-license lppl1.3
+catalogue-topics macro-supp
+catalogue-version 1.6
 
 name glyphlist
 category Package
@@ -3561,6 +3908,29 @@ containersize 40840
 containerchecksum 5b4cc6976f7d0c4a895895688f4d320dd543981470a456945420cc8d426bb551ba4d0c1fca0f2589b03237fa28770ca4e7a330358094e8cb6b1d634ee53b450d
 binfiles arch=x86_64-linux size=23
  bin/x86_64-linux/gsftopk
+
+name hycolor
+category Package
+revision 53169
+shortdesc Implements colour for packages hyperref and bookmark
+longdesc This package provides the code for the color option that is
+longdesc used by packages hyperref and bookmark. It is not intended as
+longdesc package for the user.
+containersize 3968
+containerchecksum 2d22361b11555a704e6fb8eb270e455293e6538e9c07817d680a6f352514cd4ce3b0ef08fa932b5055bd44fc866344cf50969c61d7f4bd6c2d2d0c966bc8ab8b
+doccontainersize 360356
+doccontainerchecksum 7cf2697024a7803f02ac6f9ed15f709db92955e91b062109545cb6c5a10b721f0dab53947a7cc8e70bf1e4860d989aebee53ce4bdebd8f9f9b9910358c2a0d65
+srccontainersize 9740
+srccontainerchecksum f4046f8e663a5499eb3742a3483b02ab97d0293e78443dc1bafafd6e2424f2d07de7f6421cc67b597323d0c5c28c207ac34ead2a159463b1f683016c2453226a
+runfiles size=6
+ texmf-dist/tex/latex/hycolor/hycolor.sty
+ texmf-dist/tex/latex/hycolor/xcolor-patch.sty
+catalogue-contact-bugs https://github.com/ho-tex/hycolor/issues
+catalogue-contact-repository https://github.com/ho-tex/hycolor
+catalogue-ctan /macros/latex/contrib/hycolor
+catalogue-license lppl1.3
+catalogue-topics colour
+catalogue-version 1.9
 
 name hyperref
 category Package
@@ -3782,6 +4152,28 @@ catalogue-ctan /macros/latex/contrib/infwarerr
 catalogue-license lppl1.3
 catalogue-topics messages
 catalogue-version 1.5
+
+name intcalc
+category Package
+revision 53168
+shortdesc Expandable arithmetic operations with integers
+longdesc This package provides expandable arithmetic operations with
+longdesc integers, using the e-TeX extension \numexpr if it is
+longdesc available.
+containersize 5436
+containerchecksum e1087a7ab3f1d695bc20435ef0bb2b806d1cca71eb792fcf46e6c2fc6d819de2ff623a65593b65d5bf228309e3e3d5210ae1fb1452356f97a5ecb45921a7ce0f
+doccontainersize 423196
+doccontainerchecksum f3cc5dba031957d77cdf39d902eeda96c8405efef52352109a7bfb187e363321d31120b4c66ed4b2e990fbd7085b927599a0956749e4303611cdbec5d9d7179e
+srccontainersize 12576
+srccontainerchecksum c3fc56d3ece265756a6c19684e7c2f9717df7f65176a640bcf6fede941468c8a426abb610ebf9955de920adaf2c96165f91f7314f48701121dfc4381f921d42b
+runfiles size=8
+ texmf-dist/tex/generic/intcalc/intcalc.sty
+catalogue-contact-bugs https://github.com/ho-tex/intcalc/issues
+catalogue-contact-repository https://github.com/ho-tex/intcalc
+catalogue-ctan /macros/latex/contrib/intcalc
+catalogue-license lppl1.3
+catalogue-topics arithmetic calculation
+catalogue-version 1.3
 
 name knuth-lib
 category Package
@@ -4239,6 +4631,27 @@ binfiles arch=x86_64-linux size=30
  bin/x86_64-linux/mkocp
  bin/x86_64-linux/mkofm
 
+name kvdefinekeys
+category Package
+revision 53193
+shortdesc Define keys for use in the kvsetkeys package
+longdesc The package provides a macro \kv@define@key (analogous to
+longdesc keyval's \define@key, to define keys for use by kvsetkeys.
+containersize 2092
+containerchecksum 2a03840307805bd6fe30be9c108982bc472912c11c8cec25737ebc4042e48af8fe4f1a76124536874bea8c554f003a9c52b8a72d2f6900bc6872ffef8649c40e
+doccontainersize 296808
+doccontainerchecksum c540045ec1c8bd7fea3000dd0ebc8adac64da7ccc24b0becb9b9c32c9dda6e5e11a77b57bee667bd2ddbddf347bd8af069907e087d543898a92ebaedf3fa4b7c
+srccontainersize 5112
+srccontainerchecksum 0944a3f6f8e8cd8c189767944a74d5dbf09fcccd94cfdd2e67018f4a3542ce2ca4b8b7e3cb440345eb299584707962ed903f2fd8c832fad6cb850b29c7a99af6
+runfiles size=2
+ texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+catalogue-contact-bugs https://github.com/ho-tex/kvdefinekeys/issues
+catalogue-contact-repository https://github.com/ho-tex/kvdefinekeys
+catalogue-ctan /macros/latex/contrib/kvdefinekeys
+catalogue-license lppl1.3c
+catalogue-topics keyval
+catalogue-version 1.6
+
 name kvoptions
 category Package
 revision 52985
@@ -4260,6 +4673,30 @@ catalogue-ctan /macros/latex/contrib/kvoptions
 catalogue-license lppl1.3
 catalogue-topics keyval
 catalogue-version 3.13
+
+name kvsetkeys
+category Package
+revision 53166
+shortdesc Key value parser with default handler support
+longdesc This package provides \kvsetkeys, a variant of package keyval's
+longdesc \setkeys. It allows the user to specify a handler that deals
+longdesc with unknown options. Active commas and equal signs may be used
+longdesc (e.g. see babel's shorthands) and only one level of curly
+longdesc braces are removed from the values.
+containersize 3568
+containerchecksum c5e117a46ab54485b7748bafd5cfd381d28073564b571fd1cda78da70b42dcf48fe054538323cdee7e784aff91cb76dd24361908a4c97213df315f6cb91af583
+doccontainersize 372380
+doccontainerchecksum 875af5f0ef28b6bb80b19537ca3dc426fb9daf4de8e10dc518cf5daea8f6bc6801832156e5bd978937209b2e9883898b957c8cbe87b51a2b2aeb071445e045de
+srccontainersize 10800
+srccontainerchecksum 48a8299a53c47b518b3461fc960c18d81acd26b90bc58e84756cff28fa34b072d769b55162ab86ebd10fb6e3e1a4486c85c66093a32695636f7821582234cb9f
+runfiles size=4
+ texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+catalogue-contact-bugs https://github.com/ho-tex/kvsetkeys/issues
+catalogue-contact-repository https://github.com/ho-tex/kvsetkeys
+catalogue-ctan /macros/latex/contrib/kvsetkeys
+catalogue-license lppl1.3
+catalogue-topics keyval
+catalogue-version 1.18
 
 name latex
 category Package
@@ -4579,6 +5016,30 @@ runfiles size=8
  texmf-dist/tex/latex/latexconfig/lualatexquotejobname.tex
  texmf-dist/tex/latex/latexconfig/mllatex.ini
  texmf-dist/tex/latex/latexconfig/pdflatex.ini
+
+name letltxmacro
+category Package
+revision 53022
+shortdesc Let assignment for LaTeX macros
+longdesc TeX's \let assignment does not work for LaTeX macros with
+longdesc optional arguments or for macros that are defined as robust
+longdesc macros by \DeclareRobustCommand. This package defines
+longdesc \LetLtxMacro that also takes care of the involved internal
+longdesc macros.
+containersize 2092
+containerchecksum c9c1f5c3b9aab6b31750011cd45c42bdb32ecd712ced8f8cdafe1aeca532159051d1cff1449b06e3d35fbefdd44f2332805cb1618ff1da022d405a88d600083b
+doccontainersize 290936
+doccontainerchecksum 8be12930acfaa79dbf3d7d3e0a60a518b12392c094e1dc531bfbcd8d9517d4744e99d339b3b7bcfb1e156d0ccbd17ca464126d8530e9f9c13e29d19a6aaeea99
+srccontainersize 5912
+srccontainerchecksum 86863fc9935ac5044f2e3b3013b0df39cfe95f54fff5c6b1af0297b828fc88353243b117caf79cafb7f8c17d9fa90b2e0e8ca753573baa06db7acb26a978f30d
+runfiles size=2
+ texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+catalogue-contact-bugs https://github.com/ho-tex/letltxmacro/issues
+catalogue-contact-repository https://github.com/ho-tex/letltxmacro
+catalogue-ctan /macros/latex/contrib/letltxmacro
+catalogue-license lppl1.3
+catalogue-topics macro-def
+catalogue-version 1.6
 
 name lm
 category Package
@@ -5687,6 +6148,28 @@ catalogue-license gfl
 catalogue-topics font font-proportional font-mono font-type1 font-otf font-cm
 catalogue-version 2.004
 
+name ltxcmds
+category Package
+revision 53165
+shortdesc Some LaTeX kernel commands for general use
+longdesc This package exports some utility macros from the LaTeX kernel
+longdesc into a separate namespace and also makes them available for
+longdesc other formats such as plain TeX.
+containersize 4248
+containerchecksum 9cc445ad177af9b8f942b0c5096f83200224e0cda838441d28d5a188fee50d6c24dd4d415c2afb01792f57813558400826ead9336200f810336c26852ef61ad9
+doccontainersize 388356
+doccontainerchecksum bba1f1505bd24d62c82aedb28382cce9f80232b45f9ff0002c94dc6c26de0937cd6c1757396c2ca5a0afbb44d25dafdb4a4da1df46f88757d9b4cb03c912630d
+srccontainersize 13060
+srccontainerchecksum 035c7436b6000f4b17c41b8fdd71e1497cae824e20a8c872f7f4cfdeb43d080f6a7fb1c193f3718cf725ae5c79576c24616c36ce38b8705d05a1f1b9a5eb50fd
+runfiles size=5
+ texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+catalogue-contact-bugs https://github.com/ho-tex/ltxcmds/issues
+catalogue-contact-repository https://github.com/ho-tex/ltxcmds
+catalogue-ctan /macros/latex/contrib/ltxcmds
+catalogue-license lppl1.3
+catalogue-topics macro-supp
+catalogue-version 1.24
+
 name lua-alt-getopt
 category Package
 revision 29349
@@ -6251,6 +6734,28 @@ catalogue-license lppl1.3c
 catalogue-topics layout parshape
 catalogue-version 2.0c
 
+name pdfescape
+category Package
+revision 53082
+shortdesc Implements pdfTeX's escape features using TeX or e-TeX
+longdesc This package implements pdfTeX's escape features
+longdesc (\pdfescapehex, \pdfunescapehex, \pdfescapename,
+longdesc \pdfescapestring) using TeX or e-TeX.
+containersize 4264
+containerchecksum ca908d58a9a0c0094fcd9bad550bf493a0dbea9e90702534a7418f9a5f506f5cedd42663f154bd227349e4e57e223b6360871bdc995eaea221c07cccaa780327
+doccontainersize 342644
+doccontainerchecksum d95aa97463b20c178a04f9f2cb71011985eb5242ec620adb9911bb5f1103f71e9fb0feca5704a9339b9490a71ed67c8c038efcf6cf43e16fcd20ba2eaeff8161
+srccontainersize 8308
+srccontainerchecksum b6edb668b4803c91288b0f149e2700213ecab7725310d7d4bf499cf557590cd4356d9c79a6bfaf17a50ce85f4951a1e996ccf6725ea6da000f0c316f5a0466d4
+runfiles size=5
+ texmf-dist/tex/generic/pdfescape/pdfescape.sty
+catalogue-contact-bugs https://github.com/ho-tex/pdfescape/issues
+catalogue-contact-repository https://github.com/ho-tex/pdfescape
+catalogue-ctan /macros/latex/contrib/pdfescape
+catalogue-license lppl1.3
+catalogue-topics macro-supp
+catalogue-version 1.15
+
 name pdftex
 category TLCore
 revision 52874
@@ -6363,6 +6868,54 @@ catalogue-ctan /macros/plain/base
 catalogue-license knuth
 catalogue-topics format
 catalogue-version 3.141592653
+
+name refcount
+category Package
+revision 53164
+shortdesc Counter operations with label references
+longdesc Provides commands \setcounterref and \addtocounterref which use
+longdesc the section (or whatever) number from the reference as the
+longdesc value to put into the counter, as in: ...\label{sec:foo} ...
+longdesc \setcounterref{foonum}{sec:foo} Commands \setcounterpageref and
+longdesc \addtocounterpageref do the corresponding thing with the page
+longdesc reference of the label. No .ins file is distributed; process
+longdesc the .dtx with plain TeX to create one.
+containersize 3040
+containerchecksum da914e64de5b70e124d9eb62148f5650c9445d2fdb94272ce622478b9aa50a4c7625be9c2152fffe9ff9fd87ee19319a0bc31ec5fd82839a479faec687de4af4
+doccontainersize 325408
+doccontainerchecksum 5324828978e3c8c14e9a28b86cbf87de175b9908f460ce6090bf19944557cfe82b112c6543d2878b54f4a16b1a9f3f3ffc66eddf1234c04b8852dbfa3ebaf27e
+srccontainersize 7464
+srccontainerchecksum 26c03363bd65be818d05792fc1c7e3a2e7e747a49382562eeebaefac35d5b4143b86bd46fce97fd4aa0f162ce7a1399e200f2593b3920091159bcfa08f0f8781
+runfiles size=3
+ texmf-dist/tex/latex/refcount/refcount.sty
+catalogue-contact-bugs https://github.com/ho-tex/refcount/issues
+catalogue-contact-repository https://github.com/ho-tex/refcount
+catalogue-ctan /macros/latex/contrib/refcount
+catalogue-license lppl1.3
+catalogue-topics label-ref
+catalogue-version 3.6
+
+name rerunfilecheck
+category Package
+revision 53045
+shortdesc Checksum based rerun checks on auxiliary files
+longdesc The package provides additional rerun warnings if some
+longdesc auxiliary files have changed. It is based on MD5 checksum,
+longdesc provided by pdfTeX.
+containersize 3132
+containerchecksum 4a7cd8667eeefd80cb66736beab326d0b0442bbe76f7bb28bbf99d025cb252b7ccbf462d5268ad411ed801e8ddc580288d3f3741812c394aab739274281f9b0d
+doccontainersize 313672
+doccontainerchecksum 0645f8e9080d600ebb6d14bdc32b81ad6ebfc95df275fcb47155f70a73bf6e0527bceb568ea2b3fafc116d4841b0275cd6ad0569ff58923a3ec817b7db57a4e4
+srccontainersize 7316
+srccontainerchecksum 9a15807f93bd2754606f4bf0353d49db4f1777b17dd02bc9e0ce4a151a4446dffe4a1ee0b7f4ab118bace7d59e633b907e746e8b820bcd6781b8201705b8f9b1
+runfiles size=3
+ texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+catalogue-contact-bugs https://github.com/ho-tex/rerunfilecheck/issues
+catalogue-contact-repository https://github.com/ho-tex/rerunfilecheck
+catalogue-ctan /macros/latex/contrib/rerunfilecheck
+catalogue-license lppl1.3
+catalogue-topics compilation
+catalogue-version 1.9
 
 name scheme-infraonly
 category Scheme
@@ -6862,6 +7415,28 @@ catalogue-ctan /macros/generic/unicode-data
 catalogue-license lppl1.3c
 catalogue-topics latex3 unicode
 catalogue-version 1.11
+
+name uniquecounter
+category Package
+revision 53162
+shortdesc Provides unlimited unique counter
+longdesc This package provides a kind of counter that provides unique
+longdesc number values. Several counters can be created with different
+longdesc names. The numeric values are not limited.
+containersize 2272
+containerchecksum 9769fcfd787f210e0653c971872aaad6e0ef1e5a066e392e9d599f8fc11ab9f6587d21db1100b643d09d4850cfbfbbc1d32f01fd1e86aedab8c92da4f5a7d614
+doccontainersize 291268
+doccontainerchecksum 4dc74aabd9288ae881c4513886ff917e1e8bf08446d3b34c946bded6a6fa71ea7b6786bf432fec2661cd1db1af6b5875ab329708cc3c443499b83b0325645d0f
+srccontainersize 5320
+srccontainerchecksum caac3c3445b2b9301d46ca94744eb600cc45b79f6946065f036f412d2d1b41716864d61e0cfb9e9d32ab8dbf870e5f4e302c96b388d680badb13c52821f7722e
+runfiles size=2
+ texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+catalogue-contact-bugs https://github.com/ho-tex/uniquecounter/issues
+catalogue-contact-repository https://github.com/ho-tex/uniquecounter
+catalogue-ctan /macros/latex/contrib/uniquecounter
+catalogue-license lppl1.3
+catalogue-topics numbers
+catalogue-version 1.4
 
 name updmap-map
 category Package

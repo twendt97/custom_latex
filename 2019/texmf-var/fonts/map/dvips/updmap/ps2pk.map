@@ -378,6 +378,13 @@ wncysc10 WNCYSC10 <wncysc10.pfb
 wncyss10 WNCYSS10 <wncyss10.pfb
 wncyss8 WNCYSS10 <wncyss10.pfb
 wncyss9 WNCYSS10 <wncyss10.pfb
+% eurosym.map
+feybl10 TeX-feybl10 <feybl10.pfb
+feybo10 TeX-feybo10 <feybo10.pfb
+feybr10 TeX-feybr10 <feybr10.pfb
+feyml10 TeX-feyml10 <feyml10.pfb
+feymo10 TeX-feymo10 <feymo10.pfb
+feymr10 TeX-feymr10 <feymr10.pfb
 % latxfont.map
 lasy10 LASY10 <lasy10.pfb
 lasy5 LASY5 <lasy5.pfb

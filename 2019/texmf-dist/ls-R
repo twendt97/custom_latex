@@ -9,6 +9,7 @@ fonts
 ls-R
 makeindex
 metafont
+metapost
 mft
 scripts
 source
@@ -163,6 +164,7 @@ afm
 cmap
 enc
 map
+misc
 opentype
 pk
 source
@@ -586,6 +588,7 @@ kanjix.map
 amsfonts
 cm
 dummy-space
+eurosym
 lm
 marvosym
 tetex
@@ -604,6 +607,9 @@ cmtext-bsr-interpolated.map
 
 ./fonts/map/dvips/dummy-space:
 dummy-space.map
+
+./fonts/map/dvips/eurosym:
+eurosym.map
 
 ./fonts/map/dvips/lm:
 lm-cs.map
@@ -657,6 +663,14 @@ updmap
 pdftex_dl14.map
 pdftex.map
 pdftex_ndl14.map
+
+./fonts/misc:
+xetex
+
+./fonts/misc/xetex:
+fontmapping
+
+./fonts/misc/xetex/fontmapping:
 
 ./fonts/opentype:
 public
@@ -1443,6 +1457,7 @@ txsymbol.mf
 amsfonts
 cm
 etex
+eurosym
 knuth-lib
 knuth-local
 latex-fonts
@@ -1650,6 +1665,15 @@ white_setup.mf
 
 ./fonts/source/public/etex:
 xbmc10.mf
+
+./fonts/source/public/eurosym:
+feybl10.mf
+feybo10.mf
+feybr10.mf
+fey.mf
+feyml10.mf
+feymo10.mf
+feymr10.mf
 
 ./fonts/source/public/knuth-lib:
 3test.mf
@@ -2308,6 +2332,7 @@ tcvt3583.tfm
 amsfonts
 cm
 etex
+eurosym
 knuth-lib
 knuth-local
 latex-fonts
@@ -2502,6 +2527,14 @@ cmvtt10.tfm
 
 ./fonts/tfm/public/etex:
 xbmc10.tfm
+
+./fonts/tfm/public/eurosym:
+feybl10.tfm
+feybo10.tfm
+feybr10.tfm
+feyml10.tfm
+feymo10.tfm
+feymr10.tfm
 
 ./fonts/tfm/public/knuth-lib:
 logo10.tfm
@@ -3164,6 +3197,7 @@ public
 
 ./fonts/type1/public:
 amsfonts
+eurosym
 lm
 marvosym
 pdftex
@@ -3474,6 +3508,20 @@ msbm8.pfm
 msbm9.pfb
 msbm9.pfm
 
+./fonts/type1/public/eurosym:
+feybl10.pfb
+feybo10.pfb
+feybr10.pfb
+feyml10.pfb
+feymo10.pfb
+feymr10.pfb
+geybl10.pfb
+geybo10.pfb
+geybr10.pfb
+geyml10.pfb
+geymo10.pfb
+geymr10.pfb
+
 ./fonts/type1/public/lm:
 lmb10.pfb
 lmb10.pfm
@@ -3713,6 +3761,11 @@ modename.mf
 modes.mf
 ps2mfbas.mf
 
+./metapost:
+support
+
+./metapost/support:
+
 ./mft:
 base
 knuth-local
@@ -3727,12 +3780,23 @@ README
 e.mft
 
 ./scripts:
+epspdf
+epstopdf
 lua-alt-getopt
 luaotfload
 pdftexcmds
 simpdftex
 texlive
 tlshell
+
+./scripts/epspdf:
+epspdf4tk.cmd
+epspdf.help
+epspdftk.tcl
+epspdf.tlu
+
+./scripts/epstopdf:
+epstopdf.pl
 
 ./scripts/lua-alt-getopt:
 alt_getopt.lua
@@ -3987,26 +4051,42 @@ generic
 latex
 luatex
 plain
+xelatex
 
 ./tex/generic:
+atbegshi
 babel
+babel-german
 bibtex
+bigintcalc
+bitset
 colorprofiles
 config
 dehyph
 dvips
 enctex
+etexcmds
+gettitlestring
 hyphen
 hyphenex
 hyph-utf8
 iftex
 infwarerr
+intcalc
 knuth-lib
+kvdefinekeys
+kvsetkeys
+ltxcmds
 oberdiek
+pdfescape
 pdftex
 stringenc
 tex-ini-files
 unicode-data
+uniquecounter
+
+./tex/generic/atbegshi:
+atbegshi.sty
 
 ./tex/generic/babel:
 afrikaans.sty
@@ -5246,9 +5326,25 @@ babel-zh.ini
 babel-zu.ini
 babel-zulu.tex
 
+./tex/generic/babel-german:
+austrian.ldf
+germanb.ldf
+german.ldf
+naustrian.ldf
+ngermanb.ldf
+ngerman.ldf
+nswissgerman.ldf
+swissgerman.ldf
+
 ./tex/generic/bibtex:
 apalike.sty
 apalike.tex
+
+./tex/generic/bigintcalc:
+bigintcalc.sty
+
+./tex/generic/bitset:
+bitset.sty
 
 ./tex/generic/colorprofiles:
 colorprofiles.sty
@@ -5323,6 +5419,12 @@ utf8-t1.tex
 utf8unkn.tex
 utf8warn.tex
 
+./tex/generic/etexcmds:
+etexcmds.sty
+
+./tex/generic/gettitlestring:
+gettitlestring.sty
+
 ./tex/generic/hyphen:
 dumyhyph.tex
 hyphen.tex
@@ -5357,8 +5459,20 @@ ifxetex.sty
 ./tex/generic/infwarerr:
 infwarerr.sty
 
+./tex/generic/intcalc:
+intcalc.sty
+
 ./tex/generic/knuth-lib:
 null.tex
+
+./tex/generic/kvdefinekeys:
+kvdefinekeys.sty
+
+./tex/generic/kvsetkeys:
+kvsetkeys.sty
+
+./tex/generic/ltxcmds:
+ltxcmds.sty
 
 ./tex/generic/oberdiek:
 engord.sty
@@ -5374,6 +5488,9 @@ rotchiffre.sty
 setouterhbox.sty
 telprint.sty
 thepdfnumber.sty
+
+./tex/generic/pdfescape:
+pdfescape.sty
 
 ./tex/generic/pdftex:
 glyphtounicode.tex
@@ -5449,30 +5566,41 @@ Scripts.txt
 SpecialCasing.txt
 UnicodeData.txt
 
+./tex/generic/uniquecounter:
+uniquecounter.sty
+
 ./tex/latex:
 amsfonts
 amsmath
+atveryend
 auxhook
 base
+bookmark
 carlisle
+epstopdf-pkg
 etex-pkg
+eurosym
 geometry
 graphics
 graphics-cfg
 graphics-def
 grfext
 grffile
+hycolor
 hyperref
 ifplatform
 koma-script
 kvoptions
 latexconfig
+letltxmacro
 lm
 marvosym
 mflogo
 oberdiek
 parskip
 pdftexcmds
+refcount
+rerunfilecheck
 url
 
 ./tex/latex/amsfonts:
@@ -5499,6 +5627,9 @@ amsopn.sty
 amstex.sty
 amstext.sty
 amsxtra.sty
+
+./tex/latex/atveryend:
+atveryend.sty
 
 ./tex/latex/auxhook:
 auxhook.sty
@@ -5661,6 +5792,15 @@ utf8.def
 utf8enc.dfu
 x2enc.dfu
 
+./tex/latex/bookmark:
+bkm-dvipdfm.def
+bkm-dvips.def
+bkm-dvipsone.def
+bkm-pdftex.def
+bkm-textures.def
+bkm-vtex.def
+bookmark.sty
+
 ./tex/latex/carlisle:
 dotlessj.sty
 ltxtable.sty
@@ -5670,8 +5810,15 @@ remreset.sty
 scalefnt.sty
 slashed.sty
 
+./tex/latex/epstopdf-pkg:
+epstopdf-base.sty
+epstopdf.sty
+
 ./tex/latex/etex-pkg:
 etex.sty
+
+./tex/latex/eurosym:
+eurosym.sty
 
 ./tex/latex/geometry:
 geometry.sty
@@ -5716,6 +5863,10 @@ grfext.sty
 ./tex/latex/grffile:
 grffile-2017-06-30.sty
 grffile.sty
+
+./tex/latex/hycolor:
+hycolor.sty
+xcolor-patch.sty
 
 ./tex/latex/hyperref:
 backref.sty
@@ -5821,6 +5972,9 @@ lualatexquotejobname.lua
 lualatexquotejobname.tex
 mllatex.ini
 pdflatex.ini
+
+./tex/latex/letltxmacro:
+letltxmacro.sty
 
 ./tex/latex/lm:
 il2lmdh.fd
@@ -5935,6 +6089,12 @@ parskip.sty
 
 ./tex/latex/pdftexcmds:
 pdftexcmds.sty
+
+./tex/latex/refcount:
+refcount.sty
+
+./tex/latex/rerunfilecheck:
+rerunfilecheck.sty
 
 ./tex/latex/url:
 url.sty
@@ -6123,6 +6283,8 @@ xepsf.tex
 
 ./tex/plain/makeindex:
 idxmac.tex
+
+./tex/xelatex:
 
 ./texconfig:
 g
