@@ -1,0 +1,262 @@
+TeX Live installer invocation: ./install-tl 
+Trying to verify cryptographic signatures!
+Loading https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/texlive/tlnet/tlpkg/texlive.tlpdb
+Installing TeX Live 2019 from: https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/texlive/tlnet (verified)
+Platform: x86_64-linux => 'GNU/Linux on x86_64'
+Distribution: net  (downloading)
+Using URL: https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/texlive/tlnet
+Directory for temporary files: /tmp/PVyAmJSKJt
+Installer revision: 53198
+Database revision: 53365
+Settings:
+  TEXDIR: "/home/thilo_wendt/.texlive/2019"
+  TEXMFCONFIG: "~/.texlive/texmf-config"
+  TEXMFHOME: "~/.texlive/texmf"
+  TEXMFLOCAL: "/home/thilo_wendt/.texlive/texmf-local"
+  TEXMFSYSCONFIG: "/home/thilo_wendt/.texlive/2019/texmf-config"
+  TEXMFSYSVAR: "/home/thilo_wendt/.texlive/2019/texmf-var"
+  TEXMFVAR: "~/.texlive/texmf-var"
+  binary_aarch64-linux: ""
+  binary_amd64-freebsd: ""
+  binary_amd64-netbsd: ""
+  binary_armhf-linux: ""
+  binary_i386-cygwin: ""
+  binary_i386-freebsd: ""
+  binary_i386-linux: ""
+  binary_i386-netbsd: ""
+  binary_i386-solaris: ""
+  binary_win32: ""
+  binary_x86_64-cygwin: ""
+  binary_x86_64-darwin: ""
+  binary_x86_64-darwinlegacy: ""
+  binary_x86_64-linux: "1"
+  binary_x86_64-linuxmusl: ""
+  binary_x86_64-solaris: ""
+  collection-basic: "1"
+  collection-bibtexextra: ""
+  collection-binextra: ""
+  collection-context: ""
+  collection-fontsextra: ""
+  collection-fontsrecommended: ""
+  collection-fontutils: ""
+  collection-formatsextra: ""
+  collection-games: ""
+  collection-humanities: ""
+  collection-langarabic: ""
+  collection-langchinese: ""
+  collection-langcjk: ""
+  collection-langcyrillic: ""
+  collection-langczechslovak: ""
+  collection-langenglish: ""
+  collection-langeuropean: ""
+  collection-langfrench: ""
+  collection-langgerman: ""
+  collection-langgreek: ""
+  collection-langitalian: ""
+  collection-langjapanese: ""
+  collection-langkorean: ""
+  collection-langother: ""
+  collection-langpolish: ""
+  collection-langportuguese: ""
+  collection-langspanish: ""
+  collection-latex: ""
+  collection-latexextra: ""
+  collection-latexrecommended: ""
+  collection-luatex: ""
+  collection-mathscience: ""
+  collection-metapost: ""
+  collection-music: ""
+  collection-pictures: ""
+  collection-plaingeneric: ""
+  collection-pstricks: ""
+  collection-publishers: ""
+  collection-texworks: ""
+  collection-wintools: ""
+  collection-xetex: ""
+  doc_splitting_supported: "1"
+  inst_platform: "x86_64-linux"
+  instopt_adjustpath: ""
+  instopt_adjustrepo: "1"
+  instopt_letter: ""
+  instopt_portable: ""
+  instopt_write18_restricted: "1"
+  n_collections_available: "41"
+  n_collections_selected: "1"
+  n_systems_available: "16"
+  n_systems_selected: "1"
+  page: ""
+  scheme-basic: ""
+  scheme-context: ""
+  scheme-full: ""
+  scheme-gust: ""
+  scheme-infraonly: ""
+  scheme-medium: ""
+  scheme-minimal: "1"
+  scheme-small: ""
+  scheme-tetex: ""
+  selected_scheme: "scheme-minimal"
+  src_splitting_supported: "1"
+  this_platform: "x86_64-linux"
+  tlpdbopt_autobackup: "1"
+  tlpdbopt_backupdir: "tlpkg/backups"
+  tlpdbopt_create_formats: ""
+  tlpdbopt_desktop_integration: "1"
+  tlpdbopt_file_assocs: "1"
+  tlpdbopt_generate_updmap: ""
+  tlpdbopt_install_docfiles: ""
+  tlpdbopt_install_srcfiles: ""
+  tlpdbopt_location: "https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/texlive/tlnet"
+  tlpdbopt_post_code: "1"
+  tlpdbopt_sys_bin: "/usr/local/bin"
+  tlpdbopt_sys_info: "/usr/local/share/info"
+  tlpdbopt_sys_man: "/usr/local/share/man"
+  tlpdbopt_w32_multi_user: "1"
+  total_size: "64"
+Installing to: /home/thilo_wendt/.texlive/2019
+Installing [01/59, time/total: ??:??/??:??]: texlive.infra [219k]
+Installing [02/59, time/total: 00:00/00:00]: texlive.infra.x86_64-linux [143k]
+Installing [03/59, time/total: 00:01/00:27]: amsfonts [3542k]
+Installing [04/59, time/total: 00:09/00:22]: bibtex [15k]
+Installing [05/59, time/total: 00:09/00:22]: bibtex.x86_64-linux [72k]
+Installing [06/59, time/total: 00:09/00:22]: cm [233k]
+Installing [07/59, time/total: 00:09/00:21]: collection-basic [1k]
+Installing [08/59, time/total: 00:10/00:23]: colorprofiles [86k]
+Installing [09/59, time/total: 00:10/00:22]: dehyph [46k]
+Installing [10/59, time/total: 00:10/00:22]: dvipdfmx [27k]
+Installing [11/59, time/total: 00:10/00:22]: dvipdfmx.x86_64-linux [408k]
+Installing [12/59, time/total: 00:11/00:22]: dvips [34k]
+Installing [13/59, time/total: 00:11/00:22]: dvips.x86_64-linux [142k]
+Installing [14/59, time/total: 00:11/00:21]: enctex [24k]
+Installing [15/59, time/total: 00:11/00:21]: etex [12k]
+Installing [16/59, time/total: 00:11/00:21]: etex-pkg [6k]
+Installing [17/59, time/total: 00:11/00:21]: glyphlist [25k]
+Installing [18/59, time/total: 00:12/00:23]: graphics-def [10k]
+Installing [19/59, time/total: 00:12/00:23]: gsftopk [4k]
+Installing [20/59, time/total: 00:12/00:23]: gsftopk.x86_64-linux [40k]
+Installing [21/59, time/total: 00:12/00:23]: hyph-utf8 [16k]
+Installing [22/59, time/total: 00:12/00:23]: hyphen-base [22k]
+Installing [23/59, time/total: 00:12/00:23]: hyphenex [8k]
+Installing [24/59, time/total: 00:13/00:25]: ifplatform [2k]
+Installing [25/59, time/total: 00:13/00:25]: iftex [4k]
+Installing [26/59, time/total: 00:13/00:25]: knuth-lib [30k]
+Installing [27/59, time/total: 00:13/00:24]: knuth-local [23k]
+Installing [28/59, time/total: 00:13/00:24]: kpathsea [32k]
+Installing [29/59, time/total: 00:15/00:28]: kpathsea.x86_64-linux [40k]
+Installing [30/59, time/total: 00:15/00:28]: lua-alt-getopt [2k]
+Installing [31/59, time/total: 00:16/00:30]: luatex [13k]
+Installing [32/59, time/total: 00:16/00:30]: luatex.x86_64-linux [1754k]
+Installing [33/59, time/total: 00:17/00:23]: makeindex [5k]
+Installing [34/59, time/total: 00:17/00:23]: makeindex.x86_64-linux [49k]
+Installing [35/59, time/total: 00:17/00:23]: metafont [33k]
+Installing [36/59, time/total: 00:17/00:23]: metafont.x86_64-linux [190k]
+Installing [37/59, time/total: 00:17/00:23]: mflogo [2k]
+Installing [38/59, time/total: 00:17/00:23]: mfware [4k]
+Installing [39/59, time/total: 00:17/00:23]: mfware.x86_64-linux [120k]
+Installing [40/59, time/total: 00:18/00:24]: pdftex [37k]
+Installing [41/59, time/total: 00:18/00:23]: pdftex.x86_64-linux [812k]
+Installing [42/59, time/total: 00:18/00:21]: plain [70k]
+Installing [43/59, time/total: 00:18/00:21]: tetex [72k]
+Installing [44/59, time/total: 00:19/00:22]: tetex.x86_64-linux [1k]
+Installing [45/59, time/total: 00:20/00:23]: tex [1k]
+Installing [46/59, time/total: 00:20/00:23]: tex-ini-files [4k]
+Installing [47/59, time/total: 00:20/00:23]: tex.x86_64-linux [172k]
+Installing [48/59, time/total: 00:20/00:23]: texlive-common [1k]
+Installing [49/59, time/total: 00:20/00:23]: texlive-docindex [1k]
+Installing [50/59, time/total: 00:21/00:24]: texlive-en [1k]
+Installing [51/59, time/total: 00:21/00:24]: texlive-msg-translations [139k]
+Installing [52/59, time/total: 00:21/00:23]: texlive-scripts [82k]
+Installing [53/59, time/total: 00:21/00:23]: texlive-scripts.x86_64-linux [1k]
+Installing [54/59, time/total: 00:21/00:23]: tlshell [25k]
+Installing [55/59, time/total: 00:21/00:23]: tlshell.x86_64-linux [1k]
+Installing [56/59, time/total: 00:21/00:23]: unicode-data [263k]
+Installing [57/59, time/total: 00:21/00:22]: updmap-map [286k]
+Installing [58/59, time/total: 00:22/00:23]: xdvi [7k]
+Installing [59/59, time/total: 00:22/00:23]: xdvi.x86_64-linux [518k]
+Time used for installing the packages: 00:22
+running mktexlsr /home/thilo_wendt/.texlive/2019/texmf-dist ...
+writing fmtutil.cnf to /home/thilo_wendt/.texlive/2019/texmf-dist/web2c/fmtutil.cnf
+writing updmap.cfg to /home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg
+writing language.dat to /home/thilo_wendt/.texlive/2019/texmf-var/tex/generic/config/language.dat
+writing language.def to /home/thilo_wendt/.texlive/2019/texmf-var/tex/generic/config/language.def
+writing language.dat.lua to /home/thilo_wendt/.texlive/2019/texmf-var/tex/generic/config/language.dat.lua
+running mktexlsr /home/thilo_wendt/.texlive/2019/texmf-var /home/thilo_wendt/.texlive/2019/texmf-config /home/thilo_wendt/.texlive/2019/texmf-dist ...
+running updmap-sys --nohash ...done
+updmap will read the following updmap.cfg files (in precedence order):
+  /home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg
+updmap may write changes to the following updmap.cfg file:
+  /home/thilo_wendt/.texlive/2019/texmf-config/web2c/updmap.cfg
+dvips output dir: "/home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/dvips/updmap"
+pdftex output dir: "/home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/pdftex/updmap"
+dvipdfmx output dir: "/home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/dvipdfmx/updmap"
+
+updmap is creating new map files
+using the following configuration:
+  LW35 font names                  : URWkb (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  prefer outlines                  : true (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  texhash enabled                  : false
+  download standard fonts (dvips)  : true (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  download standard fonts (pdftex) : true (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  jaEmbed replacement string       : ipaex (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  jaVariant replacement string     : <empty> (default)
+  scEmbed replacement string       : arphic (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  tcEmbed replacement string       : arphic (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  koEmbed replacement string       : baekmuk (/home/thilo_wendt/.texlive/2019/texmf-dist/web2c/updmap.cfg)
+  create a mapfile for pxdvi       : false (default)
+
+Scanning for LW35 support files  [  3 files]
+Scanning for MixedMap entries    [  6 files]
+Scanning for KanjiMap entries    [  0 files]
+Scanning for Map entries         [  3 files]
+
+Generating output for dvipdfmx...
+Generating output for ps2pk...
+Generating output for dvips...
+Generating output for pdftex...
+
+Files generated:
+  /home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/dvips/updmap:
+       15812 2020-01-11 16:40:34 builtin35.map
+       21285 2020-01-11 16:40:34 download35.map
+       22404 2020-01-11 16:40:34 psfonts_pk.map
+       26255 2020-01-11 16:40:34 psfonts_t1.map
+       26250 2020-01-11 16:40:34 ps2pk.map
+          14 2020-01-11 16:40:34 psfonts.map -> psfonts_t1.map
+  /home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/pdftex/updmap:
+       26257 2020-01-11 16:40:34 pdftex_dl14.map
+       24592 2020-01-11 16:40:34 pdftex_ndl14.map
+          15 2020-01-11 16:40:34 pdftex.map -> pdftex_dl14.map
+  /home/thilo_wendt/.texlive/2019/texmf-var/fonts/map/dvipdfmx/updmap:
+         335 2020-01-11 16:40:34 kanjix.map
+
+Transcript written on "/home/thilo_wendt/.texlive/2019/texmf-var/web2c/updmap.log".
+re-running mktexlsr /home/thilo_wendt/.texlive/2019/texmf-var /home/thilo_wendt/.texlive/2019/texmf-config ...
+running package-specific postactions
+postaction install script for dvipdfmx: perl /home/thilo_wendt/.texlive/2019/tlpkg/tlpostcode/dvipdfmx.pl
+finished with package-specific postactions
+
+ ----------------------------------------------------------------------
+ The following environment variables contain the string "tex"
+ (case-independent).  If you're doing anything but adding personal
+ directories to the system paths, they may well cause trouble somewhere
+ while running TeX.  If you encounter problems, try unsetting them.
+ Please ignore spurious matches unrelated to TeX.
+
+    TEXTDOMAIN=im-config
+    TEXTDOMAINDIR=/usr/share/locale/
+ ----------------------------------------------------------------------
+
+
+Welcome to TeX Live!
+
+
+See /home/thilo_wendt/.texlive/2019/index.html for links to documentation.
+The TeX Live web site (https://tug.org/texlive/) contains any updates and
+corrections. TeX Live is a joint project of the TeX user groups around the
+world; please consider supporting it by joining the group best for you. The
+list of groups is available on the web at https://tug.org/usergroups.html.
+
+
+Add /home/thilo_wendt/.texlive/2019/texmf-dist/doc/man to MANPATH.
+Add /home/thilo_wendt/.texlive/2019/texmf-dist/doc/info to INFOPATH.
+Most importantly, add /home/thilo_wendt/.texlive/2019/bin/x86_64-linux
+to your PATH for current and future sessions.

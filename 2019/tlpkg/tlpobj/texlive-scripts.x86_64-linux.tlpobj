@@ -1,0 +1,14 @@
+name texlive-scripts.x86_64-linux
+category TLCore
+revision 53254
+shortdesc x86_64-linux files of texlive-scripts
+containersize 476
+containerchecksum 3aa7181575432803806a7b950b97f033530f56681a70a850cd22a5d6000b7c814a7cdeff0b982cf9c9bde034da152820ab2397c4987f092b86f9c52daeaf41ab
+binfiles arch=x86_64-linux size=7
+ bin/x86_64-linux/man
+ bin/x86_64-linux/mktexfmt
+ bin/x86_64-linux/mktexmf
+ bin/x86_64-linux/mktexpk
+ bin/x86_64-linux/mktextfm
+ bin/x86_64-linux/rungs
+ bin/x86_64-linux/texhash

@@ -1,0 +1,38 @@
+name luatex
+category TLCore
+revision 53216
+shortdesc The LuaTeX engine
+longdesc LuaTeX is an extended version of pdfTeX using Lua as an
+longdesc embedded scripting language. The LuaTeX project's main
+longdesc objective is to provide an open and configurable variant of TeX
+longdesc while at the same time offering downward compatibility. LuaTeX
+longdesc uses Unicode (as UTF-8) as its default input encoding, and is
+longdesc able to use modern (OpenType) fonts (for both text and
+longdesc mathematics). It should be noted that LuaTeX is still under
+longdesc development; its specification has been declared stable, but
+longdesc absolute stability may not in practice be assumed. Source code
+longdesc is available from ctan:/systems/texlive/Source/.
+depend cm
+depend etex
+depend hyphen-base
+depend knuth-lib
+depend plain
+depend tex-ini-files
+depend unicode-data
+depend luatex.ARCH
+execute AddFormat name=luatex engine=luatex options="luatex.ini"   patterns=language.def,language.dat.lua   fmttriggers=cm,etex,hyphen-base,knuth-lib,plain,tex-ini-files,unicode-data
+execute AddFormat name=dviluatex engine=luatex options="dviluatex.ini"   patterns=language.def,language.dat.lua   fmttriggers=cm,etex,hyphen-base,knuth-lib,plain,tex-ini-files,unicode-data
+containersize 12900
+containerchecksum 8021aaa7e94f68f20f5138eb1871e089c1f5ff7385f9cccef65b4d9d91b62c31b46c042ee8e0313f91b08340698a2da6070f83decf0c389a4221d542f0baa37f
+doccontainersize 1685308
+doccontainerchecksum 11dec3c36d899e90269560d52acd334f0381e7d91561a2aa019227e3dbb7f01a2c0dd9742b3b06602cb4b19819e08acd1b87f7fede15e2d6e7c0c07abe88de1a
+runfiles size=37
+ texmf-dist/tex/generic/config/luatex-unicode-letters.tex
+ texmf-dist/tex/generic/config/luatexiniconfig.tex
+ texmf-dist/web2c/texmfcnf.lua
+catalogue-contact-bugs http://lists.tug.org/tex-k
+catalogue-contact-home http://luatex.org
+catalogue-contact-repository https://tug.org/svn/texlive/trunk/Build/source/texk/web2c/luatexdir
+catalogue-contact-support http://lists.tug.org/luatex
+catalogue-license gpl2
+catalogue-topics engine

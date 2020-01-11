@@ -1,0 +1,10 @@
+[Sat Jan 11 19:05:40 2020] install: babel
+[Sat Jan 11 19:05:41 2020] install: latex
+[Sat Jan 11 19:05:41 2020] install: latex-bin.x86_64-linux
+[Sat Jan 11 19:05:41 2020] install: latex-bin
+[Sat Jan 11 19:05:41 2020] install: latex-fonts
+[Sat Jan 11 19:05:41 2020] install: latexconfig
+[Sat Jan 11 19:06:02 2020] install: lm
+[Sat Jan 11 19:06:02 2020] install: lualibs
+[Sat Jan 11 19:06:04 2020] install: luaotfload.x86_64-linux
+[Sat Jan 11 19:06:05 2020] install: luaotfload

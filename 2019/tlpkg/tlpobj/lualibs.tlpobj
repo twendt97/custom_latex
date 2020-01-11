@@ -1,0 +1,57 @@
+name lualibs
+category Package
+revision 52658
+shortdesc Additional Lua functions for LuaTeX macro programmers
+longdesc Lualibs is a collection of Lua modules useful for general
+longdesc programming. The bundle is based on lua modules shipped with
+longdesc ConTeXt, and made available in this bundle for use independent
+longdesc of ConTeXt.
+containersize 120408
+containerchecksum cae5bc0a5381c97aaef489cf4c9fd56a7a11fde78e0b6a3b88f6f6fbace7545420a09d32b96d912550950f1e08c469557d91bdd51d01e662b595bdaf7c02e722
+doccontainersize 87748
+doccontainerchecksum 1d8388cbc80315e570dd06a824c07140bbfda4a8e622a5b3f835260359a3527524ff557838aa8025660a62371e4b418bd5cc502789725c76e200195a00aa7743
+srccontainersize 8580
+srccontainerchecksum 36981f23fdbd6b8e2ca0f8803fe674c2d592b1a5ca2439e28390ead669104c7f0d60a3ea8b74f6822c8f1821097793576c8ec592d66479c8ed5c2a58917c849c
+runfiles size=186
+ texmf-dist/tex/luatex/lualibs/lualibs-basic-merged.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-basic.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-boolean.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-compat.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-dir.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-extended-merged.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-extended.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-file.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-function.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-gzip.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-io.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-lpeg.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-lua.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-math.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-md5.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-number.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-os.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-package.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-set.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-string.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-table.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-trac-inf.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-unicode.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-url.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-deb.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-dim.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-fil.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-jsn.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-lua.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-prs.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-sta.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-sto.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-str.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-tab.lua
+ texmf-dist/tex/luatex/lualibs/lualibs-util-tpl.lua
+ texmf-dist/tex/luatex/lualibs/lualibs.lua
+catalogue-contact-repository https://github.com/latex3/lualibs
+catalogue-contact-support https://github.com/latex3/lualibs/issues
+catalogue-ctan /macros/luatex/generic/lualibs
+catalogue-license gpl2
+catalogue-topics lua-supp luatex
+catalogue-version 2.69

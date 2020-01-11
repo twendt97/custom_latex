@@ -1,0 +1,41 @@
+name pdftex
+category TLCore
+revision 52874
+shortdesc A TeX extension for direct creation of PDF
+longdesc An extension of TeX which can be configured to directly
+longdesc generate PDF documents instead of DVI. All current free TeX
+longdesc distributions including TeX Live, MacTeX and MiKTeX include
+longdesc pdfTeX (Plain TeX) and pdfLaTeX (LaTeX). ConTeXt was originally
+longdesc designed around use of pdfTeX, though nowadays it is focused on
+longdesc LuaTeX).
+depend kpathsea
+depend cm
+depend dehyph
+depend etex
+depend hyphen-base
+depend knuth-lib
+depend plain
+depend tex-ini-files
+depend pdftex.ARCH
+execute AddFormat name=pdftex engine=pdftex patterns=language.def           options="-translate-file=cp227.tcx *pdfetex.ini"           fmttriggers=cm,dehyph,etex,hyphen-base,knuth-lib,plain,tex-ini-files
+execute AddFormat name=etex engine=pdftex patterns=language.def           options="-translate-file=cp227.tcx *etex.ini"           fmttriggers=cm,dehyph,etex,hyphen-base,knuth-lib,plain
+execute AddFormat name=pdfetex engine=pdftex patterns=language.def           options="-translate-file=cp227.tcx *pdfetex.ini"           fmttriggers=cm,dehyph,etex,hyphen-base,knuth-lib,plain,tex-ini-files
+execute addMap dummy-space.map
+containersize 37000
+containerchecksum 703fc22a4d9f9251666491693b526a2622f63ae05d1caa402219b72d680a43a9eaa1294dea53144a7f0ca326ab7b88405d0fbca9e9652444bc1f34144917df99
+doccontainersize 1492588
+doccontainerchecksum cf15ec2fa6cb7230edf4a22a6811aeabb48b0420275bb6be4b2976593e33865837e50b874ab7da7a7b536cf48b74a805b93e154d4cafc42542995acbc49e29a4
+runfiles size=65
+ texmf-dist/fonts/map/dvips/dummy-space/dummy-space.map
+ texmf-dist/fonts/tfm/public/pdftex/dummy-space.tfm
+ texmf-dist/fonts/type1/public/pdftex/dummy-space.pfb
+ texmf-dist/scripts/simpdftex/simpdftex
+ texmf-dist/tex/generic/config/pdftex-dvi.tex
+ texmf-dist/tex/generic/pdftex/glyphtounicode.tex
+ texmf-dist/tex/generic/pdftex/pdfcolor.tex
+catalogue-contact-bugs https://mailman.ntg.nl/mailman/listinfo/ntg-pdftex
+catalogue-contact-home http://www.pdftex.org
+catalogue-contact-repository https://tug.org/svn/pdftex/branches/stable
+catalogue-contact-support http://lists.tug.org/pdftex
+catalogue-license gpl
+catalogue-topics engine

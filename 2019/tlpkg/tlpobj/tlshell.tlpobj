@@ -1,0 +1,14 @@
+name tlshell
+category TLCore
+revision 53201
+shortdesc GUI frontend (tcl/tk-based) for tlmgr
+depend tlshell.ARCH
+postaction shortcut type=menu name="TeX Live Manager"              cmd=TEXDIR/bin/win32/tlshell.exe
+containersize 25336
+containerchecksum b49c864427c4bc7675476d3937885bc31688e8553b39a22c3f8272f49b582e2011b9f17080edb95022ef2ea44bb434db5e4755539aeeeb6dfd1eb3637c996871
+doccontainersize 440
+doccontainerchecksum e25ec4ff0cd5b63139607cbf3a1966f44049024e2255b31d84cb2f09a1861f6c4d9a5abaa7a0032a9353b73904f81653f751aadd546eeb1efc2ba65546be37d4
+runfiles size=25
+ texmf-dist/scripts/tlshell/tlshell.tcl
+ tlpkg/tltcl/tlmgr.gif
+ tlpkg/tltcl/tltcl.tcl
