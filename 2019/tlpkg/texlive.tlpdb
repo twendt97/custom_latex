@@ -5,7 +5,7 @@ depend release/2019
 
 name 00texlive.installation
 category TLCore
-depend opt_location:https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/texlive/tlnet
+depend opt_location:http://mirror.ctan.org/systems/texlive/tlnet
 depend opt_w32_multi_user:1
 depend opt_sys_man:/usr/local/share/man
 depend opt_create_formats:0
@@ -1482,6 +1482,207 @@ catalogue-ctan /macros/latex/contrib/babel-contrib/german
 catalogue-license lppl1.3
 catalogue-topics german multilingual-addon
 catalogue-version 2.11
+
+name biber
+category Package
+revision 53064
+shortdesc A BibTeX replacement for users of BibLaTeX
+longdesc Biber is a BibTeX replacement for users of BibLaTeX. Biber
+longdesc supports full UTF-8, can (re)-encode input and output, supports
+longdesc highly configurable sorting, dynamic bibliography sets and many
+longdesc other features. The CTAN distribution offers a compressed tar
+longdesc archive of the sources, etc., together with "binary"
+longdesc distributions for a variety of platforms. Note: on SourceForge
+longdesc biber is formally named "biblatex-biber", to distinguish it
+longdesc from an earlier (now apparently moribund) project called
+longdesc "biber".
+depend biber.ARCH
+containersize 756
+containerchecksum e0f59f15bb12276ba653ae57d7599a0d31a5dcd67c64a311382a14ceda686acaef689f1e3be72597b2333fbf3df1d9ea3b21c12ade41393972853ccd51d1912f
+doccontainersize 260036
+doccontainerchecksum 4aa96124801d1cee36a2a3621a697ecc2184089fc7893ffb43de27e6a9c29a093e22aa5a7a54f0587b35159055998f7a2424637f83fb5107450ad4a3672dfe4c
+srccontainersize 917840
+srccontainerchecksum e467ec0b5ed9f3d568cde7d71962b1e8c6c1a3ab26ec48b75a08332c69521ca740e54f14558a7a0ecc8f7cc7ef1072fa7a5745f1b84f61a3f7e7d7a709378f72
+catalogue-also bibtex crosstex biblatex
+catalogue-contact-bugs https://github.com/plk/biber/issues
+catalogue-contact-home http://biblatex-biber.sourceforge.net/
+catalogue-contact-repository https://github.com/plk/biber
+catalogue-ctan /biblio/biber
+catalogue-license artistic2
+catalogue-topics biblio
+catalogue-version 2.14
+
+name biber.x86_64-linux
+category Package
+revision 53064
+shortdesc x86_64-linux files of biber
+containersize 18359936
+containerchecksum 16233af8a5b4892de6915f0eeca65284b1bce1dca59caaf629c9b875254e71d3082279d77d6509eeb1996a048b3f3b2f0703daaf5ef19388b2ca7b69ce7f4905
+binfiles arch=x86_64-linux size=5979
+ bin/x86_64-linux/biber
+
+name biblatex
+category Package
+revision 53063
+shortdesc Sophisticated Bibliographies in LaTeX
+longdesc BibLaTeX is a complete reimplementation of the bibliographic
+longdesc facilities provided by LaTeX. Formatting of the bibliography is
+longdesc entirely controlled by LaTeX macros, and a working knowledge of
+longdesc LaTeX should be sufficient to design new bibliography and
+longdesc citation styles. BibLaTeX uses its own data backend program
+longdesc called "biber" to read and process the bibliographic data. With
+longdesc biber, BibLaTeX has many features rivalling or surpassing other
+longdesc bibliography systems. To mention a few: Full Unicode support
+longdesc Highly customisable sorting using the Unicode Collation
+longdesc Algorithm + CLDR tailoring Highly customisable bibliography
+longdesc labels Complex macro-based on-the-fly data modification without
+longdesc changing your data sources A tool mode for transforming
+longdesc bibliographic data sources Multiple bibliographies and lists of
+longdesc bibliographic information in the same document with different
+longdesc sorting Highly customisable data source inheritance rules
+longdesc Polyglossia and babel suppport for automatic language switching
+longdesc for bibliographic entries and citations Automatic bibliography
+longdesc data recoding (UTF-8 -> latin1, LaTeX macros -> UTF-8 etc)
+longdesc Remote data sources Highly sophisticated automatic name and
+longdesc name list disambiguation system Highly customisable data model
+longdesc so users can define their own bibliographic data types
+longdesc Validation of bibliographic data against a data model
+longdesc Subdivided and/or filtered bibligraphies, bibliographies per
+longdesc chapter, section etc. Apart from the features unique to
+longdesc BibLaTeX, the package also incorporates core features of the
+longdesc following packages: babelbib, bibtopic, bibunits, chapterbib,
+longdesc cite, inlinebib, mcite and mciteplus, mlbib, multibib,
+longdesc splitbib. The package strictly requires e-TeX BibTeX, bibtex8,
+longdesc or Biber etoolbox 2.1 or later logreq 1.0 or later keyval
+longdesc ifthen url Biber, babel / polyglossia, and csquotes 4.4 or
+longdesc later are strongly recommended.
+depend pdftexcmds
+depend etoolbox
+depend kvoptions
+depend logreq
+depend url
+containersize 216304
+containerchecksum 544d32bf4ee3b822ecdab4583ceebb00fc3a03222e6846fe5aac6939fe4fcc6f0997939107b4654bf2d0bae920b6a92310328e330ae60de49402f9b9c21cb753
+doccontainersize 7191872
+doccontainerchecksum d8a323a2e946c1eb94bca8e24081dfa3af71466a4b25b6b8c677de7515929093a75823198f35e86b175045d2b91a4c18e6e3277b08b8fe8ddc4d7d5c411e3492
+runfiles size=536
+ texmf-dist/bibtex/bib/biblatex/biblatex/biblatex-examples.bib
+ texmf-dist/bibtex/bst/biblatex/biblatex.bst
+ texmf-dist/tex/latex/biblatex/bbx/alphabetic-verb.bbx
+ texmf-dist/tex/latex/biblatex/bbx/alphabetic.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle-comp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle-ibid.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle-icomp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle-tcomp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle-terse.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle-ticomp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authortitle.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authoryear-comp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authoryear-ibid.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authoryear-icomp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+ texmf-dist/tex/latex/biblatex/bbx/debug.bbx
+ texmf-dist/tex/latex/biblatex/bbx/draft.bbx
+ texmf-dist/tex/latex/biblatex/bbx/numeric-comp.bbx
+ texmf-dist/tex/latex/biblatex/bbx/numeric-verb.bbx
+ texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+ texmf-dist/tex/latex/biblatex/bbx/reading.bbx
+ texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose-ibid.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose-inote.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose-note.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose-trad1.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose-trad2.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose-trad3.bbx
+ texmf-dist/tex/latex/biblatex/bbx/verbose.bbx
+ texmf-dist/tex/latex/biblatex/biblatex.cfg
+ texmf-dist/tex/latex/biblatex/biblatex.def
+ texmf-dist/tex/latex/biblatex/biblatex.sty
+ texmf-dist/tex/latex/biblatex/blx-bibtex.def
+ texmf-dist/tex/latex/biblatex/blx-compat.def
+ texmf-dist/tex/latex/biblatex/blx-dm.def
+ texmf-dist/tex/latex/biblatex/blx-mcite.def
+ texmf-dist/tex/latex/biblatex/blx-natbib.def
+ texmf-dist/tex/latex/biblatex/blx-unicode.def
+ texmf-dist/tex/latex/biblatex/cbx/alphabetic-verb.cbx
+ texmf-dist/tex/latex/biblatex/cbx/alphabetic.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle-comp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle-ibid.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle-icomp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle-tcomp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle-terse.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle-ticomp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authortitle.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authoryear-comp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authoryear-ibid.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authoryear-icomp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+ texmf-dist/tex/latex/biblatex/cbx/debug.cbx
+ texmf-dist/tex/latex/biblatex/cbx/draft.cbx
+ texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
+ texmf-dist/tex/latex/biblatex/cbx/numeric-verb.cbx
+ texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+ texmf-dist/tex/latex/biblatex/cbx/reading.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose-ibid.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose-inote.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose-note.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose-trad1.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose-trad2.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose-trad3.cbx
+ texmf-dist/tex/latex/biblatex/cbx/verbose.cbx
+ texmf-dist/tex/latex/biblatex/lbx/UKenglish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/USenglish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/american.lbx
+ texmf-dist/tex/latex/biblatex/lbx/australian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/austrian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/brazil.lbx
+ texmf-dist/tex/latex/biblatex/lbx/brazilian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/british.lbx
+ texmf-dist/tex/latex/biblatex/lbx/bulgarian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/canadian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/catalan.lbx
+ texmf-dist/tex/latex/biblatex/lbx/croatian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/czech.lbx
+ texmf-dist/tex/latex/biblatex/lbx/danish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/dutch.lbx
+ texmf-dist/tex/latex/biblatex/lbx/english.lbx
+ texmf-dist/tex/latex/biblatex/lbx/estonian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/finnish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/french.lbx
+ texmf-dist/tex/latex/biblatex/lbx/galician.lbx
+ texmf-dist/tex/latex/biblatex/lbx/german.lbx
+ texmf-dist/tex/latex/biblatex/lbx/greek.lbx
+ texmf-dist/tex/latex/biblatex/lbx/hungarian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/icelandic.lbx
+ texmf-dist/tex/latex/biblatex/lbx/italian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/latvian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/magyar.lbx
+ texmf-dist/tex/latex/biblatex/lbx/naustrian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/newzealand.lbx
+ texmf-dist/tex/latex/biblatex/lbx/ngerman.lbx
+ texmf-dist/tex/latex/biblatex/lbx/norsk.lbx
+ texmf-dist/tex/latex/biblatex/lbx/nswissgerman.lbx
+ texmf-dist/tex/latex/biblatex/lbx/nynorsk.lbx
+ texmf-dist/tex/latex/biblatex/lbx/polish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/portuges.lbx
+ texmf-dist/tex/latex/biblatex/lbx/portuguese.lbx
+ texmf-dist/tex/latex/biblatex/lbx/russian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/slovak.lbx
+ texmf-dist/tex/latex/biblatex/lbx/slovene.lbx
+ texmf-dist/tex/latex/biblatex/lbx/slovenian.lbx
+ texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/swedish.lbx
+ texmf-dist/tex/latex/biblatex/lbx/swissgerman.lbx
+ texmf-dist/tex/latex/biblatex/lbx/ukrainian.lbx
+catalogue-also translation-biblatex-de
+catalogue-contact-announce https://github.com/plk/biblatex/wiki
+catalogue-contact-bugs https://github.com/plk/biblatex/issues
+catalogue-contact-home https://github.com/plk/biblatex
+catalogue-contact-repository https://github.com/plk/biblatex.git
+catalogue-ctan /macros/latex/contrib/biblatex
+catalogue-license lppl1.3
+catalogue-topics biblio biblatex etex
+catalogue-version 3.14
 
 name bibtex
 category Package
@@ -3616,6 +3817,34 @@ catalogue-license lppl1.3
 catalogue-topics macro-supp
 catalogue-version 1.7
 
+name etoolbox
+category Package
+revision 52153
+shortdesc e-TeX tools for LaTeX
+longdesc The package is a toolbox of programming facilities geared
+longdesc primarily towards LaTeX class and package authors. It provides
+longdesc LaTeX frontends to some of the new primitives provided by e-TeX
+longdesc as well as some generic tools which are not strictly related to
+longdesc e-TeX but match the profile of this package. Note that the
+longdesc initial versions of this package were released under the name
+longdesc elatex. The package provides functions that seem to offer
+longdesc alternative ways of implementing some LaTeX kernel commands;
+longdesc nevertheless, the package will not modify any part of the LaTeX
+longdesc kernel.
+containersize 8460
+containerchecksum f614e649193857d2348bed9c9ce49a64b78e0c165962acb51bab6b340a1b7397793ce07d649808eb04322d94c3df1699ed69164c6e4c3583600f9adf542650b9
+doccontainersize 234764
+doccontainerchecksum 89b5515a47fc18b6a0a2e70712b614e5fc32ae537c632e431be1ef1e8c55ec2791c7394701e676b0ee6cbf6addee38ebbab67e60d67a34118381fd4ebb0bc0b2
+runfiles size=13
+ texmf-dist/tex/latex/etoolbox/etoolbox.def
+ texmf-dist/tex/latex/etoolbox/etoolbox.sty
+catalogue-contact-bugs https://github.com/josephwright/etoolbox/issues
+catalogue-contact-repository https://github.com/josephwright/etoolbox/
+catalogue-ctan /macros/latex/contrib/etoolbox
+catalogue-license lppl1.3c
+catalogue-topics macro-supp etex
+catalogue-version 2.5h
+
 name eurosym
 category Package
 revision 17265
@@ -4698,6 +4927,123 @@ catalogue-license lppl1.3
 catalogue-topics keyval
 catalogue-version 1.18
 
+name l3backend
+category Package
+revision 52928
+shortdesc LaTeX3 backend drivers
+longdesc This package forms parts of expl3, and contains the code used
+longdesc to interface with backends (drivers) across the expl3 codebase.
+longdesc The functions here are defined differently depending on the
+longdesc engine in use. As such, these are distributed separately from
+longdesc l3kernel to allow this code to be updated on an independent
+longdesc schedule.
+containersize 11920
+containerchecksum bfb118bf3892b97e1ca5d075442bb651b62feae178ac81ed39cd0d6779f8d61dab9c6fa4cf51f6b80cf498164ca33e1c85e13fc4dbfd89e8eefc03d18c78971d
+doccontainersize 727776
+doccontainerchecksum 85505423a3920f3162ea8daa164c8f20fbf27a4c4883f90222024fa85003ccf02fc6028d2fa3774a69a0a1783bf2ab8208f581e864d8cfd5ac7d6403c9925c64
+srccontainersize 25824
+srccontainerchecksum 267516be7cfeb6423667d18a51cc8969e17a6a4b74b5d654e3a57960dfca989a9438294af7baa3ea28b74a6d6d30a8e2978465f180a0ffedda5831290723e2fd
+runfiles size=34
+ texmf-dist/dvips/l3backend/l3backend-dvips.pro
+ texmf-dist/tex/latex/l3backend/l3backend-dvipdfmx.def
+ texmf-dist/tex/latex/l3backend/l3backend-dvips.def
+ texmf-dist/tex/latex/l3backend/l3backend-dvisvgm.def
+ texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+ texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def
+catalogue-contact-bugs https://github.com/latex3/latex3/issues
+catalogue-contact-home http://www.latex-project.org/code.html
+catalogue-contact-repository https://github.com/latex3/latex3/
+catalogue-ctan /macros/latex/contrib/l3backend
+catalogue-license lppl1.3c
+catalogue-topics latex3 expl3 macro-supp pre-release
+
+name l3kernel
+category Package
+revision 52681
+shortdesc LaTeX3 programming conventions
+longdesc The l3kernel bundle provides an implementation of the LaTeX3
+longdesc programmers' interface, as a set of packages that run under
+longdesc LaTeX2e. The interface provides the foundation on which the
+longdesc LaTeX3 kernel and other future code are built: it is an API for
+longdesc TeX programmers. The packages are set up so that the LaTeX3
+longdesc conventions can be used with regular LaTeX2e packages.
+depend l3backend
+containersize 145800
+containerchecksum eb9842d160198ce76f904c07352458d505898c719b9279b640e28061b699b49ab2f054a4ee6898ede3a6e1ee7d4e9f6283dea78fced53b83f475e4e5ac0ff7ac
+doccontainersize 7963972
+doccontainerchecksum b260617bf7b414141e02a56abab65bd3448407dda7d1540be5f30b1a59d687e08ab2148c7e25a3f209dd4ab0b83ead0991469cadb97beeb542b754a00b1acb4f
+srccontainersize 525276
+srccontainerchecksum e035c0b74477266b62a6bf5d3afdef867d065b638668d375feb26581c5098b80cb4bf6e5f42ad160a754dcd0bf68fca23594cc9784a54942e9104dfe0f7a5143
+runfiles size=301
+ texmf-dist/tex/latex/l3kernel/expl3-code.tex
+ texmf-dist/tex/latex/l3kernel/expl3-generic.tex
+ texmf-dist/tex/latex/l3kernel/expl3.ltx
+ texmf-dist/tex/latex/l3kernel/expl3.lua
+ texmf-dist/tex/latex/l3kernel/expl3.sty
+ texmf-dist/tex/latex/l3kernel/l3debug.def
+ texmf-dist/tex/latex/l3kernel/l3deprecation.def
+ texmf-dist/tex/latex/l3kernel/l3doc.cls
+ texmf-dist/tex/latex/l3kernel/l3docstrip.tex
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88591.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso885910.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso885911.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso885913.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso885914.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso885915.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso885916.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88592.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88593.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88594.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88595.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88596.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88597.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88598.def
+ texmf-dist/tex/latex/l3kernel/l3str-enc-iso88599.def
+catalogue-also l3packages l3experimental
+catalogue-contact-bugs https://github.com/latex3/latex3/issues
+catalogue-contact-home http://www.latex-project.org/code.html
+catalogue-contact-repository https://github.com/latex3/latex3
+catalogue-ctan /macros/latex/contrib/l3kernel
+catalogue-license lppl1.3c
+catalogue-topics format latex3 pre-release
+
+name l3packages
+category Package
+revision 52357
+shortdesc High-level LaTeX3 concepts
+longdesc This collection contains implementations for aspects of the
+longdesc LaTeX3 kernel, dealing with higher-level ideas such as the
+longdesc Designer Interface. The packages here are considered broadly
+longdesc stable (The LaTeX3 Project does not expect the interfaces to
+longdesc alter radically). These packages are built on LaTeX2e
+longdesc conventions at the interface level, and so may not migrate in
+longdesc the current form to a stand-alone LaTeX3 format. Packages
+longdesc provided: xparse, which provides a high-level interface for
+longdesc declaring document commands xfp, an expandable IEEE 754 FPU for
+longdesc LaTeX l3keys2e, which makes the facilities of the kernel module
+longdesc l3keys available for use by LaTeX 2e packages xtemplate, which
+longdesc provides a means of defining generic functions using a
+longdesc key-value syntax xfrac, which provides flexible split-level
+longdesc fractions
+depend l3kernel
+containersize 19860
+containerchecksum eabaa7d60a77ab4dd9b4ae96e5b5cd1a93bcc4e5c4ee0259c3f3dd7856f1844b1b1b7eb4dd9cbab5b9b8803483ff1d9b1b84618d627a2bbf157472aa3db46289
+doccontainersize 1728212
+doccontainerchecksum 6f296faeabe88c7a1d6b47b2ae491c138be85b1fe93611f51eba8d756225d569d3c415969ac1907b08c6cb8885ee2f98f0063e43eb7907bbd8cc805588e51be8
+srccontainersize 64820
+srccontainerchecksum 59a319d8832072e9cf57cd5a3d4a9b0173bf8357f8714e587b2b1b50d84ae2a59e9ab9f8284f79f110d27e6e513c389ce5c95957811f2ff7039dd12eb1ae3ec4
+runfiles size=39
+ texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+ texmf-dist/tex/latex/l3packages/xfp/xfp.sty
+ texmf-dist/tex/latex/l3packages/xfrac/xfrac.sty
+ texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+ texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
+catalogue-also l3kernel l3experimental
+catalogue-contact-home http://www.latex-project.org/code.html
+catalogue-ctan /macros/latex/contrib/l3packages
+catalogue-license lppl1.3c
+catalogue-topics macro-supp latex3 pre-release
+
 name latex
 category Package
 revision 52731
@@ -5016,6 +5362,43 @@ runfiles size=8
  texmf-dist/tex/latex/latexconfig/lualatexquotejobname.tex
  texmf-dist/tex/latex/latexconfig/mllatex.ini
  texmf-dist/tex/latex/latexconfig/pdflatex.ini
+
+name latexmk
+category Package
+revision 53293
+shortdesc Fully automated LaTeX document generation
+longdesc Latexmk completely automates the process of generating a LaTeX
+longdesc document. Given the source files for a document, latexmk issues
+longdesc the appropriate sequence of commands to generate a .dvi, .ps,
+longdesc .pdf or hardcopy version of the document. An important feature
+longdesc is the "preview continuous mode", where the script watches all
+longdesc of the source files (primary file and included TeX and graphics
+longdesc files), and reruns LaTeX, etc., whenever a source file has
+longdesc changed. Thus a previewer can offer a display of the document's
+longdesc latest state.
+depend latexmk.ARCH
+containersize 92976
+containerchecksum b7e3971cd1aff149208fee6857066c83ed9af9229bc7402c7003480121a06684b9932deed33b8bba9bef544e000bab21425c51412cd2f7e273e0d53eecdc13d3
+doccontainersize 468272
+doccontainerchecksum 3008825a99898209da2311ad09e6b0ead8d8557c2e47cfd6a668b8711bb22102b89a6d5326735c306e3e21b824e8df4bc2bec864958a2f3e1a8a2884175f7b35
+srccontainersize 492
+srccontainerchecksum eeecd1be1cce9a2baf33d544bfb7726b0c468d223006241f15bf6f8a0134bf1987be49b86fded6ed5dc40acc42523373cb2407ecd5d41e7641b1ae0fa64e55fa
+runfiles size=100
+ texmf-dist/scripts/latexmk/latexmk.pl
+catalogue-also latexn prv arara
+catalogue-ctan /support/latexmk
+catalogue-license gpl2
+catalogue-topics compilation
+catalogue-version 4.67
+
+name latexmk.x86_64-linux
+category Package
+revision 10937
+shortdesc x86_64-linux files of latexmk
+containersize 340
+containerchecksum d0d78524ebd8aecbd3f2646030150d37283be92d852aadc75c1efa33b08e1b73c6365ce4e41e86eb5626d819e75140c7fe4caf772f472b51810b7b0868f0aa4d
+binfiles arch=x86_64-linux size=1
+ bin/x86_64-linux/latexmk
 
 name letltxmacro
 category Package
@@ -6148,6 +6531,35 @@ catalogue-license gfl
 catalogue-topics font font-proportional font-mono font-type1 font-otf font-cm
 catalogue-version 2.004
 
+name logreq
+category Package
+revision 53003
+shortdesc Support for automation of the LaTeX workflow
+longdesc The package helps to automate a typical LaTeX workflow that
+longdesc involves running LaTeX several times, running tools such as
+longdesc BibTeX or makeindex, and so on. It will log requests like
+longdesc "please rerun LaTeX" or "please run BibTeX on file X" to an
+longdesc external XML file which lists all open tasks in a
+longdesc machine-readable format. Compiler scripts and integrated LaTeX
+longdesc editing environments may parse this file to determine the next
+longdesc steps in the workflow in a way that is more efficient than
+longdesc parsing the main log file. In sum, the package will do two
+longdesc things: enable package authors to use LaTeX commands to issue
+longdesc requests, collect all requests from all packages and write them
+longdesc to an external XML file at the end of the document.
+depend etoolbox
+containersize 3212
+containerchecksum df61c0c6c0b8520f5ec38780d8eb69cfd5fccd21f5120e48eee71e02b004d3da4cc9cb9371a36766852e3ca09a3db86655f1a2639a49741f00134cff1246acd2
+doccontainersize 3792
+doccontainerchecksum fa9277da81dfb3aa235bd795780e8d3e629558fede90fa9234528b50a11507e59e65e49a0ca787af037186890392dfd45bf6de7bd859cec369626fb7d57b543f
+runfiles size=3
+ texmf-dist/tex/latex/logreq/logreq.def
+ texmf-dist/tex/latex/logreq/logreq.sty
+catalogue-ctan /macros/latex/contrib/logreq
+catalogue-license lppl1.3
+catalogue-topics compilation
+catalogue-version 1.0
+
 name ltxcmds
 category Package
 revision 53165
@@ -6946,6 +7358,51 @@ depend collection-basic
 containersize 428
 containerchecksum 8ae04d142c738142753b4601cc327721cb59689948c2c953f79ff1c4364aa6a449e3862d206223ef1ac1efc3fdfdb1f542c32c8049327662d4ddbe77fe7edbce
 
+name siunitx
+category Package
+revision 52662
+shortdesc A comprehensive (SI) units package
+longdesc Typesetting values with units requires care to ensure that the
+longdesc combined mathematical meaning of the value plus unit
+longdesc combination is clear. In particular, the SI units system lays
+longdesc down a consistent set of units with rules on how they are to be
+longdesc used. However, different countries and publishers have
+longdesc differing conventions on the exact appearance of numbers (and
+longdesc units). A number of LaTeX packages have been developed to
+longdesc provide consistent application of the various rules: SIunits,
+longdesc sistyle, unitsdef and units are the leading examples. The
+longdesc numprint package provides a large number of number-related
+longdesc functions, while dcolumn and rccol provide tools for
+longdesc typesetting tabular numbers. The siunitx package takes the best
+longdesc from the existing packages, and adds new features and a
+longdesc consistent interface. A number of new ideas have been
+longdesc incorporated, to fill gaps in the existing provision. The
+longdesc package also provides backward-compatibility with SIunits,
+longdesc sistyle, unitsdef and units. The aim is to have one package to
+longdesc handle all of the possible unit-related needs of LaTeX users.
+longdesc The package relies on LaTeX 3 support from the l3kernel and
+longdesc l3packages bundles.
+depend l3kernel
+depend l3packages
+containersize 35196
+containerchecksum 306baa4b911f0876589af04c5d8cab3abf3a60c96293179c17e3004a31e9c4da6806d26964bfe11ce902f8dd4d120a414c8f3ece84ec51c85ba73a668a1afe82
+doccontainersize 630636
+doccontainerchecksum 411d9aff5ff236381a639dd3ef3aa44bdd08efc8e5ee28e8ba236e42f801a2af9361ca31d712de7536ff5b67c786fd1edf7fdc701abfa7e4f8a33624d49f4356
+srccontainersize 104204
+srccontainerchecksum 2eee8f1e5c54406ebfa725a776ca387b91f579a9918a923163cd2ece50e48e1263e4ac2fe157f7de1853ef09f3f45c84f471ed28bfe6e77f91bc4ac7f68a51c3
+runfiles size=79
+ texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
+ texmf-dist/tex/latex/siunitx/siunitx-binary.cfg
+ texmf-dist/tex/latex/siunitx/siunitx-version-1.cfg
+ texmf-dist/tex/latex/siunitx/siunitx.sty
+catalogue-contact-bugs https://github.com/josephwright/siunitx/issues
+catalogue-contact-home https://www.texdev.net
+catalogue-contact-repository https://github.com/josephwright/siunitx
+catalogue-ctan /macros/latex/contrib/siunitx
+catalogue-license lppl1.3c
+catalogue-topics units scientific-docs
+catalogue-version 2.7t
+
 name stringenc
 category Package
 revision 52982
@@ -7371,6 +7828,72 @@ containersize 340
 containerchecksum a032d746184fc34956ac74cf3a65ac77674bf2278eb3dea455cd1d1a346cc5292a72b24a07bb685d1758edd8ed28680fb0f94f777b7dcc9aeef50cd676fe9138
 binfiles arch=x86_64-linux size=1
  bin/x86_64-linux/tlshell
+
+name tools
+category Package
+revision 52731
+catalogue latex-tools
+shortdesc The LaTeX standard tools bundle
+longdesc A collection of (variously) simple tools provided as part of
+longdesc the LaTeX required tools distribution, comprising the packages:
+longdesc afterpage, array, bm, calc, dcolumn, delarray, enumerate,
+longdesc fileerr, fontsmpl, ftnright, hhline, indentfirst, layout,
+longdesc longtable, multicol, rawfonts, showkeys, somedefs, tabularx,
+longdesc theorem, trace, varioref, verbatim, xr, and xspace.
+containersize 41104
+containerchecksum 2d1d7efe895de54aa7979bf96699fb9f473b3fe9a6e03d4ee8360b1418c984caf2cc0825dfdff3f5df1c448c1468235c639fc797479353617fc631fa61f064c6
+doccontainersize 5219440
+doccontainerchecksum 36fa35491bc1e0c8c3d0da6f89d57def9fae6e9688cb9cf09819027f8630d90ee4092b7c48789cf601348e3a1ae6efc577b017ff7dbb5c04b1bbf4b7200eb07e
+srccontainersize 223828
+srccontainerchecksum 39c9b44dbc83d6280d49834662a2ddf7946a0b0a73ece57feddf8e048ef1211027cf10e2ada8999465965f72396245f5dd243822834ac3034a69e7ca27752966
+runfiles size=99
+ texmf-dist/tex/latex/tools/.tex
+ texmf-dist/tex/latex/tools/afterpage.sty
+ texmf-dist/tex/latex/tools/array-2016-10-06.sty
+ texmf-dist/tex/latex/tools/array.sty
+ texmf-dist/tex/latex/tools/bm.sty
+ texmf-dist/tex/latex/tools/calc.sty
+ texmf-dist/tex/latex/tools/dcolumn.sty
+ texmf-dist/tex/latex/tools/delarray.sty
+ texmf-dist/tex/latex/tools/e.tex
+ texmf-dist/tex/latex/tools/enumerate.sty
+ texmf-dist/tex/latex/tools/fontsmpl.sty
+ texmf-dist/tex/latex/tools/fontsmpl.tex
+ texmf-dist/tex/latex/tools/ftnright.sty
+ texmf-dist/tex/latex/tools/h.tex
+ texmf-dist/tex/latex/tools/hhline.sty
+ texmf-dist/tex/latex/tools/indentfirst.sty
+ texmf-dist/tex/latex/tools/layout.sty
+ texmf-dist/tex/latex/tools/longtable.sty
+ texmf-dist/tex/latex/tools/multicol-2017-04-11.sty
+ texmf-dist/tex/latex/tools/multicol.sty
+ texmf-dist/tex/latex/tools/q.tex
+ texmf-dist/tex/latex/tools/r.tex
+ texmf-dist/tex/latex/tools/rawfonts.sty
+ texmf-dist/tex/latex/tools/s.tex
+ texmf-dist/tex/latex/tools/shellesc.sty
+ texmf-dist/tex/latex/tools/showkeys.sty
+ texmf-dist/tex/latex/tools/somedefs.sty
+ texmf-dist/tex/latex/tools/tabularx.sty
+ texmf-dist/tex/latex/tools/thb.sty
+ texmf-dist/tex/latex/tools/thc.sty
+ texmf-dist/tex/latex/tools/thcb.sty
+ texmf-dist/tex/latex/tools/theorem.sty
+ texmf-dist/tex/latex/tools/thm.sty
+ texmf-dist/tex/latex/tools/thmb.sty
+ texmf-dist/tex/latex/tools/thp.sty
+ texmf-dist/tex/latex/tools/trace.sty
+ texmf-dist/tex/latex/tools/varioref-2016-02-16.sty
+ texmf-dist/tex/latex/tools/varioref.sty
+ texmf-dist/tex/latex/tools/verbatim.sty
+ texmf-dist/tex/latex/tools/verbtest.tex
+ texmf-dist/tex/latex/tools/x.tex
+ texmf-dist/tex/latex/tools/xr.sty
+ texmf-dist/tex/latex/tools/xspace.sty
+catalogue-ctan /macros/latex/required/tools
+catalogue-license lppl1.3c
+catalogue-topics collection
+catalogue-version 2019-11-10 PL3
 
 name unicode-data
 category Package
