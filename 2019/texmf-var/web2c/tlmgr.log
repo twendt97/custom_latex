@@ -77,3 +77,19 @@
 [Sun Jan 12 10:25:34 2020] install: biber.x86_64-linux
 [Sun Jan 12 10:25:35 2020] install: biber
 [Sun Jan 12 10:27:18 2020] install: biblatex
+[Sun Jan 12 15:17:07 2020] install: pdflscape
+[Sun Jan 12 18:36:48 2020] install: minted
+[Sun Jan 12 19:35:07 2020] install: fancyvrb
+[Sun Jan 12 19:35:07 2020] install: float
+[Sun Jan 12 19:35:07 2020] install: framed
+[Sun Jan 12 19:35:07 2020] install: fvextra
+[Sun Jan 12 19:35:07 2020] install: lineno
+[Sun Jan 12 19:35:07 2020] install: upquote
+[Sun Jan 12 19:35:07 2020] install: xcolor
+[Sun Jan 12 19:35:07 2020] install: xstring
+[Sun Jan 12 19:51:41 2020] update: texlive-docindex (53336 -> 53367)
+[Sun Jan 12 19:51:41 2020] update: texlive-scripts (53361 -> 53367)
+[Sun Jan 12 19:52:32 2020] install: catchfile
+[Sun Jan 12 21:12:11 2020] install: caption
+[Mon Jan 13 08:37:36 2020] install: pdfcrop.x86_64-linux
+[Mon Jan 13 08:37:36 2020] install: pdfcrop

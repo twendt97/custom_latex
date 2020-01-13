@@ -1809,6 +1809,40 @@ catalogue-license lppl1.3
 catalogue-topics hyper
 catalogue-version 1.28
 
+name caption
+category Package
+revision 53318
+shortdesc Customising captions in floating environments
+longdesc The caption package provides many ways to customise the
+longdesc captions in floating environments like figure and table, and
+longdesc cooperates with many other packages. Facilities include
+longdesc rotating captions, sideways captions, continued captions (for
+longdesc tables or figures that come in several parts). A list of
+longdesc compatibility notes, for other packages, is provided in the
+longdesc documentation. The package also provides the "caption outside
+longdesc float" facility, in the same way that simpler packages like
+longdesc capt-of do. The package supersedes caption2.
+containersize 28836
+containerchecksum 6d68f3d0e3817a9d179cec3cbd72e44330bc7ec361ecd96666d0550eebef96c5429e1e87dc43ae8c9a5b06bb6168d04fdb88242a1681580cb952cb3d633f223c
+doccontainersize 1585192
+doccontainerchecksum 10f46459f2fa890b15691fe829b34ac4ea0e33793d5a23e55a8ae84df8e4a196297513c76b524cb87b2c917fdb150b417c0bfcdc1404e0d4918850e87b9499da
+srccontainersize 192496
+srccontainerchecksum fd32e0d0b9dfec4651e9661fe226283bc9e99b2e9598d0c931eca83563760b53661a4b7fc91468604c54ab17f9c1bec6d6d11087833072fb7a81ad8c0417a77c
+runfiles size=44
+ texmf-dist/tex/latex/caption/bicaption.sty
+ texmf-dist/tex/latex/caption/caption.sty
+ texmf-dist/tex/latex/caption/caption2.sty
+ texmf-dist/tex/latex/caption/caption3.sty
+ texmf-dist/tex/latex/caption/ltcaption.sty
+ texmf-dist/tex/latex/caption/subcaption.sty
+ texmf-dist/tex/latex/caption/totalcount.sty
+catalogue-also subcaption bicaption
+catalogue-contact-bugs https://gitlab.com/axelsommerfeldt/caption/issues
+catalogue-contact-repository https://gitlab.com/axelsommerfeldt/caption
+catalogue-ctan /macros/latex/contrib/caption
+catalogue-license lppl1.3
+catalogue-topics caption float
+
 name carlisle
 category Package
 revision 47876
@@ -1840,6 +1874,28 @@ runfiles size=11
 catalogue-ctan /macros/latex/contrib/carlisle
 catalogue-license lppl
 catalogue-topics collection
+
+name catchfile
+category Package
+revision 53084
+shortdesc Catch an external file into a macro
+longdesc This package catches the contents of a file and puts it in a
+longdesc macro. It requires e-TeX. Both LaTeX and plain TeX are
+longdesc supported.
+containersize 2748
+containerchecksum 6e01a91913a2a81224a533eb7f119283c267682efaa2a6cec11e9db7fc593b0d7a6830b83e482f22e96df208dba598b1c6596a78ae5d4cd17aa4c9a50eeaddea
+doccontainersize 297388
+doccontainerchecksum ad0d938e0bb4fe3d307dff1afc5ff93cd4b76948a88f88a65e3d036fe679cddc91c52e64febbf887c766d423fa5d94371869793c93138eeb919188b9b44234a7
+srccontainersize 6164
+srccontainerchecksum e254709b62517cbb717c43e894c17a72277465504bcbfdcacb2bf7423173e0476cce8355acb9772ca74fb267abd43faf0470ebf92139dd7847c756244efbc3fb
+runfiles size=3
+ texmf-dist/tex/generic/catchfile/catchfile.sty
+catalogue-contact-bugs https://github.com/ho-tex/catchfile/issues
+catalogue-contact-repository https://github.com/ho-tex/catchfile
+catalogue-ctan /macros/latex/contrib/catchfile
+catalogue-license lppl1.3
+catalogue-topics macro-supp
+catalogue-version 1.8
 
 name cm
 category Package
@@ -3894,6 +3950,101 @@ catalogue-license other-free
 catalogue-topics font font-specialist font-mf
 catalogue-version 1.4-subrfix
 
+name fancyvrb
+category Package
+revision 52710
+shortdesc Sophisticated verbatim text
+longdesc Flexible handling of verbatim text including: verbatim commands
+longdesc in footnotes; a variety of verbatim environments with many
+longdesc parameters; ability to define new customized verbatim
+longdesc environments; save and restore verbatim text and environments;
+longdesc write and read files in verbatim mode; build "example"
+longdesc environments (showing both result and verbatim source).
+containersize 11612
+containerchecksum c7f8e5af98403361f5bc5e708b4d29fafa13b76af896f8751f7cca4d8a61015f2b65587245f6c2aa7cb4722d507cb75a61db2a5649f2788433f59636a45a8de0
+doccontainersize 150300
+doccontainerchecksum d9420818e5b03471cabd4e725681dd7e72621e8bfdb9d085de9f1883439a915321874f06087bc7dce9fb2597fcc05bc0f175c5adb0ad650615d00fe8e61b8525
+runfiles size=17
+ texmf-dist/tex/latex/fancyvrb/fancyvrb-ex.sty
+ texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+ texmf-dist/tex/latex/fancyvrb/hbaw.sty
+ texmf-dist/tex/latex/fancyvrb/hcolor.sty
+catalogue-ctan /macros/latex/contrib/fancyvrb
+catalogue-license lppl1.3
+catalogue-topics verbatim
+catalogue-version 3.4
+
+name float
+category Package
+revision 15878
+shortdesc Improved interface for floating objects
+longdesc Improves the interface for defining floating objects such as
+longdesc figures and tables. Introduces the boxed float, the ruled float
+longdesc and the plaintop float. You can define your own floats and
+longdesc improve the behaviour of the old ones. The package also
+longdesc provides the H float modifier option of the obsolete here
+longdesc package. You can select this as automatic default with
+longdesc \floatplacement{figure}{H}.
+containersize 2712
+containerchecksum 4a5270ca2945915464ba25b7996dfbd4771ca5f477e4bf248183bc340b7051c042d9566908acac881782af74a59154f4163bc7879a21e042e1c31d67237fc6a8
+doccontainersize 112620
+doccontainerchecksum 6f713c71361c1536bb086e7638b770ffe58e97aa01bd59bbab779f71cb485b9c06322d7d89e7d87cc8f77a0c7f18f4174fd4ec47b62556faa32d82fead0b7377
+srccontainersize 12572
+srccontainerchecksum 9e577ba84dcac612e4105e597ca2385da3dafb39327189caf30e5728b85a380b5a90363b8bf9070a0464aca2130bcf9419d030bd6c39d51f9a17b0a7dd578d5f
+runfiles size=2
+ texmf-dist/tex/latex/float/float.sty
+catalogue-also rotfloat
+catalogue-ctan /macros/latex/contrib/float
+catalogue-license lppl
+catalogue-topics float
+catalogue-version 1.3d
+
+name framed
+category Package
+revision 26789
+shortdesc Framed or shaded regions that can break across pages
+longdesc The package creates three environments: framed, which puts an
+longdesc ordinary frame box around the region, shaded, which shades the
+longdesc region, and leftbar, which places a line at the left side. The
+longdesc environments allow a break at their start (the \FrameCommand
+longdesc enables creation of a title that is "attached" to the
+longdesc environment); breaks are also allowed in the course of the
+longdesc framed/shaded matter. There is also a command \MakeFramed to
+longdesc make your own framed-style environments.
+containersize 7916
+containerchecksum 06f0da36c24ba42959b2176066d3e95f23dfed41753f4e4b07c1f92c4789e68d1b246c61cbdeacbb9c00b6eb990ea2b3ec75dff8ac57845102a867dfdf2c72c7
+doccontainersize 239020
+doccontainerchecksum 1f48ac19f74f5003df88700ff85c072c8a655d4623b82bc3b7c6570a548c0a7b7e97fe292f8557a72188c0047fc28e280bc3ab65f58559804fa78e89317fd67e
+runfiles size=6
+ texmf-dist/tex/latex/framed/framed.sty
+catalogue-also mdframed
+catalogue-ctan /macros/latex/contrib/framed
+catalogue-license other-free
+catalogue-topics boxing box-breaking decoration
+catalogue-version 0.96
+
+name fvextra
+category Package
+revision 49947
+shortdesc Extensions and patches for fancyvrb
+longdesc fvextra provides several extensions to fancyvrb, including
+longdesc automatic line breaking and improved math mode. It also patches
+longdesc some fancyvrb internals. Parts of fvextra were originally
+longdesc developed as part of pythontex and minted.
+containersize 11168
+containerchecksum 9b5daea58dbbd82c3c2d5e637b3c46531aaac1600b39a945eecefc725591c885b0fd706fd38a11c3149fbee3b6029ed518147617a9f0c95b57fe5d66d19541f7
+doccontainersize 817944
+doccontainerchecksum 8e21f94366f7642cf92b8874050c961386fa019450a5e1ae9f6221ab3bf473b41e768bcb2fd1063a4421e721daef6ada5b964a1b6b9fc0054a1b9d7c4040b54c
+srccontainersize 50964
+srccontainerchecksum 85330a89067d35c88c86ffaffb0445178b899a9f7727148ccb6cece070317f0d559e72e216c7ecd5a39bf830f5ca93f9f5f711a931fe8cc9d942e4572263f74d
+runfiles size=20
+ texmf-dist/tex/latex/fvextra/fvextra.sty
+catalogue-contact-home https://github.com/gpoore/fvextra
+catalogue-ctan /macros/latex/contrib/fvextra
+catalogue-license lppl1.3
+catalogue-topics verbatim
+catalogue-version 1.4
+
 name geometry
 category Package
 revision 53299
@@ -5423,6 +5574,33 @@ catalogue-ctan /macros/latex/contrib/letltxmacro
 catalogue-license lppl1.3
 catalogue-topics macro-def
 catalogue-version 1.6
+
+name lineno
+category Package
+revision 21442
+shortdesc Line numbers on paragraphs
+longdesc Adds line numbers to selected paragraphs with reference
+longdesc possible through the LaTeX \ref and \pageref cross reference
+longdesc mechanism. Line numbering may be extended to footnote lines,
+longdesc using the fnlineno package.
+containersize 62308
+containerchecksum c98bb4c84d6473c3038a359872442ff8387ad8f111ce1d82021728d9bb8e29ca08cc65d5705261bb347a2da2fc27594cbcdc8accbd59aa03c91f0c25312578fb
+doccontainersize 649992
+doccontainerchecksum da4fc0ca69d434c6d97cb87390247b3efd3463f5dcfa7e828d2bc840d2636036c097d6d54bb2e89b5d9b5f2a95a41db89af415d08ceacddbc4642883ebc134dc
+srccontainersize 44284
+srccontainerchecksum 9598996c2796de011a31a8b8ebd38fa343ce856fc6d291426074da40bc557359e9ff40039cc48faaf6b4a3d039ae091bb7d7dfea530e449a0be3a34dba1c997d
+runfiles size=60
+ texmf-dist/tex/latex/lineno/ednmath0.sty
+ texmf-dist/tex/latex/lineno/edtable.sty
+ texmf-dist/tex/latex/lineno/fnlineno.sty
+ texmf-dist/tex/latex/lineno/lineno.sty
+ texmf-dist/tex/latex/lineno/vplref.sty
+catalogue-also numline edmac ledmac ednotes manyfoot poemscol
+catalogue-contact-support http://www.webdesign-bu.de/uwe_lueck/contact.html
+catalogue-ctan /macros/latex/contrib/lineno
+catalogue-license lppl
+catalogue-topics typesetting
+catalogue-version 4.41
 
 name lm
 category Package
@@ -7007,6 +7185,30 @@ binfiles arch=x86_64-linux size=145
  bin/x86_64-linux/pktogf
  bin/x86_64-linux/pktype
 
+name minted
+category Package
+revision 44855
+shortdesc Highlighted source code for LaTeX
+longdesc The package that facilitates expressive syntax highlighting in
+longdesc LaTeX using the powerful Pygments library. The package also
+longdesc provides options to customize the highlighted source code
+longdesc output using fancyvrb.
+containersize 9496
+containerchecksum 5923b5e87e8bb2cf148a480035b906aab4b03b903308e8e9609f98376f82e23fedd529abca37bb4e9211719160abd9d4488f5c73a0283f67c7f11ee3e1f1d5fb
+doccontainersize 803632
+doccontainerchecksum 0187a04f9e42c1bf3e5d961c28b977e527dfc1b57c0f823eda047d5e6c888f3f8da1fed691c8e3128d09b3740deb1b324baa607b9abc20a4fe47ea0a29915e90
+srccontainersize 44376
+srccontainerchecksum 1595aac2da1fc9c7b9e50c92fd12eda866fc35e884e335b1f4883188a4b0f9603a39cffa252cc1bb11ffd4a67e16a80b05c5ecf2cd7440c50f0605e5fc44e302
+runfiles size=15
+ texmf-dist/tex/latex/minted/minted.sty
+ texmf-dist/tex/latex/minted/minted1.sty
+catalogue-also texments verbments
+catalogue-contact-repository https://github.com/gpoore/minted
+catalogue-ctan /macros/latex/contrib/minted
+catalogue-license lppl1.3
+catalogue-topics listing
+catalogue-version 2.5
+
 name oberdiek
 category Package
 revision 53283
@@ -7146,6 +7348,34 @@ catalogue-license lppl1.3c
 catalogue-topics layout parshape
 catalogue-version 2.0c
 
+name pdfcrop
+category Package
+revision 29348
+shortdesc Crop PDF graphics
+longdesc A Perl script that can either trim pages of any whitespace
+longdesc border, or trim them of a fixed border.
+depend pdfcrop.ARCH
+containersize 10732
+containerchecksum eba7fd5c529e1b3a29d00ee679c24748050f1a6005391de4bdb6e6fd537cd447b01e6569e0eaa87251d49e14f548dfc80d5e33f037862a4e978905af37e9e186
+doccontainersize 4300
+doccontainerchecksum 5deb207030892f9e351d511bba20e65e957b5db17df6af60022c3f069cba127be6e9bdc1e94600b6f36af8f35697b041ac5aa529ef7997f57264b1dcbf76ce2e
+runfiles size=10
+ texmf-dist/scripts/pdfcrop/pdfcrop.pl
+catalogue-ctan /support/pdfcrop
+catalogue-license lppl
+catalogue-topics pdfprocess
+catalogue-version 1.37
+
+name pdfcrop.x86_64-linux
+category Package
+revision 14387
+shortdesc x86_64-linux files of pdfcrop
+containersize 360
+containerchecksum 931ffba4c56dfd49a7d3397e43c2d28c12c73db1a3000ce99ae1bde5f6b6b7ac8e232afb0a7f4e171e873a94f96f515d7b5fbdccfa0f3e92904cb71207aaaaef
+binfiles arch=x86_64-linux size=2
+ bin/x86_64-linux/pdfcrop
+ bin/x86_64-linux/rpdfcrop
+
 name pdfescape
 category Package
 revision 53082
@@ -7167,6 +7397,30 @@ catalogue-ctan /macros/latex/contrib/pdfescape
 catalogue-license lppl1.3
 catalogue-topics macro-supp
 catalogue-version 1.15
+
+name pdflscape
+category Package
+revision 53047
+shortdesc Make landscape pages display as landscape
+longdesc The package adds PDF support to the landscape environment of
+longdesc package lscape, by setting the PDF /Rotate page attribute.
+longdesc Pages with this attribute will be displayed in landscape
+longdesc orientation by conforming PDF viewers.
+containersize 2252
+containerchecksum c343f0527f21421f26396a6210f7932786a222a437b43d6b2bf1c53339633a0aa8337843222d92048a6a5a41f0952aa2fde6e2bfb2e181cf811383a23ffadadb
+doccontainersize 298264
+doccontainerchecksum 5fccb7dc5607f1196d6df6a1a68d010c0b9eea10854cdf2e133f31dc4095f101efc05abcf9e980a3e05375ba29ce319dc13385790c2261778fde54d3b94d1251
+srccontainersize 6000
+srccontainerchecksum 08cc0550cb76eff49ab4cc9f357f22a7c8086b2802eb191237bbf79acce2b134a2bf3ea28a8324d0140ac785afb8a928a8f7b8cc7e58bdd7e9d8b1d3a66ee7e5
+runfiles size=2
+ texmf-dist/tex/latex/pdflscape/pdflscape.sty
+catalogue-also lscape
+catalogue-contact-bugs https://github.com/ho-tex/pdflscape/issues
+catalogue-contact-repository https://github.com/ho-tex/pdflscape
+catalogue-ctan /macros/latex/contrib/pdflscape
+catalogue-license lppl1.3
+catalogue-topics landscape layout
+catalogue-version 0.12
 
 name pdftex
 category TLCore
@@ -7654,15 +7908,15 @@ doccontainerchecksum 9fa949114a490a7cfcd7c0083ea7fe797bafe4ae4b61f1b689e9950afaf
 
 name texlive-docindex
 category TLCore
-revision 53336
+revision 53367
 shortdesc top-level TeX Live doc.html, etc.
 longdesc These files are regenerated as needed, which is often, so we
 longdesc make them a separate package.  See the tl-update-auto script
 longdesc for the process.
-containersize 388
-containerchecksum 0bea3a3a71fc73bbfb1b801aa9a0fad84f87e9d9115b8dfcdddba0c6346d29f385b5a6829e7090e5c66fb5f2ce1db0ad929f9426d6988b30cc0dc0f9d19b5c64
-doccontainersize 157836
-doccontainerchecksum 9ea5f37f809bd4d1372a4208fb0b49cf0036198a09c46ae82e3024b4a2b2b648b8b5b9485562bd5466475a4ca4dace7b73e7d208a983dc1706fdb7723a9df583
+containersize 392
+containerchecksum 572835b541396c6b78f5869741ddf1306bdfb64cf9e78841455c1b6ff9cba53e1e67cfb9c83e4630d8cbd68bedfa813fdf9fffc9a35625bbe7c32829e5afb0ee
+doccontainersize 157808
+doccontainerchecksum 5b8d4bc10113ff3239bd89e10b3c2b1aaf990e3657e8acb1dbcee9d884ca184d7111e2e77ec8de860032d1e1aa8d9d10b2c0497a352f1d9e9d768a9ac900bcf5
 
 name texlive-en
 category TLCore
@@ -7707,17 +7961,17 @@ runfiles size=393
 
 name texlive-scripts
 category TLCore
-revision 53361
+revision 53367
 shortdesc TeX Live infrastructure programs
 longdesc Includes install-tl, tl-portable, rungs, etc.; not needed for
 longdesc tlmgr to run but still ours.  Not included in tlcritical.
 depend texlive.infra
 depend texlive-scripts.ARCH
 postaction shortcut type=menu name="TeX Live command-line"   cmd=TEXDIR/tlpkg/installer/tl-cmd.bat
-containersize 83308
-containerchecksum e8f6158a43afff15cc23f371ea9f622614e291f527f4ee8c32a44100ac5185b63c7202f96eecf36c995e4533d67eeea59058d67abd4548b7aad6e3edb70efabb
-doccontainersize 130228
-doccontainerchecksum f0459b6a4cc0e104961b96ba0ab4de398e0f5bfdea325d71fa3679f35d5dfe7bf07ffd5800919d6dac48b4adbbf2323991bdc19eae23de8d44c193ca13e78725
+containersize 83344
+containerchecksum 9e081e605e2a5fce777891693aad102f3a98a563d9785b879d463cf4b004a8eb95332008bec25c7e115d4efff37670b6dcbe960e865c803a1367ceaf70132fce
+doccontainersize 130232
+doccontainerchecksum b04c336f2904e1b3d1441b5346213c32bed0a88171624379384f50bbc43d0da862be524c6991255bf236a48ebb189fefe8b65d908b1d1dfded939fbcf755865e
 runfiles size=83
  install-tl
  texmf-dist/scripts/texlive/mktexmf
@@ -7982,6 +8236,34 @@ runfiles size=8052
  texmf-dist/fonts/map/pdftex/updmap/pdftex_dl14.map
  texmf-dist/fonts/map/pdftex/updmap/pdftex_ndl14.map
 
+name upquote
+category Package
+revision 26059
+shortdesc Show "realistic" quotes in verbatim
+longdesc Typewriter-style fonts are best for program listings, but
+longdesc Computer Modern Typewriter prints ` and ' as bent opening and
+longdesc closing single quotes. Other fonts, and most programming
+longdesc languages, print ` as a grave accent and ' upright; ' is used
+longdesc both to open and to close quoted strings. The package switches
+longdesc the typewriter font to Computer Modern Typewriter in OT1
+longdesc encoding, and modifies the behaviour of verbatim, verbatim*,
+longdesc \verb, and \verb* to print in the "` and ' way". It does
+longdesc thisregardless of other fonts or encodings in use, so long as
+longdesc the package is loaded after the other fonts were. The package
+longdesc does not affect \tt, \texttt, etc.
+containersize 1272
+containerchecksum 06360c313124487f291a8daf7399a3139cec8c0a05be12724cedb3d60393ecb07aa31e34f9b74a83048f5752a8d826505f91f2c85d34348264975b48a1813fab
+doccontainersize 163312
+doccontainerchecksum 4b92923e8af2dcd65e82269994c766b88c6f78f6e7b8d10b9f44889832150711acb0cbaf467d595d6745863f385569f7eeccb4ce69df8361e56910969532e314
+srccontainersize 2688
+srccontainerchecksum dcb227a6ebb481e9c4abb9f9ddacafda03ae4a445768a3a242c6dc3bc79f83e9e5f185db4d353916b4d50f5aefa9884bc52fbced79894e1c00cd7f40f0940884
+runfiles size=1
+ texmf-dist/tex/latex/upquote/upquote.sty
+catalogue-ctan /macros/latex/contrib/upquote
+catalogue-license lppl1.2
+catalogue-topics verbatim
+catalogue-version 1.3
+
 name url
 category Package
 revision 32528
@@ -8008,6 +8290,36 @@ catalogue-ctan /macros/latex/contrib/url
 catalogue-license lppl
 catalogue-topics verbatim
 catalogue-version 3.4
+
+name xcolor
+category Package
+revision 41044
+shortdesc Driver-independent color extensions for LaTeX and pdfLaTeX
+longdesc The package starts from the basic facilities of the color
+longdesc package, and provides easy driver-independent access to several
+longdesc kinds of color tints, shades, tones, and mixes of arbitrary
+longdesc colors. It allows a user to select a document-wide target color
+longdesc model and offers complete tools for conversion between eight
+longdesc color models. Additionally, there is a command for alternating
+longdesc row colors plus repeated non-aligned material (like horizontal
+longdesc lines) in tables. Colors can be mixed like
+longdesc \color{red!30!green!40!blue}.
+containersize 17300
+containerchecksum 9fba18460e4488cf2836082952ffff6e5e481b964570ee515f503aed3c8790778e054919e4e24070ff6cf608e21c1356859341eae5704558b1293b01ba8c0925
+doccontainersize 669996
+doccontainerchecksum 65f15207df8a112a4bccbac1c5259053364b52da3f0d2fdf566e1e734f61e0649ae6cc674c96f775d8c668cc6238dad2993f06b81153d38713ebf96e747e0353
+srccontainersize 76980
+srccontainerchecksum 236eb7d2f94c297e743c2b0508e55910b00495915b7910dba7e0bc107f2ee37b24e3975242bb11c2c64a99f2abc5a55bd799277b9fbcd98058ee8add005d2be7
+runfiles size=20
+ texmf-dist/dvips/xcolor/xcolor.pro
+ texmf-dist/tex/latex/xcolor/svgnam.def
+ texmf-dist/tex/latex/xcolor/x11nam.def
+ texmf-dist/tex/latex/xcolor/xcolor.sty
+catalogue-contact-home http://www.ukern.de/tex/xcolor.html
+catalogue-ctan /macros/latex/contrib/xcolor
+catalogue-license lppl1.2
+catalogue-topics colour
+catalogue-version 2.12
 
 name xdvi
 category TLCore
@@ -8042,4 +8354,29 @@ containerchecksum b1b7649145be630a1447e65aee440286e9d75f980790ab0736d20d3420b44d
 binfiles arch=x86_64-linux size=313
  bin/x86_64-linux/xdvi
  bin/x86_64-linux/xdvi-xaw
+
+name xstring
+category Package
+revision 49946
+shortdesc String manipulation for (La)TeX
+longdesc The package provides macros for manipulating strings -- testing
+longdesc a string's contents, extracting substrings, substitution of
+longdesc substrings and providing numbers such as string length,
+longdesc position of, or number of recurrences of, a substring. The
+longdesc package works equally in Plain TeX and LaTeX (though e-TeX is
+longdesc always required). The strings to be processed may contain
+longdesc (expandable) macros.
+containersize 11216
+containerchecksum 82254f103053d91eeea4c6230142de06138c392542cac63731c7b34fec5130984bbdebc29ac3b56998717dca11ad444c44f410215b6b89e6748029721a9daac6
+doccontainersize 656876
+doccontainerchecksum c0c17b82ad0d5aad95d312935e0214a7e5404a23b9a284a56ac92ec9ea936a9bfd3a68a5b01e29c131b7850a3fd3922ac87020166eaf0a7ed9d695dc80d0a931
+runfiles size=13
+ texmf-dist/tex/generic/xstring/xstring.sty
+ texmf-dist/tex/generic/xstring/xstring.tex
+catalogue-contact-bugs https://framagit.org/unbonpetit/xstring/issues
+catalogue-contact-repository https://framagit.org/unbonpetit/xstring/tree/master
+catalogue-ctan /macros/generic/xstring
+catalogue-license lppl1.3c
+catalogue-topics string
+catalogue-version 1.83
 

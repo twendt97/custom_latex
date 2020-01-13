@@ -1,0 +1,33 @@
+name caption
+category Package
+revision 53318
+shortdesc Customising captions in floating environments
+longdesc The caption package provides many ways to customise the
+longdesc captions in floating environments like figure and table, and
+longdesc cooperates with many other packages. Facilities include
+longdesc rotating captions, sideways captions, continued captions (for
+longdesc tables or figures that come in several parts). A list of
+longdesc compatibility notes, for other packages, is provided in the
+longdesc documentation. The package also provides the "caption outside
+longdesc float" facility, in the same way that simpler packages like
+longdesc capt-of do. The package supersedes caption2.
+containersize 28836
+containerchecksum 6d68f3d0e3817a9d179cec3cbd72e44330bc7ec361ecd96666d0550eebef96c5429e1e87dc43ae8c9a5b06bb6168d04fdb88242a1681580cb952cb3d633f223c
+doccontainersize 1585192
+doccontainerchecksum 10f46459f2fa890b15691fe829b34ac4ea0e33793d5a23e55a8ae84df8e4a196297513c76b524cb87b2c917fdb150b417c0bfcdc1404e0d4918850e87b9499da
+srccontainersize 192496
+srccontainerchecksum fd32e0d0b9dfec4651e9661fe226283bc9e99b2e9598d0c931eca83563760b53661a4b7fc91468604c54ab17f9c1bec6d6d11087833072fb7a81ad8c0417a77c
+runfiles size=44
+ texmf-dist/tex/latex/caption/bicaption.sty
+ texmf-dist/tex/latex/caption/caption.sty
+ texmf-dist/tex/latex/caption/caption2.sty
+ texmf-dist/tex/latex/caption/caption3.sty
+ texmf-dist/tex/latex/caption/ltcaption.sty
+ texmf-dist/tex/latex/caption/subcaption.sty
+ texmf-dist/tex/latex/caption/totalcount.sty
+catalogue-also subcaption bicaption
+catalogue-contact-bugs https://gitlab.com/axelsommerfeldt/caption/issues
+catalogue-contact-repository https://gitlab.com/axelsommerfeldt/caption
+catalogue-ctan /macros/latex/contrib/caption
+catalogue-license lppl1.3
+catalogue-topics caption float

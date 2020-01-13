@@ -1,16 +1,16 @@
 name texlive-scripts
 category TLCore
-revision 53361
+revision 53367
 shortdesc TeX Live infrastructure programs
 longdesc Includes install-tl, tl-portable, rungs, etc.; not needed for
 longdesc tlmgr to run but still ours.  Not included in tlcritical.
 depend texlive.infra
 depend texlive-scripts.ARCH
 postaction shortcut type=menu name="TeX Live command-line"   cmd=TEXDIR/tlpkg/installer/tl-cmd.bat
-containersize 83308
-containerchecksum e8f6158a43afff15cc23f371ea9f622614e291f527f4ee8c32a44100ac5185b63c7202f96eecf36c995e4533d67eeea59058d67abd4548b7aad6e3edb70efabb
-doccontainersize 130228
-doccontainerchecksum f0459b6a4cc0e104961b96ba0ab4de398e0f5bfdea325d71fa3679f35d5dfe7bf07ffd5800919d6dac48b4adbbf2323991bdc19eae23de8d44c193ca13e78725
+containersize 83344
+containerchecksum 9e081e605e2a5fce777891693aad102f3a98a563d9785b879d463cf4b004a8eb95332008bec25c7e115d4efff37670b6dcbe960e865c803a1367ceaf70132fce
+doccontainersize 130232
+doccontainerchecksum b04c336f2904e1b3d1441b5346213c32bed0a88171624379384f50bbc43d0da862be524c6991255bf236a48ebb189fefe8b65d908b1d1dfded939fbcf755865e
 runfiles size=83
  install-tl
  texmf-dist/scripts/texlive/mktexmf

@@ -109,6 +109,7 @@ config
 gsftopk
 l3backend
 tetex
+xcolor
 xdvi
 
 ./dvips/base:
@@ -170,6 +171,9 @@ config.outline
 config.pdf
 config.pk
 config.www
+
+./dvips/xcolor:
+xcolor.pro
 
 ./dvips/xdvi:
 config.xdvi
@@ -3800,6 +3804,7 @@ epstopdf
 latexmk
 lua-alt-getopt
 luaotfload
+pdfcrop
 pdftexcmds
 simpdftex
 texlive
@@ -3822,6 +3827,9 @@ alt_getopt.lua
 
 ./scripts/luaotfload:
 luaotfload-tool.lua
+
+./scripts/pdfcrop:
+pdfcrop.pl
 
 ./scripts/pdftexcmds:
 pdftexcmds.lua
@@ -4079,6 +4087,7 @@ babel-german
 bibtex
 bigintcalc
 bitset
+catchfile
 colorprofiles
 config
 dehyph
@@ -4103,6 +4112,7 @@ stringenc
 tex-ini-files
 unicode-data
 uniquecounter
+xstring
 
 ./tex/generic/atbegshi:
 atbegshi.sty
@@ -5365,6 +5375,9 @@ bigintcalc.sty
 ./tex/generic/bitset:
 bitset.sty
 
+./tex/generic/catchfile:
+catchfile.sty
+
 ./tex/generic/colorprofiles:
 FOGRA39L_coated.icc
 colorprofiles.sty
@@ -5588,6 +5601,10 @@ load-unicode-xetex-classes.tex
 ./tex/generic/uniquecounter:
 uniquecounter.sty
 
+./tex/generic/xstring:
+xstring.sty
+xstring.tex
+
 ./tex/latex:
 amsfonts
 amsmath
@@ -5596,11 +5613,16 @@ auxhook
 base
 biblatex
 bookmark
+caption
 carlisle
 epstopdf-pkg
 etex-pkg
 etoolbox
 eurosym
+fancyvrb
+float
+framed
+fvextra
 geometry
 graphics
 graphics-cfg
@@ -5617,18 +5639,23 @@ l3kernel
 l3packages
 latexconfig
 letltxmacro
+lineno
 lm
 logreq
 marvosym
 mflogo
+minted
 oberdiek
 parskip
+pdflscape
 pdftexcmds
 refcount
 rerunfilecheck
 siunitx
 tools
+upquote
 url
+xcolor
 
 ./tex/latex/amsfonts:
 amsfonts.sty
@@ -5945,6 +5972,15 @@ bkm-textures.def
 bkm-vtex.def
 bookmark.sty
 
+./tex/latex/caption:
+bicaption.sty
+caption.sty
+caption2.sty
+caption3.sty
+ltcaption.sty
+subcaption.sty
+totalcount.sty
+
 ./tex/latex/carlisle:
 dotlessj.sty
 ltxtable.sty
@@ -5967,6 +6003,21 @@ etoolbox.sty
 
 ./tex/latex/eurosym:
 eurosym.sty
+
+./tex/latex/fancyvrb:
+fancyvrb-ex.sty
+fancyvrb.sty
+hbaw.sty
+hcolor.sty
+
+./tex/latex/float:
+float.sty
+
+./tex/latex/framed:
+framed.sty
+
+./tex/latex/fvextra:
+fvextra.sty
 
 ./tex/latex/geometry:
 geometry.sty
@@ -6179,6 +6230,13 @@ pdflatex.ini
 ./tex/latex/letltxmacro:
 letltxmacro.sty
 
+./tex/latex/lineno:
+ednmath0.sty
+edtable.sty
+fnlineno.sty
+lineno.sty
+vplref.sty
+
 ./tex/latex/lm:
 il2lmdh.fd
 il2lmr.fd
@@ -6253,6 +6311,10 @@ umvs.fd
 mflogo.sty
 ulogo.fd
 
+./tex/latex/minted:
+minted.sty
+minted1.sty
+
 ./tex/latex/oberdiek:
 aliascnt.sty
 bmpsize-base.sty
@@ -6293,6 +6355,9 @@ twoopt.sty
 ./tex/latex/parskip:
 parskip-2001-04-09.sty
 parskip.sty
+
+./tex/latex/pdflscape:
+pdflscape.sty
 
 ./tex/latex/pdftexcmds:
 pdftexcmds.sty
@@ -6354,8 +6419,16 @@ x.tex
 xr.sty
 xspace.sty
 
+./tex/latex/upquote:
+upquote.sty
+
 ./tex/latex/url:
 url.sty
+
+./tex/latex/xcolor:
+svgnam.def
+x11nam.def
+xcolor.sty
 
 ./tex/luatex:
 hyph-utf8
