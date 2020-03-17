@@ -5,8 +5,8 @@
 do -- block to avoid to many local variables error
  local ProvidesLuaModule = { 
      name          = "luaotfload-harf-plug",
-     version       = "3.11",       --TAGVERSION
-     date          = "2019-11-10", --TAGDATE
+     version       = "3.12",       --TAGVERSION
+     date          = "2020-02-02", --TAGDATE
      description   = "luaotfload submodule / database",
      license       = "GPL v2.0",
      author        = "Khaled Hosny, Marcel Krüger",
@@ -565,8 +565,17 @@ end
 local push_cmd = { "push" }
 local pop_cmd = { "pop" }
 local nop_cmd = { "nop" }
-local save_cmd = { "pdf", "page", "q" }
-local restore_cmd = { "pdf", "page", "Q" }
+--[[
+  In the following, "text" actually refers to "font" mode and not to "text"
+  mode. "font" mode is called "text" inside of virtual font commands (don't
+  ask me why, but the LuaTeX source does make it clear that this is intentional)
+  and behaves mostly like "page" (especially it does not enter a "BT" "ET"
+  block) except that it always resets the current position to the origin.
+  This is necessary to ensure that the q/Q pair does not interfere with TeX's
+  position tracking.
+  ]]
+local save_cmd = { "pdf", "text", "q" }
+local restore_cmd = { "pdf", "text", "Q" }
 
 -- Convert glyphs to nodes and collect font characters.
 local function tonodes(head, node, run, glyphs)

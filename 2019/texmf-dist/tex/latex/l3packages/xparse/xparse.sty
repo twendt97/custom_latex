@@ -6,7 +6,7 @@
 %%
 %% xparse.dtx  (with options: `package')
 %% 
-%% Copyright (C) 2009-2019 The LaTeX3 Project
+%% Copyright (C) 2009-2020 The LaTeX3 Project
 %% 
 %% It may be distributed and/or modified under the conditions of
 %% the LaTeX Project Public License (LPPL), either version 1.3c of
@@ -32,7 +32,7 @@
       }%
     \endinput
   }
-\ProvidesExplPackage{xparse}{2019-10-11}{}
+\ProvidesExplPackage{xparse}{2020-02-25}{}
   {L3 Experimental document command parser}
 \tl_new:N \l__xparse_arg_spec_tl
 \tl_new:N \l__xparse_args_tl
@@ -1126,7 +1126,7 @@
   }
 \cs_new:Npn \__xparse_grab_D_nested:w #1 \q_nil \q_stop
   { \exp_not:o { \use_none:n #1 } }
-\cs_set_protected_nopar:Npn \__xparse_grab_D_call:Nw #1
+\cs_new_protected_nopar:Npn \__xparse_grab_D_call:Nw #1
   {
     \token_if_eq_catcode:NNTF + #1
       {
@@ -1662,10 +1662,10 @@
   }
 \exp_args:No \__xparse_tmp:w { \c_novalue_tl }
 \cs_new:Npn \__xparse_expandable_grab_R_alt:w #1 \q__xparse #2#3
-  { #2 { \__xparse_expandable_grab_R_alt_aux:NNnwNn #1 \q__xparse #2#3 } }
+  { #2 { \__xparse_expandable_grab_R_alt_aux:NNwNNn #1 \q__xparse #2#3 } }
 \cs_set_protected:Npn \__xparse_tmp:w #1
   {
-    \cs_new:Npn \__xparse_expandable_grab_R_alt_aux:NNwNn ##1##2##3 \q__xparse ##4##5##6
+    \cs_new:Npn \__xparse_expandable_grab_R_alt_aux:NNwNNn ##1##2##3 \q__xparse ##4##5##6
       {
         \str_if_eq:nnTF {##6} {##2}
           {
@@ -2100,7 +2100,7 @@
     LaTeX~did~not~find~it,~and~will~insert~a~default~value~to~be~processed.
   }
 \__kernel_msg_new:nnnn { xparse } { non-xparse }
-  { \str_upper_case:n #1~not~defined~using~xparse. }
+  { \str_uppercase:n #1~not~defined~using~xparse. }
   {
     You~have~asked~for~the~argument~specification~for~the~#1,~
     but~this~was~not~defined~using~xparse.
@@ -2315,10 +2315,7 @@
   }
 \keys_set:nV { xparse } \l__xparse_options_clist
 \bool_if:NF \l__xparse_log_bool
-  {
-    \msg_redirect_module:nnn { LaTeX / xparse } { info }    { none }
-    \msg_redirect_module:nnn { LaTeX / xparse } { warning } { none }
-  }
+  { \msg_redirect_module:nnn { LaTeX / xparse } { info } { none } }
 %% 
 %%
 %% End of file `xparse.sty'.

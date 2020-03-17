@@ -7,7 +7,7 @@
 %% babel.dtx  (with options: `kernel')
 %% 
 %%
-%% Copyright (C) 2012-2019 Javier Bezos and Johannes L. Braams.
+%% Copyright (C) 2012-2020 Javier Bezos and Johannes L. Braams.
 %% Copyright (C) 1989-2012 Johannes L. Braams and
 %%           any individual authors listed elsewhere in this file.
 %% All rights reserved.
@@ -37,7 +37,7 @@
     \wlog{File: #1 #4 #3 <#2>}%
     \let\ProvidesFile\@undefined}
 \fi
-\ProvidesFile{switch.def}[2019/12/08 3.37 Babel switching mechanism]
+\ProvidesFile{switch.def}[2020/02/28 3.41 Babel switching mechanism]
 \ifx\AtBeginDocument\@undefined
   \input plain.def\relax
 \fi
@@ -58,8 +58,8 @@
   \countdef\last@language=19
   \def\addlanguage{\alloc@9\language\chardef\@cclvi}
 \fi
-\def\bbl@version{3.37}
-\def\bbl@date{2019/12/08}
+\def\bbl@version{3.41}
+\def\bbl@date{2020/02/28}
 \def\adddialect#1#2{%
   \global\chardef#1#2\relax
   \bbl@usehooks{adddialect}{{#1}{#2}}%
@@ -71,7 +71,7 @@
                   (\string\language\the\count@)}%
         \def\bbl@elt####1####2####3####4{}%
       \fi}%
-    \bbl@languages
+    \@nameuse{bbl@languages}%
   \endgroup}
 \def\bbl@fixname#1{%
   \begingroup
@@ -131,6 +131,7 @@
          Babel = Babel or {}
          Babel.locale_props = Babel.locale_props or {}
          Babel.locale_props[\bbl@id@last] = {}
+         Babel.locale_props[\bbl@id@last].name = '\languagename'
         }%
       \fi}%
     {}%
@@ -161,8 +162,13 @@
   % set name
   \edef\languagename{#1}%
   \bbl@fixname\languagename
+  \expandafter\ifx\csname date\languagename\endcsname\relax
+    \IfFileExists{babel-\languagename.tex}%
+      {\babelprovide{\languagename}}%
+      {}%
+  \fi
   \bbl@iflanguage\languagename{%
-    \expandafter\ifx\csname date\languagename\endcsname\relax
+     \expandafter\ifx\csname date\languagename\endcsname\relax
       \bbl@error
         {Unknown language `#1'. Either you have\\%
          misspelled its name, it has not been installed,\\%
@@ -195,6 +201,8 @@
 \let\select@language@x\select@language
 \newif\ifbbl@usedategroup
 \def\bbl@switch#1{%  from select@, foreign@
+  % make sure there is info for the language if so requested
+  \bbl@ensureinfo{#1}%
   % restore
   \originalTeX
   \expandafter\def\expandafter\originalTeX\expandafter{%
@@ -298,6 +306,11 @@
   % set name
   \edef\languagename{#1}%
   \bbl@fixname\languagename
+  \expandafter\ifx\csname date\languagename\endcsname\relax
+    \IfFileExists{babel-\languagename.tex}%
+      {\babelprovide{\languagename}}%
+      {}%
+  \fi
   \bbl@iflanguage\languagename{%
     \expandafter\ifx\csname date\languagename\endcsname\relax
       \bbl@warning   % TODO - why a warning, not an error?
@@ -391,6 +404,7 @@
 \let\uselocale\setlocale
 \let\locale\setlocale
 \let\selectlocale\setlocale
+\let\localename\setlocale
 \let\textlocale\setlocale
 \let\textlanguage\setlocale
 \let\languagetext\setlocale

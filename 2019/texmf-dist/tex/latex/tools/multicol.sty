@@ -12,7 +12,7 @@
 %% reports for it can be opened at https://latex-project.org/bugs/
 %% (but please observe conditions on bug reports sent to that address!)
 %% 
-%% Copyright (C) 1993-2019
+%% Copyright (C) 1993-2020
 %% The LaTeX3 Project and any individual authors listed elsewhere
 %% in this file.
 %% 
@@ -107,7 +107,7 @@
 \DeclareCurrentRelease{}{2018-04-01}
 
 \ProvidesPackage{multicol}
-          [2019/03/01 v1.8w  multicolumn formatting (FMi)]
+          [2019/12/09 v1.8y  multicolumn formatting (FMi)]
 %%
 \DeclareOption{twocolumn}
    {\PackageWarning{multicol}{May not work
@@ -124,7 +124,7 @@
 \DeclareOption{debugshow}
     {\c@tracingmulticols5\relax}
 \let\mc@gridwarn\maxdimen
-\DeclareOption{grid}{\def\mc@gridwarn{\maxdepth}}
+\DeclareOption{grid}{\def\mc@gridwarn{\@maxdepth}}
 \DeclareOption{colaction}{%
   \def\mc@col@status@write{%
          \protected@write\@auxout{}%
@@ -145,14 +145,14 @@
        columns doesn't seem a good idea.^^J
        I therefore use two columns instead}%
      \col@number\tw@ \fi
-  \ifnum\col@number>10
+  \ifnum\col@number>20
      \PackageError{multicol}%
       {Too many columns}%
       {Current implementation doesn't
-       support more than 10 columns.%
+       support more than 20 columns.%
        \MessageBreak
-       I therefore use 10 columns instead}%
-     \col@number10 \fi
+       I therefore use 20 columns instead}%
+     \col@number20 \fi
      \ifx\@footnotetext\mult@footnotetext\else
        \let\orig@footnotetext\@footnotetext
        \let\@footnotetext\mult@footnotetext
@@ -421,7 +421,7 @@
 \def\reinsert@footnotes{\ifvoid\footins\else
          \insert\footins{}\fi}
 \def\vfilmaxdepth{\vskip \z@ \@plus .0001fil
-                           \@minus \maxdepth}
+                           \@minus \@maxdepth}
 \def\multi@column@out{%
    \ifnum\outputpenalty <-\@M
     \speci@ls \else
@@ -434,8 +434,8 @@
        \unvbox\@cclv}%
     \fi
    \splittopskip\topskip
-   \splitmaxdepth\maxdepth
-   \boxmaxdepth\maxdepth
+   \splitmaxdepth\@maxdepth
+   \boxmaxdepth\@maxdepth
    \dimen@\@colroom
    \divide\skip\footins\col@number
    \ifvoid\footins \else
@@ -550,7 +550,7 @@
                 \unvbox\colbreak@box
                 \penalty-\@Mv
               \fi
-              \boxmaxdepth\maxdepth
+              \boxmaxdepth\@maxdepth
               \setbox\@cclv\vbox{%
                  \unvbox\@cclv
                  \remove@discardable@items}%
@@ -637,8 +637,8 @@
    \splittopskip\@tempdima
        \@plus\multicolundershoot
        \@minus\multicolovershoot
-   \splitmaxdepth\maxdepth
-   \boxmaxdepth\maxdepth
+   \splitmaxdepth\@maxdepth
+   \boxmaxdepth\@maxdepth
    \setbox\@tempboxa\vsplit\mult@box to\z@
    \@tempdima\ht\mult@box
    \advance\@tempdima\dp\mult@box
@@ -821,10 +821,23 @@
 \newdimen\maxbalancingoverflow
 \maxbalancingoverflow=12pt
 
+\ifnum\numexpr \count20-\count14-1<41   % = 2 * 20 + 1
+  \count14=\@cclv
+\fi
 \newbox\mult@rightbox
 \newbox\mult@grightbox
 \newbox\mult@gfirstbox
 \newbox\mult@firstbox
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
+\newbox\@tempa\newbox\@tempa
 \newbox\@tempa\newbox\@tempa
 \newbox\@tempa\newbox\@tempa
 \newbox\@tempa\newbox\@tempa

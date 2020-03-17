@@ -13,10 +13,10 @@
 %%   verbatim environments and commands and extensive documentation.
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\fileversion{3.4}
-\def\filedate{2019/11/09}
-\ProvidesPackage{fancyvrb}[\filedate]
-\message{Style option: `fancyvrb' v\fileversion \space  <\filedate> (tvz)}
+\def\fileversion{3.5}
+\def\filedate{2020/01/13}
+\ProvidesPackage{fancyvrb}[2020/01/13 v3.5 verbatim text (tvz,hv)]
+%\message{Style option: `fancyvrb' v\fileversion \space  <\filedate> (tvz)}
 \csname fancyvrb@loaded\endcsname
 \let\fancyvrb@loaded\endinput
 %\ProcessOptions
@@ -530,9 +530,19 @@
 \define@booleankey{FV}{showspaces}%
   {\def\FV@Space{{\FancyVerbSpace}}}%
   {\def\FV@Space{\ }}  
-\@ifundefined{textvisiblespace}%
+%
+% new definition for \verbvisiblespace 2020-01-13
+\@ifundefined{verbvisiblespace}%
+  {%
+    \@ifundefined{textvisiblespace}%
     {\begingroup\catcode`\ =12 \gdef\FancyVerbSpace{\tt }\endgroup}
-    {\let\FancyVerbSpace\textvisiblespace}
+    {\def\FancyVerbSpace{\textvisiblespace}}
+  }%
+  {\def\FancyVerbSpace{\verbvisiblespace}} 
+%\@ifundefined{textvisiblespace}%
+%    {\begingroup\catcode`\ =12 \gdef\FancyVerbSpace{\tt }\endgroup}
+%    {\let\FancyVerbSpace\textvisiblespace}
+%
 \fvset{showspaces=false}
 \def\FV@Tab{\hbox to\FancyVerbTabSize\fontdimen2\font{\hss\FV@TabChar}}
 \define@key{FV}{tabsize}{%

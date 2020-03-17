@@ -1,6 +1,6 @@
 name l3kernel
 category Package
-revision 52681
+revision 53913
 shortdesc LaTeX3 programming conventions
 longdesc The l3kernel bundle provides an implementation of the LaTeX3
 longdesc programmers' interface, as a set of packages that run under
@@ -9,13 +9,13 @@ longdesc LaTeX3 kernel and other future code are built: it is an API for
 longdesc TeX programmers. The packages are set up so that the LaTeX3
 longdesc conventions can be used with regular LaTeX2e packages.
 depend l3backend
-containersize 145800
-containerchecksum eb9842d160198ce76f904c07352458d505898c719b9279b640e28061b699b49ab2f054a4ee6898ede3a6e1ee7d4e9f6283dea78fced53b83f475e4e5ac0ff7ac
-doccontainersize 7963972
-doccontainerchecksum b260617bf7b414141e02a56abab65bd3448407dda7d1540be5f30b1a59d687e08ab2148c7e25a3f209dd4ab0b83ead0991469cadb97beeb542b754a00b1acb4f
-srccontainersize 525276
-srccontainerchecksum e035c0b74477266b62a6bf5d3afdef867d065b638668d375feb26581c5098b80cb4bf6e5f42ad160a754dcd0bf68fca23594cc9784a54942e9104dfe0f7a5143
-runfiles size=301
+containersize 148956
+containerchecksum 95861694b7406506eaa4d158cf8187a0f0a919b225ffcc8c9dcec78cc41e928276d9f6d67de746ae7c566f93b8ac4ffb3c6a295cfb611f742829d742619a0486
+doccontainersize 9955484
+doccontainerchecksum 4a03e19c4d45e01e0773a3de2caaa6c13ad45535b91703215c108fc8cda657591492b8e22b292d5cec6e5277e4eab177698f4405d42309489fd6e58562165c5b
+srccontainersize 530008
+srccontainerchecksum 0e2ee5a7ff9098b11f71f9a73005661503d047f73a6d42a3b67efbcc3d162206a22723b49d48194ea10011e1a74ec39681e20b6145318aac651f1dc01c0a1539
+runfiles size=310
  texmf-dist/tex/latex/l3kernel/expl3-code.tex
  texmf-dist/tex/latex/l3kernel/expl3-generic.tex
  texmf-dist/tex/latex/l3kernel/expl3.ltx
@@ -40,7 +40,7 @@ runfiles size=301
  texmf-dist/tex/latex/l3kernel/l3str-enc-iso88597.def
  texmf-dist/tex/latex/l3kernel/l3str-enc-iso88598.def
  texmf-dist/tex/latex/l3kernel/l3str-enc-iso88599.def
-catalogue-also l3packages l3experimental
+catalogue-also l3backend l3packages l3experimental
 catalogue-contact-bugs https://github.com/latex3/latex3/issues
 catalogue-contact-home http://www.latex-project.org/code.html
 catalogue-contact-repository https://github.com/latex3/latex3

@@ -12,7 +12,7 @@
 %% 
 %% 
 %% graphics.dtx Copyright (C) 1994      David Carlisle Sebastian Rahtz
-%%              Copyright (C) 1995-2019 David Carlisle, LaTeX3 Project
+%%              Copyright (C) 1995-2020 David Carlisle, LaTeX3 Project
 %%
 %% This file is part of the Standard LaTeX `Graphics Bundle'.
 %% It may be distributed under the terms of the LaTeX Project Public
@@ -29,7 +29,7 @@
 \DeclareCurrentRelease{}{2019-10-01}
 
 \ProvidesPackage{graphics}
-          [2019/11/01 v1.3d  Standard LaTeX Graphics (DPC,SPQR)]
+          [2019/11/30 v1.4a  Standard LaTeX Graphics (DPC,SPQR)]
 \edef\Gin@codes{%
  \catcode`\noexpand\^^A\the\catcode`\^^A\relax
  \catcode`\noexpand\"\the\catcode`\"\relax
@@ -115,7 +115,7 @@
 \newcommand\DeclareGraphicsExtensions[1]{%
   \edef\Gin@extensions{\zap@space#1 \@empty}}
 \providecommand\Gin@extensions{}
-\def\includegraphics{%
+\protected\def\includegraphics{%
   \leavevmode
   \@ifstar
     {\Gin@cliptrue\Gin@i}%
@@ -410,7 +410,7 @@
 \let\Grot@d\@ydim
 \let\Grot@x\@linelen
 \let\Grot@y\@dashdim
-\long\def\rotatebox#1#2{%
+\protected\long\def\rotatebox#1#2{%
   \leavevmode
   \Grot@setangle{#1}%
   \setbox\z@\hbox{{#2}}%
@@ -479,7 +479,7 @@
   \advance\Grot@right-\Grot@left\wd\z@\Grot@right
   \leavevmode\box\z@
   \endgroup}
-\def\scalebox#1{%
+\protected\def\scalebox#1{%
   \@ifnextchar[{\Gscale@box{#1}}{\Gscale@box{#1}[#1]}}
 \long\def\Gscale@box#1[#2]#3{%
   \leavevmode
@@ -498,8 +498,8 @@
   \else
     \hb@xt@#1\wd\z@{\box\tw@\kern#1\wd\z@\hss}%
   \fi}
-\def\reflectbox{\Gscale@box-1[1]}
-\def\resizebox{%
+\protected\def\reflectbox{\Gscale@box-1[1]}
+\protected\def\resizebox{%
   \leavevmode
   \@ifstar{\Gscale@@box\totalheight}{\Gscale@@box\height}}
 \def\Gscale@@box#1#2#3{%

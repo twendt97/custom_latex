@@ -1,23 +1,26 @@
 name latex-bin
 category TLCore
-revision 53216
+revision 53786
 shortdesc LaTeX executables and man pages
 depend latex
 depend babel
 depend cm
 depend hyphen-base
 depend latex-fonts
+depend l3backend
+depend l3kernel
 depend tex-ini-files
+depend unicode-data
 depend dehyph
 depend latexconfig
-depend unicode-data
+depend lm
 depend luaotfload
 depend latex-bin.ARCH
-execute AddFormat name=latex engine=pdftex           patterns=language.dat           options="-translate-file=cp227.tcx *latex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,latex,tex-ini-files,dehyph,latexconfig
-execute AddFormat name=pdflatex engine=pdftex           patterns=language.dat           options="-translate-file=cp227.tcx *pdflatex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,latex,tex-ini-files,dehyph,latexconfig
-execute AddFormat name=dvilualatex engine=luatex           patterns=language.dat,language.dat.lua           options="dvilualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,latex,tex-ini-files,unicode-data,luaotfload
-execute AddFormat name=lualatex engine=luatex           patterns=language.dat,language.dat.lua           options="lualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,latex,tex-ini-files,unicode-data,luaotfload
-containersize 516
-containerchecksum 9c65db0624148341ef6ba041cada888b98d6ae197afd023b8face620aed131fd105af5411bc8ebc242eae8d10d493d0f59cfa55b50bf669577f5386d5469db83
-doccontainersize 53288
-doccontainerchecksum 26d455bc4259827a0dcd4a6b9b9f61dc5edfcdfa1d0effe0d10c88e242b47341738f17c5c148dcbb134bae7f60bc7a9bb5c5638371f2a29a439d203905c4da1f
+execute AddFormat name=latex engine=pdftex           patterns=language.dat           options="-translate-file=cp227.tcx *latex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,l3backend,l3kernel,tex-ini-files,unicode-data,latex,dehyph,latexconfig
+execute AddFormat name=pdflatex engine=pdftex           patterns=language.dat           options="-translate-file=cp227.tcx *pdflatex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,l3backend,l3kernel,tex-ini-files,unicode-data,latex,dehyph,latexconfig
+execute AddFormat name=dvilualatex engine=luatex           patterns=language.dat,language.dat.lua           options="dvilualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,l3backend,l3kernel,tex-ini-files,unicode-data,latex,lm,luaotfload
+execute AddFormat name=lualatex engine=luatex           patterns=language.dat,language.dat.lua           options="lualatex.ini"           fmttriggers=babel,cm,hyphen-base,latex-fonts,l3backend,l3kernel,tex-ini-files,unicode-data,latex,lm,luaotfload
+containersize 540
+containerchecksum 40445a3b11e87d12b665b09300ab634a90bd5a9d8b63475f8a81cd50befd9274558fed2d6c3ee29819feb09d87c79047b0deb198e69e6cd031c99b52c6c1d378
+doccontainersize 53292
+doccontainerchecksum c444005a8b8a81dc2f21c5b030b075d1c489e6a73d384a47d39aa87cda4dfe7846d09e2badc009d7c96a1970def48fd985b2ef210a39ed4d294bc41bce7d1492

@@ -93,3 +93,49 @@
 [Sun Jan 12 21:12:11 2020] install: caption
 [Mon Jan 13 08:37:36 2020] install: pdfcrop.x86_64-linux
 [Mon Jan 13 08:37:36 2020] install: pdfcrop
+[Mon Jan 27 14:48:58 2020] install: eso-pic
+[Mon Jan 27 14:48:58 2020] install: pdfpages
+[Tue Mar 17 21:22:37 2020] update: texlive.infra (53263 -> 53853)
+[Tue Mar 17 21:22:49 2020] remove: tetex.x86_64-linux
+[Tue Mar 17 21:22:49 2020] remove: tetex
+[Tue Mar 17 21:22:49 2020] update: amsmath (52854 -> 53640)
+[Tue Mar 17 21:22:49 2020] update: babel (53072 -> 53963)
+[Tue Mar 17 21:22:49 2020] update: bitset (53085 -> 53837)
+[Tue Mar 17 21:22:50 2020] update: caption (53318 -> 53517)
+[Tue Mar 17 21:22:50 2020] update: epspdf (49952 -> 53472)
+[Tue Mar 17 21:22:50 2020] update: epstopdf-pkg (53070 -> 53546)
+[Tue Mar 17 21:22:50 2020] update: fancyvrb (52710 -> 53392)
+[Tue Mar 17 21:22:50 2020] update: graphics (52663 -> 53640)
+[Tue Mar 17 21:22:50 2020] update: hycolor (53169 -> 53584)
+[Tue Mar 17 21:22:50 2020] update: hyperref (53004 -> 53837)
+[Tue Mar 17 21:22:52 2020] update: koma-script (53270 -> 53617)
+[Tue Mar 17 21:22:52 2020] update: kpathsea.x86_64-linux (53262 -> 53577)
+[Tue Mar 17 21:22:52 2020] update: kpathsea (53262 -> 53977)
+[Tue Mar 17 21:22:52 2020] update: l3backend (52928 -> 53888)
+[Tue Mar 17 21:22:53 2020] update: l3kernel (52681 -> 53913)
+[Tue Mar 17 21:22:53 2020] update: l3packages (52357 -> 53913)
+[Tue Mar 17 21:22:53 2020] update: latex (52731 -> 53958)
+[Tue Mar 17 21:22:53 2020] update: latex-bin (53216 -> 53786)
+[Tue Mar 17 21:22:53 2020] update: latexconfig (52186 -> 53525)
+[Tue Mar 17 21:22:53 2020] update: lualibs (52658 -> 53682)
+[Tue Mar 17 21:22:53 2020] update: luaotfload (52738 -> 53652)
+[Tue Mar 17 21:22:53 2020] update: luatex (53216 -> 53977)
+[Tue Mar 17 21:22:54 2020] update: metafont (52851 -> 53585)
+[Tue Mar 17 21:22:54 2020] update: parskip (49730 -> 53503)
+[Tue Mar 17 21:22:54 2020] update: pdfpages (53180 -> 53583)
+[Tue Mar 17 21:22:54 2020] update: rerunfilecheck (53045 -> 53837)
+[Tue Mar 17 21:22:54 2020] update: siunitx (52662 -> 53914)
+[Tue Mar 17 21:22:54 2020] update: texlive-docindex (53367 -> 53970)
+[Tue Mar 17 21:22:54 2020] update: texlive-en (53213 -> 53451)
+[Tue Mar 17 21:22:54 2020] update: texlive-msg-translations (52563 -> 53947)
+[Tue Mar 17 21:22:54 2020] update: texlive-scripts.x86_64-linux (53254 -> 53555)
+[Tue Mar 17 21:22:54 2020] update: texlive-scripts (53367 -> 53977)
+[Tue Mar 17 21:22:54 2020] update: tlshell (53201 -> 53801)
+[Tue Mar 17 21:22:55 2020] update: tools (52731 -> 53640)
+[Tue Mar 17 21:22:55 2020] update: updmap-map (53297 -> 53971)
+[Tue Mar 17 21:22:55 2020] auto-install new: modes (53604)
+[Tue Mar 17 21:22:55 2020] update: collection-basic (52605 -> 53774)
+[Tue Mar 17 21:22:55 2020] update: scheme-infraonly (41515 -> 53569)
+[Tue Mar 17 21:23:28 2020] install: babel-english
+[Tue Mar 17 21:25:17 2020] install: ms
+[Tue Mar 17 21:25:18 2020] install: pgf

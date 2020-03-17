@@ -5,8 +5,8 @@
 
 local ProvidesLuaModule = {
     name          = "luaotfload-multiscript",
-    version       = "3.11",     --TAGVERSION
-    date          = "2019-11-10", --TAGDATE
+    version       = "3.12",     --TAGVERSION
+    date          = "2020-02-02", --TAGDATE
     description   = "luaotfload submodule / multiscript",
     license       = "GPL v2.0",
     author        = "Marcel Krüger"
@@ -24,6 +24,19 @@ local insert_after       = node.direct.insert_after
 local traverse_char      = node.direct.traverse_char
 local protect_glyph      = node.direct.protect_glyph
 local otffeatures        = fonts.constructors.newfeatures "otf"
+-- local normalize          = fonts.handlers.otf.features.normalize
+local definers           = fonts.definers
+local define_font        = luaotfload.define_font
+local scripts_lib        = require'luaotfload-scripts'.script
+local script_to_iso      = scripts_lib.to_iso
+local script_to_ot       = scripts_lib.to_ot
+
+local harf = luaotfload.harfbuzz
+local GSUBtag, GPOStag
+if harf then
+  GSUBtag = harf.Tag.new("GSUB")
+  GPOStag = harf.Tag.new("GPOS")
+end
 
 local sep = lpeg.P' '^0 * ';' * lpeg.P' '^0
 local codepoint = lpeg.S'0123456789ABCDEF'^4/function(c)return tonumber(c, 16)end
@@ -35,7 +48,7 @@ local function multirawset(table, key1, key2, value)
   return table
 end
 local script_extensions do
-  local entry = lpeg.Cg(codepoint_range * sep * lpeg.Ct((lpeg.C(lpeg.R'AZ' * lpeg.R'az'^1))^1 * ' ') * '#')^-1 * (1-lpeg.P'\n')^0 * '\n'
+  local entry = lpeg.Cg(codepoint_range * sep * lpeg.Ct((lpeg.C(lpeg.R'AZ' * lpeg.R'az'^1)/string.lower)^1 * ' ') * '#')^-1 * (1-lpeg.P'\n')^0 * '\n'
   local file = lpeg.Cf(
       lpeg.Ct''
     * entry^0
@@ -98,7 +111,7 @@ local script_mapping do
     Cuneiform = "Xsux", Yi = "Yiii", Zanabazar_Square = "Zanb",
     Inherited = "Zinh", Common = "Zyyy", Unknown = "Zzzz",
   }
-  local entry = lpeg.Cg(codepoint_range * sep * ((lpeg.R'AZ' + lpeg.R'az' + '_')^1/script_aliases))^-1 * (1-lpeg.P'\n')^0 * '\n'
+  local entry = lpeg.Cg(codepoint_range * sep * ((lpeg.R'AZ' + lpeg.R'az' + '_')^1/script_aliases/string.lower))^-1 * (1-lpeg.P'\n')^0 * '\n'
   -- local entry = lpeg.Cg(codepoint_range * sep * lpeg.Cc(true))^-1 * (1-lpeg.P'\n')^0 * '\n'
   local file = lpeg.Cf(
       lpeg.Ct''
@@ -108,6 +121,48 @@ local script_mapping do
   local f = io.open(kpse.find_file"Scripts.txt")
   script_mapping = file:match(f:read'*a')
   f:close()
+end
+
+local function load_on_demand(specifications, size)
+  return setmetatable({}, { __index = function(t, k)
+    local specification = specifications[k]
+    if not specification then return end
+    local f = define_font(specification, size)
+    local fid
+    if type(f) == 'table' then
+      fid = font.define(f)
+      definers.register(f, fid)
+    elseif f then
+      fid = f
+    end
+    t[k] = fid
+    return fid
+  end})
+end
+
+local function collect_scripts(tfmdata)
+  local script_dict = {}
+  local hbdata = tfmdata.hb
+  if hbdata then
+    local face = hbdata.shared.face
+    for _, tag in next, { GSUBtag, GPOStag } do
+      local script_tags = face:ot_layout_get_script_tags(tag) or {}
+      for i = 1, #script_tags do
+        script_dict[tostring(script_tags[i]):gsub(" +$", "")] = true
+      end
+    end
+  else
+    local features = tfmdata.resources.features
+    for _, feature_table in next, features do
+      for _, scripts in next, feature_table do
+        for script in next, scripts do
+          script_dict[script] = true
+        end
+      end
+    end
+    script_dict["*"] = nil
+  end
+  return script_dict
 end
 
 local additional_scripts_tables = { }
@@ -122,27 +177,112 @@ local additional_scripts_fonts = setmetatable({}, {
   end,
 })
 
+local function is_dominant_script(scripts, script, first, ...)
+  if script == first then return true end
+  if scripts[first] or not first then return false end
+  return is_dominant_script(scripts, script, ...)
+end
+
 local function makecombifont(tfmdata, _, additional_scripts)
-  local basescript = tfmdata.properties.script
-  local scripts = {basescript = false}
-  additional_scripts = additional_scripts_tables[additional_scripts]
-  for script, fontname in pairs(additional_scripts) do
-    if script ~= basescript then
-      local f = fonts.definers.read(fontname, tfmdata.size)
-      local fid
-      if type(f) == 'table' then
-        fid = font.define(f)
-      else
-        error[[FIXME???]]
+  local has_auto
+  additional_scripts = tostring(additional_scripts)
+  if additional_scripts:sub(1, 5) == "auto+" then
+    additional_scripts = additional_scripts:sub(6)
+    has_auto = true
+  elseif additional_scripts == "auto" then
+    has_auto, additional_scripts = true, false
+  end
+  if additional_scripts then
+    local t = additional_scripts_tables[tonumber(additional_scripts) or additional_scripts]
+    if not t then error(string.format("Unknown multiscript table %s", additional_scripts)) end
+    local lower_t = {}
+    for k, v in next, t do if type(k) == "string" then
+      local l = string.lower(k)
+      if lower_t[l] ~= nil and lower_t[l] ~= v then
+        error(string.format("Inconsistant multiscript table %q for script %s", additional_scripts, l))
       end
-      scripts[script] = {
-        fid = fid,
-        font = f,
-        characters = f.characters,
-      }
+      lower_t[l] = v
+    end end
+    additional_scripts = lower_t
+  else
+    additional_scripts = {}
+  end
+  if has_auto then
+    local fallback = tfmdata.fallback_lookup
+    if fallback then -- FIXME: here be dragons
+      local fallbacks = {}
+      local current = tfmdata
+      local i = 0
+      while current do
+        local collected = collect_scripts(current)
+        for script in next, collected do
+          local scr_fb = fallbacks[script]
+          if not scr_fb then
+            scr_fb = {}
+            fallbacks[script] = scr_fb
+          end
+          scr_fb[#scr_fb + 1] = current.specification.specification .. ';script=' .. script .. ';-multiscript'
+        end
+        i = i - 1
+        current = fallback[i]
+      end
+      current = tfmdata
+      i = 0
+      while current do
+        local collected = collect_scripts(current)
+        for script, scr_fb in next, fallbacks do
+          if not collected[script] then
+            scr_fb[#scr_fb + 1] = current.specification.specification .. ';-multiscript'
+          end
+        end
+        i = i - 1
+        current = fallback[i]
+      end
+      for script, scr_fb in next, fallbacks do
+        local iso_script = script_to_iso(script)
+        if not additional_scripts[iso_script] and is_dominant_script(scr_fb, script, script_to_ot(iso_script)) then
+          local main = scr_fb[1]
+          table.remove(scr_fb, 1)
+          local fbid = luaotfload.add_fallback(scr_fb)
+          additional_scripts[iso_script] = main .. ';fallback=' .. fbid
+        end
+      end
+    else
+      local spec = tfmdata.specification
+      local collected = collect_scripts(tfmdata)
+      for script in next, collected do
+        local iso_script = script_to_iso(script)
+        if not additional_scripts[iso_script] and is_dominant_script(collected, script, script_to_ot(iso_script)) then
+          additional_scripts[iso_script] = spec.specification .. ';-multiscript;script=' .. script
+          ---- FIXME: IMHO the following which just modiefies the spec
+          --   would be nicer, but it breaks font patching callbacks
+          --   (except if we ignore them, but that would be inconsistant to
+          --    other fonts)
+          -- local new_raw_features = {}
+          -- local new_features = { raw = new_raw_features, normal = new_raw_features }
+          -- for f, v in next, spec.features.raw do
+          --   new_raw_features[f] = v
+          -- end
+          -- new_raw_features.multiscript = false
+          -- new_raw_features.script = script
+          -- local new_normal_features = luaotfload.apply_default_features(new_raw_features)
+          -- new_normal_features.sub = nil
+          -- new_normal_features.lookup = nil
+          -- new_features.normal = normalize(new_normal_features)
+          -- local new_spec = {}
+          -- for k, v in next, spec do
+          --   new_spec[k] = v
+          -- end
+          -- new_spec.hash = nil
+          -- new_spec.features = new_features
+          -- additional_scripts[script] = new_spec
+        end
+      end
     end
   end
-  tfmdata.additional_scripts = scripts
+  local basescript = tfmdata.properties.script or "dflt"
+  tfmdata.additional_scripts = load_on_demand(additional_scripts, tfmdata.size)
+  tfmdata.additional_scripts[basescript] = false
 end
 
 local glyph_id = node.id'glyph'
@@ -156,29 +296,30 @@ function domultiscript(head, _, _, _, direction)
     end
     if last_fonts then
       local mapped_scr = script_mapping[cid]
-      if mapped_scr == "Zinh" then
+      if mapped_scr == "zinh" then
         mapped_scr = last_script
       else
-        local additional_scr = script_extensions[cid]
+        local additional_scripts = script_extensions[cid]
         if additional_scripts then
           if additional_scripts[last_script] then
             mapped_scr = last_script
-          elseif not last_fonts[mapped_scr] then
+          elseif last_fonts[mapped_scr] == nil then
             for i = 1, #additional_scripts do
-              if last_fonts[additional_scripts[i]] then
-                mapped_scr = additional_scripts[i]
+              local script = additional_scripts[i]
+              if last_fonts[script] ~= nil then
+                mapped_scr = script
                 break
               end
             end
           end
-        elseif mapped_scr == "Zyyy" then
+        elseif mapped_scr == "zyyy" then
           mapped_scr = last_script
         end
       end
       last_script = mapped_scr
       local mapped_font = last_fonts[mapped_scr]
       if mapped_font then
-        setfont(cur, mapped_font.fid)
+        setfont(cur, mapped_font)
       end
     end
   end
@@ -188,6 +329,8 @@ function luaotfload.add_multiscript(name, fonts)
   if fonts == nil then
     fonts = name
     name = #additional_scripts_fonts + 1
+  else
+    name = name:lower()
   end
   additional_scripts_tables[name] = fonts
   return name
@@ -198,6 +341,7 @@ otffeatures.register {
   description = "Combine fonts for multiple scripts",
   manipulators = {
     node = makecombifont,
+    plug = makecombifont,
   },
   -- processors = { -- processors would be nice, but they are applied
   --                -- too late for our purposes

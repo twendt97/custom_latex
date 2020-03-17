@@ -27,7 +27,7 @@
 \providecommand\DeclareCurrentRelease[2]{}
 \DeclareRelease{}{2018-12-01}{amsmath-2018-12-01.sty}
 \DeclareCurrentRelease{}{2019-04-01}
-\ProvidesPackage{amsmath}[2019/11/16 v2.17d AMS math features]
+\ProvidesPackage{amsmath}[2020/01/20 v2.17e AMS math features]
 \edef\@temp{\catcode 96=\number\catcode 96 }
 \catcode\string `\`=12
 \def\do#1{\catcode\number`#1=\number\catcode`#1}
@@ -177,9 +177,9 @@ For additional information on amsmath, use the \lq ?\rq\space option.%
 \@xp\@tempa\vert\@empty\@nil
 \ifnum\@tempcnta>\z@
   \advance\@tempcnta "4000000
-  \xdef\lvert{\delimiter\number\@tempcnta\space }
+  \protected\xdef\lvert{\delimiter\number\@tempcnta\space }
   \advance\@tempcnta "1000000
-  \xdef\rvert{\delimiter\number\@tempcnta\space }
+  \protected\xdef\rvert{\delimiter\number\@tempcnta\space }
 \else
   \ifx\@@undefined\lvert
     % Fall back to cmex encoding since we don't know what else to do.
@@ -192,9 +192,9 @@ For additional information on amsmath, use the \lq ?\rq\space option.%
 \@xp\@tempa\Vert\@empty\@nil
 \ifnum\@tempcnta>\z@
   \advance\@tempcnta "4000000
-  \xdef\lVert{\delimiter\number\@tempcnta\space }
+  \protected\xdef\lVert{\delimiter\number\@tempcnta\space }
   \advance\@tempcnta "1000000
-  \xdef\rVert{\delimiter\number\@tempcnta\space }
+  \protected\xdef\rVert{\delimiter\number\@tempcnta\space }
 \else
   \ifx\@@undefined\lVert
     \DeclareMathDelimiter{\lVert}
@@ -1309,7 +1309,8 @@ and fix things up.}
             \nointerlineskip
             \vskip-\ht\strutbox@
             \vskip-\dp\strutbox@
-            \vbox{\noindent\hbox to\displaywidth{\hbox to#1{\strut@\hfill}}}%
+            \vbox{\noindent\hbox to\displaywidth{%
+                           \hbox to#1{\strut@\hfill}}}%
             \prevdepth\dimen@
         \fi
     }%

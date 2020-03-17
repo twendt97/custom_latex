@@ -48,11 +48,13 @@
 %% l3coffins.dtx  (with options: `package')
 %% l3luatex.dtx  (with options: `package,tex')
 %% l3unicode.dtx  (with options: `package')
+%% l3text.dtx  (with options: `package')
+%% l3text-case.dtx  (with options: `package')
 %% l3candidates.dtx  (with options: `package')
 %% l3legacy.dtx  (with options: `package')
 %% l3deprecation.dtx  (with options: `package,kernel')
 %% 
-%% Copyright (C) 1990-2019 The LaTeX3 Project
+%% Copyright (C) 1990-2020 The LaTeX3 Project
 %% 
 %% It may be distributed and/or modified under the conditions of
 %% the LaTeX Project Public License (LPPL), either version 1.3c of
@@ -65,7 +67,7 @@
 %% and all files in that bundle must be distributed together.
 %% 
 %% File: expl3.dtx
-\def\ExplFileDate{2019-11-07}%
+\def\ExplFileDate{2020-02-25}%
 \begingroup
   \def\next{\endgroup}%
   \expandafter\ifx\csname PackageError\endcsname\relax
@@ -1223,6 +1225,9 @@
   \__kernel_primitive:NN \Uvextensible          \tex_Uvextensible:D
   \__kernel_primitive:NN \autospacing           \tex_autospacing:D
   \__kernel_primitive:NN \autoxspacing          \tex_autoxspacing:D
+  \__kernel_primitive:NN \currentcjktoken       \tex_currentcjktoken:D
+  \__kernel_primitive:NN \currentspacingmode    \tex_currentspacingmode:D
+  \__kernel_primitive:NN \currentxspacingmode   \tex_currentxspacingmode:D
   \__kernel_primitive:NN \disinhibitglue        \tex_disinhibitglue:D
   \__kernel_primitive:NN \dtou                  \tex_dtou:D
   \__kernel_primitive:NN \epTeXinputencoding    \tex_epTeXinputencoding:D
@@ -1336,7 +1341,7 @@
   \tex_else:D
     \tex_ifdefined:D \tex_directlua:D
       \tex_directlua:D { tex.enableprimitives("@@", {"tracingfonts"}) }
-      \tex_let:D \tex_tracingfonts:D \luatextracingfonts
+      \tex_let:D \tex_tracingfonts:D \@@tracingfonts
     \tex_fi:D
   \tex_fi:D
 \tex_fi:D
@@ -3917,6 +3922,7 @@
 \__cs_tmp:w { ooo }
 \__cs_tmp:w { oof }
 \__cs_tmp:w { ffo }
+\__cs_tmp:w { eee }
 \__cs_tmp:w { NNx }
 \__cs_tmp:w { Nnx }
 \__cs_tmp:w { Nox }
@@ -5502,12 +5508,12 @@
     \tl_to_str:n {#1} \q_mark \q_mark \q_stop
   }
 \cs_new:Npn \__str_tail_auxii:w #1 #2 \q_mark #3 \q_stop { #2 }
-\cs_new:Npn \str_fold_case:n  #1 { \__str_change_case:nn {#1} { fold } }
-\cs_new:Npn \str_lower_case:n #1 { \__str_change_case:nn {#1} { lower } }
-\cs_new:Npn \str_upper_case:n #1 { \__str_change_case:nn {#1} { upper } }
-\cs_generate_variant:Nn \str_fold_case:n  { V }
-\cs_generate_variant:Nn \str_lower_case:n { f }
-\cs_generate_variant:Nn \str_upper_case:n { f }
+\cs_new:Npn \str_foldcase:n  #1 { \__str_change_case:nn {#1} { fold } }
+\cs_new:Npn \str_lowercase:n #1 { \__str_change_case:nn {#1} { lower } }
+\cs_new:Npn \str_uppercase:n #1 { \__str_change_case:nn {#1} { upper } }
+\cs_generate_variant:Nn \str_foldcase:n  { V }
+\cs_generate_variant:Nn \str_lowercase:n { f }
+\cs_generate_variant:Nn \str_uppercase:n { f }
 \cs_new:Npn \__str_change_case:nn #1
   {
     \exp_after:wN \__str_change_case_aux:nn \exp_after:wN
@@ -5541,7 +5547,7 @@
     \quark_if_recursion_tail_stop_do:Nn #2
       { \__str_change_case_end:wn }
     \__str_change_case_output:fw
-      { \use:c { char_str_ #1 _case:N } #2 }
+      { \use:c { char_str_ #1 case:N } #2 }
     \__str_change_case_loop:nw {#1}
   }
 \str_const:Nx \c_ampersand_str   { \cs_to_str:N \& }
@@ -7516,7 +7522,11 @@
   {
     \sys_if_engine_xetex:TF
       {
-        \str_if_eq:VnF #1 { xdvipdfmx }
+        \str_case:VnF #1
+          {
+            { dvisvgm }   { }
+            { xdvipdfmx } { }
+          }
           {
             \__kernel_msg_error:nnxx { sys } { wrong-backend }
               #1 { xdvipdfmx }
@@ -8632,6 +8642,225 @@
         }
   \fi:
 \group_end:
+\cs_new:Npn \char_to_utfviii_bytes:n #1
+  {
+    \exp_args:Nf \__char_to_utfviii_bytes_auxi:n
+      { \int_eval:n {#1} }
+  }
+\cs_new:Npn \__char_to_utfviii_bytes_auxi:n #1
+  {
+    \if_int_compare:w #1 > "80 \exp_stop_f:
+      \if_int_compare:w #1 < "800 \exp_stop_f:
+        \__char_to_utfviii_bytes_outputi:nw
+          { \__char_to_utfviii_bytes_auxii:Nnn C {#1} { 64 } }
+        \__char_to_utfviii_bytes_outputii:nw
+          { \__char_to_utfviii_bytes_auxiii:n {#1} }
+      \else:
+        \if_int_compare:w #1 < "10000 \exp_stop_f:
+          \__char_to_utfviii_bytes_outputi:nw
+            { \__char_to_utfviii_bytes_auxii:Nnn E {#1} { 64 * 64 } }
+          \__char_to_utfviii_bytes_outputii:nw
+            {
+              \__char_to_utfviii_bytes_auxiii:n
+                { \int_div_truncate:nn {#1} { 64 } }
+            }
+          \__char_to_utfviii_bytes_outputiii:nw
+            { \__char_to_utfviii_bytes_auxiii:n {#1} }
+        \else:
+          \__char_to_utfviii_bytes_outputi:nw
+            {
+              \__char_to_utfviii_bytes_auxii:Nnn F
+                 {#1} { 64 * 64 * 64 }
+            }
+          \__char_to_utfviii_bytes_outputii:nw
+            {
+              \__char_to_utfviii_bytes_auxiii:n
+                { \int_div_truncate:nn {#1} { 64 * 64 } }
+            }
+          \__char_to_utfviii_bytes_outputiii:nw
+            {
+              \__char_to_utfviii_bytes_auxiii:n
+                { \int_div_truncate:nn {#1} { 64 } }
+            }
+          \__char_to_utfviii_bytes_outputiv:nw
+            { \__char_to_utfviii_bytes_auxiii:n {#1} }
+        \fi:
+      \fi:
+    \else:
+      \__char_to_utfviii_bytes_outputi:nw {#1}
+    \fi:
+    \__char_to_utfviii_bytes_end: { } { } { } { }
+  }
+\cs_new:Npn \__char_to_utfviii_bytes_auxii:Nnn #1#2#3
+  {  "#10 + \int_div_truncate:nn {#2} {#3} }
+\cs_new:Npn \__char_to_utfviii_bytes_auxiii:n #1
+  { \int_mod:nn {#1} { 64 } + 128 }
+\cs_new:Npn \__char_to_utfviii_bytes_outputi:nw
+  #1 #2 \__char_to_utfviii_bytes_end: #3
+  { \__char_to_utfviii_bytes_output:fnn { \int_eval:n {#1} } { } {#2} }
+\cs_new:Npn \__char_to_utfviii_bytes_outputii:nw
+  #1 #2 \__char_to_utfviii_bytes_end: #3#4
+  { \__char_to_utfviii_bytes_output:fnn { \int_eval:n {#1} } { {#3} } {#2} }
+\cs_new:Npn \__char_to_utfviii_bytes_outputiii:nw
+  #1 #2 \__char_to_utfviii_bytes_end: #3#4#5
+  {
+    \__char_to_utfviii_bytes_output:fnn
+      { \int_eval:n {#1} } { {#3} {#4} } {#2}
+  }
+\cs_new:Npn \__char_to_utfviii_bytes_outputiv:nw
+  #1 #2 \__char_to_utfviii_bytes_end: #3#4#5#6
+  {
+    \__char_to_utfviii_bytes_output:fnn
+      { \int_eval:n {#1} } { {#3} {#4} {#5} } {#2}
+  }
+\cs_new:Npn \__char_to_utfviii_bytes_output:nnn #1#2#3
+  {
+    #3
+    \__char_to_utfviii_bytes_end: #2 {#1}
+  }
+\cs_generate_variant:Nn \__char_to_utfviii_bytes_output:nnn { f }
+\cs_new:Npn \__char_to_utfviii_bytes_end: { }
+\cs_new:Npn \char_to_nfd:N #1
+  {
+    \cs_if_exist:cTF { c__char_nfd_ \token_to_str:N #1 _ tl }
+      {
+        \exp_after:wN \exp_after:wN \exp_after:wN \__char_to_nfd:Nw
+          \exp_after:wN \exp_after:wN \exp_after:wN #1
+            \cs:w c__char_nfd_ \token_to_str:N #1 _ tl \cs_end:
+              \q_stop
+      }
+      { \exp_not:n {#1} }
+  }
+\cs_set_eq:NN \__char_to_nfd:n \char_to_nfd:N
+\cs_new:Npn \__char_to_nfd:Nw #1#2#3 \q_stop
+  {
+    \exp_args:Ne \__char_to_nfd:n
+      { \char_generate:nn { `#2 } { \__char_change_case_catcode:N #1 } }
+    \tl_if_blank:nF {#3}
+      {
+        \exp_args:Ne \__char_to_nfd:n
+          { \char_generate:nn { `#3 } { \char_value_catcode:n { `#3 } } }
+      }
+  }
+\cs_new:Npn \char_lowercase:N #1
+  { \__char_change_case:nNN { lower } \char_value_lccode:n #1 }
+\cs_new:Npn \char_uppercase:N #1
+  { \__char_change_case:nNN { upper } \char_value_uccode:n #1 }
+\cs_new:Npn \char_titlecase:N #1
+  {
+    \tl_if_exist:cTF { c__char_titlecase_ \token_to_str:N #1 _tl }
+      {
+        \__char_change_case_multi:vN
+          { c__char_titlecase_ \token_to_str:N #1 _tl } #1
+      }
+      { \char_uppercase:N #1 }
+  }
+\cs_new:Npn \char_foldcase:N #1
+  { \__char_change_case:nNN { fold } \char_value_lccode:n #1 }
+\cs_new:Npn \__char_change_case:nNN #1#2#3
+  {
+    \tl_if_exist:cTF { c__char_ #1 case_ \token_to_str:N #3 _tl }
+      {
+        \__char_change_case_multi:vN
+          { c__char_ #1 case_ \token_to_str:N #3 _tl } #3
+      }
+      { \exp_args:Nf \__char_change_case:nN { #2 { `#3 } } #3 }
+  }
+\cs_new:Npn \__char_change_case:nN #1#2
+  {
+    \int_compare:nNnTF {#1} = 0
+      { #2 }
+      { \char_generate:nn {#1} { \__char_change_case_catcode:N #2 } }
+  }
+\cs_new:Npn \__char_change_case_multi:nN #1#2
+  { \__char_change_case_multi:NNNNw #2 #1 \q_no_value \q_no_value \q_stop }
+\cs_generate_variant:Nn \__char_change_case_multi:nN { v }
+\cs_new:Npn \__char_change_case_multi:NNNNw #1#2#3#4#5 \q_stop
+  {
+    \quark_if_no_value:NTF #4
+      {
+        \quark_if_no_value:NTF #3
+          { \__char_change_case:NN #1 #2 }
+          { \__char_change_case:NNN #1 #2#3 }
+      }
+      { \__char_change_case:NNNN #1 #2#3#4 }
+  }
+\cs_new:Npn \__char_change_case:NNN #1#2#3
+  {
+    \exp_args:Nnf \use:nn
+      { \__char_change_case:NN #1 #2 }
+      { \__char_change_case:NN #1 #3 }
+  }
+\cs_new:Npn \__char_change_case:NNNN #1#2#3#4
+  {
+    \exp_args:Nnff \use:nnn
+      { \__char_change_case:NN #1 #2 }
+      { \__char_change_case:NN #1 #3 }
+      { \__char_change_case:NN #1 #4 }
+  }
+\cs_new:Npn \__char_change_case:NN #1#2
+  { \char_generate:nn { `#2 } { \__char_change_case_catcode:N #1 } }
+\cs_new:Npn \__char_change_case_catcode:N #1
+  {
+    \if_catcode:w \exp_not:N #1 \c_math_toggle_token
+      3
+    \else:
+      \if_catcode:w \exp_not:N #1 \c_alignment_token
+        4
+      \else:
+        \if_catcode:w \exp_not:N #1 \c_math_superscript_token
+          7
+        \else:
+          \if_catcode:w \exp_not:N #1 \c_math_subscript_token
+            8
+          \else:
+            \if_catcode:w \exp_not:N #1 \c_space_token
+              10
+            \else:
+             \if_catcode:w \exp_not:N #1 \c_catcode_letter_token
+               11
+             \else:
+               \if_catcode:w \exp_not:N #1 \c_catcode_other_token
+                 12
+               \else:
+                 13
+               \fi:
+             \fi:
+            \fi:
+          \fi:
+        \fi:
+      \fi:
+    \fi:
+  }
+\cs_new:Npn \char_str_lowercase:N #1
+  { \__char_str_change_case:nNN { lower } \char_value_lccode:n #1 }
+\cs_new:Npn \char_str_uppercase:N #1
+  { \__char_str_change_case:nNN { upper } \char_value_uccode:n #1 }
+\cs_new:Npn \char_str_titlecase:N #1
+  {
+    \tl_if_exist:cTF { c__char_titlecase_ \token_to_str:N #1 _tl }
+      { \tl_to_str:c { c__char_titlecase_ \token_to_str:N #1 _tl } }
+      { \char_str_uppercase:N #1 }
+  }
+\cs_new:Npn \char_str_foldcase:N #1
+  { \__char_str_change_case:nNN { fold } \char_value_lccode:n #1 }
+\cs_new:Npn \__char_str_change_case:nNN #1#2#3
+  {
+    \tl_if_exist:cTF { c__char_ #1 case_ \token_to_str:N #3 _tl }
+      { \tl_to_str:c { c__char_ #1 case_ \token_to_str:N #3 _tl } }
+      { \exp_args:Nf \__char_str_change_case:nN { #2 { `#3 } } #3 }
+  }
+\cs_new:Npn \__char_str_change_case:nN #1#2
+  {
+    \int_compare:nNnTF {#1} = 0
+      { \tl_to_str:n {#2} }
+      { \char_generate:nn {#1} { 12 } }
+  }
+\cs_if_exist:NF \tex_Uchar:D
+  {
+    \cs_set:Npn \__char_str_change_case:nN #1#2
+      { \tl_to_str:n {#2} }
+  }
 \tl_const:Nx \c_catcode_other_space_tl { \char_generate:nn { `\  } { 12 } }
 \group_begin:
   \__kernel_chk_if_free_cs:N \c_group_begin_token
@@ -11335,12 +11564,94 @@
     \cs_new:Npn \__file_mdfive_hash:n #1
       { \tex_mdfivesum:D file {#1} }
   }
+\cs_new:Npn \file_hex_dump:nnn #1#2#3
+  {
+    \exp_args:Neee \__file_hex_dump_auxi:nnn
+      { \file_full_name:n {#1} }
+      { \int_eval:n {#2} }
+      { \int_eval:n {#3} }
+  }
+\cs_new:Npn \__file_hex_dump_auxi:nnn #1#2#3
+  {
+    \bool_lazy_any:nF
+      {
+        { \tl_if_blank_p:n {#1} }
+        { \int_compare_p:nNn {#2} = 0 }
+        { \int_compare_p:nNn {#3} = 0 }
+      }
+      {
+        \exp_args:Ne \__file_hex_dump_auxii:nnnn
+          { \__file_details_aux:nn {#1} { size } }
+          {#1} {#2} {#3}
+      }
+  }
+\cs_new:Npn \__file_hex_dump_auxii:nnnn #1#2#3#4
+  {
+    \int_compare:nNnTF {#3} > 0
+      { \__file_hex_dump_auxiii:nnnn {#3} }
+      {
+        \exp_args:Ne \__file_hex_dump_auxiii:nnnn
+          { \int_eval:n { #1 + #3 } }
+      }
+        {#1} {#2} {#4}
+  }
+\cs_new:Npn \__file_hex_dump_auxiii:nnnn #1#2#3#4
+  {
+    \int_compare:nNnTF {#4} > 0
+      { \__file_hex_dump_auxiv:nnn {#4} }
+      {
+        \exp_args:Ne \__file_hex_dump_auxiv:nnn
+          { \int_eval:n { #2 + #4 } }
+      }
+        {#1} {#3}
+  }
+\cs_new:Npn \__file_hex_dump_auxiv:nnn #1#2#3
+  {
+    \tex_filedump:D
+      offset ~ \int_eval:n { #2 - 1 } ~
+      length ~ \int_eval:n { #1 - #2 + 1 }
+      {#3}
+  }
+\sys_if_engine_luatex:T
+  {
+    \cs_gset:Npn \__file_hex_dump_auxiv:nnn #1#2#3
+      {
+        \lua_now:e
+          {
+            l3kernel.filedump
+              (
+                " \lua_escape:e {#3} " ,
+                \int_eval:n { #2 - 1 } ,
+                \int_eval:n { #1 - #2 + 1 }
+              )
+          }
+      }
+  }
+\cs_new:Npn \file_hex_dump:n #1
+  { \exp_args:Ne \__file_hex_dump:n { \file_full_name:n {#1} } }
+\cs_new:Npn \__file_hex_dump:n #1
+  {
+    \tl_if_blank:nF {#1}
+      { \tex_filedump:D length \tex_filesize:D {#1} {#1} }
+  }
+\sys_if_engine_luatex:T
+  {
+    \cs_gset:Npn \__file_hex_dump:n #1
+      {
+        \lua_now:e
+          { l3kernel.filedump ( " \lua_escape:e { #1 } " ) }
+      }
+  }
+\cs_new_protected:Npn \file_get_hex_dump:nN #1#2
+  { \file_get_hex_dump:nNF {#1} #2 { \tl_set:Nn #2 { \q_no_value } } }
 \cs_new_protected:Npn \file_get_mdfive_hash:nN #1#2
   { \file_get_mdfive_hash:nNF {#1} #2 { \tl_set:Nn #2 { \q_no_value } } }
 \cs_new_protected:Npn \file_get_size:nN #1#2
   { \file_get_size:nNF {#1} #2 { \tl_set:Nn #2 { \q_no_value } } }
 \cs_new_protected:Npn \file_get_timestamp:nN #1#2
   { \file_get_timestamp:nNF {#1} #2 { \tl_set:Nn #2 { \q_no_value } } }
+\prg_new_protected_conditional:Npnn \file_get_hex_dump:nN #1#2 { T , F , TF }
+  { \__file_get_details:nnN {#1} { hex_dump } #2 }
 \prg_new_protected_conditional:Npnn \file_get_mdfive_hash:nN #1#2 { T , F , TF }
   { \__file_get_details:nnN {#1} { mdfive_hash } #2 }
 \prg_new_protected_conditional:Npnn \file_get_size:nN #1#2 { T , F , TF }
@@ -11368,6 +11679,7 @@
             \token_to_str:N \(pdf)file
             \str_case:nn {#2}
               {
+                { hex_dump } { dump }
                 { mdfive_hash } { mdfivesum }
                 { timestamp } { moddate }
                 { size } { size }
@@ -11375,6 +11687,20 @@
           }
         \prg_return_false:
       }
+  }
+\cs_new_protected:Npn \file_get_hex_dump:nnnN #1#2#3#4
+  {
+    \file_get_hex_dump:nnnNF {#1} {#2} {#3} #4
+      { \tl_set:Nn #4 { \q_no_value } }
+  }
+\prg_new_protected_conditional:Npnn \file_get_hex_dump:nnnN #1#2#3#4
+  { T , F , TF }
+  {
+    \tl_set:Nx #4
+      { \file_hex_dump:nnn {#1} {#2} {#3} }
+    \tl_if_empty:NTF #4
+      { \prg_return_false: }
+      { \prg_return_true: }
   }
 \cs_new:Npn \__file_str_cmp:nn #1#2 { \tex_strcmp:D {#1} {#2} }
 \sys_if_engine_luatex:T
@@ -12333,30 +12659,32 @@
   { \__keyval_def_aux:w #1 \q_stop }
 \cs_new:Npn \__keyval_def_aux:w #1 \q_stop { \exp_not:n {#1} }
 \__kernel_msg_new:nnnn { kernel } { misplaced-equals-sign }
-  { Misplaced~equals~sign~in~key-value~input~\msg_line_number: }
+  { Misplaced~equals~sign~in~key-value~input~\msg_line_context: }
   {
     LaTeX~is~attempting~to~parse~some~key-value~input~but~found~
     two~equals~signs~not~separated~by~a~comma.
   }
-\tl_const:Nn \c__keys_code_root_tl     { key~code~>~ }
-\tl_const:Nn \c__keys_default_root_tl  { key~default~>~ }
-\tl_const:Nn \c__keys_groups_root_tl   { key~groups~>~ }
-\tl_const:Nn \c__keys_inherit_root_tl  { key~inherit~>~ }
-\tl_const:Nn \c__keys_type_root_tl     { key~type~>~ }
-\tl_const:Nn \c__keys_validate_root_tl { key~validate~>~ }
-\tl_const:Nn \c__keys_props_root_tl { key~prop~>~ }
+\str_const:Nn \c__keys_code_root_str     { key~code~>~ }
+\str_const:Nn \c__keys_default_root_str  { key~default~>~ }
+\str_const:Nn \c__keys_groups_root_str   { key~groups~>~ }
+\str_const:Nn \c__keys_inherit_root_str  { key~inherit~>~ }
+\str_const:Nn \c__keys_type_root_str     { key~type~>~ }
+\str_const:Nn \c__keys_validate_root_str { key~validate~>~ }
+\str_const:Nn \c__keys_props_root_str { key~prop~>~ }
 \int_new:N \l_keys_choice_int
 \tl_new:N \l_keys_choice_tl
 \clist_new:N \l__keys_groups_clist
+\str_new:N \l_keys_key_str
 \tl_new:N \l_keys_key_tl
-\tl_new:N \l__keys_module_tl
+\str_new:N \l__keys_module_str
 \bool_new:N \l__keys_no_value_bool
 \bool_new:N \l__keys_only_known_bool
+\str_new:N \l_keys_path_str
 \tl_new:N \l_keys_path_tl
-\tl_new:N \l__keys_inherit_tl
+\str_new:N \l__keys_inherit_str
 \tl_new:N \l__keys_relative_tl
 \tl_set:Nn \l__keys_relative_tl { \q_no_value }
-\tl_new:N \l__keys_property_tl
+\str_new:N \l__keys_property_str
 \bool_new:N \l__keys_selective_bool
 \bool_new:N \l__keys_filtered_bool
 \seq_new:N \l__keys_selective_seq
@@ -12366,12 +12694,12 @@
 \tl_new:N \l__keys_tmpa_tl
 \tl_new:N \l__keys_tmpb_tl
 \cs_new_protected:Npn \keys_define:nn
-  { \__keys_define:onn \l__keys_module_tl }
+  { \__keys_define:onn \l__keys_module_str }
 \cs_new_protected:Npn \__keys_define:nnn #1#2#3
   {
-    \tl_set:Nx \l__keys_module_tl { \__keys_trim_spaces:n {#2} }
+    \str_set:Nx \l__keys_module_str { \__keys_trim_spaces:n {#2} }
     \keyval_parse:NNn \__keys_define:n \__keys_define:nn {#3}
-    \tl_set:Nn \l__keys_module_tl {#1}
+    \str_set:Nn \l__keys_module_str {#1}
   }
 \cs_generate_variant:Nn \__keys_define:nnn { o }
 \cs_new_protected:Npn \__keys_define:n #1
@@ -12387,56 +12715,56 @@
 \cs_new_protected:Npn \__keys_define_aux:nn #1#2
   {
     \__keys_property_find:n {#1}
-    \cs_if_exist:cTF { \c__keys_props_root_tl \l__keys_property_tl }
-      { \__keys_define_code:n {#2}
-      }
+    \cs_if_exist:cTF { \c__keys_props_root_str \l__keys_property_str }
+      { \__keys_define_code:n {#2} }
       {
-         \tl_if_empty:NF \l__keys_property_tl
+         \str_if_empty:NF \l__keys_property_str
            {
              \__kernel_msg_error:nnxx { kernel } { key-property-unknown }
-              { \l__keys_property_tl } { \l_keys_path_tl }
+              { \l__keys_property_str } { \l_keys_path_str }
            }
       }
   }
 \cs_new_protected:Npn \__keys_property_find:n #1
   {
-    \tl_set:Nx \l__keys_property_tl { \__keys_trim_spaces:n {#1} }
-    \exp_after:wN \__keys_property_find:w \l__keys_property_tl . .
+    \str_set:Nx \l__keys_property_str { \__keys_trim_spaces:n {#1} }
+    \exp_after:wN \__keys_property_find:w \l__keys_property_str . .
       \q_stop {#1}
   }
 \cs_new_protected:Npn \__keys_property_find:w #1 . #2 . #3 \q_stop #4
   {
     \tl_if_blank:nTF {#3}
       {
-        \tl_clear:N \l__keys_property_tl
+        \str_clear:N \l__keys_property_str
         \__kernel_msg_error:nnn { kernel } { key-no-property } {#4}
       }
       {
         \str_if_eq:nnTF {#3} { . }
           {
-            \tl_set:Nx \l_keys_path_tl
+            \str_set:Nx \l_keys_path_str
               {
-                \tl_if_empty:NF \l__keys_module_tl
-                  { \l__keys_module_tl  / }
+                \str_if_empty:NF \l__keys_module_str
+                  { \l__keys_module_str  / }
                \tl_trim_spaces:n {#1}
               }
-            \tl_set:Nn \l__keys_property_tl { . #2 }
+            \str_set:Nn \l__keys_property_str { . #2 }
           }
           {
-            \tl_set:Nx \l_keys_path_tl { \l__keys_module_tl / #1 . #2 }
+            \str_set:Nx \l_keys_path_str { \l__keys_module_str / #1 . #2 }
             \__keys_property_search:w #3 \q_stop
           }
+        \tl_set_eq:NN \l_keys_path_tl \l_keys_path_str
       }
   }
 \cs_new_protected:Npn \__keys_property_search:w #1 . #2 \q_stop
   {
     \str_if_eq:nnTF {#2} { . }
       {
-        \tl_set:Nx \l_keys_path_tl { \l_keys_path_tl }
-        \tl_set:Nn \l__keys_property_tl { . #1 }
+        \str_set:Nx \l_keys_path_str { \l_keys_path_str }
+        \str_set:Nn \l__keys_property_str { . #1 }
       }
       {
-        \tl_set:Nx \l_keys_path_tl { \l_keys_path_tl . #1 }
+        \str_set:Nx \l_keys_path_str { \l_keys_path_str . #1 }
         \__keys_property_search:w #2 \q_stop
       }
   }
@@ -12445,15 +12773,15 @@
     \bool_if:NTF \l__keys_no_value_bool
       {
         \exp_after:wN \__keys_define_code:w
-          \l__keys_property_tl \q_stop
-          { \use:c { \c__keys_props_root_tl \l__keys_property_tl } }
+          \l__keys_property_str \q_stop
+          { \use:c { \c__keys_props_root_str \l__keys_property_str } }
           {
             \__kernel_msg_error:nnxx { kernel }
-              { key-property-requires-value } { \l__keys_property_tl }
-              { \l_keys_path_tl }
+              { key-property-requires-value } { \l__keys_property_str }
+              { \l_keys_path_str }
             }
       }
-      { \use:c { \c__keys_props_root_tl \l__keys_property_tl } {#1} }
+      { \use:c { \c__keys_props_root_str \l__keys_property_str } {#1} }
   }
 \exp_last_unbraced:NNNNo
   \cs_new:Npn \__keys_define_code:w #1 \c_colon_str #2 \q_stop
@@ -12462,14 +12790,14 @@
   {
     \bool_if_exist:NF #1 { \bool_new:N #1 }
     \__keys_choice_make:
-    \__keys_cmd_set:nx { \l_keys_path_tl / true }
+    \__keys_cmd_set:nx { \l_keys_path_str / true }
       { \exp_not:c { bool_ #2 set_true:N } \exp_not:N #1 }
-    \__keys_cmd_set:nx { \l_keys_path_tl / false }
+    \__keys_cmd_set:nx { \l_keys_path_str / false }
       { \exp_not:c { bool_ #2 set_false:N } \exp_not:N #1 }
-    \__keys_cmd_set:nn { \l_keys_path_tl / unknown }
+    \__keys_cmd_set:nn { \l_keys_path_str / unknown }
       {
         \__kernel_msg_error:nnx { kernel } { boolean-values-only }
-          { \l_keys_key_tl }
+          { \l_keys_key_str }
       }
     \__keys_default_set:n { true }
   }
@@ -12478,14 +12806,14 @@
   {
     \bool_if_exist:NF #1 { \bool_new:N #1 }
     \__keys_choice_make:
-    \__keys_cmd_set:nx { \l_keys_path_tl / true }
+    \__keys_cmd_set:nx { \l_keys_path_str / true }
       { \exp_not:c { bool_ #2 set_false:N } \exp_not:N #1 }
-    \__keys_cmd_set:nx { \l_keys_path_tl / false }
+    \__keys_cmd_set:nx { \l_keys_path_str / false }
       { \exp_not:c { bool_ #2 set_true:N } \exp_not:N #1 }
-    \__keys_cmd_set:nn { \l_keys_path_tl / unknown }
+    \__keys_cmd_set:nn { \l_keys_path_str / unknown }
       {
         \__kernel_msg_error:nnx { kernel } { boolean-values-only }
-          { \l_keys_key_tl }
+          { \l_keys_key_str }
       }
     \__keys_default_set:n { true }
   }
@@ -12497,14 +12825,14 @@
 \cs_new_protected:Npn \__keys_choice_make:N #1
   {
     \cs_if_exist:cTF
-      { \c__keys_type_root_tl \__keys_parent:o \l_keys_path_tl }
+      { \c__keys_type_root_str \__keys_parent:o \l_keys_path_str }
       {
         \str_if_eq:vnTF
-          { \c__keys_type_root_tl \__keys_parent:o \l_keys_path_tl }
+          { \c__keys_type_root_str \__keys_parent:o \l_keys_path_str }
           { choice }
           {
             \__kernel_msg_error:nnxx { kernel } { nested-choice-key }
-              { \l_keys_path_tl } { \__keys_parent:o \l_keys_path_tl }
+              { \l_keys_path_tl } { \__keys_parent:o \l_keys_path_str }
           }
           { \__keys_choice_make_aux:N #1 }
       }
@@ -12512,13 +12840,13 @@
   }
 \cs_new_protected:Npn \__keys_choice_make_aux:N #1
   {
-    \cs_set_nopar:cpn { \c__keys_type_root_tl \l_keys_path_tl }
+    \cs_set_nopar:cpn { \c__keys_type_root_str \l_keys_path_str }
       { choice }
-    \__keys_cmd_set:nn { \l_keys_path_tl } { #1 {##1} }
-    \__keys_cmd_set:nn { \l_keys_path_tl / unknown }
+    \__keys_cmd_set:nn { \l_keys_path_str } { #1 {##1} }
+    \__keys_cmd_set:nn { \l_keys_path_str / unknown }
       {
         \__kernel_msg_error:nnxx { kernel } { key-choice-unknown }
-          { \l_keys_path_tl } {##1}
+          { \l_keys_path_str } {##1}
       }
   }
 \cs_new_protected:Npn \__keys_choices_make:nn
@@ -12533,7 +12861,7 @@
       {
         \int_incr:N \l_keys_choice_int
         \__keys_cmd_set:nx
-          { \l_keys_path_tl / \__keys_trim_spaces:n {##1} }
+          { \l_keys_path_str / \__keys_trim_spaces:n {##1} }
           {
             \tl_set:Nn \exp_not:N \l_keys_choice_tl {##1}
             \int_set:Nn \exp_not:N \l_keys_choice_int
@@ -12543,20 +12871,28 @@
       }
   }
 \cs_new_protected:Npn \__keys_cmd_set:nn #1#2
-  { \cs_set_protected:cpn { \c__keys_code_root_tl #1 } ##1 {#2} }
+  { \cs_set_protected:cpn { \c__keys_code_root_str #1 } ##1 {#2} }
 \cs_generate_variant:Nn \__keys_cmd_set:nn { nx , Vn , Vo }
+\cs_new_protected:Npn \__keys_cs_set:NNpn #1#2#3#
+  {
+    \cs_set_protected:cpx { \c__keys_code_root_str \l_keys_path_str } ##1
+      { #1 \exp_not:N #2 \exp_not:n {#3} {##1} }
+    \use_none:n
+  }
+\cs_generate_variant:Nn \__keys_cs_set:NNpn { Nc }
 \cs_new_protected:Npn \__keys_default_set:n #1
   {
     \tl_if_empty:nTF {#1}
       {
         \cs_set_eq:cN
-          { \c__keys_default_root_tl \l_keys_path_tl }
+          { \c__keys_default_root_str \l_keys_path_str }
           \tex_undefined:D
       }
       {
         \cs_set_nopar:cpx
-          { \c__keys_default_root_tl \l_keys_path_tl }
+          { \c__keys_default_root_str \l_keys_path_str }
           { \exp_not:n {#1} }
+        \__keys_value_requirement:nn { required } { false }
       }
   }
 \cs_new_protected:Npn \__keys_groups_set:n #1
@@ -12564,47 +12900,47 @@
     \clist_set:Nn \l__keys_groups_clist {#1}
     \clist_if_empty:NTF \l__keys_groups_clist
       {
-        \cs_set_eq:cN { \c__keys_groups_root_tl \l_keys_path_tl }
+        \cs_set_eq:cN { \c__keys_groups_root_str \l_keys_path_str }
           \tex_undefined:D
       }
       {
-        \cs_set_eq:cN { \c__keys_groups_root_tl \l_keys_path_tl }
+        \cs_set_eq:cN { \c__keys_groups_root_str \l_keys_path_str }
           \l__keys_groups_clist
       }
   }
 \cs_new_protected:Npn \__keys_inherit:n #1
   {
     \__keys_undefine:
-    \cs_set_nopar:cpn { \c__keys_inherit_root_tl \l_keys_path_tl } {#1}
+    \cs_set_nopar:cpn { \c__keys_inherit_root_str \l_keys_path_str } {#1}
   }
 \cs_new_protected:Npn \__keys_initialise:n #1
   {
     \cs_if_exist:cTF
-      { \c__keys_inherit_root_tl \__keys_parent:o \l_keys_path_tl }
+      { \c__keys_inherit_root_str \__keys_parent:o \l_keys_path_str }
       { \__keys_execute_inherit: }
       {
-        \tl_clear:N \l__keys_inherit_tl
-        \cs_if_exist_use:cT { \c__keys_code_root_tl \l_keys_path_tl } { {#1} }
+        \str_clear:N \l__keys_inherit_str
+        \cs_if_exist_use:cT { \c__keys_code_root_str \l_keys_path_str } { {#1} }
       }
   }
 \cs_new_protected:Npn \__keys_meta_make:n #1
   {
-    \__keys_cmd_set:Vo \l_keys_path_tl
+    \__keys_cmd_set:Vo \l_keys_path_str
       {
         \exp_after:wN \keys_set:nn
-        \exp_after:wN { \l__keys_module_tl } {#1}
+        \exp_after:wN { \l__keys_module_str } {#1}
       }
   }
 \cs_new_protected:Npn \__keys_meta_make:nn #1#2
-  { \__keys_cmd_set:Vn \l_keys_path_tl { \keys_set:nn {#1} {#2} } }
+  { \__keys_cmd_set:Vn \l_keys_path_str { \keys_set:nn {#1} {#2} } }
 \cs_new_protected:Npn \__keys_prop_put:Nn #1#2
   {
     \prop_if_exist:NF #1 { \prop_new:N #1 }
     \exp_after:wN \__keys_find_key_module:NNw
       \exp_after:wN \l__keys_tmpa_tl
       \exp_after:wN \l__keys_tmpb_tl
-      \l_keys_path_tl / \q_stop
-    \__keys_cmd_set:nx { \l_keys_path_tl }
+      \l_keys_path_str / \q_stop
+    \__keys_cmd_set:nx { \l_keys_path_str }
       {
         \exp_not:c { prop_ #2 put:Nnn }
         \exp_not:N #1
@@ -12619,7 +12955,7 @@
       { code , default , groups , inherit , type , validate }
       {
         \cs_set_eq:cN
-          { \tl_use:c { c__keys_ ##1 _root_tl } \l_keys_path_tl }
+          { \tl_use:c { c__keys_ ##1 _root_str } \l_keys_path_str }
           \tex_undefined:D
       }
   }
@@ -12630,17 +12966,17 @@
         { true }
           {
             \cs_set_eq:cc
-              { \c__keys_validate_root_tl \l_keys_path_tl }
+              { \c__keys_validate_root_str \l_keys_path_str }
               { __keys_validate_ #1 : }
           }
         { false }
           {
             \cs_if_eq:ccT
-              { \c__keys_validate_root_tl \l_keys_path_tl }
+              { \c__keys_validate_root_str \l_keys_path_str }
               { __keys_validate_ #1 : }
               {
                 \cs_set_eq:cN
-                  { \c__keys_validate_root_tl \l_keys_path_tl }
+                  { \c__keys_validate_root_str \l_keys_path_str }
                   \tex_undefined:D
               }
           }
@@ -12656,7 +12992,7 @@
     \bool_if:NF \l__keys_no_value_bool
       {
         \__kernel_msg_error:nnxx { kernel } { value-forbidden }
-          { \l_keys_path_tl } { \l_keys_value_tl }
+          { \l_keys_path_str } { \l_keys_value_tl }
         \__keys_validate_cleanup:w
       }
   }
@@ -12665,7 +13001,7 @@
     \bool_if:NT \l__keys_no_value_bool
       {
         \__kernel_msg_error:nnx { kernel } { value-required }
-          { \l_keys_path_tl }
+          { \l_keys_path_str }
         \__keys_validate_cleanup:w
       }
   }
@@ -12673,7 +13009,7 @@
 \cs_new_protected:Npn \__keys_variable_set:NnnN #1#2#3#4
   {
     \use:c { #2_if_exist:NF } #1 { \use:c { #2 _new:N } #1 }
-    \__keys_cmd_set:nx { \l_keys_path_tl }
+    \__keys_cmd_set:nx { \l_keys_path_str }
       {
         \exp_not:c { #2 _ #3 set:N #4 }
         \exp_not:N #1
@@ -12681,145 +13017,167 @@
       }
   }
 \cs_generate_variant:Nn \__keys_variable_set:NnnN { c }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_set:N } #1
+\cs_new_protected:Npn \__keys_variable_set_required:NnnN #1#2#3#4
+  {
+    \__keys_variable_set:NnnN #1 {#2} {#3} #4
+    \__keys_value_requirement:nn { required } { true }
+  }
+\cs_generate_variant:Nn \__keys_variable_set_required:NnnN { c }
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_set:N } #1
   { \__keys_bool_set:Nn #1 { } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_set:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_set:c } #1
   { \__keys_bool_set:cn {#1} { } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_gset:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_gset:N } #1
   { \__keys_bool_set:Nn #1 { g } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_gset:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_gset:c } #1
   { \__keys_bool_set:cn {#1} { g } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_set_inverse:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_set_inverse:N } #1
   { \__keys_bool_set_inverse:Nn #1 { } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_set_inverse:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_set_inverse:c } #1
   { \__keys_bool_set_inverse:cn {#1} { } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_gset_inverse:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_gset_inverse:N } #1
   { \__keys_bool_set_inverse:Nn #1 { g } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .bool_gset_inverse:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .bool_gset_inverse:c } #1
   { \__keys_bool_set_inverse:cn {#1} { g } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .choice: }
+\cs_new_protected:cpn { \c__keys_props_root_str .choice: }
   { \__keys_choice_make: }
-\cs_new_protected:cpn { \c__keys_props_root_tl .choices:nn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .choices:nn } #1
   { \__keys_choices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .choices:Vn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .choices:Vn } #1
   { \exp_args:NV \__keys_choices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .choices:on } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .choices:on } #1
   { \exp_args:No \__keys_choices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .choices:xn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .choices:xn } #1
   { \exp_args:Nx \__keys_choices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .code:n } #1
-  { \__keys_cmd_set:nn { \l_keys_path_tl } {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .clist_set:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .code:n } #1
+  { \__keys_cmd_set:nn { \l_keys_path_str } {#1} }
+\cs_new_protected:cpn { \c__keys_props_root_str .clist_set:N } #1
   { \__keys_variable_set:NnnN #1 { clist } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .clist_set:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .clist_set:c } #1
   { \__keys_variable_set:cnnN {#1} { clist } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .clist_gset:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .clist_gset:N } #1
   { \__keys_variable_set:NnnN #1 { clist } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .clist_gset:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .clist_gset:c } #1
   { \__keys_variable_set:cnnN {#1} { clist } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .default:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_set:Np } #1
+  { \__keys_cs_set:NNpn \cs_set:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_set:cp } #1
+  { \__keys_cs_set:Ncpn \cs_set:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_set_protected:Np } #1
+  { \__keys_cs_set:NNpn \cs_set_protected:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_set_protected:cp } #1
+  { \__keys_cs_set:Ncpn \cs_set_protected:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_gset:Np } #1
+  { \__keys_cs_set:NNpn \cs_gset:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_gset:cp } #1
+  { \__keys_cs_set:Ncpn \cs_gset:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_gset_protected:Np } #1
+  { \__keys_cs_set:NNpn \cs_gset_protected:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .cs_gset_protected:cp } #1
+  { \__keys_cs_set:Ncpn \cs_gset_protected:Npn #1 { } }
+\cs_new_protected:cpn { \c__keys_props_root_str .default:n } #1
   { \__keys_default_set:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .default:V } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .default:V } #1
   { \exp_args:NV \__keys_default_set:n #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .default:o } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .default:o } #1
   { \exp_args:No \__keys_default_set:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .default:x } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .default:x } #1
   { \exp_args:Nx \__keys_default_set:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .dim_set:N } #1
-  { \__keys_variable_set:NnnN #1 { dim } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .dim_set:c } #1
-  { \__keys_variable_set:cnnN {#1} { dim } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .dim_gset:N } #1
-  { \__keys_variable_set:NnnN #1 { dim } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .dim_gset:c } #1
-  { \__keys_variable_set:cnnN {#1} { dim } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .fp_set:N } #1
-  { \__keys_variable_set:NnnN #1 { fp } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .fp_set:c } #1
-  { \__keys_variable_set:cnnN {#1} { fp } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .fp_gset:N } #1
-  { \__keys_variable_set:NnnN #1 { fp } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .fp_gset:c } #1
-  { \__keys_variable_set:cnnN {#1} { fp } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .groups:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .dim_set:N } #1
+  { \__keys_variable_set_required:NnnN #1 { dim } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .dim_set:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { dim } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .dim_gset:N } #1
+  { \__keys_variable_set_required:NnnN #1 { dim } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .dim_gset:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { dim } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .fp_set:N } #1
+  { \__keys_variable_set_required:NnnN #1 { fp } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .fp_set:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { fp } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .fp_gset:N } #1
+  { \__keys_variable_set_required:NnnN #1 { fp } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .fp_gset:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { fp } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .groups:n } #1
   { \__keys_groups_set:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .inherit:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .inherit:n } #1
   { \__keys_inherit:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .initial:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .initial:n } #1
   { \__keys_initialise:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .initial:V } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .initial:V } #1
   { \exp_args:NV \__keys_initialise:n #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .initial:o } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .initial:o } #1
   { \exp_args:No \__keys_initialise:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .initial:x } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .initial:x } #1
   { \exp_args:Nx \__keys_initialise:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .int_set:N } #1
-  { \__keys_variable_set:NnnN #1 { int } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .int_set:c } #1
-  { \__keys_variable_set:cnnN {#1} { int } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .int_gset:N } #1
-  { \__keys_variable_set:NnnN #1 { int } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .int_gset:c } #1
-  { \__keys_variable_set:cnnN {#1} { int } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .meta:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .int_set:N } #1
+  { \__keys_variable_set_required:NnnN #1 { int } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .int_set:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { int } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .int_gset:N } #1
+  { \__keys_variable_set_required:NnnN #1 { int } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .int_gset:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { int } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .meta:n } #1
   { \__keys_meta_make:n {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .meta:nn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .meta:nn } #1
   { \__keys_meta_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .multichoice: }
+\cs_new_protected:cpn { \c__keys_props_root_str .multichoice: }
   { \__keys_multichoice_make: }
-\cs_new_protected:cpn { \c__keys_props_root_tl .multichoices:nn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .multichoices:nn } #1
   { \__keys_multichoices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .multichoices:Vn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .multichoices:Vn } #1
   { \exp_args:NV \__keys_multichoices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .multichoices:on } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .multichoices:on } #1
   { \exp_args:No \__keys_multichoices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .multichoices:xn } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .multichoices:xn } #1
   { \exp_args:Nx \__keys_multichoices_make:nn #1 }
-\cs_new_protected:cpn { \c__keys_props_root_tl .muskip_set:N } #1
-  { \__keys_variable_set:NnnN #1 { muskip } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .muskip_set:c } #1
-  { \__keys_variable_set:cnnN {#1} { muskip } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .muskip_gset:N } #1
-  { \__keys_variable_set:NnnN #1 { muskip } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .muskip_gset:c } #1
-  { \__keys_variable_set:cnnN {#1} { muskip } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .prop_put:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .muskip_set:N } #1
+  { \__keys_variable_set_required:NnnN #1 { muskip } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .muskip_set:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { muskip } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .muskip_gset:N } #1
+  { \__keys_variable_set_required:NnnN #1 { muskip } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .muskip_gset:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { muskip } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .prop_put:N } #1
   { \__keys_prop_put:Nn #1 { } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .prop_put:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .prop_put:c } #1
   { \__keys_prop_put:cn {#1} { } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .prop_gput:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .prop_gput:N } #1
   { \__keys_prop_put:Nn #1 { g } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .prop_gput:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .prop_gput:c } #1
   { \__keys_prop_put:cn {#1} { g } }
-\cs_new_protected:cpn { \c__keys_props_root_tl .skip_set:N } #1
-  { \__keys_variable_set:NnnN #1 { skip } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .skip_set:c } #1
-  { \__keys_variable_set:cnnN {#1} { skip } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .skip_gset:N } #1
-  { \__keys_variable_set:NnnN #1 { skip } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .skip_gset:c } #1
-  { \__keys_variable_set:cnnN {#1} { skip } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_set:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .skip_set:N } #1
+  { \__keys_variable_set_required:NnnN #1 { skip } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .skip_set:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { skip } { } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .skip_gset:N } #1
+  { \__keys_variable_set_required:NnnN #1 { skip } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .skip_gset:c } #1
+  { \__keys_variable_set_required:cnnN {#1} { skip } { g } n }
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_set:N } #1
   { \__keys_variable_set:NnnN #1 { tl } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_set:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_set:c } #1
   { \__keys_variable_set:cnnN {#1} { tl } { } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_set_x:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_set_x:N } #1
   { \__keys_variable_set:NnnN #1 { tl } { } x }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_set_x:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_set_x:c } #1
   { \__keys_variable_set:cnnN {#1} { tl } { } x }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_gset:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_gset:N } #1
   { \__keys_variable_set:NnnN #1 { tl } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_gset:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_gset:c } #1
   { \__keys_variable_set:cnnN {#1} { tl } { g } n }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_gset_x:N } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_gset_x:N } #1
   { \__keys_variable_set:NnnN #1 { tl } { g } x }
-\cs_new_protected:cpn { \c__keys_props_root_tl .tl_gset_x:c } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .tl_gset_x:c } #1
   { \__keys_variable_set:cnnN {#1} { tl } { g } x }
-\cs_new_protected:cpn { \c__keys_props_root_tl .undefine: }
+\cs_new_protected:cpn { \c__keys_props_root_str .undefine: }
   { \__keys_undefine: }
-\cs_new_protected:cpn { \c__keys_props_root_tl .value_forbidden:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .value_forbidden:n } #1
   { \__keys_value_requirement:nn { forbidden } {#1} }
-\cs_new_protected:cpn { \c__keys_props_root_tl .value_required:n } #1
+\cs_new_protected:cpn { \c__keys_props_root_str .value_required:n } #1
   { \__keys_value_requirement:nn { required } {#1} }
 \cs_new_protected:Npn \keys_set:nn #1#2
   {
@@ -12843,12 +13201,12 @@
   }
 \cs_generate_variant:Nn \keys_set:nn { nV , nv , no }
 \cs_new_protected:Npn \__keys_set:nn #1#2
-  { \exp_args:No \__keys_set:nnn \l__keys_module_tl {#1} {#2} }
+  { \exp_args:No \__keys_set:nnn \l__keys_module_str {#1} {#2} }
 \cs_new_protected:Npn \__keys_set:nnn #1#2#3
   {
-    \tl_set:Nx \l__keys_module_tl { \__keys_trim_spaces:n {#2} }
+    \str_set:Nx \l__keys_module_str { \__keys_trim_spaces:n {#2} }
     \keyval_parse:NNn \__keys_set_keyval:n \__keys_set_keyval:nn {#3}
-    \tl_set:Nn \l__keys_module_tl {#1}
+    \str_set:Nn \l__keys_module_str {#1}
   }
 \cs_new_protected:Npn \keys_set_known:nnN #1#2#3
   {
@@ -12965,42 +13323,43 @@
 \cs_new_protected:Npn \__keys_set_keyval:n #1
   {
     \bool_set_true:N \l__keys_no_value_bool
-    \__keys_set_keyval:onn \l__keys_module_tl {#1} { }
+    \__keys_set_keyval:onn \l__keys_module_str {#1} { }
   }
 \cs_new_protected:Npn \__keys_set_keyval:nn #1#2
   {
     \bool_set_false:N \l__keys_no_value_bool
-    \__keys_set_keyval:onn \l__keys_module_tl {#1} {#2}
+    \__keys_set_keyval:onn \l__keys_module_str {#1} {#2}
   }
 \cs_new_protected:Npn \__keys_set_keyval:nnn #1#2#3
   {
-    \tl_set:Nx \l_keys_path_tl
+    \tl_set:Nx \l_keys_path_str
       {
         \tl_if_blank:nF {#1}
           { #1 / }
         \__keys_trim_spaces:n {#2}
       }
-    \tl_clear:N \l__keys_module_tl
-    \tl_clear:N \l__keys_inherit_tl
+    \str_clear:N \l__keys_module_str
+    \str_clear:N \l__keys_inherit_str
     \exp_after:wN \__keys_find_key_module:NNw
-      \exp_after:wN \l__keys_module_tl
-      \exp_after:wN \l_keys_key_tl
-      \l_keys_path_tl / \q_stop
+      \exp_after:wN \l__keys_module_str
+      \exp_after:wN \l_keys_key_str
+      \l_keys_path_str / \q_stop
+    \tl_set_eq:NN \l_keys_key_tl \l_keys_key_str
     \__keys_value_or_default:n {#3}
     \bool_if:NTF \l__keys_selective_bool
       { \__keys_set_selective: }
       { \__keys_execute: }
-    \tl_set:Nn \l__keys_module_tl {#1}
+    \str_set:Nn \l__keys_module_str {#1}
   }
 \cs_generate_variant:Nn \__keys_set_keyval:nnn { o }
 \cs_new_protected:Npn \__keys_find_key_module:NNw #1#2#3 / #4 \q_stop
   {
     \tl_if_blank:nTF {#4}
-      { \tl_set:Nn #2 {#3} }
+      { \str_set:Nn #2 {#3} }
       {
-        \tl_put_right:Nx #1
+        \str_put_right:Nx #1
           {
-            \tl_if_empty:NF #1 { / }
+            \str_if_empty:NF #1 { / }
             #3
           }
         \__keys_find_key_module:NNw #1#2 #4 \q_stop
@@ -13008,10 +13367,10 @@
   }
 \cs_new_protected:Npn \__keys_set_selective:
   {
-    \cs_if_exist:cTF { \c__keys_groups_root_tl \l_keys_path_tl }
+    \cs_if_exist:cTF { \c__keys_groups_root_str \l_keys_path_str }
       {
         \clist_set_eq:Nc \l__keys_groups_clist
-          { \c__keys_groups_root_tl \l_keys_path_tl }
+          { \c__keys_groups_root_str \l_keys_path_str }
         \__keys_check_groups:
       }
       {
@@ -13050,16 +13409,16 @@
   {
     \bool_if:NTF \l__keys_no_value_bool
       {
-        \cs_if_exist:cTF { \c__keys_default_root_tl \l_keys_path_tl }
+        \cs_if_exist:cTF { \c__keys_default_root_str \l_keys_path_str }
           {
             \tl_set_eq:Nc
               \l_keys_value_tl
-              { \c__keys_default_root_tl \l_keys_path_tl }
+              { \c__keys_default_root_str \l_keys_path_str }
           }
           {
             \tl_clear:N \l_keys_value_tl
             \cs_if_exist:cT
-              { \c__keys_inherit_root_tl \__keys_parent:o \l_keys_path_tl }
+              { \c__keys_inherit_root_str \__keys_parent:o \l_keys_path_str }
               { \__keys_default_inherit: }
           }
       }
@@ -13068,29 +13427,29 @@
 \cs_new_protected:Npn \__keys_default_inherit:
   {
     \clist_map_inline:cn
-      { \c__keys_inherit_root_tl \__keys_parent:o \l_keys_path_tl }
+      { \c__keys_inherit_root_str \__keys_parent:o \l_keys_path_str }
       {
         \cs_if_exist:cT
-          { \c__keys_default_root_tl ##1 / \l_keys_key_tl }
+          { \c__keys_default_root_str ##1 / \l_keys_key_str }
           {
             \tl_set_eq:Nc
               \l_keys_value_tl
-              { \c__keys_default_root_tl ##1 / \l_keys_key_tl }
+              { \c__keys_default_root_str ##1 / \l_keys_key_str }
             \clist_map_break:
           }
       }
   }
 \cs_new_protected:Npn \__keys_execute:
   {
-    \cs_if_exist:cTF { \c__keys_code_root_tl \l_keys_path_tl }
+    \cs_if_exist:cTF { \c__keys_code_root_str \l_keys_path_str }
       {
-        \cs_if_exist_use:c { \c__keys_validate_root_tl \l_keys_path_tl }
-        \cs:w \c__keys_code_root_tl \l_keys_path_tl \exp_after:wN \cs_end:
+        \cs_if_exist_use:c { \c__keys_validate_root_str \l_keys_path_str }
+        \cs:w \c__keys_code_root_str \l_keys_path_str \exp_after:wN \cs_end:
           \exp_after:wN { \l_keys_value_tl }
       }
       {
         \cs_if_exist:cTF
-          { \c__keys_inherit_root_tl \__keys_parent:o \l_keys_path_tl }
+          { \c__keys_inherit_root_str \__keys_parent:o \l_keys_path_str }
           { \__keys_execute_inherit: }
           { \__keys_execute_unknown: }
       }
@@ -13098,13 +13457,14 @@
 \cs_new_protected:Npn \__keys_execute_inherit:
   {
     \clist_map_inline:cn
-      { \c__keys_inherit_root_tl \__keys_parent:o \l_keys_path_tl }
+      { \c__keys_inherit_root_str \__keys_parent:o \l_keys_path_str }
       {
         \cs_if_exist:cT
-          { \c__keys_code_root_tl ##1 / \l_keys_key_tl }
+          { \c__keys_code_root_str ##1 / \l_keys_key_str }
           {
-            \tl_set:Nn \l__keys_inherit_tl {##1}
-            \cs:w \c__keys_code_root_tl ##1 / \l_keys_key_tl
+            \str_set:Nn \l__keys_inherit_str {##1}
+            \cs_if_exist_use:c { \c__keys_validate_root_str ##1 / \l_keys_key_str }
+            \cs:w \c__keys_code_root_str ##1 / \l_keys_key_str
               \exp_after:wN \cs_end: \exp_after:wN
               { \l_keys_value_tl }
             \clist_map_break:n { \use_none:n }
@@ -13118,22 +13478,22 @@
       { \__keys_store_unused: }
       {
         \cs_if_exist:cTF
-          { \c__keys_code_root_tl \l__keys_module_tl / unknown }
+          { \c__keys_code_root_str \l__keys_module_str / unknown }
           {
-            \cs:w \c__keys_code_root_tl \l__keys_module_tl / unknown
+            \cs:w \c__keys_code_root_str \l__keys_module_str / unknown
               \exp_after:wN \cs_end: \exp_after:wN { \l_keys_value_tl }
           }
           {
             \__kernel_msg_error:nnxx { kernel } { key-unknown }
-             { \l_keys_path_tl } { \l__keys_module_tl }
+             { \l_keys_path_str } { \l__keys_module_str }
           }
       }
   }
 \cs_new:Npn \__keys_execute:nn #1#2
   {
-    \cs_if_exist:cTF { \c__keys_code_root_tl #1 }
+    \cs_if_exist:cTF { \c__keys_code_root_str #1 }
       {
-        \cs:w \c__keys_code_root_tl #1 \exp_after:wN \cs_end:
+        \cs:w \c__keys_code_root_str #1 \exp_after:wN \cs_end:
           \exp_after:wN { \l_keys_value_tl }
       }
       {#2}
@@ -13144,7 +13504,7 @@
       {
         \clist_put_right:Nx \l__keys_unused_clist
           {
-            \exp_not:o \l_keys_key_tl
+            \exp_not:o \l_keys_key_str
             \bool_if:NF \l__keys_no_value_bool
               { = { \exp_not:o \l_keys_value_tl } }
           }
@@ -13154,7 +13514,7 @@
           {
             \clist_put_right:Nx \l__keys_unused_clist
               {
-                \exp_not:o \l_keys_path_tl
+                \exp_not:o \l_keys_path_str
                 \bool_if:NF \l__keys_no_value_bool
                   { = { \exp_not:o \l_keys_value_tl } }
               }
@@ -13177,7 +13537,7 @@
           \tl_if_blank:nF {##1}
             {
               \__kernel_msg_error:nnxx { kernel } { bad-relative-key-path }
-                \l_keys_path_tl
+                \l_keys_path_str
                 \l__keys_relative_tl
             }
           \clist_put_right:Nx \l__keys_unused_clist
@@ -13189,7 +13549,7 @@
         }
     \use:x
       {
-        \__keys_store_unused:w \l_keys_path_tl
+        \__keys_store_unused:w \l_keys_path_str
           \l__keys_relative_tl / \l__keys_relative_tl /
           \exp_not:N \q_stop
       }
@@ -13197,18 +13557,18 @@
 \cs_new_protected:Npn \__keys_store_unused:w { }
 \cs_new:Npn \__keys_choice_find:n #1
   {
-    \tl_if_empty:NTF \l__keys_inherit_tl
-      { \__keys_choice_find:nn { \l_keys_path_tl } {#1} }
+    \str_if_empty:NTF \l__keys_inherit_str
+      { \__keys_choice_find:nn { \l_keys_path_str } {#1} }
       {
         \__keys_choice_find:nn
-          { \l__keys_inherit_tl / \l_keys_key_tl } {#1}
+          { \l__keys_inherit_str / \l_keys_key_str } {#1}
       }
   }
 \cs_new:Npn \__keys_choice_find:nn #1#2
   {
-    \cs_if_exist:cTF { \c__keys_code_root_tl #1 / \__keys_trim_spaces:n {#2} }
-      { \use:c { \c__keys_code_root_tl #1 / \__keys_trim_spaces:n {#2} } {#2} }
-      { \use:c { \c__keys_code_root_tl #1 / unknown } {#2} }
+    \cs_if_exist:cTF { \c__keys_code_root_str #1 / \__keys_trim_spaces:n {#2} }
+      { \use:c { \c__keys_code_root_str #1 / \__keys_trim_spaces:n {#2} } {#2} }
+      { \use:c { \c__keys_code_root_str #1 / unknown } {#2} }
   }
 \cs_new:Npn \__keys_multichoice_find:n #1
   { \clist_map_function:nN {#1} \__keys_choice_find:n }
@@ -13246,13 +13606,13 @@
 \cs_set:Npn \__keys_trim_spaces_auxiii:w #1 /
   {
     \quark_if_recursion_tail_stop:n {#1}
-    \tl_trim_spaces:n { / #1 }
+    / \tl_trim_spaces:n { #1 }
     \__keys_trim_spaces_auxiii:w
   }
 \prg_new_conditional:Npnn \keys_if_exist:nn #1#2 { p , T , F , TF }
   {
     \cs_if_exist:cTF
-      { \c__keys_code_root_tl \__keys_trim_spaces:n { #1 / #2 } }
+      { \c__keys_code_root_str \__keys_trim_spaces:n { #1 / #2 } }
       { \prg_return_true: }
       { \prg_return_false: }
   }
@@ -13260,7 +13620,7 @@
   { p , T , F , TF }
   {
     \cs_if_exist:cTF
-      { \c__keys_code_root_tl \__keys_trim_spaces:n { #1 / #2 / #3 } }
+      { \c__keys_code_root_str \__keys_trim_spaces:n { #1 / #2 / #3 } }
       { \prg_return_true: }
       { \prg_return_false: }
   }
@@ -13279,7 +13639,7 @@
               {
                 \exp_args:Nc \cs_replacement_spec:N
                   {
-                    \c__keys_code_root_tl
+                    \c__keys_code_root_str
                     \__keys_trim_spaces:n { #2 / #3 }
                   }
               }
@@ -14662,7 +15022,7 @@
     \cs_if_exist_use:cF { __fp_parse_word_#2:N }
       {
         \cs_if_exist_use:cF
-          { __fp_parse_caseless_ \str_fold_case:n {#2} :N }
+          { __fp_parse_caseless_ \str_foldcase:n {#2} :N }
           {
             \__kernel_msg_expandable_error:nnn
               { kernel } { unknown-fp-word } {#2}
@@ -27252,27 +27612,47 @@
       \ior_open:Nn \g__char_data_ior { UnicodeData.txt }
       \cs_set_protected:Npn \__char_data_auxi:w
         #1 ; #2 ; #3 ; #4 ; #5 ; #6 ; #7 ; #8 ; #9 ;
-        { \__char_data_auxii:w #1 ; }
-      \cs_set_protected:Npn \__char_data_auxii:w
-        #1 ; #2 ; #3 ; #4 ; #5 ; #6 ; #7 \q_stop
+        {
+          \tl_if_blank:nF {#6}
+            {
+              \tl_if_head_eq_charcode:nNF {#6}  < % >
+                { \__char_data_auxii:w #1 ; #6 ~ \q_stop }
+            }
+          \__char_data_auxiii:w #1 ;
+        }
+      \cs_set_protected:Npn \__char_data_auxii:w #1 ; #2 ~ #3 \q_stop
+        {
+          \tl_const:cx
+            { c__char_nfd_ \__char_generate_char:n {#1} _tl }
+            {
+              \__char_generate:n { "#2 }
+              \tl_if_blank:nF {#3}
+                { \__char_generate:n { "#3 } }
+            }
+        }
+      \cs_set_protected:Npn \__char_data_auxiii:w
+        #1 ; #2 ; #3 ; #4 ; #5 ; #6 ; #7 ~ \q_stop
         {
           \cs_set_nopar:Npn \l__char_tmpa_tl {#7}
           \reverse_if:N \if_meaning:w \l__char_tmpa_tl \c_empty_tl
             \cs_set_nopar:Npn \l__char_tmpb_tl {#5}
             \reverse_if:N \if_meaning:w \l__char_tmpa_tl \l__char_tmpb_tl
               \tl_const:cx
-                { c__char_mixed_case_ \__char_generate_char:n {#1} _tl }
+                { c__char_titlecase_ \__char_generate_char:n {#1} _tl }
                 { \__char_generate:n { "#7 } }
             \fi:
           \fi:
         }
-      \ior_map_variable:NNn \g__char_data_ior \l__char_tmpa_tl
-        {
-          \if_meaning:w \l__char_tmpa_tl \c_space_tl
-            \exp_after:wN \ior_map_break:
-          \fi:
-          \exp_after:wN \__char_data_auxi:w \l__char_tmpa_tl \q_stop
-        }
+      \group_begin:
+        \char_set_catcode_space:n { `\  }%
+        \ior_map_variable:NNn \g__char_data_ior \l__char_tmpa_tl
+          {%
+            \if_meaning:w \l__char_tmpa_tl \c_space_tl
+              \exp_after:wN \ior_map_break:
+            \fi:
+            \exp_after:wN \__char_data_auxi:w \l__char_tmpa_tl \q_stop
+          }%
+      \group_end:
       \ior_close:N \g__char_data_ior
       \ior_open:Nn \g__char_data_ior { CaseFolding.txt }
       \cs_set_protected:Npn \__char_data_auxi:w #1 ;~ #2 ;~ #3 ; #4 \q_stop
@@ -27281,7 +27661,7 @@
             \reverse_if:N \if_int_compare:w
               \char_value_lccode:n {"#1} = "#3 ~
               \tl_const:cx
-                { c__char_fold_case_ \__char_generate_char:n {#1} _tl }
+                { c__char_foldcase_ \__char_generate_char:n {#1} _tl }
                 { \__char_generate:n { "#3 } }
             \fi:
           \else:
@@ -27292,7 +27672,7 @@
         }
       \cs_set_protected:Npn \__char_data_auxii:w #1 ~ #2 ~ #3 ~ #4 \q_stop
         {
-          \tl_const:cx { c__char_fold_case_ \__char_generate_char:n {#1} _tl }
+          \tl_const:cx { c__char_foldcase_ \__char_generate_char:n {#1} _tl }
             {
               \__char_generate:n { "#2 }
               \__char_generate:n { "#3 }
@@ -27314,14 +27694,14 @@
           \use:n { \__char_data_auxii:w #1 ~ lower ~ #2 ~ } ~ \q_stop
           \use:n { \__char_data_auxii:w #1 ~ upper ~ #4 ~ } ~ \q_stop
           \str_if_eq:nnF {#3} {#4}
-            { \use:n { \__char_data_auxii:w #1 ~ mixed ~ #3 ~ } ~ \q_stop }
+            { \use:n { \__char_data_auxii:w #1 ~ title ~ #3 ~ } ~ \q_stop }
         }
       \cs_set_protected:Npn \__char_data_auxii:w
         #1 ~ #2 ~ #3 ~ #4 ~ #5 \q_stop
         {
           \tl_if_empty:nF {#4}
             {
-              \tl_const:cx { c__char_ #2 _case_ \__char_generate_char:n {#1} _tl }
+              \tl_const:cx { c__char_ #2 case_ \__char_generate_char:n {#1} _tl }
                 {
                   \__char_generate:n { "#3 }
                   \__char_generate:n { "#4 }
@@ -27351,9 +27731,9 @@
       \cs_set_protected:Npn \__char_tmp:NN #1#2
         {
           \quark_if_recursion_tail_stop:N #2
-          \tl_const:cn { c__char_upper_case_ #2 _tl } {#1}
-          \tl_const:cn { c__char_lower_case_ #1 _tl } {#2}
-          \tl_const:cn { c__char_fold_case_  #1 _tl } {#2}
+          \tl_const:cn { c__char_uppercase_ #2 _tl } {#1}
+          \tl_const:cn { c__char_lowercase_ #1 _tl } {#2}
+          \tl_const:cn { c__char_foldcase_  #1 _tl } {#2}
           \__char_tmp:NN
         }
       \__char_tmp:NN
@@ -27362,6 +27742,1592 @@
       \ior_open:Nn \g__char_data_ior { UnicodeData.txt }
       \ior_close:N \g__char_data_ior
     \group_end:
+  }
+%% File: l3text.dtx
+\group_begin:
+  \char_set_catcode_active:n { 0 }
+  \cs_new:Npn \__text_token_to_explicit:N #1
+    {
+      \if_catcode:w \exp_not:N #1
+        \if_catcode:w \scan_stop: \exp_not:N #1
+          \scan_stop:
+        \else:
+          \exp_not:N ^^@
+        \fi:
+        \exp_after:wN \__text_token_to_explicit_cs:N
+      \else:
+        \exp_after:wN \__text_token_to_explicit_char:N
+      \fi:
+      #1
+    }
+\group_end:
+\cs_new:Npn \__text_token_to_explicit_cs:N #1
+  {
+    \exp_after:wN \if_meaning:w \exp_not:N #1 #1
+      \exp_after:wN \use:nn \exp_after:wN
+        \__text_token_to_explicit_cs_aux:N
+    \else:
+      \exp_after:wN \exp_not:n
+    \fi:
+      {#1}
+  }
+\cs_new:Npn \__text_token_to_explicit_cs_aux:N #1
+  {
+    \bool_lazy_or:nnTF
+      { \token_if_chardef_p:N #1 }
+      { \token_if_mathchardef_p:N #1 }
+      {
+        \char_generate:nn {#1}
+          { \char_value_catcode:n {#1} }
+      }
+      {#1}
+  }
+\cs_new:Npn \__text_token_to_explicit_char:N #1
+  {
+    \if:w
+      \if_catcode:w ^ \exp_args:No \str_tail:n { \token_to_str:N #1 } ^
+        \token_to_str:N #1 #1
+        \else:
+        AB
+      \fi:
+      \exp_after:wN \exp_not:n
+    \else:
+      \exp_after:wN \__text_token_to_explicit:n
+    \fi:
+      {#1}
+  }
+\cs_new:Npn \__text_token_to_explicit:n #1
+  {
+    \exp_after:wN \__text_token_to_explicit_auxi:w
+      \int_value:w
+        \if_catcode:w \c_group_begin_token #1 1 \else:
+        \if_catcode:w \c_group_end_token #1 2 \else:
+        \if_catcode:w \c_math_toggle_token #1 3 \else:
+        \if_catcode:w ## #1 6 \else:
+        \if_catcode:w ^ #1 7 \else:
+        \if_catcode:w \c_math_subscript_token #1 8 \else:
+        \if_catcode:w \c_space_token #1 10 \else:
+        \if_catcode:w A #1 11 \else:
+        \if_catcode:w + #1 12 \else:
+        4 \fi: \fi: \fi: \fi: \fi: \fi: \fi: \fi: \fi:
+    \exp_after:wN ;
+    \token_to_meaning:N #1 \q_stop
+  }
+\cs_new:Npn \__text_token_to_explicit_auxi:w #1 ; #2 \q_stop
+  {
+    \char_generate:nn
+      {
+        \if_int_compare:w #1 < 9 \exp_stop_f:
+          \exp_after:wN \__text_token_to_explicit_auxii:w
+        \else:
+          \exp_after:wN \__text_token_to_explicit_auxiii:w
+        \fi:
+        #2
+      }
+      {#1}
+  }
+\exp_last_unbraced:NNNNo \cs_new:Npn \__text_token_to_explicit_auxii:w
+  #1 { \tl_to_str:n { character ~ } } { ` }
+\cs_new:Npn \__text_token_to_explicit_auxiii:w #1 ~ #2 ~ { ` }
+\cs_new:Npn \__text_char_catcode:N #1
+  {
+    \if_catcode:w \exp_not:N #1 \c_math_toggle_token
+      3
+    \else:
+      \if_catcode:w \exp_not:N #1 \c_alignment_token
+        4
+      \else:
+        \if_catcode:w \exp_not:N #1 \c_math_superscript_token
+          7
+        \else:
+          \if_catcode:w \exp_not:N #1 \c_math_subscript_token
+            8
+          \else:
+            \if_catcode:w \exp_not:N #1 \c_space_token
+              10
+            \else:
+             \if_catcode:w \exp_not:N #1 \c_catcode_letter_token
+               11
+             \else:
+               \if_catcode:w \exp_not:N #1 \c_catcode_other_token
+                 12
+               \else:
+                 13
+               \fi:
+             \fi:
+            \fi:
+          \fi:
+        \fi:
+      \fi:
+    \fi:
+  }
+\prg_new_conditional:Npnn \__text_if_expandable:N #1 { T , F , TF }
+  {
+    \token_if_expandable:NTF #1
+      {
+        \bool_lazy_any:nTF
+          {
+            { \token_if_protected_macro_p:N      #1 }
+            { \token_if_protected_long_macro_p:N #1 }
+            { \token_if_eq_meaning_p:NN \q_recursion_tail #1 }
+          }
+          { \prg_return_false: }
+          { \prg_return_true: }
+      }
+      { \prg_return_false: }
+  }
+\tl_new:N \l_text_accents_tl
+\tl_set:Nn \l_text_accents_tl
+  { \` \' \^ \~ \= \u \. \" \r \H \v \d \c \k \b \t }
+\tl_new:N \l_text_letterlike_tl
+\tl_set:Nn \l_text_letterlike_tl
+  {
+    \AA \aa
+    \AE \ae
+    \DH \dh
+    \DJ \dj
+    \IJ \ij
+    \L  \l
+    \NG \ng
+    \O  \o
+    \OE \oe
+    \SS \ss
+    \TH \th
+  }
+\tl_new:N \l_text_case_exclude_arg_tl
+\tl_set:Nn \l_text_case_exclude_arg_tl { \begin \cite \end \label \ref }
+\tl_new:N \l_text_math_arg_tl
+\tl_set:Nn \l_text_math_arg_tl { \ensuremath }
+\tl_new:N \l_text_math_delims_tl
+\tl_set:Nn \l_text_math_delims_tl { $ $ \( \) }
+\tl_new:N \l_text_expand_exclude_tl
+\tl_set:Nn \l_text_expand_exclude_tl
+  { \begin \cite \end \label \ref }
+\tl_new:N \l__text_math_mode_tl
+\tex_chardef:D \c__text_chardef_space_token = `\  %
+\tex_mathchardef:D \c__text_mathchardef_space_token = `\  %
+\tex_chardef:D \c__text_chardef_group_begin_token = `\{ % `\}
+\tex_mathchardef:D \c__text_mathchardef_group_begin_token = `\{ % `\} `\{
+\tex_chardef:D \c__text_chardef_group_end_token = `\} % `\{
+\tex_mathchardef:D \c__text_mathchardef_group_end_token = `\} %
+\cs_new:Npn \text_expand:n #1
+  {
+    \__kernel_exp_not:w \exp_after:wN
+      {
+        \exp:w
+        \__text_expand:n {#1}
+      }
+  }
+\cs_new:Npn \__text_expand:n #1
+  {
+    \group_align_safe_begin:
+    \__text_expand_loop:w #1
+      \q_recursion_tail \q_recursion_stop
+    \__text_expand_result:n { }
+  }
+\cs_new:Npn \__text_expand_store:n #1
+  { \__text_expand_store:nw {#1} }
+\cs_generate_variant:Nn \__text_expand_store:n { o }
+\cs_new:Npn \__text_expand_store:nw #1#2 \__text_expand_result:n #3
+  { #2 \__text_expand_result:n { #3 #1 } }
+\cs_new:Npn \__text_expand_end:w #1 \__text_expand_result:n #2
+  {
+    \group_align_safe_end:
+    \exp_end:
+    #2
+  }
+\cs_new:Npn \__text_expand_loop:w #1 \q_recursion_stop
+  {
+    \tl_if_head_is_N_type:nTF {#1}
+      { \__text_expand_N_type:N }
+      {
+        \tl_if_head_is_group:nTF {#1}
+          { \__text_expand_group:n }
+          { \__text_expand_space:w }
+      }
+    #1 \q_recursion_stop
+  }
+\cs_new:Npn \__text_expand_group:n #1
+  {
+    \__text_expand_store:o
+      {
+        \exp_after:wN
+          {
+            \exp:w
+            \__text_expand:n {#1}
+          }
+      }
+    \__text_expand_loop:w
+  }
+\exp_last_unbraced:NNo \cs_new:Npn \__text_expand_space:w \c_space_tl
+  {
+    \__text_expand_store:n { ~ }
+    \__text_expand_loop:w
+  }
+\cs_new:Npx \__text_expand_N_type:N #1
+  {
+    \exp_not:N \quark_if_recursion_tail_stop_do:Nn #1
+      { \exp_not:N \__text_expand_end:w }
+    \exp_not:N \bool_lazy_any:nTF
+      {
+        { \exp_not:N \token_if_eq_meaning_p:NN #1 \c_space_token }
+        {
+          \exp_not:N \token_if_eq_meaning_p:NN #1
+            \c__text_chardef_space_token
+        }
+        {
+          \exp_not:N \token_if_eq_meaning_p:NN #1
+            \c__text_mathchardef_space_token
+        }
+      }
+      { \exp_not:N \__text_expand_space:w \c_space_tl }
+      { \exp_not:N \__text_expand_N_type_auxi:N #1 }
+  }
+\cs_new:Npn \__text_expand_N_type_auxi:N #1
+  {
+    \bool_lazy_or:nnTF
+      { \token_if_eq_meaning_p:NN #1 \c__text_chardef_group_begin_token }
+      { \token_if_eq_meaning_p:NN #1 \c__text_mathchardef_group_begin_token }
+      {
+        \__text_expand_store:o \c_left_brace_str
+        \__text_expand_loop:w
+      }
+      {
+        \bool_lazy_or:nnTF
+          { \token_if_eq_meaning_p:NN #1 \c__text_chardef_group_end_token }
+          { \token_if_eq_meaning_p:NN #1 \c__text_mathchardef_group_end_token }
+          {
+            \__text_expand_store:o \c_right_brace_str
+            \__text_expand_loop:w
+          }
+          { \__text_expand_N_type_auxii:N #1 }
+      }
+  }
+\cs_new:Npn \__text_expand_N_type_auxii:N #1
+  {
+    \token_if_eq_meaning:NNTF #1 \c_group_begin_token
+      {
+        { \if_false: } \fi:
+        \__text_expand_loop:w
+      }
+      {
+        \token_if_eq_meaning:NNTF #1 \c_group_end_token
+          {
+            \if_false: { \fi: }
+            \__text_expand_loop:w
+          }
+          { \__text_expand_N_type_auxiii:N #1 }
+      }
+  }
+\cs_new:Npn \__text_expand_N_type_auxiii:N #1
+  {
+    \exp_after:wN \__text_expand_math_search:NNN
+      \exp_after:wN #1 \l_text_math_delims_tl
+      \q_recursion_tail \q_recursion_tail
+      \q_recursion_stop
+  }
+\cs_new:Npn \__text_expand_math_search:NNN #1#2#3
+  {
+    \quark_if_recursion_tail_stop_do:Nn #2
+      { \__text_expand_explicit:N #1 }
+    \token_if_eq_meaning:NNTF #1 #2
+      {
+        \use_i_delimit_by_q_recursion_stop:nw
+           {
+             \__text_expand_store:n {#1}
+             \__text_expand_math_loop:Nw #3
+           }
+      }
+      { \__text_expand_math_search:NNN #1 }
+  }
+\cs_new:Npn \__text_expand_math_loop:Nw #1#2 \q_recursion_stop
+  {
+    \tl_if_head_is_N_type:nTF {#2}
+      { \__text_expand_math_N_type:NN }
+      {
+        \tl_if_head_is_group:nTF {#2}
+          { \__text_expand_math_group:Nn }
+          { \__text_expand_math_space:Nw }
+      }
+    #1#2 \q_recursion_stop
+  }
+\cs_new:Npn \__text_expand_math_N_type:NN #1#2
+  {
+    \quark_if_recursion_tail_stop_do:Nn #2
+      { \__text_expand_end:w }
+    \__text_expand_store:n {#2}
+    \token_if_eq_meaning:NNTF #2 #1
+      { \__text_expand_loop:w }
+      { \__text_expand_math_loop:Nw #1 }
+  }
+\cs_new:Npn \__text_expand_math_group:Nn #1#2
+  {
+    \__text_expand_store:n { {#2} }
+    \__text_expand_math_loop:Nw #1
+  }
+\exp_after:wN \cs_new:Npn \exp_after:wN \__text_expand_math_space:Nw
+  \exp_after:wN # \exp_after:wN 1 \c_space_tl
+  {
+    \__text_expand_store:n { ~ }
+    \__text_expand_math_loop:Nw #1
+  }
+\cs_new:Npn \__text_expand_explicit:N #1
+  {
+    \token_if_cs:NTF #1
+      { \__text_expand_exclude:N #1 }
+      {
+        \__text_expand_store:n {#1}
+        \__text_expand_loop:w
+      }
+  }
+\cs_new:Npn \__text_expand_exclude:N #1
+  {
+    \exp_args:Ne \__text_expand_exclude:nN
+      {
+        \exp_not:V \l_text_math_arg_tl
+        \exp_not:V \l_text_accents_tl
+        \exp_not:V \l_text_expand_exclude_tl
+      }
+    #1
+  }
+\cs_new:Npn \__text_expand_exclude:nN #1#2
+  {
+    \__text_expand_exclude:NN #2 #1
+      \q_recursion_tail \q_recursion_stop
+  }
+\cs_new:Npn \__text_expand_exclude:NN #1#2
+  {
+    \quark_if_recursion_tail_stop_do:Nn #2
+      { \__text_expand_letterlike:N #1 }
+    \cs_if_eq:NNTF #2 #1
+      {
+        \use_i_delimit_by_q_recursion_stop:nw
+          { \__text_expand_exclude:Nn #1 }
+      }
+      { \__text_expand_exclude:NN #1 }
+  }
+\cs_new:Npn \__text_expand_exclude:Nn #1#2
+  {
+    \__text_expand_store:n { #1 {#2} }
+    \__text_expand_loop:w
+  }
+\cs_new:Npn \__text_expand_letterlike:N #1
+  {
+    \exp_after:wN \__text_expand_letterlike:NN \exp_after:wN
+      #1 \l_text_letterlike_tl
+      \q_recursion_tail \q_recursion_stop
+  }
+\cs_new:Npn \__text_expand_letterlike:NN #1#2
+  {
+    \quark_if_recursion_tail_stop_do:Nn #2
+      { \__text_expand_cs:N #1 }
+    \cs_if_eq:NNTF #2 #1
+      {
+        \use_i_delimit_by_q_recursion_stop:nw
+          {
+            \__text_expand_store:n {#1}
+            \__text_expand_loop:w
+          }
+      }
+      { \__text_expand_letterlike:NN #1 }
+  }
+\cs_new:Npx \__text_expand_cs:N #1
+  {
+    \exp_not:N \str_if_eq:nnTF {#1} { \exp_not:N \protect }
+      { \exp_not:N \__text_expand_protect:N }
+      {
+        \cs_if_exist:cTF { @current@cmd }
+          { \exp_not:N \__text_expand_encoding:N #1 }
+          { \exp_not:N \__text_expand_replace:N #1 }
+      }
+  }
+\cs_new:Npn \__text_expand_protect:N #1
+  {
+    \exp_args:Ne \__text_expand_protect:nN
+      { \cs_to_str:N #1 } #1
+  }
+\cs_new:Npn \__text_expand_protect:nN #1#2
+  { \__text_expand_protect:Nw #2 #1 \q_nil #1 ~ \q_nil \q_nil \q_stop }
+\cs_new:Npn \__text_expand_protect:Nw #1 #2 ~ \q_nil #3 \q_nil #4 \q_stop
+  {
+    \quark_if_nil:nTF {#4}
+      {
+        \cs_if_exist:cTF {#2}
+          { \exp_args:Ne \__text_expand_store:n { \exp_not:c {#2} } }
+          { \__text_expand_store:n { \protect #1 } }
+      }
+      { \__text_expand_store:n { \protect #1 } }
+    \__text_expand_loop:w
+  }
+\cs_new:Npn \__text_expand_encoding:N #1
+  {
+    \cs_if_eq:NNTF #1 \@current@cmd
+      { \exp_after:wN \__text_expand_loop:w \__text_expand_encoding_escape:NN }
+      {
+        \cs_if_eq:NNTF #1 \@changed@cmd
+          {
+            \exp_after:wN \__text_expand_loop:w
+              \__text_expand_encoding_escape:NN
+          }
+          { \__text_expand_replace:N #1 }
+      }
+  }
+\cs_new:Npn \__text_expand_encoding_escape:NN #1#2 { \exp_not:n {#1} }
+\cs_new:Npn \__text_expand_replace:N #1
+  {
+    \bool_lazy_and:nnTF
+      { \cs_if_exist_p:c { l__text_expand_ \token_to_str:N #1 _tl } }
+      {
+        \bool_lazy_or_p:nn
+          { \token_if_cs_p:N #1 }
+          { \token_if_active_p:N #1 }
+      }
+      {
+        \exp_args:Nv \__text_expand_replace:n
+          { l__text_expand_ \token_to_str:N #1 _tl }
+      }
+      { \__text_expand_cs_expand:N #1 }
+  }
+\cs_new:Npn \__text_expand_replace:n #1 { \__text_expand_loop:w #1 }
+\cs_new:Npn \__text_expand_cs_expand:N #1
+  {
+    \__text_if_expandable:NTF #1
+      {
+        \token_if_eq_meaning:NNTF #1 \exp_not:n
+          { \__text_expand_noexpand:w }
+          { \exp_after:wN \__text_expand_loop:w #1 }
+      }
+      {
+        \__text_expand_store:n {#1}
+        \__text_expand_loop:w
+      }
+  }
+\cs_new:Npn \__text_expand_noexpand:w #1#
+  { \__text_expand_noexpand:nn {#1} }
+\cs_new:Npn \__text_expand_noexpand:nn #1#2
+  {
+    #1 \__text_expand_store:n #1 {#2}
+    \__text_expand_loop:w
+  }
+\cs_new_protected:Npn \text_declare_expand_equivalent:Nn #1#2
+  {
+    \tl_clear_new:c { l__text_expand_ \token_to_str:N #1 _tl }
+    \tl_set:cn { l__text_expand_ \token_to_str:N #1 _tl } {#2}
+  }
+\cs_generate_variant:Nn \text_declare_expand_equivalent:Nn { c }
+%% File: l3text-case.dtx
+\cs_new:Npn \text_lowercase:n #1
+  { \__text_change_case:nnn { lower } { } {#1} }
+\cs_new:Npn \text_uppercase:n #1
+  { \__text_change_case:nnn { upper } { } {#1} }
+\cs_new:Npn \text_titlecase:n #1
+  { \__text_change_case:nnn { title } { } {#1} }
+\cs_new:Npn \text_titlecase_first:n #1
+  { \__text_change_case:nnn { titleonly } { } {#1} }
+\cs_new:Npn \text_lowercase:nn #1#2
+  { \__text_change_case:nnn { lower } {#1} {#2} }
+\cs_new:Npn \text_uppercase:nn #1#2
+  { \__text_change_case:nnn { upper } {#1} {#2} }
+\cs_new:Npn \text_titlecase:nn #1#2
+  { \__text_change_case:nnn { title } {#1} {#2} }
+\cs_new:Npn \text_titlecase_first:nn #1#2
+  { \__text_change_case:nnn { titleonly } {#1} {#2} }
+\cs_new:Npn \__text_change_case:nnn #1#2#3
+  {
+     \__kernel_exp_not:w \exp_after:wN
+      {
+        \exp:w
+        \exp_args:Ne \__text_change_case_aux:nnn
+          { \text_expand:n {#3} }
+          {#1} {#2}
+      }
+  }
+\cs_new:Npn \__text_change_case_aux:nnn #1#2#3
+  {
+    \group_align_safe_begin:
+    \__text_change_case_loop:nnw {#2} {#3} #1
+      \q_recursion_tail \q_recursion_stop
+    \__text_change_case_result:n { }
+  }
+\cs_new:Npn \__text_change_case_store:n #1
+  { \__text_change_case_store:nw {#1} }
+\cs_generate_variant:Nn \__text_change_case_store:n { o , e , V , v }
+\cs_new:Npn \__text_change_case_store:nw #1#2 \__text_change_case_result:n #3
+  { #2 \__text_change_case_result:n { #3 #1 } }
+\cs_new:Npn \__text_change_case_end:w #1 \__text_change_case_result:n #2
+  {
+    \group_align_safe_end:
+    \exp_end:
+    #2
+  }
+\cs_new:Npn \__text_change_case_loop:nnw #1#2#3 \q_recursion_stop
+  {
+    \tl_if_head_is_N_type:nTF {#3}
+      { \__text_change_case_N_type:nnN }
+      {
+        \tl_if_head_is_group:nTF {#3}
+          { \use:c { __text_change_case_group_ #1 :nnn } }
+          { \__text_change_case_space:nnw }
+      }
+    {#1} {#2} #3 \q_recursion_stop
+  }
+\cs_new:Npn \__text_change_case_break:w #1 \q_recursion_tail \q_recursion_stop
+  {
+    \__text_change_case_store:n {#1}
+    \__text_change_case_end:w
+  }
+\cs_new:Npn \__text_change_case_group_lower:nnn #1#2#3
+  {
+    \__text_change_case_store:o
+      {
+        \exp_after:wN
+          {
+            \exp:w
+            \__text_change_case_aux:nnn {#3} {#1} {#2}
+          }
+      }
+    \__text_change_case_loop:nnw {#1} {#2}
+  }
+\cs_new_eq:NN \__text_change_case_group_upper:nnn
+  \__text_change_case_group_lower:nnn
+\cs_new:Npn \__text_change_case_group_title:nnn #1#2#3
+  {
+    \__text_change_case_store:o
+      {
+        \exp_after:wN
+          {
+            \exp:w
+            \__text_change_case_aux:nnn {#3} {#1} {#2}
+          }
+      }
+    \__text_change_case_loop:nnw { lower } {#2}
+  }
+\cs_new:Npn \__text_change_case_group_titleonly:nnn #1#2#3
+  {
+    \__text_change_case_store:o
+      {
+        \exp_after:wN
+          {
+            \exp:w
+            \__text_change_case_aux:nnn {#3} {#1} {#2}
+          }
+      }
+    \__text_change_case_break:w
+  }
+\use:x
+  {
+    \cs_new:Npn \exp_not:N \__text_change_case_space:nnw ##1##2 \c_space_tl
+  }
+  {
+    \__text_change_case_store:n { ~ }
+    \__text_change_case_loop:nnw {#1} {#2}
+  }
+\cs_new:Npn \__text_change_case_N_type:nnN #1#2#3
+  {
+    \quark_if_recursion_tail_stop_do:Nn #3
+      { \__text_change_case_end:w }
+    \__text_change_case_N_type_aux:nnN {#1} {#2} #3
+  }
+\cs_new:Npn \__text_change_case_N_type_aux:nnN #1#2#3
+  {
+    \exp_args:NV \__text_change_case_N_type:nnnN
+      \l_text_math_delims_tl {#1} {#2} #3
+  }
+\cs_new:Npn \__text_change_case_N_type:nnnN #1#2#3#4
+  {
+    \__text_change_case_math_search:nnNNN {#2} {#3} #4 #1
+      \q_recursion_tail \q_recursion_tail
+      \q_recursion_stop
+  }
+\cs_new:Npn \__text_change_case_math_search:nnNNN #1#2#3#4#5
+  {
+    \quark_if_recursion_tail_stop_do:Nn #4
+      { \__text_change_case_cs_check:nnN {#1} {#2} #3 }
+    \token_if_eq_meaning:NNTF #3 #4
+      {
+        \use_i_delimit_by_q_recursion_stop:nw
+           {
+             \__text_change_case_store:n {#3}
+             \__text_change_case_math_loop:nnNw {#1} {#2} #5
+           }
+      }
+      { \__text_change_case_math_search:nnNNN {#1} {#2} #3 }
+  }
+\cs_new:Npn \__text_change_case_math_loop:nnNw #1#2#3#4 \q_recursion_stop
+  {
+    \tl_if_head_is_N_type:nTF {#4}
+      { \__text_change_case_math_N_type:nnNN }
+      {
+        \tl_if_head_is_group:nTF {#4}
+          { \__text_change_case_math_group:nnNn }
+          { \__text_change_case_math_space:nnNw }
+      }
+    {#1} {#2} #3 #4 \q_recursion_stop
+  }
+\cs_new:Npn \__text_change_case_math_N_type:nnNN #1#2#3#4
+  {
+    \quark_if_recursion_tail_stop_do:Nn #4
+      { \__text_change_case_end:w }
+    \__text_change_case_store:n {#4}
+    \token_if_eq_meaning:NNTF #4 #3
+      { \__text_change_case_loop:nnw {#1} {#2} }
+      { \__text_change_case_math_loop:nnNw {#1} {#2} #3 }
+  }
+\cs_new:Npn \__text_change_case_math_group:nnNn #1#2#3#4
+  {
+    \__text_change_case_store:n { {#4} }
+    \__text_change_case_math_loop:nnNw {#1} {#2} #3
+  }
+\use:x
+  {
+    \cs_new:Npn \exp_not:N \__text_change_case_math_space:nnNw ##1##2##3
+      \c_space_tl
+  }
+  {
+    \__text_change_case_store:n { ~ }
+    \__text_change_case_math_loop:nnNw {#1} {#2} #3
+  }
+\cs_new:Npn \__text_change_case_cs_check:nnN #1#2#3
+  {
+    \token_if_cs:NTF #3
+      { \__text_change_case_exclude:nnN }
+      { \use:c { __text_change_case_char_ #1 :nnN } }
+        {#1} {#2} #3
+  }
+\cs_new:Npn \__text_change_case_exclude:nnN #1#2#3
+  {
+    \exp_args:Ne \__text_change_case_exclude:nnnN
+      {
+        \exp_not:V \l_text_math_arg_tl
+        \exp_not:V \l_text_case_exclude_arg_tl
+      }
+      {#1} {#2} #3
+  }
+\cs_new:Npn \__text_change_case_exclude:nnnN #1#2#3#4
+  {
+    \__text_change_case_exclude:nnNN {#2} {#3} #4 #1
+      \q_recursion_tail \q_recursion_stop
+  }
+\cs_new:Npn \__text_change_case_exclude:nnNN #1#2#3#4
+  {
+    \quark_if_recursion_tail_stop_do:Nn #4
+      { \use:c { __text_change_case_letterlike_ #1 :nnN } {#1} {#2} #3 }
+    \cs_if_eq:NNTF #3 #4
+      {
+        \use_i_delimit_by_q_recursion_stop:nw
+          { \__text_change_case_exclude:nnNn {#1} {#2} #3 }
+      }
+      { \__text_change_case_exclude:nnNN {#1} {#2} #3 }
+  }
+\cs_new:Npn \__text_change_case_exclude:nnNn #1#2#3#4
+  {
+    \__text_change_case_store:n { #3 {#4} }
+    \__text_change_case_loop:nnw {#1} {#2}
+  }
+\cs_new:Npn \__text_change_case_letterlike_lower:nnN #1#2#3
+  { \__text_change_case_letterlike:nnnnN {#1} {#1} {#1} {#2} #3 }
+\cs_new_eq:NN \__text_change_case_letterlike_upper:nnN
+  \__text_change_case_letterlike_lower:nnN
+\cs_new:Npn \__text_change_case_letterlike_title:nnN #1#2#3
+  { \__text_change_case_letterlike:nnnnN { upper } { lower } {#1} {#2} #3 }
+\cs_new:Npn \__text_change_case_letterlike_titleonly:nnN #1#2#3
+  { \__text_change_case_letterlike:nnnnN { upper } { end } {#1} {#2} #3 }
+\cs_new:Npn \__text_change_case_letterlike:nnnnN #1#2#3#4#5
+  {
+    \cs_if_exist:cTF { c__text_ #1 case_ \token_to_str:N #5 _tl }
+      {
+        \__text_change_case_store:v
+          { c__text_ #1 case_ \token_to_str:N #5 _tl }
+         \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#4}
+      }
+      {
+        \__text_change_case_store:n {#5}
+        \cs_if_exist:cTF
+          {
+            c__text_
+            \str_if_eq:nnTF {#1} { lower } { upper } { lower }
+            case_ \token_to_str:N #5 _tl
+          }
+          { \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#4} }
+          { \__text_change_case_loop:nnw {#3} {#4} }
+      }
+  }
+\cs_new:Npx \__text_change_case_char_lower:nnN #1#2#3
+  {
+    \exp_not:N \cs_if_exist_use:cF { __text_change_case_lower_ #2 :nnnN }
+      {
+        \bool_lazy_or:nnTF
+          { \sys_if_engine_luatex_p: }
+          { \sys_if_engine_xetex_p: }
+          { \exp_not:N \__text_change_case_lower_sigma:nnnN }
+          { \exp_not:N \__text_change_case_char:nnnN }
+       }
+        {#1} {#1} {#2} #3
+  }
+\cs_new:Npn \__text_change_case_char_upper:nnN #1#2#3
+  {
+    \cs_if_exist_use:cF { __text_change_case_upper_ #2 :nnnN }
+      { \__text_change_case_char:nnnN }
+        {#1} {#1} {#2} #3
+  }
+\bool_lazy_or:nnT
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+    \cs_new:Npn \__text_change_case_lower_sigma:nnnN #1#2#3#4
+      {
+        \int_compare:nNnTF { `#4 } = { "03A3 }
+          { \__text_change_case_lower_sigma:nnNw {#2} {#3} #4 }
+          { \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+      }
+    \cs_new:Npn \__text_change_case_lower_sigma:nnNw #1#2#3#4 \q_recursion_stop
+      {
+        \tl_if_head_is_N_type:nTF {#4}
+          { \__text_change_case_lower_sigma:NnnN #3 }
+          {
+            \__text_change_case_store:e
+              { \char_generate:nn { "03C2 } { \__text_char_catcode:N #3 } }
+            \__text_change_case_loop:nnw
+          }
+            {#1} {#2} #4 \q_recursion_stop
+      }
+    \cs_new:Npn \__text_change_case_lower_sigma:NnnN #1#2#3#4
+      {
+        \__text_change_case_store:e
+          {
+            \token_if_letter:NTF #4
+              { \char_generate:nn { "03C3 } { \__text_char_catcode:N #1 } }
+              { \char_generate:nn { "03C2 } { \__text_char_catcode:N #1 } }
+          }
+        \__text_change_case_loop:nnw {#2} {#3} #4
+      }
+  }
+\cs_new:Npx \__text_change_case_char_title:nnN #1#2#3
+  {
+    \bool_lazy_or:nnTF
+      { \sys_if_engine_luatex_p: }
+      { \sys_if_engine_xetex_p: }
+      { \exp_not:N \token_if_letter:NTF #3 }
+      {
+        \exp_not:N \bool_lazy_or:nnTF
+          { \exp_not:N \token_if_letter_p:N #3 }
+          { \exp_not:N \token_if_active_p:N #3 }
+      }
+      { \exp_not:N \use:c { __text_change_case_char_ #1 :nN } }
+      { \exp_not:N \__text_change_case_char_title:nnnN { title } {#1} }
+        {#2} #3
+  }
+\cs_new_eq:NN \__text_change_case_char_titleonly:nnN
+  \__text_change_case_char_title:nnN
+\cs_new:Npn \__text_change_case_char_title:nN #1#2
+  { \__text_change_case_char_title:nnnN { title } { lower } {#1} #2 }
+\cs_new:Npn \__text_change_case_char_titleonly:nN #1#2
+  { \__text_change_case_char_title:nnnN { title } { end } {#1} #2 }
+\cs_new:Npn \__text_change_case_char_title:nnnN #1#2#3#4
+  {
+    \cs_if_exist_use:cF { __text_change_case_title_ #3 :nnnN }
+      {
+        \cs_if_exist_use:cF { __text_change_case_upper_ #3 :nnnN }
+          { \__text_change_case_char:nnnN }
+      }
+        {#1} {#2} {#3} #4
+  }
+\bool_lazy_or:nnTF
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+    \cs_new:Npn \__text_change_case_char:nnnN #1#2#3#4
+      {
+        \__text_change_case_store:e
+          { \use:c { char_ #1 case :N } #4 }
+        \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#3}
+      }
+  }
+  {
+    \cs_new:Npn \__text_change_case_char:nnnN #1#2#3#4
+      {
+        \int_compare:nNnTF { `#4 } > { "80 }
+          {
+            \int_compare:nNnTF { `#4 } < { "E0 }
+              { \__text_change_case_char_UTFviii:nnnNN }
+              {
+                \int_compare:nNnTF { `#4 } < { "F0 }
+                  { \__text_change_case_char_UTFviii:nnnNNN }
+                  { \__text_change_case_char_UTFviii:nnnNNNN }
+              }
+                {#1} {#2} {#3} #4
+          }
+          {
+            \__text_change_case_store:e{ \use:c { char_ #1 case :N } #4 }
+            \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#3}
+          }
+       }
+    \cs_new:Npn \__text_change_case_char_UTFviii:nnnNN #1#2#3#4#5
+      { \__text_change_case_char_UTFviii:nnnn {#1} {#2} {#3} {#4#5} }
+    \cs_new:Npn \__text_change_case_char_UTFviii:nnnNNN #1#2#3#4#5#6
+      { \__text_change_case_char_UTFviii:nnnn {#1} {#2} {#3} {#4#5#6} }
+    \cs_new:Npn \__text_change_case_char_UTFviii:nnnNNNNN #1#2#3#4#5#6#7
+      { \__text_change_case_char_UTFviii:nnnn {#1} {#2} {#3} {#4#5#6#7} }
+    \cs_new:Npn \__text_change_case_char_UTFviii:nnnn #1#2#3#4
+      {
+        \cs_if_exist:cTF { c__text_ #1 case_ \tl_to_str:n {#4} _tl }
+          {
+            \__text_change_case_store:v
+              { c__text_ #1 case_ \tl_to_str:n {#4} _tl }
+          }
+          { \__text_change_case_store:n {#4} }
+        \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#3}
+      }
+  }
+\cs_new:Npn \__text_change_case_char_next_lower:nn #1#2
+  { \__text_change_case_loop:nnw {#1} {#2} }
+\cs_new_eq:NN \__text_change_case_char_next_upper:nn
+  \__text_change_case_char_next_lower:nn
+\cs_new_eq:NN \__text_change_case_char_next_title:nn
+  \__text_change_case_char_next_lower:nn
+\cs_new_eq:NN \__text_change_case_char_next_titleonly:nn
+  \__text_change_case_char_next_lower:nn
+\cs_new:Npn \__text_change_case_char_next_end:nn #1#2
+  { \__text_change_case_break:w }
+\bool_lazy_or:nnTF
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+    \cs_new:cpn { __text_change_case_upper_de-alt:nnnN } #1#2#3#4
+      {
+        \int_compare:nNnTF { `#4 } = { "00DF }
+          {
+            \__text_change_case_store:e
+             { \char_generate:nn { "1E9E } { \__text_char_catcode:N #4 } }
+            \use:c { __text_change_case_char_next_ #2 :nn }
+              {#2} {#3}
+          }
+          { \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+      }
+  }
+  {
+    \cs_new:cpx { __text_change_case_upper_de-alt:nnnN } #1#2#3#4
+      {
+        \exp_not:N \int_compare:nNnTF { `#4 } = { "00C3 }
+          {
+            \exp_not:c { __text_change_case_upper_de-alt:nnnNN }
+              {#1} {#2} {#3} #4
+          }
+          { \exp_not:N \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+      }
+    \cs_new:cpn { __text_change_case_upper_de-alt:nnnNN } #1#2#3#4#5
+      {
+        \int_compare:nNnTF { `#5 } = { "009F }
+          {
+            \__text_change_case_store:V \c__text_grosses_Eszett_tl
+            \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#3}
+          }
+          { \__text_change_case_char:nnnN {#1} {#2} {#3} #4#5 }
+      }
+  }
+\bool_lazy_or:nnT
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+    \cs_new:Npn \__text_change_case_upper_el:nnnN #1#2#3#4
+      {
+        \__text_change_case_if_greek:nTF { `#4 }
+          {
+            \exp_args:Ne \__text_change_case_upper_el:nnnn
+              { \char_to_nfd:N #4 } {#1} {#2} {#3}
+          }
+          { \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+      }
+    \cs_new:Npn \__text_change_case_upper_el:nnnn #1#2#3#4
+      { \__text_change_case_upper_el_aux:nnnN {#2} {#3} {#4} #1 }
+    \cs_new:Npn \__text_change_case_upper_el_aux:nnnN #1#2#3#4
+      {
+        \__text_change_case_store:e { \use:c { char_ #1 case:N } #4 }
+        \__text_change_case_upper_el_loop:nnw {#2} {#3}
+      }
+    \cs_new:Npn \__text_change_case_upper_el_loop:nnw
+      #1#2#3 \q_recursion_stop
+      {
+        \tl_if_head_is_N_type:nTF {#3}
+          { \__text_change_case_upper_el:nnN }
+          { \__text_change_case_loop:nnw }
+            {#1} {#2} #3 \q_recursion_stop
+      }
+    \cs_new:Npn \__text_change_case_upper_el:nnN #1#2#3
+      {
+        \token_if_cs:NTF #3
+          { \__text_change_case_loop:nnw {#1} {#2} #3 }
+          {
+            \int_compare:nNnTF { `#3 } = { "0308 }
+              {
+                \__text_change_case_store:n {#3}
+                \__text_change_case_upper_el_loop:nnw {#1} {#2}
+              }
+              {
+                \bool_lazy_any:nTF
+                  {
+                    { \int_compare_p:nNn { `#3 } = { "0300 } }
+                    { \int_compare_p:nNn { `#3 } = { "0301 } }
+                    { \int_compare_p:nNn { `#3 } = { "0304 } }
+                    { \int_compare_p:nNn { `#3 } = { "0306 } }
+                    { \int_compare_p:nNn { `#3 } = { "0308 } }
+                    { \int_compare_p:nNn { `#3 } = { "0313 } }
+                    { \int_compare_p:nNn { `#3 } = { "0314 } }
+                    { \int_compare_p:nNn { `#3 } = { "0342 } }
+                    { \int_compare_p:nNn { `#3 } = { "0340 } }
+                    { \int_compare_p:nNn { `#3 } = { "0341 } }
+                    { \int_compare_p:nNn { `#3 } = { "0343 } }
+                  }
+                  { \__text_change_case_upper_el_loop:nnw {#1} {#2} }
+                  {
+                    \int_compare:nNnTF { `#3 } = { "0344 }
+                      {
+                        \__text_change_case_store:e
+                          {
+                            \char_generate:nn { "0308 }
+                              { \__text_char_catcode:N #3 }
+                          }
+                        \__text_change_case_upper_el_loop:nnw {#1} {#2}
+                      }
+                      {
+                        \int_compare:nNnTF { `#3 } = { "0345 }
+                          { \__text_change_case_loop:nnw {#1} {#2} }
+                          { \__text_change_case_loop:nnw {#1} {#2} #3 }
+                      }
+                  }
+              }
+          }
+      }
+    \prg_new_conditional:Npnn \__text_change_case_if_greek:n #1 { TF }
+      {
+        \if_int_compare:w #1 < "0370 \exp_stop_f:
+          \prg_return_false:
+        \else:
+          \if_int_compare:w #1 > "03FF \exp_stop_f:
+            \if_int_compare:w #1 < "1F00 \exp_stop_f:
+              \prg_return_false:
+            \else:
+              \if_int_compare:w #1 > "1FFF \exp_stop_f:
+                \prg_return_false:
+              \else:
+                \prg_return_true:
+              \fi:
+            \fi:
+          \else:
+            \prg_return_true:
+          \fi:
+        \fi:
+      }
+  }
+\bool_lazy_or:nnT
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+    \cs_new:Npn \__text_change_case_title_el:nnnN #1#2#3#4
+      { \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+  }
+\bool_lazy_or:nnT
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+   \cs_new:Npn \__text_change_case_lower_lt:nnnN #1#2#3#4
+     {
+        \exp_args:Ne \__text_change_case_lower_lt_auxi:nnnN
+          {
+            \int_case:nn { `#4 }
+              {
+                { "00CC } { "0300 }
+                { "00CD } { "0301 }
+                { "0128 } { "0303 }
+              }
+          }
+            {#2} {#3} #4
+      }
+    \cs_new:Npn \__text_change_case_lower_lt_auxi:nnnN #1#2#3#4
+      {
+        \tl_if_blank:nTF {#1}
+          {
+            \exp_args:Ne \__text_change_case_lower_lt_auxii:nnnN
+              {
+                \int_case:nn { `#4 }
+                  {
+                    { "0049 } { "0069 }
+                    { "004A } { "006A }
+                    { "012E } { "012F }
+                  }
+              }
+              {#2} {#3} #4
+          }
+          {
+            \__text_change_case_store:e
+              {
+                \char_generate:nn { "0069 } { \__text_char_catcode:N #4 }
+                \char_generate:nn { "0307 } { \__text_char_catcode:N #4 }
+                \char_generate:nn {#1} { \__text_char_catcode:N #4 }
+              }
+            \__text_change_case_loop:nnw {#2} {#3}
+          }
+      }
+    \cs_new:Npn \__text_change_case_lower_lt_auxii:nnnN #1#2#3#4
+      {
+        \tl_if_blank:nTF {#1}
+          { \__text_change_case_lower_sigma:nnnN {#2} {#2} {#3} #4 }
+          {
+            \__text_change_case_store:e
+              { \char_generate:nn {#1} { \__text_char_catcode:N #4 } }
+            \__text_change_case_lower_lt:nnw {#2} {#3}
+          }
+      }
+    \cs_new:Npn \__text_change_case_lower_lt:nnw #1#2#3 \q_recursion_stop
+      {
+        \tl_if_head_is_N_type:nTF {#3}
+          { \__text_change_case_lower_lt:nnN }
+          { \__text_change_case_loop:nnw }
+           {#1} {#2} #3 \q_recursion_stop
+      }
+    \cs_new:Npn \__text_change_case_lower_lt:nnN #1#2#3
+      {
+        \bool_lazy_and:nnT
+          { ! \token_if_cs_p:N #3 }
+          {
+            \bool_lazy_any_p:n
+              {
+                { \int_compare_p:nNn { `#3 } = { "0300 } }
+                { \int_compare_p:nNn { `#3 } = { "0301 } }
+                { \int_compare_p:nNn { `#3 } = { "0303 } }
+              }
+          }
+          {
+            \__text_change_case_store:e
+              { \char_generate:nn { "0307 } { \__text_char_catcode:N #3 } }
+          }
+        \__text_change_case_loop:nnw {#1} {#2} #3
+      }
+  }
+\bool_lazy_or:nnT
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+   \cs_new:Npn \__text_change_case_upper_lt:nnnN #1#2#3#4
+     {
+        \exp_args:Ne \__text_change_case_upper_lt_aux:nnnN
+          {
+            \int_case:nn { `#4 }
+              {
+                { "0069 } { "0049 }
+                { "006A } { "004A }
+                { "012F } { "012E }
+              }
+          }
+            {#2} {#3} #4
+      }
+   \cs_new:Npn \__text_change_case_upper_lt_aux:nnnN #1#2#3#4
+     {
+       \tl_if_blank:nTF {#1}
+         { \__text_change_case_char:nnnN { upper } {#2} {#3} #4 }
+         {
+           \__text_change_case_store:e
+             { \char_generate:nn {#1} { \__text_char_catcode:N #4 } }
+           \__text_change_case_upper_lt:nnw {#2} {#3}
+         }
+     }
+    \cs_new:Npn \__text_change_case_upper_lt:nnw #1#2#3 \q_recursion_stop
+      {
+        \tl_if_head_is_N_type:nTF {#3}
+          { \__text_change_case_upper_lt:nnN }
+          { \use:c { __text_change_case_char_next_ #1 :nn } }
+            {#1} {#2} #3 \q_recursion_stop
+      }
+    \cs_new:Npn \__text_change_case_upper_lt:nnN #1#2#3
+      {
+        \bool_lazy_and:nnTF
+          { ! \token_if_cs_p:N #3 }
+          { \int_compare_p:nNn { `#3 } = { "0307 } }
+          { \use:c { __text_change_case_char_next_ #1 :nn } {#1} {#2} }
+          { \use:c { __text_change_case_char_next_ #1 :nn } {#1} {#2} #3 }
+      }
+  }
+\cs_new:Npn \__text_change_case_title_nl:nnnN #1#2#3#4
+  {
+    \bool_lazy_or:nnTF
+      { \int_compare_p:nNn { `#4 } = { "0049 } }
+      { \int_compare_p:nNn { `#4 } = { "0069 } }
+      {
+        \__text_change_case_store:e
+          { \char_generate:nn { "0049 } { \__text_char_catcode:N #4 } }
+        \__text_change_case_title_nl:nnw {#2} {#3}
+      }
+      { \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+  }
+\cs_new:Npn \__text_change_case_title_nl:nnw #1#2#3 \q_recursion_stop
+  {
+    \tl_if_head_is_N_type:nTF {#3}
+      { \__text_change_case_title_nl:nnN }
+      { \use:c { __text_change_case_char_next_ #1 :nn } }
+        {#1} {#2} #3 \q_recursion_stop
+  }
+\cs_new:Npn \__text_change_case_title_nl:nnN #1#2#3
+  {
+    \bool_lazy_and:nnTF
+      { ! \token_if_cs_p:N #3 }
+      {
+        \bool_lazy_or_p:nn
+          { \int_compare_p:nNn { `#3 } = { "004A } }
+          { \int_compare_p:nNn { `#3 } = { "006A } }
+      }
+      {
+        \__text_change_case_store:e
+          { \char_generate:nn { "004A } { \__text_char_catcode:N #3 } }
+        \use:c { __text_change_case_char_next_ #1 :nn } {#1} {#2}
+      }
+      { \use:c { __text_change_case_char_next_ #1 :nn } {#1} {#2} #3 }
+  }
+\bool_lazy_or:nnTF
+  { \sys_if_engine_luatex_p: }
+  { \sys_if_engine_xetex_p: }
+  {
+    \cs_new:Npn \__text_change_case_lower_tr:nnnN #1#2#3#4
+      {
+        \int_compare:nNnTF { `#4 } = { "0049 }
+          { \__text_change_case_lower_tr:nnNw {#1} {#3} #4 }
+          {
+            \int_compare:nNnTF { `#4 } = { "0130 }
+              {
+                \__text_change_case_store:e
+                  { \char_generate:nn { "0069 } { \__text_char_catcode:N #4 } }
+                \__text_change_case_loop:nnw {#1} {#3}
+              }
+              { \__text_change_case_lower_sigma:nnnN {#1} {#2} {#3} #4 }
+          }
+      }
+    \cs_new:Npn \__text_change_case_lower_tr:nnNw #1#2#3#4 \q_recursion_stop
+      {
+        \tl_if_head_is_N_type:nTF {#4}
+          { \__text_change_case_lower_tr:nnN }
+          {
+            \__text_change_case_store:e
+              { \char_generate:nn { "0131 } { \__text_char_catcode:N #3 } }
+            \__text_change_case_loop:nnw
+          }
+            {#1} {#2} #4 \q_recursion_stop
+      }
+    \cs_new:Npn \__text_change_case_lower_tr:nnN #1#2#3
+      {
+        \bool_lazy_or:nnTF
+          { \token_if_cs_p:N #3 }
+          { ! \int_compare_p:nNn { `#3 } = { "0307 } }
+          {
+            \__text_change_case_store:e
+              { \char_generate:nn { "0131 } { \__text_char_catcode:N #3 } }
+            \__text_change_case_loop:nnw {#1} {#2} #3
+          }
+          {
+            \__text_change_case_store:e
+              { \char_generate:nn { "0069 } { \__text_char_catcode:N #3 } }
+            \__text_change_case_loop:nnw {#1} {#2}
+          }
+      }
+  }
+  {
+    \cs_new:Npn \__text_change_case_lower_tr:nnnN #1#2#3#4
+      {
+        \int_compare:nNnTF { `#4 } = { "0049 }
+          {
+            \__text_change_case_store:V \c__text_dotless_i_tl
+            \__text_change_case_loop:nnw {#1} {#3}
+          }
+          {
+            \int_compare:nNnTF { `#4 } = { "00C4 }
+              { \__text_change_case_lower_tr:nnnNN {#1} {#2} {#3} #4 }
+              { \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+          }
+      }
+    \cs_new:Npn \__text_change_case_lower_tr:nnnNN #1#2#3#4#5
+      {
+        \int_compare:nNnTF { `#5 } = { "00B0 }
+          {
+            \__text_change_case_store:e
+              {
+                \char_generate:nn { "0069 }
+                  { \char_value_catcode:n { "0069 } }
+              }
+            \__text_change_case_loop:nnw {#1} {#3}
+          }
+          { \__text_change_case_char:nnnN {#1} {#2} {#3} #4#5 }
+      }
+  }
+\cs_new:Npx \__text_change_case_upper_tr:nnnN #1#2#3#4
+  {
+    \exp_not:N \int_compare:nNnTF { `#4 } = { "0069 }
+      {
+        \bool_lazy_or:nnTF
+          { \sys_if_engine_luatex_p: }
+          { \sys_if_engine_xetex_p: }
+          {
+            \exp_not:N \__text_change_case_store:e
+              {
+                \exp_not:N \char_generate:nn { "0130 }
+                  { \exp_not:N \__text_char_catcode:N #4 }
+              }
+          }
+          {
+            \exp_not:N \__text_change_case_store:V
+            \exp_not:N \c__text_dotted_I_tl
+          }
+        \exp_not:N \use:c { __text_change_case_char_next_ #2 :nn } {#2} {#3}
+      }
+      { \exp_not:N \__text_change_case_char:nnnN {#1} {#2} {#3} #4 }
+  }
+\cs_new_eq:NN \__text_change_case_lower_az:nnnN
+  \__text_change_case_lower_tr:nnnN
+\cs_new_eq:NN \__text_change_case_upper_az:nnnN
+  \__text_change_case_upper_tr:nnnN
+\group_begin:
+  \bool_lazy_or:nnF
+    { \sys_if_engine_luatex_p: }
+    { \sys_if_engine_xetex_p: }
+    {
+      \cs_set_protected:Npn \__text_tmp:w #1#2
+        {
+          \group_begin:
+            \cs_set_protected:Npn \__text_tmp:w ##1##2##3##4
+              {
+                \tl_const:Nx #1
+                  {
+                    \exp_after:wN \exp_after:wN \exp_after:wN
+                      \exp_not:N \char_generate:nn {##1} { 13 }
+                    \exp_after:wN \exp_after:wN \exp_after:wN
+                      \exp_not:N \char_generate:nn {##2} { 13 }
+                    \tl_if_blank:nF {##3}
+                      {
+                        \exp_after:wN \exp_after:wN \exp_after:wN
+                          \exp_not:N \char_generate:nn {##3} { 13 }
+                      }
+                  }
+              }
+            \use:x
+              { \__text_tmp:w \char_to_utfviii_bytes:n { "#2 } }
+          \group_end:
+        }
+      \__text_tmp:w \c__text_dotless_i_tl      { 0131 }
+      \__text_tmp:w \c__text_dotted_I_tl       { 0130 }
+      \__text_tmp:w \c__text_i_ogonek_tl       { 012F }
+      \__text_tmp:w \c__text_I_ogonek_tl       { 012E }
+      \__text_tmp:w \c__text_grosses_Eszett_tl { 1E9E }
+    }
+\group_end:
+\group_begin:
+  \bool_lazy_or:nnF
+    { \sys_if_engine_luatex_p: }
+    { \sys_if_engine_xetex_p: }
+    {
+      \cs_set_protected:Npn \__text_loop:nn #1#2
+        {
+          \quark_if_recursion_tail_stop:n {#1}
+          \use:x
+            {
+              \__text_tmp:w
+                \char_to_utfviii_bytes:n { "#1 }
+                \char_to_utfviii_bytes:n { "#2 }
+            }
+          \__text_loop:nn
+        }
+      \cs_set_protected:Npn \__text_tmp:nnnn #1#2#3#4#5
+        {
+          \tl_const:cx
+            {
+              c__text_ #1 case_
+              \char_generate:nn {#2} { 12 }
+              \char_generate:nn {#3} { 12 }
+              _tl
+            }
+            {
+              \exp_after:wN \exp_after:wN \exp_after:wN
+                \exp_not:N \char_generate:nn {#4} { 13 }
+              \exp_after:wN \exp_after:wN \exp_after:wN
+                \exp_not:N \char_generate:nn {#5} { 13 }
+            }
+        }
+      \cs_set_protected:Npn \__text_tmp:w #1#2#3#4#5#6#7#8
+        {
+          \tl_const:cx
+            {
+              c__text_lowercase_
+              \char_generate:nn {#1} { 12 }
+              \char_generate:nn {#2} { 12 }
+              _tl
+            }
+            {
+              \exp_after:wN \exp_after:wN \exp_after:wN
+                \exp_not:N \char_generate:nn {#5} { 13 }
+              \exp_after:wN \exp_after:wN \exp_after:wN
+                \exp_not:N \char_generate:nn {#6} { 13 }
+            }
+          \__text_tmp:nnnn { upper } {#5} {#6} {#1} {#2}
+          \__text_tmp:nnnn { title } {#5} {#6} {#1} {#2}
+        }
+      \__text_loop:nn
+        { 00C0 } { 00E0 }
+        { 00C1 } { 00E1 }
+        { 00C2 } { 00E2 }
+        { 00C3 } { 00E3 }
+        { 00C4 } { 00E4 }
+        { 00C5 } { 00E5 }
+        { 00C6 } { 00E6 }
+        { 00C7 } { 00E7 }
+        { 00C8 } { 00E8 }
+        { 00C9 } { 00E9 }
+        { 00CA } { 00EA }
+        { 00CB } { 00EB }
+        { 00CC } { 00EC }
+        { 00CD } { 00ED }
+        { 00CE } { 00EE }
+        { 00CF } { 00EF }
+        { 00D0 } { 00F0 }
+        { 00D1 } { 00F1 }
+        { 00D2 } { 00F2 }
+        { 00D3 } { 00F3 }
+        { 00D4 } { 00F4 }
+        { 00D5 } { 00F5 }
+        { 00D6 } { 00F6 }
+        { 00D8 } { 00F8 }
+        { 00D9 } { 00F9 }
+        { 00DA } { 00FA }
+        { 00DB } { 00FB }
+        { 00DC } { 00FC }
+        { 00DD } { 00FD }
+        { 00DE } { 00FE }
+        { 0100 } { 0101 }
+        { 0102 } { 0103 }
+        { 0104 } { 0105 }
+        { 0106 } { 0107 }
+        { 0108 } { 0109 }
+        { 010A } { 010B }
+        { 010C } { 010D }
+        { 010E } { 010F }
+        { 0110 } { 0111 }
+        { 0112 } { 0113 }
+        { 0114 } { 0115 }
+        { 0116 } { 0117 }
+        { 0118 } { 0119 }
+        { 011A } { 011B }
+        { 011C } { 011D }
+        { 011E } { 011F }
+        { 0120 } { 0121 }
+        { 0122 } { 0123 }
+        { 0124 } { 0125 }
+        { 0128 } { 0129 }
+        { 012A } { 012B }
+        { 012C } { 012D }
+        { 012E } { 012F }
+        { 0132 } { 0133 }
+        { 0134 } { 0135 }
+        { 0136 } { 0137 }
+        { 0139 } { 013A }
+        { 013B } { 013C }
+        { 013E } { 013F }
+        { 0141 } { 0142 }
+        { 0143 } { 0144 }
+        { 0145 } { 0146 }
+        { 0147 } { 0148 }
+        { 014A } { 014B }
+        { 014C } { 014D }
+        { 014E } { 014F }
+        { 0150 } { 0151 }
+        { 0152 } { 0153 }
+        { 0154 } { 0155 }
+        { 0156 } { 0157 }
+        { 0158 } { 0159 }
+        { 015A } { 015B }
+        { 015C } { 015D }
+        { 015E } { 015F }
+        { 0160 } { 0161 }
+        { 0162 } { 0163 }
+        { 0164 } { 0165 }
+        { 0168 } { 0169 }
+        { 016A } { 016B }
+        { 016C } { 016D }
+        { 016E } { 016F }
+        { 0170 } { 0171 }
+        { 0172 } { 0173 }
+        { 0174 } { 0175 }
+        { 0176 } { 0177 }
+        { 0178 } { 00FF }
+        { 0179 } { 017A }
+        { 017B } { 017C }
+        { 017D } { 017E }
+        { 01CD } { 01CE }
+        { 01CF } { 01D0 }
+        { 01D1 } { 01D2 }
+        { 01D3 } { 01D4 }
+        { 01E2 } { 01E3 }
+        { 01E6 } { 01E7 }
+        { 01E8 } { 01E9 }
+        { 01EA } { 01EB }
+        { 01F4 } { 01F5 }
+        { 0218 } { 0219 }
+        { 021A } { 021B }
+        { 0400 } { 0450 }
+        { 0401 } { 0451 }
+        { 0402 } { 0452 }
+        { 0403 } { 0453 }
+        { 0404 } { 0454 }
+        { 0405 } { 0455 }
+        { 0406 } { 0456 }
+        { 0407 } { 0457 }
+        { 0408 } { 0458 }
+        { 0409 } { 0459 }
+        { 040A } { 045A }
+        { 040B } { 045B }
+        { 040C } { 045C }
+        { 040D } { 045D }
+        { 040E } { 045E }
+        { 040F } { 045F }
+        { 0410 } { 0430 }
+        { 0411 } { 0431 }
+        { 0412 } { 0432 }
+        { 0413 } { 0433 }
+        { 0414 } { 0434 }
+        { 0415 } { 0435 }
+        { 0416 } { 0436 }
+        { 0417 } { 0437 }
+        { 0418 } { 0438 }
+        { 0419 } { 0439 }
+        { 041A } { 043A }
+        { 041B } { 043B }
+        { 041C } { 043C }
+        { 041D } { 043D }
+        { 041E } { 043E }
+        { 041F } { 043F }
+        { 0420 } { 0440 }
+        { 0421 } { 0441 }
+        { 0422 } { 0442 }
+        { 0423 } { 0443 }
+        { 0424 } { 0444 }
+        { 0425 } { 0445 }
+        { 0426 } { 0446 }
+        { 0427 } { 0447 }
+        { 0428 } { 0448 }
+        { 0429 } { 0449 }
+        { 042A } { 044A }
+        { 042B } { 044B }
+        { 042C } { 044C }
+        { 042D } { 044D }
+        { 042E } { 044E }
+        { 042F } { 044F }
+        { 0391 } { 03B1 }
+        { 0392 } { 03B2 }
+        { 0393 } { 03B3 }
+        { 0394 } { 03B4 }
+        { 0395 } { 03B5 }
+        { 0396 } { 03B6 }
+        { 0397 } { 03B7 }
+        { 0398 } { 03B8 }
+        { 0399 } { 03B9 }
+        { 039A } { 03BA }
+        { 039B } { 03BB }
+        { 039C } { 03BC }
+        { 039D } { 03BD }
+        { 039E } { 03BE }
+        { 039F } { 03BF }
+        { 03A0 } { 03C0 }
+        { 03A1 } { 03C1 }
+        { 03A3 } { 03C3 }
+        { 03A4 } { 03C4 }
+        { 03A5 } { 03C5 }
+        { 03A6 } { 03C6 }
+        { 03A7 } { 03C7 }
+        { 03A8 } { 03C8 }
+        { 03A9 } { 03C9 }
+        { 03D8 } { 03D9 }
+        { 03DA } { 03DB }
+        { 03DC } { 03DD }
+        { 03DE } { 03DF }
+        { 03E0 } { 03E1 }
+        \q_recursion_tail ?
+        \q_recursion_stop
+      \cs_set_protected:Npn \__text_tmp:w #1#2#3
+        {
+          \group_begin:
+            \cs_set_protected:Npn \__text_tmp:w ##1##2##3##4
+              {
+                \tl_const:cx
+                  {
+                    c__text_ #3 case_
+                    \char_generate:nn {##1} { 12 }
+                    \char_generate:nn {##2} { 12 }
+                    _tl
+                  }
+                    {#2}
+              }
+            \use:x
+              { \__text_tmp:w \char_to_utfviii_bytes:n { "#1 } }
+          \group_end:
+        }
+      \__text_tmp:w { 00DF } { SS } { upper }
+      \__text_tmp:w { 00DF } { Ss } { title }
+      \__text_tmp:w { 0131 } { I }  { upper }
+    }
+  \group_end:
+\group_begin:
+  \cs_set_protected:Npn \__text_change_case_setup:NN #1#2
+    {
+      \quark_if_recursion_tail_stop:N #1
+      \tl_const:cn { c__text_lowercase_ \token_to_str:N #1 _tl }
+        { #2 }
+      \tl_const:cn { c__text_uppercase_ \token_to_str:N #2 _tl }
+        { #1 }
+      \__text_change_case_setup:NN
+    }
+  \__text_change_case_setup:NN
+  \AA \aa
+  \AE \ae
+  \DH \dh
+  \DJ \dj
+  \IJ \ij
+  \L  \l
+  \NG \ng
+  \O  \o
+  \OE \oe
+  \SS \ss
+  \TH \th
+  \q_recursion_tail ?
+  \q_recursion_stop
+  \tl_const:cn { c__text_uppercase_ \token_to_str:N \i _tl } { I }
+  \tl_const:cn { c__text_uppercase_ \token_to_str:N \j _tl } { J }
+\group_end:
+\cs_if_exist:cT { @uclclist }
+  {
+    \AtBeginDocument
+      {
+        \group_begin:
+          \cs_set_protected:Npn \__text_change_case_setup:Nn #1#2
+            {
+              \quark_if_recursion_tail_stop:N #1
+              \tl_if_single_token:nT {#2}
+                {
+                  \cs_if_exist:cF
+                    { c__text_uppercase_ \token_to_str:N #1 _tl }
+                    {
+                      \tl_const:cn
+                        { c__text_uppercase_ \token_to_str:N #1 _tl }
+                        { #2 }
+                    }
+                  \cs_if_exist:cF
+                    { c__text_lowercase_ \token_to_str:N #2 _tl }
+                    {
+                      \tl_const:cn
+                        { c__text_lowercase_ \token_to_str:N #2 _tl }
+                        { #1 }
+                    }
+                }
+              \__text_change_case_setup:Nn
+            }
+          \exp_after:wN \__text_change_case_setup:Nn \@uclclist
+          \q_recursion_tail ?
+          \q_recursion_stop
+        \group_end:
+      }
   }
 %% File: l3candidates.dtx
 \cs_new_protected:Npn \box_clip:N #1
@@ -27540,6 +29506,41 @@
 \cs_new_protected:Npn \bool_gset_inverse:N #1
   { \bool_if:NTF #1 { \bool_gset_false:N } { \bool_gset_true:N } #1 }
 \cs_generate_variant:Nn \bool_gset_inverse:N { c }
+\cs_new:Npn \bool_case_true:nTF
+  { \exp:w \__bool_case:NnTF \c_true_bool }
+\cs_new:Npn \bool_case_true:nT #1#2
+  { \exp:w \__bool_case:NnTF \c_true_bool {#1} {#2} { } }
+\cs_new:Npn \bool_case_true:nF #1
+  { \exp:w \__bool_case:NnTF \c_true_bool {#1} { } }
+\cs_new:Npn \bool_case_true:n #1
+  { \exp:w \__bool_case:NnTF \c_true_bool {#1} { } { } }
+\cs_new:Npn \bool_case_false:nTF
+  { \exp:w \__bool_case:NnTF \c_false_bool }
+\cs_new:Npn \bool_case_false:nT #1#2
+  { \exp:w \__bool_case:NnTF \c_false_bool {#1} {#2} { } }
+\cs_new:Npn \bool_case_false:nF #1
+  { \exp:w \__bool_case:NnTF \c_false_bool {#1} { } }
+\cs_new:Npn \bool_case_false:n #1
+  { \exp:w \__bool_case:NnTF \c_false_bool {#1} { } { } }
+\cs_new:Npn \__bool_case:NnTF #1#2#3#4
+  {
+    \bool_if:NTF #1 \__bool_case_true:w \__bool_case_false:w
+    #2 #1 { } \q_mark {#3} \q_mark {#4} \q_stop
+  }
+\cs_new:Npn \__bool_case_true:w #1#2
+  {
+    \bool_if:nTF {#1}
+      { \__bool_case_end:nw {#2} }
+      { \__bool_case_true:w }
+  }
+\cs_new:Npn \__bool_case_false:w #1#2
+  {
+    \bool_if:nTF {#1}
+      { \__bool_case_false:w }
+      { \__bool_case_end:nw {#2} }
+  }
+\cs_new:Npn \__bool_case_end:nw #1#2#3 \q_mark #4#5 \q_stop
+  { \exp_end: #1 #4 }
 \cs_new:Npn \prop_rand_key_value:N #1
   {
     \prop_if_empty:NF #1
@@ -27719,1105 +29720,6 @@
   {
     LaTeX~tried~to~call~a~system~process~but~this~was~not~possible.\\
     Try~the~"--shell-escape"~(or~"--enable-pipes")~option.
-  }
-\cs_new:Npn \char_lower_case:N #1
-  { \__char_change_case:nNN { lower } \char_value_lccode:n #1 }
-\cs_new:Npn \char_upper_case:N #1
-  { \__char_change_case:nNN { upper } \char_value_uccode:n #1 }
-\cs_new:Npn \char_mixed_case:N #1
-  {
-    \tl_if_exist:cTF { c__char_mixed_case_ \token_to_str:N #1 _tl }
-      {
-        \__char_change_case_multi:vN
-          { c__char_mixed_case_ \token_to_str:N #1 _tl } #1
-      }
-      { \char_upper_case:N #1 }
-  }
-\cs_new:Npn \char_fold_case:N #1
-  { \__char_change_case:nNN { fold } \char_value_lccode:n #1 }
-\cs_new:Npn \__char_change_case:nNN #1#2#3
-  {
-    \tl_if_exist:cTF { c__char_ #1 _case_ \token_to_str:N #3 _tl }
-      {
-        \__char_change_case_multi:vN
-          { c__char_ #1 _case_ \token_to_str:N #3 _tl } #3
-      }
-      { \exp_args:Nf \__char_change_case:nN { #2 { `#3 } } #3 }
-  }
-\cs_new:Npn \__char_change_case:nN #1#2
-  {
-    \int_compare:nNnTF {#1} = 0
-      { #2 }
-      { \char_generate:nn {#1} { \__char_change_case_catcode:N #2 } }
-  }
-\cs_new:Npn \__char_change_case_multi:nN #1#2
-  { \__char_change_case_multi:NNNNw #2 #1 \q_no_value \q_no_value \q_stop }
-\cs_generate_variant:Nn \__char_change_case_multi:nN { v }
-\cs_new:Npn \__char_change_case_multi:NNNNw #1#2#3#4#5 \q_stop
-  {
-    \quark_if_no_value:NTF #4
-      {
-        \quark_if_no_value:NTF #3
-          { \__char_change_case:NN #1 #2 }
-          { \__char_change_case:NNN #1 #2#3 }
-      }
-      { \__char_change_case:NNNN #1 #2#3#4 }
-  }
-\cs_new:Npn \__char_change_case:NNN #1#2#3
-  {
-    \exp_args:Nnf \use:nn
-      { \__char_change_case:NN #1 #2 }
-      { \__char_change_case:NN #1 #3 }
-  }
-\cs_new:Npn \__char_change_case:NNNN #1#2#3#4
-  {
-    \exp_args:Nnff \use:nnn
-      { \__char_change_case:NN #1 #2 }
-      { \__char_change_case:NN #1 #3 }
-      { \__char_change_case:NN #1 #4 }
-  }
-\cs_new:Npn \__char_change_case:NN #1#2
-  { \char_generate:nn { `#2 } { \__char_change_case_catcode:N #1 } }
-\cs_new:Npn \__char_change_case_catcode:N #1
-  {
-    \if_catcode:w \exp_not:N #1 \c_math_toggle_token
-      3
-    \else:
-      \if_catcode:w \exp_not:N #1 \c_alignment_token
-        4
-      \else:
-        \if_catcode:w \exp_not:N #1 \c_math_superscript_token
-          7
-        \else:
-          \if_catcode:w \exp_not:N #1 \c_math_subscript_token
-            8
-          \else:
-            \if_catcode:w \exp_not:N #1 \c_space_token
-              10
-            \else:
-             \if_catcode:w \exp_not:N #1 \c_catcode_letter_token
-               11
-             \else:
-               \if_catcode:w \exp_not:N #1 \c_catcode_other_token
-                 12
-               \else:
-                 13
-               \fi:
-             \fi:
-            \fi:
-          \fi:
-        \fi:
-      \fi:
-    \fi:
-  }
-\cs_new:Npn \char_str_lower_case:N #1
-  { \__char_str_change_case:nNN { lower } \char_value_lccode:n #1 }
-\cs_new:Npn \char_str_upper_case:N #1
-  { \__char_str_change_case:nNN { upper } \char_value_uccode:n #1 }
-\cs_new:Npn \char_str_mixed_case:N #1
-  {
-    \tl_if_exist:cTF { c__char_mixed_case_ \token_to_str:N #1 _tl }
-      { \tl_to_str:c { c__char_mixed_case_ \token_to_str:N #1 _tl } }
-      { \char_str_upper_case:N #1 }
-  }
-\cs_new:Npn \char_str_fold_case:N #1
-  { \__char_str_change_case:nNN { fold } \char_value_lccode:n #1 }
-\cs_new:Npn \__char_str_change_case:nNN #1#2#3
-  {
-    \tl_if_exist:cTF { c__char_ #1 _case_ \token_to_str:N #3 _tl }
-      { \tl_to_str:c { c__char_ #1 _case_ \token_to_str:N #3 _tl } }
-      { \exp_args:Nf \__char_str_change_case:nN { #2 { `#3 } } #3 }
-  }
-\cs_new:Npn \__char_str_change_case:nN #1#2
-  {
-    \int_compare:nNnTF {#1} = 0
-      { \tl_to_str:n {#2} }
-      { \char_generate:nn {#1} { 12 } }
-  }
-\cs_if_exist:NF \tex_Uchar:D
-  {
-    \cs_set:Npn \__char_str_change_case:nN #1#2
-      { \tl_to_str:n {#2} }
-  }
-\cs_new:Npn \char_codepoint_to_bytes:n #1
-  {
-    \exp_args:Nf \__char_codepoint_to_bytes_auxi:n
-      { \int_eval:n {#1} }
-  }
-\cs_new:Npn \__char_codepoint_to_bytes_auxi:n #1
-  {
-    \if_int_compare:w #1 > "80 \exp_stop_f:
-      \if_int_compare:w #1 < "800 \exp_stop_f:
-        \__char_codepoint_to_bytes_outputi:nw
-          { \__char_codepoint_to_bytes_auxii:Nnn C {#1} { 64 } }
-        \__char_codepoint_to_bytes_outputii:nw
-          { \__char_codepoint_to_bytes_auxiii:n {#1} }
-      \else:
-        \if_int_compare:w #1 < "10000 \exp_stop_f:
-          \__char_codepoint_to_bytes_outputi:nw
-            { \__char_codepoint_to_bytes_auxii:Nnn E {#1} { 64 * 64 } }
-          \__char_codepoint_to_bytes_outputii:nw
-            {
-              \__char_codepoint_to_bytes_auxiii:n
-                { \int_div_truncate:nn {#1} { 64 } }
-            }
-          \__char_codepoint_to_bytes_outputiii:nw
-            { \__char_codepoint_to_bytes_auxiii:n {#1} }
-        \else:
-          \__char_codepoint_to_bytes_outputi:nw
-            {
-              \__char_codepoint_to_bytes_auxii:Nnn F
-                 {#1} { 64 * 64 * 64 }
-            }
-          \__char_codepoint_to_bytes_outputii:nw
-            {
-              \__char_codepoint_to_bytes_auxiii:n
-                { \int_div_truncate:nn {#1} { 64 * 64 } }
-            }
-          \__char_codepoint_to_bytes_outputiii:nw
-            {
-              \__char_codepoint_to_bytes_auxiii:n
-                { \int_div_truncate:nn {#1} { 64 } }
-            }
-          \__char_codepoint_to_bytes_outputiv:nw
-            { \__char_codepoint_to_bytes_auxiii:n {#1} }
-        \fi:
-      \fi:
-    \else:
-      \__char_codepoint_to_bytes_outputi:nw {#1}
-    \fi:
-    \__char_codepoint_to_bytes_end: { } { } { } { }
-  }
-\cs_new:Npn \__char_codepoint_to_bytes_auxii:Nnn #1#2#3
-  {  "#10 + \int_div_truncate:nn {#2} {#3} }
-\cs_new:Npn \__char_codepoint_to_bytes_auxiii:n #1
-  { \int_mod:nn {#1} { 64 } + 128 }
-\cs_new:Npn \__char_codepoint_to_bytes_outputi:nw
-  #1 #2 \__char_codepoint_to_bytes_end: #3
-  { \__char_codepoint_to_bytes_output:fnn { \int_eval:n {#1} } { } {#2} }
-\cs_new:Npn \__char_codepoint_to_bytes_outputii:nw
-  #1 #2 \__char_codepoint_to_bytes_end: #3#4
-  { \__char_codepoint_to_bytes_output:fnn { \int_eval:n {#1} } { {#3} } {#2} }
-\cs_new:Npn \__char_codepoint_to_bytes_outputiii:nw
-  #1 #2 \__char_codepoint_to_bytes_end: #3#4#5
-  {
-    \__char_codepoint_to_bytes_output:fnn
-      { \int_eval:n {#1} } { {#3} {#4} } {#2}
-  }
-\cs_new:Npn \__char_codepoint_to_bytes_outputiv:nw
-  #1 #2 \__char_codepoint_to_bytes_end: #3#4#5#6
-  {
-    \__char_codepoint_to_bytes_output:fnn
-      { \int_eval:n {#1} } { {#3} {#4} {#5} } {#2}
-  }
-\cs_new:Npn \__char_codepoint_to_bytes_output:nnn #1#2#3
-  {
-    #3
-    \__char_codepoint_to_bytes_end: #2 {#1}
-  }
-\cs_generate_variant:Nn \__char_codepoint_to_bytes_output:nnn { f }
-\cs_new:Npn \__char_codepoint_to_bytes_end: { }
-\cs_new:Npn \tl_lower_case:n { \__tl_change_case:nnn { lower } { } }
-\cs_new:Npn \tl_upper_case:n { \__tl_change_case:nnn { upper } { } }
-\cs_new:Npn \tl_mixed_case:n { \__tl_change_case:nnn { mixed } { } }
-\cs_new:Npn \tl_lower_case:nn { \__tl_change_case:nnn { lower } }
-\cs_new:Npn \tl_upper_case:nn { \__tl_change_case:nnn { upper } }
-\cs_new:Npn \tl_mixed_case:nn { \__tl_change_case:nnn { mixed } }
-\cs_new:Npn \__tl_change_case:nnn #1#2#3
-  {
-    \__kernel_exp_not:w \exp_after:wN
-      {
-        \exp:w
-        \__tl_change_case_aux:nnn {#1} {#2} {#3}
-      }
-  }
-\cs_new:Npn \__tl_change_case_aux:nnn #1#2#3
-  {
-    \group_align_safe_begin:
-    \__tl_change_case_loop:wnn
-      #3 \q_recursion_tail \q_recursion_stop {#1} {#2}
-    \__tl_change_case_result:n { }
-  }
-\cs_new:Npn \__tl_change_case_loop:wnn #1 \q_recursion_stop
-  {
-    \tl_if_head_is_N_type:nTF {#1}
-      { \__tl_change_case_N_type:Nwnn }
-      {
-        \tl_if_head_is_group:nTF {#1}
-          { \__tl_change_case_group:nwnn }
-          { \__tl_change_case_space:wnn }
-      }
-    #1 \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_output:nwn #1#2 \__tl_change_case_result:n #3
-  { #2 \__tl_change_case_result:n { #3 #1 } }
-\cs_generate_variant:Nn \__tl_change_case_output:nwn { V , o , v , f }
-\cs_new:Npn \__tl_change_case_end:wn #1 \__tl_change_case_result:n #2
-  {
-    \group_align_safe_end:
-    \exp_end:
-    #2
-  }
-\cs_new:Npn \__tl_change_case_group:nwnn #1#2 \q_recursion_stop #3#4
-  {
-    \use:c { __tl_change_case_group_ #3 : nnnn } {#1} {#2} {#3} {#4}
-  }
-\cs_new:Npn \__tl_change_case_group_lower:nnnn #1#2#3#4
-  {
-    \__tl_change_case_output:own
-      {
-        \exp_after:wN
-          {
-            \exp:w
-            \__tl_change_case_aux:nnn {#3} {#4} {#1}
-          }
-      }
-    \__tl_change_case_loop:wnn #2 \q_recursion_stop {#3} {#4}
-  }
-\cs_new_eq:NN \__tl_change_case_group_upper:nnnn
-  \__tl_change_case_group_lower:nnnn
-\cs_new:Npn \__tl_change_case_group_mixed:nnnn #1#2#3#4
-  {
-    \__tl_change_case_output:own
-      {
-        \exp_after:wN
-          {
-            \exp:w
-            \__tl_change_case_aux:nnn {#3} {#4} {#1}
-          }
-      }
-    \__tl_change_case_loop:wnn #2 \q_recursion_stop { lower } {#4}
-  }
-\exp_last_unbraced:NNo \cs_new:Npn \__tl_change_case_space:wnn \c_space_tl
-  {
-    \__tl_change_case_output:nwn { ~ }
-    \__tl_change_case_loop:wnn
-  }
-\cs_new:Npn \__tl_change_case_N_type:Nwnn #1#2 \q_recursion_stop
-  {
-    \quark_if_recursion_tail_stop_do:Nn #1
-      { \__tl_change_case_end:wn }
-    \exp_after:wN \__tl_change_case_N_type:NNNnnn
-      \exp_after:wN #1 \l_tl_case_change_math_tl
-      \q_recursion_tail ? \q_recursion_stop {#2}
-  }
-\cs_new:Npn \__tl_change_case_N_type:NNNnnn #1#2#3
-  {
-    \quark_if_recursion_tail_stop_do:Nn #2
-     { \__tl_change_case_N_type:Nnnn #1 }
-    \token_if_eq_meaning:NNTF #1 #2
-      {
-        \use_i_delimit_by_q_recursion_stop:nw
-           {
-             \__tl_change_case_math:NNNnnn
-               #1 #3 \__tl_change_case_loop:wnn
-           }
-      }
-      { \__tl_change_case_N_type:NNNnnn #1 }
-  }
-\cs_new:Npn \__tl_change_case_math:NNNnnn #1#2#3#4
-  {
-    \__tl_change_case_output:nwn {#1}
-    \__tl_change_case_math_loop:wNNnn #4 \q_recursion_stop #2 #3
-  }
-\cs_new:Npn \__tl_change_case_math_loop:wNNnn #1 \q_recursion_stop
-  {
-    \tl_if_head_is_N_type:nTF {#1}
-      { \__tl_change_case_math:NwNNnn }
-      {
-        \tl_if_head_is_group:nTF {#1}
-          { \__tl_change_case_math_group:nwNNnn }
-          { \__tl_change_case_math_space:wNNnn }
-      }
-    #1 \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_math:NwNNnn #1#2 \q_recursion_stop #3#4
-  {
-    \token_if_eq_meaning:NNTF \q_recursion_tail #1
-      { \__tl_change_case_end:wn }
-      {
-        \__tl_change_case_output:nwn {#1}
-        \token_if_eq_meaning:NNTF #1 #3
-          { #4 #2 \q_recursion_stop }
-          { \__tl_change_case_math_loop:wNNnn #2 \q_recursion_stop #3#4 }
-      }
-  }
-\cs_new:Npn \__tl_change_case_math_group:nwNNnn #1#2 \q_recursion_stop
-  {
-    \__tl_change_case_output:nwn { {#1} }
-    \__tl_change_case_math_loop:wNNnn #2 \q_recursion_stop
-  }
-\exp_last_unbraced:NNo
-  \cs_new:Npn \__tl_change_case_math_space:wNNnn \c_space_tl
-  {
-    \__tl_change_case_output:nwn { ~ }
-    \__tl_change_case_math_loop:wNNnn
-  }
-\cs_new:Npn \__tl_change_case_N_type:Nnnn #1#2#3#4
-  {
-    \token_if_cs:NTF #1
-      { \__tl_change_case_cs_letterlike:Nn #1 {#3} }
-      { \use:c { __tl_change_case_char_ #3 :Nnn } #1 {#3} {#4} }
-    \__tl_change_case_loop:wnn #2 \q_recursion_stop {#3} {#4}
-  }
-\cs_new:Npn \__tl_change_case_char_lower:Nnn #1#2#3
-  {
-    \cs_if_exist_use:cF { __tl_change_case_ #2 _ #3 :Nnw }
-      { \use_ii:nn }
-        #1
-        {
-          \use:c { __tl_change_case_ #2 _ sigma:Nnw } #1
-            { \__tl_change_case_char:nN {#2} #1 }
-        }
-  }
-\cs_new_eq:NN \__tl_change_case_char_upper:Nnn
-  \__tl_change_case_char_lower:Nnn
-\cs_new:Npn \__tl_change_case_char_mixed:Nnn #1#2#3
-  {
-    \__tl_change_case_mixed_switch:w
-    \cs_if_exist_use:cF { __tl_change_case_mixed_ #3 :Nnw }
-      {
-        \cs_if_exist_use:cF { __tl_change_case_upper_ #3 :Nnw }
-          { \use_ii:nn }
-      }
-        #1
-        { \__tl_change_case_mixed_skip:N #1 }
-  }
-\bool_lazy_or:nnTF
-  { \sys_if_engine_luatex_p: }
-  { \sys_if_engine_xetex_p: }
-  {
-    \cs_new:Npn \__tl_change_case_char:nN #1#2
-      {
-        \__tl_change_case_output:fwn
-          { \use:c { char_ #1 _case:N } #2 }
-      }
-  }
-  {
-    \cs_new:Npn \__tl_change_case_char:nN #1#2
-      {
-        \int_compare:nNnTF { `#2 } > { "80 }
-          {
-            \int_compare:nNnTF { `#2 } < { "E0 }
-              { \__tl_change_case_char_UTFviii:nNNN {#1} #2 }
-              {
-                \int_compare:nNnTF { `#2 } < { "F0 }
-                  { \__tl_change_case_char_UTFviii:nNNNN {#1} #2 }
-                  { \__tl_change_case_char_UTFviii:nNNNNN {#1} #2 }
-              }
-          }
-          {
-            \__tl_change_case_output:fwn
-              { \use:c { char_ #1 _case:N } #2 }
-          }
-       }
-  }
-\bool_lazy_or:nnF
-  { \sys_if_engine_luatex_p: }
-  { \sys_if_engine_xetex_p: }
-  {
-    \cs_new:Npn \__tl_change_case_char_UTFviii:nNNN #1#2#3#4
-      { \__tl_change_case_char_UTFviii:nnN {#1} {#2#4} #3 }
-    \cs_new:Npn \__tl_change_case_char_UTFviii:nNNNN #1#2#3#4#5
-      { \__tl_change_case_char_UTFviii:nnN {#1} {#2#4#5} #3 }
-    \cs_new:Npn \__tl_change_case_char_UTFviii:nNNNNN #1#2#3#4#5#6
-      { \__tl_change_case_char_UTFviii:nnN {#1} {#2#4#5#6} #3 }
-    \cs_new:Npn \__tl_change_case_char_UTFviii:nnN #1#2#3
-      {
-        \cs_if_exist:cTF { c__tl_ #1 _case_ \tl_to_str:n {#2} _tl }
-          {
-            \__tl_change_case_output:vwn
-              { c__tl_ #1 _case_ \tl_to_str:n {#2} _tl }
-          }
-          { \__tl_change_case_output:nwn {#2} }
-        #3
-      }
-  }
-\cs_new:Npn \__tl_change_case_cs_letterlike:Nn #1#2
-  {
-    \str_if_eq:nnTF {#2} { mixed }
-      {
-        \__tl_change_case_cs_letterlike:NnN #1 { upper }
-          \__tl_change_case_mixed_switch:w
-      }
-      { \__tl_change_case_cs_letterlike:NnN #1 {#2} \prg_do_nothing: }
-  }
-\cs_new:Npn \__tl_change_case_cs_letterlike:NnN #1#2#3
-  {
-    \cs_if_exist:cTF { c__tl_change_case_ #2 _ \token_to_str:N #1 _tl }
-      {
-        \__tl_change_case_output:vwn
-          { c__tl_change_case_ #2 _ \token_to_str:N #1 _tl }
-        #3
-      }
-      {
-        \cs_if_exist:cTF
-          {
-            c__tl_change_case_
-            \str_if_eq:nnTF {#2} { lower } { upper } { lower }
-            _ \token_to_str:N #1 _tl
-          }
-          {
-            \__tl_change_case_output:nwn {#1}
-            #3
-          }
-          {
-            \exp_after:wN \__tl_change_case_cs_accents:NN
-              \exp_after:wN #1 \l_tl_case_change_accents_tl
-              \q_recursion_tail \q_recursion_stop
-          }
-      }
-  }
-\cs_new:Npn \__tl_change_case_cs_accents:NN #1#2
-  {
-    \quark_if_recursion_tail_stop_do:Nn #2
-      { \__tl_change_case_cs:N #1 }
-    \str_if_eq:nnTF {#1} {#2}
-      {
-        \use_i_delimit_by_q_recursion_stop:nw
-          { \__tl_change_case_output:nwn {#1} }
-      }
-      { \__tl_change_case_cs_accents:NN #1 }
-  }
-\cs_new:Npn \__tl_change_case_cs:N #1
-  {
-    \str_if_eq:nnTF {#1} { \protect } { \__tl_change_case_protect:wNN }
-    \exp_after:wN \__tl_change_case_cs:NN
-      \exp_after:wN #1 \l_tl_case_change_exclude_tl
-      \q_recursion_tail \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_cs:NN #1#2
-  {
-    \quark_if_recursion_tail_stop_do:Nn #2
-      {
-        \__tl_change_case_cs_expand:Nnw #1
-          { \__tl_change_case_output:nwn {#1} }
-      }
-    \str_if_eq:nnTF {#1} {#2}
-      {
-        \use_i_delimit_by_q_recursion_stop:nw
-          { \__tl_change_case_cs:NNn #1 }
-      }
-      { \__tl_change_case_cs:NN #1 }
-  }
-\cs_new:Npn \__tl_change_case_cs:NNn #1#2#3
-  {
-    \__tl_change_case_output:nwn { #1 {#3} }
-    #2
-  }
-\cs_new:Npn \__tl_change_case_protect:wNN #1 \q_recursion_stop #2 #3
-  { \__tl_change_case_output:nwn { \protect #3 } #2 }
-\cs_new:Npn \__tl_change_case_if_expandable:NTF #1
-  {
-    \token_if_expandable:NTF #1
-      {
-        \bool_lazy_any:nTF
-          {
-            { \token_if_eq_meaning_p:NN \q_recursion_tail #1 }
-            { \token_if_protected_macro_p:N      #1 }
-            { \token_if_protected_long_macro_p:N #1 }
-          }
-          { \use_ii:nn }
-          { \use_i:nn }
-      }
-      { \use_ii:nn }
-  }
-\cs_new:Npn \__tl_change_case_cs_expand:Nnw #1#2
-  {
-    \__tl_change_case_if_expandable:NTF #1
-      { \__tl_change_case_cs_expand:NN #1 }
-      { #2 }
-  }
-\cs_new:Npn \__tl_change_case_cs_expand:NN #1#2
-  { \exp_after:wN #2 #1 }
-\cs_new:Npn \__tl_change_case_mixed_skip:N #1
-  {
-    \exp_after:wN \__tl_change_case_mixed_skip:NN
-      \exp_after:wN #1 \l_tl_mixed_case_ignore_tl
-      \q_recursion_tail \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_mixed_skip:NN #1#2
-  {
-    \quark_if_recursion_tail_stop_do:nn {#2}
-      { \__tl_change_case_char:nN { mixed } #1 }
-    \int_compare:nNnT { `#1 }  = { `#2 }
-      {
-        \use_i_delimit_by_q_recursion_stop:nw
-          {
-            \__tl_change_case_output:nwn {#1}
-            \__tl_change_case_mixed_skip_tidy:Nwn
-          }
-      }
-    \__tl_change_case_mixed_skip:NN #1
-  }
-\cs_new:Npn \__tl_change_case_mixed_skip_tidy:Nwn #1#2 \q_recursion_stop #3
-  {
-    \__tl_change_case_loop:wnn #2 \q_recursion_stop { mixed }
-  }
-\cs_new:Npn \__tl_change_case_mixed_switch:w
-  #1 \__tl_change_case_loop:wnn #2 \q_recursion_stop #3
-  {
-    #1
-    \__tl_change_case_loop:wnn #2 \q_recursion_stop { lower }
-  }
-\cs_new:Npn \__tl_change_case_lower_sigma:Nnw #1#2#3#4 \q_recursion_stop
-  {
-    \int_compare:nNnTF { `#1 } = { "03A3 }
-      {
-        \__tl_change_case_output:fwn
-          { \__tl_change_case_lower_sigma:w #4 \q_recursion_stop }
-      }
-      {#2}
-    #3 #4 \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_lower_sigma:w #1 \q_recursion_stop
-  {
-    \tl_if_head_is_N_type:nTF {#1}
-      { \__tl_change_case_lower_sigma:Nw #1 \q_recursion_stop }
-      { \c__tl_final_sigma_tl }
-  }
-\cs_new:Npn \__tl_change_case_lower_sigma:Nw #1#2 \q_recursion_stop
-  {
-    \__tl_change_case_if_expandable:NTF #1
-      {
-        \exp_after:wN \__tl_change_case_lower_sigma:w #1
-          #2 \q_recursion_stop
-      }
-      {
-        \token_if_letter:NTF #1
-          { \c__tl_std_sigma_tl }
-          { \c__tl_final_sigma_tl }
-      }
-  }
-\cs_new_eq:NN \__tl_change_case_upper_sigma:Nnw \use_ii:nn
-\bool_lazy_or:nnTF
-  { \sys_if_engine_luatex_p: }
-  { \sys_if_engine_xetex_p: }
-  {
-    \cs_new:Npn \__tl_change_case_lower_tr:Nnw #1#2
-      {
-        \int_compare:nNnTF { `#1 } = { "0049 }
-          { \__tl_change_case_lower_tr_auxi:Nw }
-          {
-            \int_compare:nNnTF { `#1 } = { "0130 }
-              { \__tl_change_case_output:nwn { i } }
-              {#2}
-          }
-      }
-    \cs_new:Npn \__tl_change_case_lower_tr_auxi:Nw #1#2 \q_recursion_stop
-      {
-        \tl_if_head_is_N_type:nTF {#2}
-          { \__tl_change_case_lower_tr_auxii:Nw #2 \q_recursion_stop }
-          { \__tl_change_case_output:Vwn \c__tl_dotless_i_tl }
-        #1 #2 \q_recursion_stop
-      }
-    \cs_new:Npn \__tl_change_case_lower_tr_auxii:Nw #1#2 \q_recursion_stop
-      {
-        \__tl_change_case_if_expandable:NTF #1
-          {
-            \exp_after:wN \__tl_change_case_lower_tr_auxi:Nw #1
-              #2 \q_recursion_stop
-          }
-          {
-            \bool_lazy_or:nnTF
-              { \token_if_cs_p:N #1 }
-              { ! \int_compare_p:nNn { `#1 } = { "0307 } }
-              { \__tl_change_case_output:Vwn \c__tl_dotless_i_tl }
-              {
-                \__tl_change_case_output:nwn { i }
-                \use_i:nn
-              }
-          }
-      }
-  }
-  {
-    \cs_new:Npn \__tl_change_case_lower_tr:Nnw #1#2
-      {
-        \int_compare:nNnTF { `#1 } = { "0049 }
-          { \__tl_change_case_output:Vwn \c__tl_dotless_i_tl }
-          {
-            \int_compare:nNnTF { `#1 } = { 196 }
-              { \__tl_change_case_lower_tr_auxi:Nw #1 {#2} }
-              {#2}
-          }
-      }
-    \cs_new:Npn \__tl_change_case_lower_tr_auxi:Nw #1#2#3#4
-      {
-        \int_compare:nNnTF { `#4 } = { 176 }
-          {
-            \__tl_change_case_output:nwn { i }
-            #3
-          }
-          {
-            #2
-            #3 #4
-          }
-      }
-  }
-\cs_new:Npn \__tl_change_case_upper_tr:Nnw #1#2
-  {
-    \int_compare:nNnTF { `#1 } = { "0069 }
-      { \__tl_change_case_output:Vwn \c__tl_dotted_I_tl }
-      {#2}
-  }
-\cs_new_eq:NN \__tl_change_case_lower_az:Nnw \__tl_change_case_lower_tr:Nnw
-\cs_new_eq:NN \__tl_change_case_upper_az:Nnw \__tl_change_case_upper_tr:Nnw
-\cs_new:Npn \__tl_change_case_lower_lt:Nnw #1
-  {
-    \exp_args:Nf \__tl_change_case_lower_lt:nNnw
-      { \str_case:nVF #1 \c__tl_accents_lt_tl \exp_stop_f: }
-      #1
-  }
-\cs_new:Npn \__tl_change_case_lower_lt:nNnw #1#2
-  {
-    \tl_if_blank:nTF {#1}
-      {
-        \exp_args:Nf \__tl_change_case_lower_lt:nnw
-          {
-            \int_case:nnF {`#2}
-              {
-                { "0049 } i
-                { "004A } j
-                { "012E } \c__tl_i_ogonek_tl
-              }
-              \exp_stop_f:
-          }
-      }
-      {
-        \__tl_change_case_output:nwn {#1}
-        \use_none:n
-      }
-  }
-\cs_new:Npn \__tl_change_case_lower_lt:nnw #1#2
-  {
-    \tl_if_blank:nTF {#1}
-      {#2}
-      {
-        \__tl_change_case_output:nwn {#1}
-        \__tl_change_case_lower_lt:Nw
-      }
-  }
-\cs_new:Npn \__tl_change_case_lower_lt:Nw #1#2 \q_recursion_stop
-  {
-    \tl_if_head_is_N_type:nT {#2}
-      { \__tl_change_case_lower_lt:NNw }
-    #1 #2 \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_lower_lt:NNw #1#2#3 \q_recursion_stop
-  {
-    \__tl_change_case_if_expandable:NTF #2
-      {
-        \exp_after:wN \__tl_change_case_lower_lt:Nw \exp_after:wN #1 #2
-          #3 \q_recursion_stop
-      }
-      {
-        \bool_lazy_and:nnT
-          { ! \token_if_cs_p:N #2 }
-          {
-            \bool_lazy_any_p:n
-              {
-                { \int_compare_p:nNn { `#2 } = { "0300 } }
-                { \int_compare_p:nNn { `#2 } = { "0301 } }
-                { \int_compare_p:nNn { `#2 } = { "0303 } }
-              }
-          }
-          { \__tl_change_case_output:Vwn \c__tl_dot_above_tl }
-        #1 #2#3 \q_recursion_stop
-      }
-  }
-\cs_new:Npn \__tl_change_case_upper_lt:Nnw #1
-  {
-    \exp_args:Nf \__tl_change_case_upper_lt:nnw
-      {
-        \int_case:nnF {`#1}
-          {
-            { "0069 } I
-            { "006A } J
-            { "012F } \c__tl_I_ogonek_tl
-          }
-          \exp_stop_f:
-      }
-  }
-\cs_new:Npn \__tl_change_case_upper_lt:nnw #1#2
-  {
-    \tl_if_blank:nTF {#1}
-      {#2}
-      {
-        \__tl_change_case_output:nwn {#1}
-        \__tl_change_case_upper_lt:Nw
-      }
-  }
-\cs_new:Npn \__tl_change_case_upper_lt:Nw #1#2 \q_recursion_stop
-  {
-    \tl_if_head_is_N_type:nT {#2}
-      { \__tl_change_case_upper_lt:NNw }
-    #1 #2 \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_upper_lt:NNw #1#2#3 \q_recursion_stop
-  {
-    \__tl_change_case_if_expandable:NTF #2
-      {
-        \exp_after:wN \__tl_change_case_upper_lt:Nw \exp_after:wN #1 #2
-          #3 \q_recursion_stop
-      }
-      {
-        \bool_lazy_and:nnTF
-          { ! \token_if_cs_p:N #2 }
-          { \int_compare_p:nNn { `#2 } = { "0307 } }
-          { #1 }
-          { #1 #2 }
-        #3 \q_recursion_stop
-      }
-  }
-\cs_new:cpn { __tl_change_case_upper_de-alt:Nnw } #1#2
-  {
-    \int_compare:nNnTF { `#1 } = { 223 }
-      { \__tl_change_case_output:Vwn \c__tl_upper_Eszett_tl }
-      {#2}
-  }
-\bool_lazy_or:nnTF
-  { \sys_if_engine_luatex_p: }
-  { \sys_if_engine_xetex_p: }
-  {
-    \group_begin:
-      \cs_set:Npn \__tl_tmp:n #1
-        {
-          \exp_after:wN \exp_after:wN \exp_after:wN \exp_not:N
-            \char_generate:nn {#1} { \char_value_catcode:n {#1} }
-        }
-      \tl_const:Nx \c__tl_std_sigma_tl    { \__tl_tmp:n { "03C3 } }
-      \tl_const:Nx \c__tl_final_sigma_tl  { \__tl_tmp:n { "03C2 } }
-      \tl_const:Nx \c__tl_accents_lt_tl
-        {
-          \__tl_tmp:n { "00CC }
-            {
-              \__tl_tmp:n { "0069 }
-              \__tl_tmp:n { "0307 }
-              \__tl_tmp:n { "0300 }
-            }
-          \__tl_tmp:n { "00CD }
-            {
-              \__tl_tmp:n { "0069 }
-              \__tl_tmp:n { "0307 }
-              \__tl_tmp:n { "0301 }
-            }
-          \__tl_tmp:n { "0128 }
-            {
-              \__tl_tmp:n { "0069 }
-              \__tl_tmp:n { "0307 }
-              \__tl_tmp:n { "0303 }
-            }
-        }
-      \tl_const:Nx \c__tl_dot_above_tl    { \__tl_tmp:n { "0307 } }
-      \tl_const:Nx \c__tl_upper_Eszett_tl { \__tl_tmp:n { "1E9E } }
-    \group_end:
-  }
-  {
-      \tl_const:Nn \c__tl_std_sigma_tl    { }
-      \tl_const:Nn \c__tl_final_sigma_tl  { }
-      \tl_const:Nn \c__tl_accents_lt_tl   { }
-      \tl_const:Nn \c__tl_dot_above_tl    { }
-      \tl_const:Nn \c__tl_upper_Eszett_tl { }
-  }
-\group_begin:
-  \bool_lazy_or:nnTF
-    { \sys_if_engine_luatex_p: }
-    { \sys_if_engine_xetex_p: }
-    {
-      \cs_set_protected:Npn \__tl_tmp:w #1#2
-        {
-          \tl_const:Nx #1
-            {
-              \exp_after:wN \exp_after:wN \exp_after:wN
-               \exp_not:N \char_generate:nn
-                 {"#2} { \char_value_catcode:n {"#2} }
-            }
-        }
-    }
-    {
-      \cs_set_protected:Npn \__tl_tmp:w #1#2
-        {
-          \group_begin:
-            \cs_set_protected:Npn \__tl_tmp:w ##1##2##3##4
-              {
-                \tl_const:Nx #1
-                  {
-                    \exp_after:wN \exp_after:wN \exp_after:wN
-                      \exp_not:N \char_generate:nn {##1} { 13 }
-                    \exp_after:wN \exp_after:wN \exp_after:wN
-                      \exp_not:N \char_generate:nn {##2} { 13 }
-                  }
-              }
-            \tl_set:Nx \l__tl_internal_a_tl
-              { \char_codepoint_to_bytes:n {"#2} }
-            \exp_after:wN \__tl_tmp:w \l__tl_internal_a_tl
-          \group_end:
-        }
-    }
-  \__tl_tmp:w \c__tl_dotless_i_tl { 0131 }
-  \__tl_tmp:w \c__tl_dotted_I_tl  { 0130 }
-  \__tl_tmp:w \c__tl_i_ogonek_tl  { 012F }
-  \__tl_tmp:w \c__tl_I_ogonek_tl  { 012E }
-\group_end:
-\group_begin:
-  \bool_lazy_or:nnF
-    { \sys_if_engine_luatex_p: }
-    { \sys_if_engine_xetex_p: }
-    {
-      \cs_set_protected:Npn \__tl_loop:nn #1#2
-        {
-          \quark_if_recursion_tail_stop:n {#1}
-          \tl_set:Nx \l__tl_internal_a_tl
-            {
-              \char_codepoint_to_bytes:n {"#1}
-              \char_codepoint_to_bytes:n {"#2}
-            }
-          \exp_after:wN \__tl_tmp:w \l__tl_internal_a_tl
-          \__tl_loop:nn
-        }
-      \cs_set_protected:Npn \__tl_tmp:nnnn #1#2#3#4#5
-        {
-          \tl_const:cx
-            {
-              c__tl_ #1 _case_
-              \char_generate:nn {#2} { 12 }
-              \char_generate:nn {#3} { 12 }
-              _tl
-            }
-            {
-              \exp_after:wN \exp_after:wN \exp_after:wN
-                \exp_not:N \char_generate:nn {#4} { 13 }
-              \exp_after:wN \exp_after:wN \exp_after:wN
-                \exp_not:N \char_generate:nn {#5} { 13 }
-            }
-        }
-      \cs_set_protected:Npn \__tl_tmp:w #1#2#3#4#5#6#7#8
-        {
-          \tl_const:cx
-            {
-              c__tl_lower_case_
-              \char_generate:nn {#1} { 12 }
-              \char_generate:nn {#2} { 12 }
-              _tl
-            }
-            {
-              \exp_after:wN \exp_after:wN \exp_after:wN
-                \exp_not:N \char_generate:nn {#5} { 13 }
-              \exp_after:wN \exp_after:wN \exp_after:wN
-                \exp_not:N \char_generate:nn {#6} { 13 }
-            }
-          \__tl_tmp:nnnn { upper } {#5} {#6} {#1} {#2}
-          \__tl_tmp:nnnn { mixed } {#5} {#6} {#1} {#2}
-        }
-      \__tl_loop:nn
-        { 00C0 } { 00E0 }
-        { 00C2 } { 00E2 }
-        { 00C3 } { 00E3 }
-        { 00C4 } { 00E4 }
-        { 00C5 } { 00E5 }
-        { 00C6 } { 00E6 }
-        { 00C7 } { 00E7 }
-        { 00C8 } { 00E8 }
-        { 00C9 } { 00E9 }
-        { 00CA } { 00EA }
-        { 00CB } { 00EB }
-        { 00CC } { 00EC }
-        { 00CD } { 00ED }
-        { 00CE } { 00EE }
-        { 00CF } { 00EF }
-        { 00D0 } { 00F0 }
-        { 00D1 } { 00F1 }
-        { 00D2 } { 00F2 }
-        { 00D3 } { 00F3 }
-        { 00D4 } { 00F4 }
-        { 00D5 } { 00F5 }
-        { 00D6 } { 00F6 }
-        { 00D8 } { 00F8 }
-        { 00D9 } { 00F9 }
-        { 00DA } { 00FA }
-        { 00DB } { 00FB }
-        { 00DC } { 00FC }
-        { 00DD } { 00FD }
-        { 00DE } { 00FE }
-        { 0100 } { 0101 }
-        { 0102 } { 0103 }
-        { 0104 } { 0105 }
-        { 0106 } { 0107 }
-        { 0108 } { 0109 }
-        { 010A } { 010B }
-        { 010C } { 010D }
-        { 010E } { 010F }
-        { 0110 } { 0111 }
-        { 0112 } { 0113 }
-        { 0114 } { 0115 }
-        { 0116 } { 0117 }
-        { 0118 } { 0119 }
-        { 011A } { 011B }
-        { 011C } { 011D }
-        { 011E } { 011F }
-        { 0120 } { 0121 }
-        { 0122 } { 0123 }
-        { 0124 } { 0125 }
-        { 0128 } { 0129 }
-        { 012A } { 012B }
-        { 012C } { 012D }
-        { 012E } { 012F }
-        { 0132 } { 0133 }
-        { 0134 } { 0135 }
-        { 0136 } { 0137 }
-        { 0139 } { 013A }
-        { 013B } { 013C }
-        { 013E } { 013F }
-        { 0141 } { 0142 }
-        { 0143 } { 0144 }
-        { 0145 } { 0146 }
-        { 0147 } { 0148 }
-        { 014A } { 014B }
-        { 014C } { 014D }
-        { 014E } { 014F }
-        { 0150 } { 0151 }
-        { 0152 } { 0153 }
-        { 0154 } { 0155 }
-        { 0156 } { 0157 }
-        { 0158 } { 0159 }
-        { 015A } { 015B }
-        { 015C } { 015D }
-        { 015E } { 015F }
-        { 0160 } { 0161 }
-        { 0162 } { 0163 }
-        { 0164 } { 0165 }
-        { 0168 } { 0169 }
-        { 016A } { 016B }
-        { 016C } { 016D }
-        { 016E } { 016F }
-        { 0170 } { 0171 }
-        { 0172 } { 0173 }
-        { 0174 } { 0175 }
-        { 0176 } { 0177 }
-        { 0178 } { 00FF }
-        { 0179 } { 017A }
-        { 017B } { 017C }
-        { 017D } { 017E }
-        { 01CD } { 01CE }
-        { 01CF } { 01D0 }
-        { 01D1 } { 01D2 }
-        { 01D3 } { 01D4 }
-        { 01E2 } { 01E3 }
-        { 01E6 } { 01E7 }
-        { 01E8 } { 01E9 }
-        { 01EA } { 01EB }
-        { 01F4 } { 01F5 }
-        { 0218 } { 0219 }
-        { 021A } { 021B }
-        \q_recursion_tail ?
-        \q_recursion_stop
-      \cs_set_protected:Npn \__tl_tmp:w #1#2#3
-        {
-          \group_begin:
-            \cs_set_protected:Npn \__tl_tmp:w ##1##2##3##4
-              {
-                \tl_const:cx
-                  {
-                    c__tl_ #3 _case_
-                    \char_generate:nn {##1} { 12 }
-                    \char_generate:nn {##2} { 12 }
-                    _tl
-                  }
-                    {#2}
-              }
-            \tl_set:Nx \l__tl_internal_a_tl
-              { \char_codepoint_to_bytes:n { "#1 } }
-            \exp_after:wN \__tl_tmp:w \l__tl_internal_a_tl
-          \group_end:
-        }
-      \__tl_tmp:w { 00DF } { SS } { upper }
-      \__tl_tmp:w { 00DF } { Ss } { mixed }
-      \__tl_tmp:w { 0131 } { I }  { upper }
-    }
-  \group_end:
-\group_begin:
-  \cs_set_protected:Npn \__tl_change_case_setup:NN #1#2
-    {
-      \quark_if_recursion_tail_stop:N #1
-      \tl_const:cn { c__tl_change_case_lower_ \token_to_str:N #1 _tl }
-        { #2 }
-      \tl_const:cn { c__tl_change_case_upper_ \token_to_str:N #2 _tl }
-        { #1 }
-      \__tl_change_case_setup:NN
-    }
-  \__tl_change_case_setup:NN
-  \AA \aa
-  \AE \ae
-  \DH \dh
-  \DJ \dj
-  \IJ \ij
-  \L  \l
-  \NG \ng
-  \O  \o
-  \OE \oe
-  \SS \ss
-  \TH \th
-  \q_recursion_tail ?
-  \q_recursion_stop
-  \tl_const:cn { c__tl_change_case_upper_ \token_to_str:N \i _tl } { I }
-  \tl_const:cn { c__tl_change_case_upper_ \token_to_str:N \j _tl } { J }
-\group_end:
-\tl_new:N \l_tl_case_change_accents_tl
-\tl_set:Nn \l_tl_case_change_accents_tl
-  { \" \' \. \^ \` \~ \c \H \k \r \t \u \v }
-\cs_new:Npn \__tl_change_case_mixed_nl:Nnw #1
-  {
-    \bool_lazy_or:nnTF
-      { \int_compare_p:nNn { `#1 } = { `i } }
-      { \int_compare_p:nNn { `#1 } = { `I } }
-      {
-        \__tl_change_case_output:nwn { I }
-        \__tl_change_case_mixed_nl:Nw
-      }
-  }
-\cs_new:Npn \__tl_change_case_mixed_nl:Nw #1#2 \q_recursion_stop
-  {
-    \tl_if_head_is_N_type:nT {#2}
-      { \__tl_change_case_mixed_nl:NNw }
-    #1 #2 \q_recursion_stop
-  }
-\cs_new:Npn \__tl_change_case_mixed_nl:NNw #1#2#3 \q_recursion_stop
-  {
-    \__tl_change_case_if_expandable:NTF #2
-      {
-        \exp_after:wN \__tl_change_case_mixed_nl:Nw \exp_after:wN #1 #2
-          #3 \q_recursion_stop
-      }
-      {
-        \bool_lazy_and:nnTF
-          { ! ( \token_if_cs_p:N #2 ) }
-          {
-            \bool_lazy_or_p:nn
-              { \int_compare_p:nNn { `#2 } = { `j } }
-              { \int_compare_p:nNn { `#2 } = { `J } }
-          }
-          {
-            \__tl_change_case_output:nwn { J }
-            #1
-          }
-          { #1 #2 }
-        #3 \q_recursion_stop
-      }
-  }
-\tl_new:N \l_tl_case_change_math_tl
-\tl_set:Nn \l_tl_case_change_math_tl
-  { $ $ \( \) }
-\tl_new:N \l_tl_case_change_exclude_tl
-\tl_set:Nn \l_tl_case_change_exclude_tl
-  { \cite \ensuremath \label \ref }
-\tl_new:N \l_tl_mixed_case_ignore_tl
-\tl_set:Nx \l_tl_mixed_case_ignore_tl
-  {
-    ( % )
-    [ % ]
-    \cs_to_str:N \{ % \}
-    `
-    -
   }
 \cs_new_protected:Npn \tl_build_begin:N #1
   { \__tl_build_begin:NN \cs_set_nopar:Npx #1 }
@@ -29315,7 +30217,7 @@
   }
 \cs_gset_protected:Npn \__kernel_sys_configuration_load:n #1
   { \file_input:n { #1 .def } }
-\sys_load_deprecation:
+\__kernel_sys_configuration_load:n { l3deprecation }
 %% 
 %%
 %% End of file `expl3-code.tex'.

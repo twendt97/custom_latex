@@ -1,12 +1,12 @@
-# $Id: TLConfig.pm 53076 2019-12-10 06:20:44Z preining $
+# $Id: TLConfig.pm 53803 2020-02-16 17:17:22Z karl $
 # TeXLive::TLConfig.pm - module exporting configuration values
-# Copyright 2007-2019 Norbert Preining
+# Copyright 2007-2020 Norbert Preining
 # This file is licensed under the GNU General Public License version 2
 # or any later version.
 
 package TeXLive::TLConfig;
 
-my $svnrev = '$Revision: 53076 $';
+my $svnrev = '$Revision: 53803 $';
 my $_modulerevision = ($svnrev =~ m/: ([0-9]+) /) ? $1 : "unknown";
 sub module_revision { return $_modulerevision; }
 
@@ -190,7 +190,7 @@ our %TLPDBOptions = (
       "Directory for backups" ],
   "create_formats" =>
     [ "b", 1, "formats",  
-      "Create formats on installation" ],
+      "Generate formats at installation or update" ],
   "desktop_integration" =>
     [ "b", 1, "desktop_integration",
       "Create Start menu shortcuts (w32)" ],

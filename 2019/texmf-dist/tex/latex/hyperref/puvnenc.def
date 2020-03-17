@@ -6,11 +6,12 @@
 %%
 %% hyperref.dtx  (with options: `puvnenc')
 %% 
-%% File: hyperref.dtx Copyright 1995-2001 Sebastian Rahtz,
-%% with portions written by David Carlisle and Heiko Oberdiek,
-%% 2001-2012 Heiko Oberdiek.
-%% 2016-2019 Oberdiek Package Suport Group
-%% 2019 LaTeX3 Project
+%% File: hyperref.dtx
+%% Copyright
+%% 1995-2001 Sebastian Rahtz, with portions written by David Carlisle and Heiko Oberdiek,
+%% 2001-2015 Heiko Oberdiek.
+%% 2016-2019 Oberdiek Package Support Group
+%% 2019-2020 LaTeX3 Project
 %%      https://github.com/latex3/hyperref/issues
 %%
 %% This file is part of the `Hyperref Bundle'.
@@ -32,7 +33,7 @@
 %% given in the file `manifest.txt'.
 %%
 \ProvidesFile{puvnenc.def}
-  [2019/11/10 v7.00c %
+  [2020/01/14 v7.00d %
   Hyperref: Additions to puenc.def for VnTeX]
 \DeclareTextCommand{\abreve}{PU}{\81\003}% U+0103
 \DeclareTextCommand{\acircumflex}{PU}{\80\342}% U+00E2

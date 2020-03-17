@@ -34,8 +34,8 @@
 %%   caption-deu.tex, caption-eng.tex, caption-rus.tex.
 %% 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
-\ProvidesPackage{subcaption}[2020/01/03 v1.3b Sub-captions (AR)]
-\RequirePackage{caption}[2019/09/01] % needs v3.3c or newer
+\ProvidesPackage{subcaption}[2020/01/22 v1.3d Sub-captions (AR)]
+\RequirePackage{caption}[2020/01/03] % needs v3.4h or newer
 \newcommand\subcaption@CheckCompatibility{%
   \@ifundefined{caption@ifcompatibility}{}{%
     \caption@ifcompatibility{%
@@ -65,10 +65,6 @@
   \let\subcaption@CheckCompatibility\@undefined
   \let\subcaption@EH\@undefined
 }
-\caption@SetupOptions{subcaption}{\captionsetup[sub]{#2}}%
-\caption@ExecuteOptions{subcaption}{%
-  size=smaller,labelformat=parens,labelsep=space,skip=6pt,list=0,hypcap=0}
-\caption@ProcessOptions*{subcaption}
 \caption@ForEachType{\DeclareCaptionSubType{#1}}
 \caption@ifundefined\newsubfloat{}{%
   \renewcommand*\newsubfloat{\DeclareCaptionSubType}}
@@ -105,7 +101,9 @@
   \else
     \minipage[#1]#2{#3}%
   \fi\fi
+  \@subfloatboxreset
   \setcaptionsubtype\relax}
+\providecommand*\@subfloatboxreset{}
 \newcommand*\subcaptionbox{%
   \caption@withoptargs{\caption@ibox\setcaptionsubtype}}
 \g@addto@macro\caption@subtypehook{%
@@ -142,6 +140,10 @@
     {\caption@Error{Undefined label format `#1'}}%
     {\expandafter\let\expandafter\subcaption@reffmt\csname caption@lfmt@#1\endcsname}}
 \subcaption@setrefformat{simple}
+\caption@SetupOptions{subcaption}{\captionsetup[sub]{#2}}%
+\caption@ExecuteOptions{subcaption}{%
+  size=smaller,labelformat=parens,labelsep=space,skip=6pt,list=0,hypcap=0}
+\caption@ProcessOptions*{subcaption}
 \def\subfloat{%
   \@ifnextchar[\@subfloat\subfloat@}
 \long\def\@subfloat[#1]{%
@@ -155,7 +157,8 @@
   \ignorespaces}
 \def\subfloat@#1{%
   \setbox\@tempboxa\hbox{#1}%
-  \caption@iiiibox\setcaptionsubtype
+  \caption@iiiibox
+    \setcaptionsubtype
     {\phantomcaption\@gobble}{\phantomcaption\@gobble}% no box with \caption
     {}% no optional arguments for \caption
     {}% no sub-caption

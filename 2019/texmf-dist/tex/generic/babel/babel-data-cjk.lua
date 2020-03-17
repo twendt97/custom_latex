@@ -7,7 +7,7 @@
 -- babel.dtx  (with options: `cjkdata')
 -- 
 --
--- Copyright (C) 2012-2019 Javier Bezos and Johannes L. Braams.
+-- Copyright (C) 2012-2020 Javier Bezos and Johannes L. Braams.
 -- Copyright (C) 1989-2012 Johannes L. Braams and
 --           any individual authors listed elsewhere in this file.
 -- All rights reserved.
@@ -251,6 +251,8 @@ Babel.cjk_class = setmetatable ( Babel.cjk_characters, {
   __index = function(_, k)
     if (k >= 0xAC00  and k <= 0xD7A3)      -- H2/H3
         or (k >= 0x2E80  and k <= 0x9FFF)
+        or (k >= 0xA000  and k <= 0xA48F)  -- Yi
+        or (k >= 0xA490  and k <= 0xA4CF)  -- Yi
         or (k >= 0xF900  and k <= 0xFAFF)
         or (k >= 0xFE10  and k <= 0xFE1F)
         or (k >= 0xFE30  and k <= 0xFE6F)

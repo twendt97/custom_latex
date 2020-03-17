@@ -12,7 +12,7 @@
 %% reports for it can be opened at https://latex-project.org/bugs/
 %% (but please observe conditions on bug reports sent to that address!)
 %% 
-%% Copyright (C) 1993-2019
+%% Copyright (C) 1993-2020
 %% The LaTeX3 Project and any individual authors listed elsewhere
 %% in this file.
 %% 
@@ -34,10 +34,10 @@
 %% The list of all files belonging to the LaTeX `Tools Bundle' is
 %% given in the file `manifest.txt'.
 %% 
-%% File: longtable.dtx Copyright (C) 1990-2019 David Carlisle
+%% File: longtable.dtx Copyright (C) 1990-2020 David Carlisle
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \ProvidesPackage{longtable}
-          [2019/02/06 v4.12 Multi-page Table package (DPC)]
+          [2020/01/07 v4.13 Multi-page Table package (DPC)]
 \def\LT@err{\PackageError{longtable}}
 \def\LT@warn{\PackageWarning{longtable}}
 \def\LT@final@warn{%
@@ -145,7 +145,7 @@
 \def\LT@no@pgbk#1[#2]{\penalty #1\@getpen{#2}\ifnum`{=0\fi}}
 \def\LT@start{%
   \let\LT@start\endgraf
-  \endgraf\penalty\z@\vskip\LTpre
+  \endgraf\penalty\z@\vskip\LTpre\endgraf
   \dimen@\pagetotal
   \advance\dimen@ \ht\ifvoid\LT@firsthead\LT@head\else\LT@firsthead\fi
   \advance\dimen@ \dp\ifvoid\LT@firsthead\LT@head\else\LT@firsthead\fi

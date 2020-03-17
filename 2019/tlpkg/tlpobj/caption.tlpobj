@@ -1,6 +1,6 @@
 name caption
 category Package
-revision 53318
+revision 53517
 shortdesc Customising captions in floating environments
 longdesc The caption package provides many ways to customise the
 longdesc captions in floating environments like figure and table, and
@@ -11,12 +11,12 @@ longdesc compatibility notes, for other packages, is provided in the
 longdesc documentation. The package also provides the "caption outside
 longdesc float" facility, in the same way that simpler packages like
 longdesc capt-of do. The package supersedes caption2.
-containersize 28836
-containerchecksum 6d68f3d0e3817a9d179cec3cbd72e44330bc7ec361ecd96666d0550eebef96c5429e1e87dc43ae8c9a5b06bb6168d04fdb88242a1681580cb952cb3d633f223c
-doccontainersize 1585192
-doccontainerchecksum 10f46459f2fa890b15691fe829b34ac4ea0e33793d5a23e55a8ae84df8e4a196297513c76b524cb87b2c917fdb150b417c0bfcdc1404e0d4918850e87b9499da
-srccontainersize 192496
-srccontainerchecksum fd32e0d0b9dfec4651e9661fe226283bc9e99b2e9598d0c931eca83563760b53661a4b7fc91468604c54ab17f9c1bec6d6d11087833072fb7a81ad8c0417a77c
+containersize 28864
+containerchecksum 5902f3a3c9706f3eb1fe973515232f5d5271c3a5c7dc23d027a30b0274da998c289887e204071538d3c58342572f5c92cff73f729436fdf0e34475fd47405da3
+doccontainersize 1585196
+doccontainerchecksum 57b89b79f2c81aed9101ef2b7ad0ba17053873ce8ec512fb10fde4ac8400bd7a7ba47fac67eded49db870b1dc4d001f46aa2e4ae994d750423c830b8f46450af
+srccontainersize 192524
+srccontainerchecksum 67730bbecc3a2644e3c7157a969908538a5f7356898a9f78f68663a499cff5b3cbdb8e2b91eb18af5e74d49ece6804e39744822765d86820d52d68b653051807
 runfiles size=44
  texmf-dist/tex/latex/caption/bicaption.sty
  texmf-dist/tex/latex/caption/caption.sty

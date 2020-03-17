@@ -1,18 +1,18 @@
 name lualibs
 category Package
-revision 52658
+revision 53682
 shortdesc Additional Lua functions for LuaTeX macro programmers
 longdesc Lualibs is a collection of Lua modules useful for general
 longdesc programming. The bundle is based on lua modules shipped with
 longdesc ConTeXt, and made available in this bundle for use independent
 longdesc of ConTeXt.
-containersize 120408
-containerchecksum cae5bc0a5381c97aaef489cf4c9fd56a7a11fde78e0b6a3b88f6f6fbace7545420a09d32b96d912550950f1e08c469557d91bdd51d01e662b595bdaf7c02e722
-doccontainersize 87748
-doccontainerchecksum 1d8388cbc80315e570dd06a824c07140bbfda4a8e622a5b3f835260359a3527524ff557838aa8025660a62371e4b418bd5cc502789725c76e200195a00aa7743
-srccontainersize 8580
-srccontainerchecksum 36981f23fdbd6b8e2ca0f8803fe674c2d592b1a5ca2439e28390ead669104c7f0d60a3ea8b74f6822c8f1821097793576c8ec592d66479c8ed5c2a58917c849c
-runfiles size=186
+containersize 120980
+containerchecksum bf41a6bca45473d40f927ec019434612947fe79d70671837b2b1ac53cfc727f68e436cd52bf60d12bca5d5dd0bf89e49fbf610107458ab4078b8dfa3bae25940
+doccontainersize 87576
+doccontainerchecksum 3703aa61ceb2fb0cc79a33972e15f1e8d19a2f597eff19b871233422b78dde4cfcba2145cda33c0352cb54a014b7773c3fcee6819b547fb6d91f499f4b464f97
+srccontainersize 8572
+srccontainerchecksum 9975b9391ead3221261494bae828b0b2e618cc686da2bf27b6d7ef2d034868a6428fe9cf274a1ae87bcc42ea6c9d898254df93b1a9d0da21b8e6fefaa7b86468
+runfiles size=187
  texmf-dist/tex/luatex/lualibs/lualibs-basic-merged.lua
  texmf-dist/tex/luatex/lualibs/lualibs-basic.lua
  texmf-dist/tex/luatex/lualibs/lualibs-boolean.lua
@@ -54,4 +54,4 @@ catalogue-contact-support https://github.com/latex3/lualibs/issues
 catalogue-ctan /macros/luatex/generic/lualibs
 catalogue-license gpl2
 catalogue-topics lua-supp luatex
-catalogue-version 2.69
+catalogue-version 2.70

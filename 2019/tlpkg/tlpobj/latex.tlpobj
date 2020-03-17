@@ -1,6 +1,6 @@
 name latex
 category Package
-revision 52731
+revision 53958
 shortdesc A TeX macro package that defines LaTeX
 longdesc LaTeX is a widely-used macro package for TeX, providing many
 longdesc basic document formating commands extended by a wide range of
@@ -21,13 +21,13 @@ depend luatex
 depend pdftex
 depend latexconfig
 depend latex-fonts
-containersize 160488
-containerchecksum 02a090812079518fe091c9777a3a6f4f65d0b3cd6a17657f0a6db3d25b4ac54d38fab816abea845e9b5d2fa48044e456c5449ebfd9459c97f3f922a0f34c768c
-doccontainersize 17643368
-doccontainerchecksum f124dc748017ad9a583529b353751116928377cea0aa45f7f89601676213075fc077f8d78a787ce0cc6d9dc85d9f24605527fc1bf990d19b57ea044d2ec6c730
-srccontainersize 498968
-srccontainerchecksum ac0d14f825cc8b16b30a37eacc39a73efb7f17c2ff716ebfb506c7834db26a9e8efe8e0cdd7343467ed873200fabeeac4e664b958131281560f594e22bd1c509
-runfiles size=429
+containersize 168896
+containerchecksum cf8f91ef3dbfe100597a779a369adc5ebb18c298408d60f6c4453abdbf40315e32bc7b9a943ccaf03dbfe6cf0a43cb0bc942c6ec04ca07cd7bd23c7cf239a7be
+doccontainersize 17592484
+doccontainerchecksum 043858d0c636c83f1e641b72b330475383e0ae04de43bf80437fc51130519c8ab5985a60a2ac5a1bc77a1ce0072ca7367994728e8d83a6cf7796ef50caffc23b
+srccontainersize 524952
+srccontainerchecksum ad0d796bffb1cb8622cde8f7e3d59d748763bdaa6477bd01a3a8644ed28f7d95150d981825e7b8f9240ff0c775d73a7bfdc0080553662ff7d4fdbcad22528faf
+runfiles size=462
  texmf-dist/makeindex/latex/gglo.ist
  texmf-dist/makeindex/latex/gind.ist
  texmf-dist/tex/latex/base/alltt.sty
@@ -88,6 +88,7 @@ runfiles size=429
  texmf-dist/tex/latex/base/leqno.sty
  texmf-dist/tex/latex/base/letter.cls
  texmf-dist/tex/latex/base/letter.sty
+ texmf-dist/tex/latex/base/ltexpl.ltx
  texmf-dist/tex/latex/base/ltluatex.lua
  texmf-dist/tex/latex/base/ltluatex.tex
  texmf-dist/tex/latex/base/ltnews.cls
@@ -162,6 +163,7 @@ runfiles size=429
  texmf-dist/tex/latex/base/t2cenc.dfu
  texmf-dist/tex/latex/base/testpage.tex
  texmf-dist/tex/latex/base/texsys.cfg
+ texmf-dist/tex/latex/base/textcomp-2018-08-11.sty
  texmf-dist/tex/latex/base/textcomp.sty
  texmf-dist/tex/latex/base/tracefnt.sty
  texmf-dist/tex/latex/base/ts1cmr.fd
@@ -189,4 +191,4 @@ runfiles size=429
 catalogue-contact-home http://www.latex-project.org/
 catalogue-license lppl1.3c
 catalogue-topics format
-catalogue-version 2019-10-01 PL3
+catalogue-version 2020-02-02-PL5

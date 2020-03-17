@@ -6,7 +6,7 @@
 %%
 %% l3debug.dtx  (with options: `package')
 %% 
-%% Copyright (C) 1990-2019 The LaTeX3 Project
+%% Copyright (C) 1990-2020 The LaTeX3 Project
 %% 
 %% It may be distributed and/or modified under the conditions of
 %% the LaTeX Project Public License (LPPL), either version 1.3c of
@@ -605,7 +605,7 @@
     { \__cs_generate_variant:wwNN  }
   \__kernel_patch:nnn
     {
-      \cs_if_exist:cF { \c__keys_code_root_tl #1 }
+      \cs_if_exist:cF { \c__keys_code_root_str #1 }
         { \__kernel_debug_log:x { Defining~key~#1~\msg_line_context: } }
     }
     { }
@@ -802,7 +802,7 @@
     }
   \__kernel_patch_eval:nn
     { \__box_dim_eval:n }
-    { \__box_eval:w { } }
+    { \__box_dim_eval:w { } }
   \__kernel_patch_eval:nn
     {
       \dim_eval:n

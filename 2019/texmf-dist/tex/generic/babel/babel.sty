@@ -7,7 +7,7 @@
 %% babel.dtx  (with options: `package')
 %% 
 %%
-%% Copyright (C) 2012-2019 Javier Bezos and Johannes L. Braams.
+%% Copyright (C) 2012-2020 Javier Bezos and Johannes L. Braams.
 %% Copyright (C) 1989-2012 Johannes L. Braams and
 %%           any individual authors listed elsewhere in this file.
 %% All rights reserved.
@@ -33,7 +33,7 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{babel}[2019/12/08 3.37 The Babel package]
+\ProvidesPackage{babel}[2020/02/28 3.41 The Babel package]
 \@ifpackagewith{babel}{debug}
   {\providecommand\bbl@trace[1]{\message{^^J[ #1 ]}}%
    \let\bbl@debug\@firstofone}
@@ -146,31 +146,33 @@
     \fi}%
   \expandafter\bbl@replace@aux#1#2\bbl@nil#2%
   \edef#1{\the\toks@}}
-\bbl@exp{\def\\\bbl@parsedef##1\detokenize{macro:}}#2->#3\relax{%
-  \def\bbl@tempa{#1}%
-  \def\bbl@tempb{#2}%
-  \def\bbl@tempe{#3}}
-\def\bbl@sreplace#1#2#3{%
-  \begingroup
-    \expandafter\bbl@parsedef\meaning#1\relax
-    \def\bbl@tempc{#2}%
-    \edef\bbl@tempc{\expandafter\strip@prefix\meaning\bbl@tempc}%
-    \def\bbl@tempd{#3}%
-    \edef\bbl@tempd{\expandafter\strip@prefix\meaning\bbl@tempd}%
-    \bbl@xin@{\bbl@tempc}{\bbl@tempe}% If not in macro, do nothing
-    \ifin@
-      \bbl@exp{\\\bbl@replace\\\bbl@tempe{\bbl@tempc}{\bbl@tempd}}%
-      \def\bbl@tempc{%     Expanded an executed below as 'uplevel'
-         \\\makeatletter % "internal" macros with @ are assumed
-         \\\scantokens{%
-           \bbl@tempa\\\@namedef{\bbl@stripslash#1}\bbl@tempb{\bbl@tempe}}%
-         \catcode64=\the\catcode64\relax}%  Restore @
-    \else
-      \let\bbl@tempc\@empty  % Not \relax
-    \fi
-    \bbl@exp{%      For the 'uplevel' assignments
-  \endgroup
-    \bbl@tempc}}  % empty or expand to set #1 with changes
+\ifx\detokenize\@undefined\else % Unused macros if old Plain TeX
+  \bbl@exp{\def\\\bbl@parsedef##1\detokenize{macro:}}#2->#3\relax{%
+    \def\bbl@tempa{#1}%
+    \def\bbl@tempb{#2}%
+    \def\bbl@tempe{#3}}
+  \def\bbl@sreplace#1#2#3{%
+    \begingroup
+      \expandafter\bbl@parsedef\meaning#1\relax
+      \def\bbl@tempc{#2}%
+      \edef\bbl@tempc{\expandafter\strip@prefix\meaning\bbl@tempc}%
+      \def\bbl@tempd{#3}%
+      \edef\bbl@tempd{\expandafter\strip@prefix\meaning\bbl@tempd}%
+      \bbl@xin@{\bbl@tempc}{\bbl@tempe}% If not in macro, do nothing
+      \ifin@
+        \bbl@exp{\\\bbl@replace\\\bbl@tempe{\bbl@tempc}{\bbl@tempd}}%
+        \def\bbl@tempc{%     Expanded an executed below as 'uplevel'
+           \\\makeatletter % "internal" macros with @ are assumed
+           \\\scantokens{%
+             \bbl@tempa\\\@namedef{\bbl@stripslash#1}\bbl@tempb{\bbl@tempe}}%
+           \catcode64=\the\catcode64\relax}%  Restore @
+      \else
+        \let\bbl@tempc\@empty  % Not \relax
+      \fi
+      \bbl@exp{%      For the 'uplevel' assignments
+    \endgroup
+      \bbl@tempc}}  % empty or expand to set #1 with changes
+\fi
 \def\bbl@ifsamestring#1#2{%
   \begingroup
     \protected@edef\bbl@tempb{#1}%
@@ -214,8 +216,6 @@
   \bbl@languages
 \fi
 \ifodd\bbl@engine
-  % Harftex is evolving, so the callback is not harcoded, just in case
-  \def\bbl@harfpreline{Harf pre_linebreak_filter callback}%
   \def\bbl@activate@preotf{%
     \let\bbl@activate@preotf\relax  % only once
     \directlua{
@@ -245,23 +245,14 @@
         Babel.pre_otfload_v,
         'Babel.pre_otfload_v',
         luatexbase.priority_in_callback('pre_linebreak_filter',
-           '\bbl@harfpreline')
-        or luatexbase.priority_in_callback('pre_linebreak_filter',
-           'luaotfload.node_processor')
-        or nil)
+          'luaotfload.node_processor') or nil)
       %
       luatexbase.add_to_callback('hpack_filter',
         Babel.pre_otfload_h,
         'Babel.pre_otfload_h',
         luatexbase.priority_in_callback('hpack_filter',
-           '\bbl@harfpreline')
-        or luatexbase.priority_in_callback('hpack_filter',
-           'luaotfload.node_processor')
-        or nil)
-    }%
-    \@ifpackageloaded{harfload}%
-      {\directlua{ Babel.mirroring_enabled = false }}%
-      {}}
+          'luaotfload.node_processor') or nil)
+    }}
   \let\bbl@tempa\relax
   \@ifpackagewith{babel}{bidi=basic}%
     {\def\bbl@tempa{basic}}%

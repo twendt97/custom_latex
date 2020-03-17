@@ -1,6 +1,6 @@
 name babel
 category Package
-revision 53072
+revision 53963
 shortdesc Multilingual support for Plain TeX or LaTeX
 longdesc This package manages culturally-determined typographical (and
 longdesc other) rules for a wide range of languages. A document may
@@ -12,13 +12,13 @@ longdesc has to be done for each language. Included is also a set of ini
 longdesc files for about 200 languages. Many language styles work with
 longdesc pdfLaTeX, as well as with XeLaTeX and LuaLaTeX, out of the box.
 longdesc A few even work with plain formats.
-containersize 153836
-containerchecksum 76c3c2470a3cca6b8f55c663f581d0037e826c719fb27ad7bb659bb92eae1404108bf45e49a5483fb7b0f03954fe10b23ce932e36f544ec98e5b763261da69d4
-doccontainersize 726916
-doccontainerchecksum 44739bbba741d5559b194bf031702b434806600d782f17e40f313f183b450354cbc9dbd2a469738ec9229a4f42b523a6aa0f96a8d6beab82e3afeb178465b63f
-srccontainersize 611124
-srccontainerchecksum 4c6039c52111201593526324b388e9a618689ecdcf72fb59483637440a5141fc8227f50f09220ef0452179c3300ae59d6314fd107ca25c14e2ad141bc68b1711
-runfiles size=841
+containersize 158240
+containerchecksum 2f86e0a45d4911a3a1331c7c42e42903c89f3c2226773caa42a4ddafd11990df8be7b76211581fc4c6ae49424466a78f89b07d41b9b7a86f1ad53dda7b1b66e5
+doccontainersize 753940
+doccontainerchecksum fccda4835fd0b1a861e6da181be38db85c4d27718de81a33aeb64765fbeeb6d31ad003b4b3dd165a579c29618cca01d8874fb73c1c69c3e0dca0e3fa70bf338e
+srccontainersize 632404
+srccontainerchecksum a7de843ec2a5dfa920d32901206a1818e61c4afdb3b5f09968b8d1adfc03742a25d0592d2858dec5258947ab9524959880cd614b6d5c72703ac1fccc7bc294ac
+runfiles size=881
  texmf-dist/makeindex/babel/bbglo.ist
  texmf-dist/makeindex/babel/bbind.ist
  texmf-dist/tex/generic/babel/UKenglish.sty
@@ -141,14 +141,25 @@ runfiles size=841
  texmf-dist/tex/generic/babel/locale/dav/babel-dav.ini
  texmf-dist/tex/generic/babel/locale/dav/babel-taita.tex
  texmf-dist/tex/generic/babel/locale/de/babel-austrian.tex
+ texmf-dist/tex/generic/babel/locale/de/babel-de-1901.ini
+ texmf-dist/tex/generic/babel/locale/de/babel-de-1996.ini
+ texmf-dist/tex/generic/babel/locale/de/babel-de-AT-1901.ini
+ texmf-dist/tex/generic/babel/locale/de/babel-de-AT-1996.ini
  texmf-dist/tex/generic/babel/locale/de/babel-de-AT.ini
+ texmf-dist/tex/generic/babel/locale/de/babel-de-CH-1901.ini
+ texmf-dist/tex/generic/babel/locale/de/babel-de-CH-1996.ini
  texmf-dist/tex/generic/babel/locale/de/babel-de-CH.ini
  texmf-dist/tex/generic/babel/locale/de/babel-de.ini
  texmf-dist/tex/generic/babel/locale/de/babel-german-at.tex
+ texmf-dist/tex/generic/babel/locale/de/babel-german-austria-traditional.tex
  texmf-dist/tex/generic/babel/locale/de/babel-german-austria.tex
  texmf-dist/tex/generic/babel/locale/de/babel-german-ch.tex
+ texmf-dist/tex/generic/babel/locale/de/babel-german-switzerland-traditional.tex
  texmf-dist/tex/generic/babel/locale/de/babel-german-switzerland.tex
+ texmf-dist/tex/generic/babel/locale/de/babel-german-traditional.tex
  texmf-dist/tex/generic/babel/locale/de/babel-german.tex
+ texmf-dist/tex/generic/babel/locale/de/babel-naustrian.tex
+ texmf-dist/tex/generic/babel/locale/de/babel-ngerman.tex
  texmf-dist/tex/generic/babel/locale/de/babel-nswissgerman.tex
  texmf-dist/tex/generic/babel/locale/de/babel-swissgerman.tex
  texmf-dist/tex/generic/babel/locale/dje/babel-dje.ini
@@ -169,6 +180,7 @@ runfiles size=841
  texmf-dist/tex/generic/babel/locale/el/babel-el-polyton.ini
  texmf-dist/tex/generic/babel/locale/el/babel-el.ini
  texmf-dist/tex/generic/babel/locale/el/babel-greek.tex
+ texmf-dist/tex/generic/babel/locale/el/babel-monotonicgreek.tex
  texmf-dist/tex/generic/babel/locale/el/babel-polytonicgreek.tex
  texmf-dist/tex/generic/babel/locale/en/babel-american.tex
  texmf-dist/tex/generic/babel/locale/en/babel-australian.tex
@@ -242,6 +254,8 @@ runfiles size=841
  texmf-dist/tex/generic/babel/locale/gd/babel-scottishgaelic.tex
  texmf-dist/tex/generic/babel/locale/gl/babel-galician.tex
  texmf-dist/tex/generic/babel/locale/gl/babel-gl.ini
+ texmf-dist/tex/generic/babel/locale/grc/babel-ancientgreek.tex
+ texmf-dist/tex/generic/babel/locale/grc/babel-grc.ini
  texmf-dist/tex/generic/babel/locale/gsw/babel-gsw.ini
  texmf-dist/tex/generic/babel/locale/gu/babel-gu.ini
  texmf-dist/tex/generic/babel/locale/gu/babel-gujarati.tex
@@ -332,6 +346,14 @@ runfiles size=841
  texmf-dist/tex/generic/babel/locale/kw/babel-kw.ini
  texmf-dist/tex/generic/babel/locale/ky/babel-ky.ini
  texmf-dist/tex/generic/babel/locale/ky/babel-kyrgyz.tex
+ texmf-dist/tex/generic/babel/locale/la/babel-classiclatin.tex
+ texmf-dist/tex/generic/babel/locale/la/babel-ecclesiasticlatin.tex
+ texmf-dist/tex/generic/babel/locale/la/babel-la-x-classic.ini
+ texmf-dist/tex/generic/babel/locale/la/babel-la-x-ecclesia.ini
+ texmf-dist/tex/generic/babel/locale/la/babel-la-x-medieval.ini
+ texmf-dist/tex/generic/babel/locale/la/babel-la.ini
+ texmf-dist/tex/generic/babel/locale/la/babel-latin.tex
+ texmf-dist/tex/generic/babel/locale/la/babel-medievallatin.tex
  texmf-dist/tex/generic/babel/locale/lag/babel-lag.ini
  texmf-dist/tex/generic/babel/locale/lag/babel-langi.tex
  texmf-dist/tex/generic/babel/locale/lb/babel-lb.ini
@@ -658,13 +680,11 @@ runfiles size=841
  texmf-dist/tex/generic/babel/spanish.sty
  texmf-dist/tex/generic/babel/swedish.sty
  texmf-dist/tex/generic/babel/switch.def
- texmf-dist/tex/generic/babel/test-hyphen-post-wiki.tex
  texmf-dist/tex/generic/babel/turkish.sty
  texmf-dist/tex/generic/babel/txtbabel.def
  texmf-dist/tex/generic/babel/ukraineb.sty
  texmf-dist/tex/generic/babel/usorbian.sty
  texmf-dist/tex/generic/babel/welsh.sty
- texmf-dist/tex/generic/babel/xe-polygreek.tex
  texmf-dist/tex/generic/babel/xebabel.def
 catalogue-also polyglossia
 catalogue-contact-bugs https://github.com/latex3/babel/issues
@@ -672,4 +692,4 @@ catalogue-contact-repository https://github.com/latex3/babel
 catalogue-ctan /macros/latex/required/babel/base
 catalogue-license lppl1.3
 catalogue-topics multilingual
-catalogue-version 3.37
+catalogue-version 3.41

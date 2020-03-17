@@ -5,8 +5,8 @@
 
 local ProvidesLuaModule = { 
     name          = "luaotfload-features",
-    version       = "3.11",       --TAGVERSION
-    date          = "2019-11-10", --TAGDATE
+    version       = "3.12",       --TAGVERSION
+    date          = "2020-02-02", --TAGDATE
     description   = "luaotfload submodule / features",
     license       = "GPL v2.0",
     author        = "Hans Hagen, Khaled Hosny, Elie Roux, Philipp Gesang, Marcel Krüger",
@@ -28,6 +28,8 @@ local P                 = lpeg.P
 local R                 = lpeg.R
 local S                 = lpeg.S
 local C                 = lpeg.C
+
+local lower             = string.lower
 
 local table             = table
 local tabletohash       = table.tohash
@@ -240,7 +242,14 @@ local support_incomplete = tabletohash({
 --doc]]--
 
 --- (string, string) dict -> (string, string) dict
-local apply_default_features = function (speclist)
+local apply_default_features = function (rawlist)
+    local speclist = {}
+    for k, v in pairs(rawlist) do
+        if type(v) == 'string' then
+            v = ({['true'] = true, ['false'] = false})[lower(v)] or v
+        end
+        speclist[k] = v
+    end
     local default_features = luaotfload.features
 
     speclist = speclist or { }
@@ -248,8 +257,8 @@ local apply_default_features = function (speclist)
 
     --- handle language tag
     local language = speclist.language
-    if language then --- already lowercase at this point
-        language = stringgsub(language, "[^a-z0-9]", "")
+    if language then
+        language = stringgsub(lower(language), "[^a-z0-9]", "")
         language = rawget(verboselanguages, language) -- srsly, rawget?
                 or (languages[language] and language)
                 or "dflt"
@@ -261,7 +270,7 @@ local apply_default_features = function (speclist)
     --- handle script tag
     local script = speclist.script
     if script then
-        script = stringgsub(script, "[^a-z0-9]","")
+        script = stringgsub(lower(script), "[^a-z0-9]","")
         script = rawget(verbosescripts, script)
               or (scripts[script] and script)
               or "dflt"
@@ -392,15 +401,7 @@ local handle_request = function (specification)
     end
 
     features.raw = request.features or {}
-    request.features = {}
-    for k, v in pairs(features.raw) do
-        if type(v) == 'string' then
-            v = string.lower(v)
-            v = ({['true'] = true, ['false'] = false})[v] or v
-        end
-        request.features[k] = v
-    end
-    request.features = apply_default_features(request.features)
+    request.features = apply_default_features(features.raw)
 
     if name then
         specification.name     = name
@@ -430,9 +431,12 @@ local handle_request = function (specification)
     features.normal = normalize (request.features)
     specification.sub = request.sub or specification.sub or false
 
-    if request.features and request.features.mode
-          and fonts.readers[request.features.mode] then
-        specification.forced = request.features.mode
+    local forced_mode = request.features and request.features.mode
+    if forced_mode then
+        forced_mode = lower(forced_mode)
+        if fonts.readers[forced_mode] then
+            specification.forced = forced_mode
+        end
     end
 
     return specification
@@ -575,6 +579,8 @@ local add_auto_features = function ()
         otf.addfeature (name, spec)
     end
 end
+
+luaotfload.apply_default_features = apply_default_features
 
 return function ()
     if not fonts and fonts.handlers then

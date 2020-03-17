@@ -1,6 +1,6 @@
 name graphics
 category Package
-revision 52663
+revision 53640
 catalogue latex-graphics
 shortdesc The LaTeX standard graphics bundle
 longdesc This is a collection of LaTeX packages for: producing colour
@@ -9,12 +9,12 @@ longdesc of text in LaTeX documents. It comprises the packages color,
 longdesc graphics, graphicx, trig, epsfig, keyval, and lscape.
 depend graphics-cfg
 depend graphics-def
-containersize 15040
-containerchecksum 644fb04d471819b976df0ead918a6f9d4c73affdf45ef19f905462713578be9eff4d487f97423e801651ab352bd49f275b89433ad8b5d5068c2aee7839d003f5
-doccontainersize 2001436
-doccontainerchecksum 194a3ab2ecead492a89c2a50a6afa1764348fa8dc70d2c00fd8eca9dd68aba71361732c9c01b760f4a2e3e5d5f5550fa37e2d42c8fc72cab33f1014ea10bd213
-srccontainersize 51852
-srccontainerchecksum f54ff0eec5c381518003d4203ac8d92a33aa8c18937aec8e74f89ce081710110deb649c359230b8b50036469376722718726ca87616ccbd596f78be0107696a4
+containersize 15064
+containerchecksum e46cb5c148958bfb538bfb0a3265f4b33c9f950285e39f9e7bb8bf2e8a5bf801a2baff9bee3268c072ed02c8f84097a4e7dadbd5f2a2f50b92fb8e7f9585f03f
+doccontainersize 1988012
+doccontainerchecksum 5b978813cf8fd00523cae6b543af0ef2f50544211a2fab6d2be84d778cf6c720ad2c4c91ef44cac21719358568c5728892a15b29e0b1858d61592d6b196e5479
+srccontainersize 51832
+srccontainerchecksum bc052e0d9c2d0ee0364511b1faf6965f656fff76ca7961598ba168ceae730e22b962adf130ee5f7b2a44a77cc80f8d54eba3a1438fa3aeb5d400994560bc45c0
 runfiles size=36
  texmf-dist/tex/latex/graphics/color.sty
  texmf-dist/tex/latex/graphics/dvipdf.def
@@ -41,4 +41,3 @@ catalogue-contact-home https://www.latex-project.org/
 catalogue-ctan /macros/latex/required/graphics
 catalogue-license lppl1.3c
 catalogue-topics graphics collection
-catalogue-version 2019-10-01 PL1

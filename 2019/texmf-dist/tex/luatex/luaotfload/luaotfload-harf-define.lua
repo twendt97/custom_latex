@@ -5,8 +5,8 @@
 do -- block to avoid to many local variables error
  local ProvidesLuaModule = { 
      name          = "luaotfload-harf-define",
-     version       = "3.11",       --TAGVERSION
-     date          = "2019-11-10", --TAGDATE
+     version       = "3.12",       --TAGVERSION
+     date          = "2020-02-02", --TAGDATE
      description   = "luaotfload submodule / database",
      license       = "GPL v2.0",
      author        = "Khaled Hosny, Marcel Krüger",
@@ -46,6 +46,7 @@ local function loadfont(spec)
   local key = string.format("%s:%d", gsub(path, "[/\\]", ":"), sub)
 
   local attributes = lfs.attributes(path)
+  if not attributes then return end
   local size, date = attributes.size or 0, attributes.modification or 0
 
   local cached = containers.read(facecache, key)
@@ -193,6 +194,17 @@ local function loadfont(spec)
   end
   cached.face = hbface
   cached.font = hbfont
+  do
+    local nominals = cached.nominals
+    local gid_offset = cached.gid_offset
+    cached.name_to_char = setmetatable({}, {__index = function(t, name)
+      local gid = hbfont:get_glyph_from_name(name)
+      local char = gid and (nominals[gid] or gid_offset + gid)
+      t[name] = char -- ? Do we want this
+      return char
+    end})
+  end
+
   return cached
 end
 
@@ -217,11 +229,11 @@ local tlig ={
 }
 
 local function scalefont(data, spec)
+  if not data then return data, spec end
   local size = spec.size
-  local features = spec.features.normal
+  local features = fonts.constructors.checkedfeatures("otf", spec.features.normal)
   features.mode = 'plug'
   features.features = 'harf'
-  fonts.constructors.checkedfeatures("otf", features)
   local hbface = data.face
   local hbfont = data.font
   local upem = data.upem
@@ -316,7 +328,7 @@ local function scalefont(data, spec)
 
   local tfmdata = {
     name = spec.specification,
-    filename = spec.resolved,
+    filename = 'harfloaded:' .. spec.resolved,
     subfont = spec.sub or 1,
     designsize = size,
     psname = sanitize(data.psname),
@@ -356,8 +368,12 @@ local function scalefont(data, spec)
     specification = spec,
     shared = {},
     properties = {},
+    resources = {
+      unicodes = data.name_to_char,
+    },
   }
   tfmdata.shared.processes = fonts.handlers.otf.setfeatures(tfmdata, features)
+  fonts.constructors.applymanipulators("otf", tfmdata, features, false)
   return tfmdata
 end
 
@@ -404,3 +420,11 @@ fonts.readers.harf = function(spec)
   end
   return scalefont(loadfont(spec), spec)
 end
+
+luatexbase.add_to_callback('find_opentype_file', function(name)
+  return name:gsub('^harfloaded:', '')
+end, 'luaotfload.harf.strip_prefix')
+
+luatexbase.add_to_callback('find_truetype_file', function(name)
+  return name:gsub('^harfloaded:', '')
+end, 'luaotfload.harf.strip_prefix')

@@ -6,7 +6,7 @@
 %%
 %% l3keys2e.dtx  (with options: `package')
 %% 
-%% Copyright (C) 2009-2019 The LaTeX3 Project
+%% Copyright (C) 2009-2020 The LaTeX3 Project
 %% 
 %% It may be distributed and/or modified under the conditions of
 %% the LaTeX Project Public License (LPPL), either version 1.3c of
@@ -19,8 +19,8 @@
 %% and all files in that bundle must be distributed together.
 %% 
 %% File: l3keys2e.dtx
-\RequirePackage{expl3}[2018/02/21]
-\@ifpackagelater{expl3}{2018/02/21}
+\RequirePackage{expl3}[2020/02/08]
+\@ifpackagelater{expl3}{2020/02/08}
   {}
   {%
     \PackageError{l3keys2e}{Support package l3kernel too old}
@@ -32,7 +32,7 @@
       }%
     \endinput
   }
-\ProvidesExplPackage{l3keys2e}{2019-10-11}{}
+\ProvidesExplPackage{l3keys2e}{2020-02-25}{}
   {LaTeX2e option processing using LaTeX3 keys}
 \cs_generate_variant:Nn \clist_put_right:Nn { Nv }
 \cs_generate_variant:Nn \keys_if_exist:nnT  { nx }
@@ -51,9 +51,11 @@
             unknown .code:n =
               {
                 \msg_error:nnxx { keyvalue } { option-unknown }
-                  { \l_keys_key_tl } { \@currname }
+                  { \l_keys_key_str } { \@currname }
               }
           }
+        \AtEndOfPackage
+          { \keys_define:nn {#1} { unknown .undefine: } }
       }
     \clist_map_inline:Nn \l__keys_latexe_options_clist
       {

@@ -1,6 +1,6 @@
 name collection-basic
 category Collection
-revision 52605
+revision 53774
 shortdesc Essential programs and files
 longdesc These files are regarded as basic for any TeX system, covering
 longdesc plain TeX macros, Computer Modern fonts, and configuration for
@@ -12,6 +12,7 @@ depend cm
 depend colorprofiles
 depend dvipdfmx
 depend dvips
+depend ec
 depend enctex
 depend etex
 depend etex-pkg
@@ -32,9 +33,9 @@ depend makeindex
 depend metafont
 depend mflogo
 depend mfware
+depend modes
 depend pdftex
 depend plain
-depend tetex
 depend tex
 depend tex-ini-files
 depend texlive-common
@@ -46,5 +47,5 @@ depend tlshell
 depend unicode-data
 depend updmap-map
 depend xdvi
-containersize 640
-containerchecksum a1c4adfa3d670ba20ffd19458ccaf194161fb7cc81f5c243d42503f077fa01731ee347e6ddd1fd2f8f3f3bc6dc9244ec3a5979d074e3acd5962e2f53fffe189c
+containersize 644
+containerchecksum 57aab47e05657c83c41e81fa1ece61a43b223c76043b7f4c2a3af6c54110ba69ee3421ad7bda591e7f0872a5f2e4def87f338d6d0fa9a931396a37ca76dda521

@@ -1,8 +1,8 @@
 #!/usr/bin/env perl
-# $Id: install-menu-text.pl 53204 2019-12-21 23:18:19Z karl $
+# $Id: install-menu-text.pl 53428 2020-01-16 23:29:27Z karl $
 # install-menu-txt.pl
 #
-# Copyright 2007-2017 Norbert Preining, Karl Berry
+# Copyright 2007-2020 Norbert Preining, Karl Berry
 # Copyright 2007-2008 Reinhard Kotucha
 # This file is licensed under the GNU General Public License version 2
 # or any later version.

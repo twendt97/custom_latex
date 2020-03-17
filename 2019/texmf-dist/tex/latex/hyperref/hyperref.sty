@@ -6,11 +6,12 @@
 %%
 %% hyperref.dtx  (with options: `package')
 %% 
-%% File: hyperref.dtx Copyright 1995-2001 Sebastian Rahtz,
-%% with portions written by David Carlisle and Heiko Oberdiek,
-%% 2001-2012 Heiko Oberdiek.
-%% 2016-2019 Oberdiek Package Suport Group
-%% 2019 LaTeX3 Project
+%% File: hyperref.dtx
+%% Copyright
+%% 1995-2001 Sebastian Rahtz, with portions written by David Carlisle and Heiko Oberdiek,
+%% 2001-2015 Heiko Oberdiek.
+%% 2016-2019 Oberdiek Package Support Group
+%% 2019-2020 LaTeX3 Project
 %%      https://github.com/latex3/hyperref/issues
 %%
 %% This file is part of the `Hyperref Bundle'.
@@ -33,7 +34,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{hyperref}
-  [2019/11/10 v7.00c %
+  [2020/01/14 v7.00d %
   Hypertext links for LaTeX]
 \begingroup
   \@makeother\`%
@@ -2894,22 +2895,33 @@
   \@ifundefined{Hy@pdfversion@#1}{%
     \PackageWarning{hyperref}{%
       Unsupported PDF version `#1'.\MessageBreak
-      Valid values: 1.2 until 1.9%
+      Valid values: 1.2-1.7, 2.0%
     }%
   }{%
     \Hy@setpdfversiontrue
-    \edef\Hy@pdfversion{\@nameuse{Hy@pdfversion@#1}}%
+    \@nameuse{Hy@pdfversion@#1}%
   }%
 }
-\@namedef{Hy@pdfversion@1.2}{2}%
-\@namedef{Hy@pdfversion@1.3}{3}%
-\@namedef{Hy@pdfversion@1.4}{4}%
-\@namedef{Hy@pdfversion@1.5}{5}%
-\@namedef{Hy@pdfversion@1.6}{6}%
-\@namedef{Hy@pdfversion@1.7}{7}%
-\@namedef{Hy@pdfversion@1.8}{8}%
-\@namedef{Hy@pdfversion@1.9}{9}%
-\def\Hy@pdfversion{5}
+\@namedef{Hy@pdfversion@1.2}{\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{2}}%
+\@namedef{Hy@pdfversion@1.3}{\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{3}}%
+\@namedef{Hy@pdfversion@1.4}{\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{4}}%
+\@namedef{Hy@pdfversion@1.5}{\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{5}}%
+\@namedef{Hy@pdfversion@1.6}{\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{6}}%
+\@namedef{Hy@pdfversion@1.7}{\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{7}}%
+\@namedef{Hy@pdfversion@2.0}{\def\Hy@pdf@majorversion{2}\def\Hy@pdf@minorversion{0}}%
+\def\Hy@pdf@majorversion{1}\def\Hy@pdf@minorversion{5}
+\let\Hy@pdfversion\Hy@pdf@minorversion
+\def\Hy@pdf@majorminor@version{\numexpr100*\Hy@pdf@majorversion+\Hy@pdf@minorversion\relax}
+\def\Hy@pdfmajorminor@version{\numexpr100*\Hy@pdfmajorversion+\Hy@pdfminorversion\relax}
+\@ifundefined{pdfminorversion}{}{%
+\@ifundefined{pdfmajorversion}{%
+\newcount\pdfmajorversion
+\pdfmajorversion=1
+}{}%
+}
+\ifx\pdfmajorversion\@undefined\else
+\def\Hy@pdfmajorversion{\pdfmajorversion}
+\fi
 \newif\ifHy@DviMode
 \let\Hy@DviErrMsg\ltx@empty
 \ifpdf
@@ -4452,7 +4464,7 @@
 }
 \Hy@DisableOption{pdfa}
 \ifHy@pdfa
-  \ifnum \Hy@pdfversion < 4
+  \ifnum \Hy@pdf@majorminor@version< 104
   \kvsetkeys{Hyp}{pdfversion=1.4}%
   \fi
   \Hy@DisableOption{pdfversion}%
@@ -4666,7 +4678,7 @@
   \ifx\HyOpt@CustomDriver\ltx@empty
     \ifx\Hy@driver\@empty
       \def\HyOpt@DriverType{ (autodetected)}%
-      \providecommand*{\Hy@defaultdriver}{hypertex}%
+      \providecommand*{\Hy@defaultdriver}{hdvips}%
       \ifpdf
         \ifx\pdfextension\@undefined
           \def\Hy@driver{hpdftex}%
@@ -5872,7 +5884,7 @@
     \kv@parse{#1}{%
       \Hy@pdfstringdef\kv@key\kv@key
       \ifx\kv@value\relax
-        \ifnum\Hy@pdfversion<3 % implementation note 122, PDF spec 1.7
+        \ifnum\Hy@pdf@majorminor@version<103 % implementation note 122, PDF spec 1.7
           \xdef\Fld@choices{\Fld@choices[(\kv@key)(\kv@key)]}%
         \else
           \xdef\Fld@choices{\Fld@choices(\kv@key)}%

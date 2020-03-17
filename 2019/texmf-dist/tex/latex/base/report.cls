@@ -13,7 +13,7 @@
 %% (but please observe conditions on bug reports sent to that address!)
 %% 
 %% 
-%% Copyright (C) 1993-2019
+%% Copyright (C) 1993-2020
 %% The LaTeX3 Project and any individual authors listed elsewhere
 %% in this file.
 %% 
@@ -43,7 +43,7 @@
 %% extension .ins) which are part of the distribution.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{report}
-              [2019/10/25 v1.4k
+              [2019/12/20 v1.4l
  Standard LaTeX document class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -427,10 +427,11 @@
 \renewcommand\p@enumii{\theenumi}
 \renewcommand\p@enumiii{\theenumi(\theenumii)}
 \renewcommand\p@enumiv{\p@enumiii\theenumiii}
-\newcommand\labelitemi{\textbullet}
-\newcommand\labelitemii{\normalfont\bfseries \textendash}
-\newcommand\labelitemiii{\textasteriskcentered}
-\newcommand\labelitemiv{\textperiodcentered}
+\newcommand\labelitemi  {\labelitemfont \textbullet}
+\newcommand\labelitemii {\labelitemfont \bfseries \textendash}
+\newcommand\labelitemiii{\labelitemfont \textasteriskcentered}
+\newcommand\labelitemiv{ \labelitemfont \textperiodcentered}
+\newcommand\labelitemfont{\normalfont}
 \newenvironment{description}
                {\list{}{\labelwidth\z@ \itemindent-\leftmargin
                         \let\makelabel\descriptionlabel}}

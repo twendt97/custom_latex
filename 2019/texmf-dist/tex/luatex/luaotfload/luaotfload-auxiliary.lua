@@ -6,8 +6,8 @@
 
 local ProvidesLuaModule = { 
     name          = "luaotfload-auxiliary",
-    version       = "3.11",       --TAGVERSION
-    date          = "2019-11-10", --TAGDATE
+    version       = "3.12",       --TAGVERSION
+    date          = "2020-02-02", --TAGDATE
     description   = "luaotfload submodule / auxiliary functions",
     license       = "GPL v2.0"
 }
@@ -429,6 +429,19 @@ function aux.name_of_slot(codepoint)
   return false
 end
 
+--[[doc--
+
+  Get the GID of the glyph associated with a given name.
+
+--doc]]--
+function aux.gid_of_name(font_id, glyphname)
+  local slot = aux.slot_of_name(font_id, glyphname)
+  if not slot then return end
+  local tfmdata = identifiers[font_id] or font.fonts[font_id]
+  -- assert(tfmdata) -- Otherwise slot_of_name would have failed already
+  return tfmdata.characters[slot].index or slot
+end
+
 -----------------------------------------------------------------------
 ---                 features / scripts / languages
 -----------------------------------------------------------------------
@@ -638,7 +651,7 @@ function aux.provides_feature(font_id,        asked_script,
                                                         or asked_script)
     local language = harf.Tag.new(asked_language == "DFLT" and "dflt"
                                                             or asked_language)
-    local feature = harf.Tag.new(feature)
+    local feature = harf.Tag.new(asked_feature)
 
     for _, tag in next, { GSUBtag, GPOStag } do
       local _, script_idx = hbface:ot_layout_find_script(tag, script)

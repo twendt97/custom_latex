@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
-# $Id: tlmgr.pl 53225 2019-12-24 19:19:02Z karl $
+# $Id: tlmgr.pl 53842 2020-02-19 07:28:40Z preining $
 #
-# Copyright 2008-2019 Norbert Preining
+# Copyright 2008-2020 Norbert Preining
 # This file is licensed under the GNU General Public License version 2
 # or any later version.
 
-my $svnrev = '$Revision: 53225 $';
-my $datrev = '$Date: 2019-12-24 20:19:02 +0100 (Tue, 24 Dec 2019) $';
+my $svnrev = '$Revision: 53842 $';
+my $datrev = '$Date: 2020-02-19 08:28:40 +0100 (Wed, 19 Feb 2020) $';
 my $tlmgrrevision;
 my $tlmgrversion;
 my $prg;
@@ -2359,11 +2359,12 @@ sub write_w32_updater {
   >con echo DO NOT CLOSE THIS WINDOW!
   >con echo TeX Live infrastructure update in progress ...
   >con echo Detailed command logging to $upd_log
-  chdir /d "%~dp0.."
+  pushd "%~dp0.."
   if not errorlevel 1 goto :update
   >con echo Could not change working directory to "%~dp0.."
   >con echo Aborting infrastructure update, no changes have been made.
   >con $gui_pause 
+  popd
   exit /b 1
     
 :update
@@ -2379,6 +2380,7 @@ sub write_w32_updater {
   >con echo Infrastructure update finished successfully.
   >con echo $post_update_msg
   >con $gui_pause 
+  popd
   exit /b 0
 
 :rollback
@@ -2395,6 +2397,7 @@ sub write_w32_updater {
   >con echo self restore: @rst_info
   >con echo Infrastructure update failed. Previous version has been restored.
   >con $gui_pause 
+  popd
   exit /b 1
 
 :panic
@@ -2405,6 +2408,7 @@ sub write_w32_updater {
   >con echo To repair your TeX Live installation download and run:
   >con echo $TeXLive::TLConfig::TeXLiveURL/update-tlmgr-latest.exe
   >con $gui_pause 
+  popd
   exit /b 666
 EOF
 
@@ -3529,14 +3533,14 @@ sub action_update {
 
   # only when we are not dry-running we restart the program
   if (!win32() && $restart_tlmgr && !$opts{"dry-run"} && !$opts{"list"}) {
-    info ("Restarting tlmgr to complete update ...\n");
+    info("$prg: Restarting to complete update ...\n");
     debug("restarting tlmgr @::SAVEDARGV\n");
     # cleanup temp files before re-exec-ing tlmgr
     File::Temp::cleanup();
     exec("tlmgr", @::SAVEDARGV);
     # we need warn here, otherwise perl gives warnings!
-    warn ("$prg: cannot restart tlmgr, please retry update\n");
-    return ($F_ERROR);
+    warn("$prg: cannot restart tlmgr, please retry update\n");
+    return($F_ERROR);
   }
 
   # for --dry-run we cannot restart tlmgr (no way to fake successful 
@@ -3547,7 +3551,7 @@ sub action_update {
     $opts{"dry-run"} = -1;
     $localtlpdb = undef;
     $remotetlpdb = undef;
-    info ("Restarting tlmgr to complete update ...\n");
+    info ("$prg --dry-run: would restart tlmgr to complete update ...\n");
     $ret |= action_update();
     return ($ret);
   }
@@ -4653,7 +4657,7 @@ sub action_option {
         $ret |= $F_WARNING;
       }
     }
-  } elsif ($what =~ m/^showall$/i) {
+  } elsif ($what =~ m/^(showall|help)$/i) {
     if ($opts{'json'}) {
       my $json = $localtlpdb->options_as_json();
       print("$json\n");
@@ -6152,7 +6156,7 @@ sub action_conf {
           info("$k = " . $cf->value($k) . "\n");
         }
       } else {
-        info("$arg config file $fn not present\n");
+        info("$prg: $arg config file $fn not present\n");
         return($F_WARNING);
       }
     } else {
@@ -6242,7 +6246,7 @@ sub action_conf {
       } elsif (!defined($val)) {
         if (defined($opts{'delete'})) {
           if (defined($cf->value($key))) {
-            info("removing setting $arg $key value: " . $cf->value($key)
+            info("$prg: removing setting $arg $key value: " . $cf->value($key)
                  . "from $fn\n"); 
             $cf->delete_key($key);
           } else {
@@ -6896,8 +6900,10 @@ END_NO_CHECKSUMS
   }
   # from here on only in non-machine-readable mode and not silent
   info("$prg: package repositories\n");
+  my $show_verification_page_link = 0;
   my $verstat = "";
   if (!$remotetlpdb->virtual_get_tlpdb('main')->is_verified) {
+    $show_verification_page_link = 1;
     $verstat = ": ";
     $verstat .= $VerificationStatusDescription{$remotetlpdb->virtual_get_tlpdb('main')->verification_status};
   }
@@ -6908,13 +6914,21 @@ END_NO_CHECKSUMS
     if ($t ne 'main') {
       $verstat = "";
       if (!$remotetlpdb->virtual_get_tlpdb($t)->is_verified) {
+        my $tlpdb_ver_stat = $remotetlpdb->virtual_get_tlpdb($t)->verification_status;
         $verstat = ": ";
-        $verstat .= $VerificationStatusDescription{$remotetlpdb->virtual_get_tlpdb($t)->verification_status};
+        $verstat .= $VerificationStatusDescription{$tlpdb_ver_stat};
+        # if the db is not verified *but* was signed, give the page link info
+        if ($tlpdb_ver_stat != $VS_UNSIGNED) {
+          $show_verification_page_link = 1;
+        }
       }
       info("\t$t = " . $repos{$t} . " (" .
         ($remotetlpdb->virtual_get_tlpdb($t)->is_verified ? "" : "not ") .
         "verified$verstat)\n");
     }
+  }
+  if ($show_verification_page_link) {
+    info("For more about verification, see https://texlive.info/verification.html.\n");
   }
   return 1;
 }
@@ -7002,12 +7016,13 @@ sub setup_one_remotetlpdb {
       ddebug("loc copy found!\n");
       # we found the tlpdb matching the current location
       # check for the remote hash
-      my $path = "$location/$InfraLocation/$DatabaseName.$TeXLive::TLConfig::ChecksumExtension";
+      my $path = "$location/$InfraLocation/$DatabaseName";
       ddebug("remote path of digest = $path\n");
-
-      my ($ret,$msg)
-        = TeXLive::TLCrypto::verify_checksum($loc_copy_of_remote_tlpdb, $path);
-      if ($ret == $VS_CONNECTION_ERROR) {
+      my ($verified, $status)
+        = TeXLive::TLCrypto::verify_checksum_and_check_return($loc_copy_of_remote_tlpdb, $path,
+            $is_main, 1); # the 1 means local copy mode!
+      # deal with those cases that need special treatment
+      if ($status == $VS_CONNECTION_ERROR) {
         info(<<END_NO_INTERNET);
 Unable to download the checksum of the remote TeX Live database,
 but found a local copy, so using that.
@@ -7023,42 +7038,17 @@ END_NO_INTERNET
         $remotetlpdb = TeXLive::TLPDB->new(root => $location,
           tlpdbfile => $loc_copy_of_remote_tlpdb);
         $local_copy_tlpdb_used = 1;
-      } elsif ($ret == $VS_UNSIGNED) {
-        # we require the main database to be signed, but allow for
-        # subsidiary to be unsigned
-        if ($is_main) {
-          tldie("$prg: main database at $location is not signed: $msg\n");
-        }
-        # the remote database has not be signed, warn
-        debug("$prg: remote database is not signed, continuing anyway!\n");
-      } elsif ($ret == $VS_GPG_UNAVAILABLE) {
-        # no gpg available
-        debug("$prg: no gpg available for verification, continuing anyway!\n");
-      } elsif ($ret == $VS_PUBKEY_MISSING) {
-        # pubkey missing
-        debug("$prg: $msg, continuing anyway!\n");
-      } elsif ($ret == $VS_CHECKSUM_ERROR) {
-        # no problem, checksum is wrong, we need to get new tlpdb
-      } elsif ($ret == $VS_SIGNATURE_ERROR) {
-        # umpf, signature error
-        # TODO should we die here? Probably yes because one of 
-        # checksum file or signature file has changed!
-        tldie("$prg: verification of checksum for $location failed: $msg\n");
-      } elsif ($ret == $VS_EXPKEYSIG) {
-        # do nothing, try to get new tlpdb and hope sig is better?
-        debug("$prg: good signature bug gpg key expired, continuing anyway!\n");
-      } elsif ($ret == $VS_REVKEYSIG) {
-        # do nothing, try to get new tlpdb and hope sig is better?
-        debug("$prg: good signature but from revoked gpg key, continuing anyway!\n");
-      } elsif ($ret == $VS_VERIFIED) {
+      } elsif ($status == $VS_VERIFIED || $status == $VS_EXPKEYSIG || $status == $VS_REVKEYSIG) {
         $remotetlpdb = TeXLive::TLPDB->new(root => $location,
           tlpdbfile => $loc_copy_of_remote_tlpdb);
         $local_copy_tlpdb_used = 1;
-        # we did verify this tlpdb, make sure that is recorded
-        $remotetlpdb->is_verified(1);
-      } else {
-        tldie("$prg: unexpected return value from verify_checksum: $ret\n");
+        # if verification was successful, make sure that is recorded
+        $remotetlpdb->verification_status($status);
+        $remotetlpdb->is_verified($verified);
       }
+      # nothing to do in the else case
+      # we tldie already in the verify_checksum_and_check_return
+      # for all other cases
     }
   }
   if (!$local_copy_tlpdb_used) {
@@ -7471,9 +7461,9 @@ sub clear_old_backups {
       # only echo out if explicitly asked for verbose which is done
       # in the backup --clean action
       if ($verb) {
-        info ("Removing backup $backupdir/$e->[1]\n");
+        info("$prg: Removing backup $backupdir/$e->[1]\n");
       } else {
-        debug ("Removing backup $backupdir/$e->[1]\n");
+        debug("Removing backup $backupdir/$e->[1]\n");
       }
       unlink("$backupdir/$e->[1]") unless $dryrun;
     }
@@ -8409,7 +8399,7 @@ Synonym for L</info>.
 
 =item B<option [--json] [show]>
 
-=item B<option [--json] showall>
+=item B<option [--json] showall|help>
 
 =item B<option I<key> [I<value>]>
 
@@ -8420,7 +8410,8 @@ saved in the TLPDB with a short description and the C<key> used for
 changing it in parentheses.
 
 The second form, C<showall>, is similar, but also shows options which
-can be defined but are not currently set to any value.
+can be defined but are not currently set to any value (C<help> is a
+synonym).
 
 Both C<show...> forms take an option C<--json>, which dumps the option
 information in JSON format.  In this case, both forms dump the same
@@ -8435,7 +8426,7 @@ Possible values for I<key> are (run C<tlmgr option showall> for
 the definitive list):
 
  repository (default package repository),
- formats    (create formats at installation time),
+ formats    (generate formats at installation or update time),
  postcode   (run postinst code blobs)
  docfiles   (install documentation files),
  srcfiles   (install source files),
@@ -8460,7 +8451,8 @@ be used as a synonym for C<repository>.)
 
 If C<formats> is set (this is the default), then formats are regenerated
 when either the engine or the format files have changed.  Disable this
-only when you know how and want to regenerate formats yourself.
+only when you know how and want to regenerate formats yourself whenever
+needed (which is often, in practice).
 
 The C<postcode> option controls execution of per-package
 postinstallation action code.  It is set by default, and again disabling
@@ -9910,7 +9902,7 @@ user installations.
 
 =item C<TEXLIVE_COMPRESSOR>
 
-This option allows selecting a different compressor program for
+This variable allows selecting a different compressor program for
 backups and intermediate rollback containers. The order of selection is:
 
 =over 8
@@ -10001,14 +9993,13 @@ regardless of any setting.
 
 =back
 
-
 =head1 AUTHORS AND COPYRIGHT
 
 This script and its documentation were written for the TeX Live
 distribution (L<https://tug.org/texlive>) and both are licensed under the
 GNU General Public License Version 2 or later.
 
-$Id: tlmgr.pl 53225 2019-12-24 19:19:02Z karl $
+$Id: tlmgr.pl 53842 2020-02-19 07:28:40Z preining $
 =cut
 
 # test HTML version: pod2html --cachedir=/tmp tlmgr.pl >/tmp/tlmgr.html

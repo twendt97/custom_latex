@@ -7,7 +7,7 @@
 %% babel.dtx  (with options: `luatex')
 %% 
 %%
-%% Copyright (C) 2012-2019 Javier Bezos and Johannes L. Braams.
+%% Copyright (C) 2012-2020 Javier Bezos and Johannes L. Braams.
 %% Copyright (C) 1989-2012 Johannes L. Braams and
 %%           any individual authors listed elsewhere in this file.
 %% All rights reserved.
@@ -34,6 +34,9 @@
 
 \ifx\AddBabelHook\@undefined
 \bbl@trace{Read language.dat}
+\ifx\bbl@readstream\@undefined
+  \csname newread\endcsname\bbl@readstream
+\fi
 \begingroup
   \toks@{}
   \count@\z@ % 0=start, 1=0th, 2=normal
@@ -97,16 +100,16 @@
   \fi
   \def\bbl@elt#1#2#3#4{\@namedef{zth@#1}{}} % Define flags
   \bbl@languages
-  \openin1=language.dat
-  \ifeof1
+  \openin\bbl@readstream=language.dat
+  \ifeof\bbl@readstream
     \bbl@warning{I couldn't find language.dat. No additional\\%
                  patterns loaded. Reported}%
   \else
     \loop
       \endlinechar\m@ne
-      \read1 to \bbl@line
+      \read\bbl@readstream to \bbl@line
       \endlinechar`\^^M
-      \if T\ifeof1F\fi T\relax
+      \if T\ifeof\bbl@readstream F\fi T\relax
         \ifx\bbl@line\@empty\else
           \edef\bbl@line{\bbl@line\space\space\space}%
           \expandafter\bbl@process@line\bbl@line\relax
@@ -373,7 +376,7 @@
           quad = font.getfont(last_char.font).size
           for lg, rg in pairs(sea_ranges) do
             if last_char.char > rg[1] and last_char.char < rg[2] then
-              lg = lg:sub(1, 4)
+              lg = lg:sub(1, 4)  ^^ Remove trailing number of, eg, Cyrl1
               local intraspace = Babel.intraspaces[lg]
               local intrapenalty = Babel.intrapenalties[lg]
               local n
@@ -418,15 +421,14 @@
                 luatexbase.registernumber'bbl@attr@locale')
           local props = Babel.locale_props[LOCALE]
 
-          class = Babel.cjk_class[item.char].c
+          local class = Babel.cjk_class[item.char].c
 
           if class == 'cp' then class = 'cl' end % )] as CL
           if class == 'id' then class = 'I' end
 
+          local br = 0
           if class and last_class and Babel.cjk_breaks[last_class][class] then
             br = Babel.cjk_breaks[last_class][class]
-          else
-            br = 0
           end
 
           if br == 1 and props.linebreak == 'c' and
@@ -462,13 +464,13 @@
   \directlua{
     luatexbase.add_to_callback('hyphenate',
     function (head, tail)
-      if Babel.cjk_enabled then
-        Babel.cjk_linebreak(head)
-      end
       if Babel.linebreaking.before then
         for k, func in ipairs(Babel.linebreaking.before)  do
           func(head)
         end
+      end
+      if Babel.cjk_enabled then
+        Babel.cjk_linebreak(head)
       end
       lang.hyphenate(head)
       if Babel.linebreaking.after then
@@ -487,7 +489,7 @@
 \def\bbl@provide@intraspace{%
   \bbl@ifunset{bbl@intsp@\languagename}{}%
     {\expandafter\ifx\csname bbl@intsp@\languagename\endcsname\@empty\else
-       \bbl@xin@{\bbl@cs{sbcp@\languagename}}{Hant,Hans,Jpan,Kore,Kana}%
+       \bbl@xin@{\bbl@cs{lnbrk@\languagename}}{c}%
        \ifin@           % cjk
          \bbl@cjkintraspace
          \directlua{
@@ -552,6 +554,12 @@
 \bbl@trace{Font handling with fontspec}
 \@onlypreamble\babelfont
 \newcommand\babelfont[2][]{%  1=langs/scripts 2=fam
+  \bbl@foreach{#1}{%
+    \expandafter\ifx\csname date##1\endcsname\relax
+    \IfFileExists{babel-##1.tex}%
+      {\babelprovide{##1}}%
+      {}%
+    \fi}%
   \edef\bbl@tempa{#1}%
   \def\bbl@tempb{#2}%  Used by \bbl@bblfont
   \ifx\fontspec\@undefined
@@ -727,6 +735,99 @@
   \expandafter\addto\csname extras#1\endcsname{%
     \babel@save\bbl@langfeatures
     \edef\bbl@langfeatures{#2,}}}
+\directlua{
+Babel.script_blocks = {
+  ['Arab'] = {{0x0600, 0x06FF}, {0x08A0, 0x08FF}, {0x0750, 0x077F},
+              {0xFE70, 0xFEFF}, {0xFB50, 0xFDFF}, {0x1EE00, 0x1EEFF}},
+  ['Armn'] = {{0x0530, 0x058F}},
+  ['Beng'] = {{0x0980, 0x09FF}},
+  ['Cher'] = {{0x13A0, 0x13FF}, {0xAB70, 0xABBF}},
+  ['Cyrl'] = {{0x0400, 0x04FF}, {0x0500, 0x052F}, {0x1C80, 0x1C8F},
+              {0x2DE0, 0x2DFF}, {0xA640, 0xA69F}},
+  ['Deva'] = {{0x0900, 0x097F}, {0xA8E0, 0xA8FF}},
+  ['Ethi'] = {{0x1200, 0x137F}, {0x1380, 0x139F}, {0x2D80, 0x2DDF},
+              {0xAB00, 0xAB2F}},
+  ['Geor'] = {{0x10A0, 0x10FF}, {0x2D00, 0x2D2F}},
+  ['Grek'] = {{0x0370, 0x03FF}, {0x1F00, 0x1FFF}},
+  ['Hans'] = {{0x2E80, 0x2EFF}, {0x3000, 0x303F}, {0x31C0, 0x31EF},
+              {0x3300, 0x33FF}, {0x3400, 0x4DBF}, {0x4E00, 0x9FFF},
+              {0xF900, 0xFAFF}, {0xFE30, 0xFE4F}, {0xFF00, 0xFFEF},
+              {0x20000, 0x2A6DF}, {0x2A700, 0x2B73F},
+              {0x2B740, 0x2B81F}, {0x2B820, 0x2CEAF},
+              {0x2CEB0, 0x2EBEF}, {0x2F800, 0x2FA1F}},
+  ['Hebr'] = {{0x0590, 0x05FF}},
+  ['Jpan'] = {{0x3000, 0x303F}, {0x3040, 0x309F}, {0x30A0, 0x30FF},
+              {0x4E00, 0x9FAF}, {0xFF00, 0xFFEF}},
+  ['Khmr'] = {{0x1780, 0x17FF}, {0x19E0, 0x19FF}},
+  ['Knda'] = {{0x0C80, 0x0CFF}},
+  ['Kore'] = {{0x1100, 0x11FF}, {0x3000, 0x303F}, {0x3130, 0x318F},
+              {0x4E00, 0x9FAF}, {0xA960, 0xA97F}, {0xAC00, 0xD7AF},
+              {0xD7B0, 0xD7FF}, {0xFF00, 0xFFEF}},
+  ['Laoo'] = {{0x0E80, 0x0EFF}},
+  ['Latn'] = {{0x0000, 0x007F}, {0x0080, 0x00FF}, {0x0100, 0x017F},
+              {0x0180, 0x024F}, {0x1E00, 0x1EFF}, {0x2C60, 0x2C7F},
+              {0xA720, 0xA7FF}, {0xAB30, 0xAB6F}},
+  ['Mahj'] = {{0x11150, 0x1117F}},
+  ['Mlym'] = {{0x0D00, 0x0D7F}},
+  ['Mymr'] = {{0x1000, 0x109F}, {0xAA60, 0xAA7F}, {0xA9E0, 0xA9FF}},
+  ['Orya'] = {{0x0B00, 0x0B7F}},
+  ['Sinh'] = {{0x0D80, 0x0DFF}, {0x111E0, 0x111FF}},
+  ['Taml'] = {{0x0B80, 0x0BFF}},
+  ['Telu'] = {{0x0C00, 0x0C7F}},
+  ['Tfng'] = {{0x2D30, 0x2D7F}},
+  ['Thai'] = {{0x0E00, 0x0E7F}},
+  ['Tibt'] = {{0x0F00, 0x0FFF}},
+  ['Vaii'] = {{0xA500, 0xA63F}},
+  ['Yiii'] = {{0xA000, 0xA48F}, {0xA490, 0xA4CF}}
+}
+
+Babel.script_blocks.Hant = Babel.script_blocks.Hans
+Babel.script_blocks.Kana = Babel.script_blocks.Jpan
+
+function Babel.locale_map(head)
+  if not Babel.locale_mapped then return head end
+
+  local LOCALE = luatexbase.registernumber'bbl@attr@locale'
+  local GLYPH = node.id('glyph')
+  local inmath = false
+  for item in node.traverse(head) do
+    local toloc
+    if not inmath and item.id == GLYPH then
+      % Optimization: build a table with the chars found
+      if Babel.chr_to_loc[item.char] then
+        toloc = Babel.chr_to_loc[item.char]
+      else
+        for lc, maps in pairs(Babel.loc_to_scr) do
+          for _, rg in pairs(maps) do
+            if item.char >= rg[1] and item.char <= rg[2] then
+              Babel.chr_to_loc[item.char] = lc
+              toloc = lc
+              break
+            end
+          end
+        end
+      end
+      % Now, take action
+      if toloc and toloc > -1 then
+        if Babel.locale_props[toloc].lg then
+          item.lang = Babel.locale_props[toloc].lg
+          node.set_attribute(item, LOCALE, toloc)
+        end
+        if Babel.locale_props[toloc]['/'..item.font] then
+          item.font = Babel.locale_props[toloc]['/'..item.font]
+        end
+      end
+    elseif not inmath and item.id == 7 then
+      item.replace = item.replace and Babel.locale_map(item.replace)
+      item.pre     = item.pre and Babel.locale_map(item.pre)
+      item.post    = item.post and Babel.locale_map(item.post)
+    elseif item.id == node.id'math' then
+      inmath = (item.subtype == 0)
+    end
+  end
+  return head
+end
+}
 \newcommand\babelcharproperty[1]{%
   \count@=#1\relax
   \ifvmode
@@ -766,6 +867,12 @@
     Babel.Babel.cjk_characters[\the\count@]['c'] = '#1'
   }}
 \let\bbl@chprop@lb\bbl@chprop@linebreak
+\def\bbl@chprop@locale#1{%
+  \directlua{
+    Babel.chr_to_loc = Babel.chr_to_loc or {}
+    Babel.chr_to_loc[\the\count@] =
+      \bbl@ifblank{#1}{-1000}{\the\@nameuse{bbl@id@@#1}}\space
+  }}
 \begingroup
 \catcode`\#=12
 \catcode`\%=12
@@ -935,15 +1042,44 @@
     return head
   end
 
+  &% The following functions belong to the next macro
+
+  &% This table stores capture maps, numbered consecutively
+  Babel.capture_maps = {}
+
   function Babel.capture_func(key, cap)
     local ret = "[[" .. cap:gsub('{([0-9])}', "]]..m[%1]..[[") .. "]]"
+    ret = ret:gsub('{([0-9])|([^|]+)|(.-)}', Babel.capture_func_map)
     ret = ret:gsub("%[%[%]%]%.%.", '')
     ret = ret:gsub("%.%.%[%[%]%]", '')
     return key .. [[=function(m) return ]] .. ret .. [[ end]]
   end
+
+  function Babel.capt_map(from, mapno)
+    return Babel.capture_maps[mapno][from] or from
+  end
+
+  &% Handle the {n|abc|ABC} syntax in captures
+  function Babel.capture_func_map(capno, from, to)
+    local froms = {}
+    for s in string.utfcharacters(from) do
+      table.insert(froms, s)
+    end
+    local cnt = 1
+    table.insert(Babel.capture_maps, {})
+    local mlen = table.getn(Babel.capture_maps)
+    for s in string.utfcharacters(to) do
+      Babel.capture_maps[mlen][froms[cnt]] = s
+      cnt = cnt + 1
+    end
+    return "]]..Babel.capt_map(m[" .. capno .. "]," ..
+           (mlen) .. ").." .. "[["
+  end
+
 }
 \catcode`\#=6
 \gdef\babelposthyphenation#1#2#3{&%
+  \bbl@activateposthyphen
   \begingroup
     \def\babeltempa{\bbl@add@list\babeltempb}&%
     \let\babeltempb\@empty
@@ -976,6 +1112,11 @@
     }&%
   \endgroup}
 \endgroup
+\def\bbl@activateposthyphen{%
+  \let\bbl@activateposthyphen\relax
+  \directlua{
+    Babel.linebreaking.add_after(Babel.post_hyphenate_replace)
+  }}
 \bbl@trace{Redefinitions for bidi layout}
 \ifx\@eqnnum\@undefined\else
   \ifx\bbl@attr@dir\@undefined\else

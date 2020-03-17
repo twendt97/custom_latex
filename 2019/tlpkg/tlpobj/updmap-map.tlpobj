@@ -1,13 +1,13 @@
 name updmap-map
 category Package
-revision 53297
+revision 53971
 shortdesc auto-generated font map files
 longdesc These map files are regenerated every time a new font is added.
 longdesc There is no need to rebuild formats or update binaries because
 longdesc of such updates, hence this separate package.
-containersize 292620
-containerchecksum e678e0fdb9efef043e8f7e37fd470969f6124829fcbb1ae96b5d8dcfb056ba670b877449874621d346861ae81c678b12c9d548352e7d61d7cba48d44bf08e908
-runfiles size=8052
+containersize 300608
+containerchecksum 087753526998c68fa94dc86df6beebd6293dab9bf87f0969bb80f362b6d33215bd4f3b9baae5c8a22adbe0e3ecd5d1b8e4d0f71eab6cf6c1a932e7acbc94efbb
+runfiles size=8180
  texmf-dist/fonts/map/dvipdfmx/updmap/kanjix.map
  texmf-dist/fonts/map/dvips/updmap/builtin35.map
  texmf-dist/fonts/map/dvips/updmap/download35.map

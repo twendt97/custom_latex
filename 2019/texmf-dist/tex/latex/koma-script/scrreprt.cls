@@ -84,7 +84,7 @@
 %% find a complete unmodified copy of LaTeX2e at
 %% <http://mirror.ctan.org/tex-archive/macros/latex/base/>.
 %% 
-%%% From File: $Id: scrkernel-version.dtx 3444 2019-12-23 08:06:56Z kohm $
+%%% From File: $Id: scrkernel-version.dtx 3449 2020-01-24 07:28:10Z kohm $
 \begingroup
   \catcode`\@11\relax
   \ifx\KOMAScriptVersion\undefined
@@ -106,7 +106,7 @@
       \fi
     }
   \fi
-  \@CheckKOMAScriptVersion{2019/12/23 v3.28 KOMA-Script}%
+  \@CheckKOMAScriptVersion{2020/01/24 v3.29 KOMA-Script}%
 \endgroup
 \providecommand*{\scr@clsextension}{\@clsextension}
 \AtBeginDocument{%
@@ -121,16 +121,16 @@
   report%
 }
 \ProvidesClass{\KOMAClassName}[%
-  2019/12/23 v3.28 KOMA-Script
+  2020/01/24 v3.29 KOMA-Script
   document class (\ClassName)%
 ]
-%%% From File: $Id: scrkernel-basics.dtx 3409 2019-11-26 16:16:24Z kohm $
+%%% From File: $Id: scrkernel-basics.dtx 3448 2020-01-17 14:56:41Z kohm $
 %%%            (run: load)
 \RequirePackage{scrkbase}[\KOMAScriptVersion]
 %%% From File: $Id: scrkernel-listsof.dtx 3390 2019-11-18 17:09:35Z kohm $
 %%%            (run: prepare)
 \RequirePackage{tocbasic}[%
-  2019/12/23 v3.28 KOMA-Script
+  2020/01/24 v3.29 KOMA-Script
 ]
 \AtAddToTocList[\@currname.\@currext]{\setuptoc{\@currext}{onecolumn}}%
 \AtAddToTocList[ToC]{\setuptoc{\@currext}{onecolumn}}%
@@ -219,7 +219,7 @@
 \newcommand*{\size@paragraph}{}
 \newcommand*{\size@subparagraph}{}
 \newcommand*{\sectfont}{\normalcolor\@gr@gsffamily\bfseries}
-%%% From File: $Id: scrkernel-compatibility.dtx 3397 2019-11-20 10:26:14Z kohm $
+%%% From File: $Id: scrkernel-compatibility.dtx 3446 2020-01-06 16:31:11Z kohm $
 %%%            (run: init)
 \newcommand*
   {\scr@compatibility}{\scr@v@last}
@@ -295,10 +295,11 @@
 \@namedef{scr@v@3.27}{17}
 \@namedef{scr@v@3.27a}{17}
 \@namedef{scr@v@3.28}{17}
+\@namedef{scr@v@3.29}{17}
 \@namedef{scr@v@last}{17}
 %%% From File: $Id: scrkernel-typearea.dtx 3390 2019-11-18 17:09:35Z kohm $
 %%%            (run: init)
-%%% From File: $Id: scrkernel-compatibility.dtx 3397 2019-11-20 10:26:14Z kohm $
+%%% From File: $Id: scrkernel-compatibility.dtx 3446 2020-01-06 16:31:11Z kohm $
 %%%            (run: option)
 \newif\if@scr@emulatestandardclasses
 \let\scr@emulatestandardclassestrue\relax
@@ -2026,7 +2027,7 @@
   headings=big%
 }
 \KOMAProcessOptions\relax
-%%% From File: $Id: scrkernel-compatibility.dtx 3397 2019-11-20 10:26:14Z kohm $
+%%% From File: $Id: scrkernel-compatibility.dtx 3446 2020-01-06 16:31:11Z kohm $
 %%%            (run: body)
 %%% From File: $Id: scrkernel-fonts.dtx 3390 2019-11-18 17:09:35Z kohm $
 %%%            (run: body)

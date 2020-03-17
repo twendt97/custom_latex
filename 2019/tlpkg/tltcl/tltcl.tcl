@@ -1,6 +1,6 @@
 #!/usr/bin/env wish
 
-# Copyright 2018 Siep Kroonenberg
+# Copyright 2018-2020 Siep Kroonenberg
 
 # This file is licensed under the GNU General Public License version 2
 # or any later version.
@@ -541,6 +541,28 @@ proc native_slashify {s} {
     regsub -all {\\} $s {/} r
   }
   return $r
+}
+
+# test whether a directory is writable.
+# 'file writable' merely tests permissions, which may not be good enough
+proc dir_writable {d} {
+  for {set x 0} {$x<100} {incr x} {
+    set y [expr {int(10000*rand())}]
+    set newfile [file join $::instroot $y]
+    if [file exists $newfile] {
+      continue
+    } else {
+      set fid [open $newfile w]
+      chan close $fid
+      if [file exists $newfile] {
+        file delete $newfile
+        return 1
+      } else {
+        return 0
+      }
+    }
+  }
+  return 0
 }
 
 # unix: choose_dir replacing native directory browser

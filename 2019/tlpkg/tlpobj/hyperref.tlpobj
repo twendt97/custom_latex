@@ -1,6 +1,6 @@
 name hyperref
 category Package
-revision 53004
+revision 53837
 shortdesc Extensive support for hypertext in LaTeX
 longdesc The hyperref package is used to handle cross-referencing
 longdesc commands in LaTeX to produce hypertext links in the document.
@@ -12,15 +12,27 @@ longdesc TeX4ht; and for VTeX's pdf and HTML backends. The package is
 longdesc distributed with the backref and nameref packages, which make
 longdesc use of the facilities of hyperref. The package depends on the
 longdesc author's kvoptions, ltxcmds and refcount packages.
-depend url
+depend atbegshi
+depend bitset
+depend etexcmds
+depend gettitlestring
+depend intcalc
+depend kvdefinekeys
+depend kvsetkeys
+depend letltxmacro
+depend ltxcmds
+depend pdfescape
+depend refcount
+depend rerunfilecheck
 depend stringenc
-containersize 108788
-containerchecksum fe21577aedd87184b459fae696234ea46cbb686c6a5f2d6cea5571b5ac77eff271c3c7f5f063e4ca4aa03ec3838a1b64e29a2b9d172b3feee37e88707df4211b
-doccontainersize 3213732
-doccontainerchecksum 078981c76f882f6f97185127b9ef8304b536f71bf2d89e62a5d2fe86f298f3f3d0bc207facf9dd27c5a3b2be71d5dd42caacf9944ae4527236754f760c95907b
-srccontainersize 448456
-srccontainerchecksum 37c18dd02f154242f62e831adafebcce83318c803dae49ed6e126ba940b4790a2ca73afc3e1bac65bf97dfe8b36256e9764dcace17f74a073e83a721155652fb
-runfiles size=237
+depend url
+containersize 98212
+containerchecksum 2efe03b554745ebfdd0939ce93aef7cb048e296115b07129c5d0f16ebd91658bdf216830ee8ab6fcb06a5da72cdbbb148be65dab10d60a403985f79b262768ae
+doccontainersize 3066148
+doccontainerchecksum 15d78301321738026532c5bcf926f4e20d2eac8b66b87bd1b38b79b3785029f05f8abe4a0300d23f2bc68edd923bc0e49c01a32b81e6493faf3f2f04b2c11881
+srccontainersize 447404
+srccontainerchecksum 94763191d72329744ad2f76c08dfdce5d0b320a31788d13db61402a7d42284b002d35fb70ccb7272547e18a8482947cee1f3e2558a1d08c88990737eb84a3b8b
+runfiles size=215
  texmf-dist/tex/latex/hyperref/backref.sty
  texmf-dist/tex/latex/hyperref/hdvipdfm.def
  texmf-dist/tex/latex/hyperref/hdvips.def
@@ -35,7 +47,6 @@ runfiles size=237
  texmf-dist/tex/latex/hyperref/hvtexhtm.def
  texmf-dist/tex/latex/hyperref/hvtexmrk.def
  texmf-dist/tex/latex/hyperref/hxetex.def
- texmf-dist/tex/latex/hyperref/hylatex.ltx
  texmf-dist/tex/latex/hyperref/hyperref.sty
  texmf-dist/tex/latex/hyperref/hypertex.def
  texmf-dist/tex/latex/hyperref/minitoc-hyper.sty
@@ -54,4 +65,4 @@ catalogue-contact-home https://github.com/latex3/hyperref
 catalogue-ctan /macros/latex/contrib/hyperref
 catalogue-license lppl1.3
 catalogue-topics hyper pdf-feat adobe-distiller form-fillin
-catalogue-version 7.00c
+catalogue-version 7.00d

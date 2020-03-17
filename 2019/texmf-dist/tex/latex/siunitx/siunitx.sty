@@ -13,11 +13,11 @@
 %% See http://www.latex-project.org/lppl.txt
 %% ---------------------------------------------------------------
 %% 
-\RequirePackage{expl3}[2015/09/11]
+\RequirePackage{expl3}[2020/01/12]
 \RequirePackage{xparse}
-\ProvidesExplPackage {siunitx} {2019/10/10} {2.7t}
+\ProvidesExplPackage {siunitx} {2020/02/25} {2.8b}
   {A comprehensive (SI) units package}
-\@ifpackagelater { expl3 } { 2015/11/15 }
+\@ifpackagelater { expl3 } { 2020/01/12 }
   { }
   {
     \PackageError { siunitx } { Support~package~expl3~too~old }
@@ -69,41 +69,7 @@
 \bool_new:N \l__siunitx_error_bool
 \AtBeginDocument {
   \cs_if_free:cT { T@TS1 }
-    {
-      \DeclareFontEncoding { TS1 } { } { }
-      \DeclareFontSubstitution { TS1 } { cmr } { m } { n }
-    }
-}
-\DeclareTextSymbolDefault \c__siunitx_minus_tl { TS1 }
-\DeclareTextSymbol \c__siunitx_minus_tl { TS1 } { 61 }
-\AtBeginDocument {
-  \@ifpackageloaded { fontspec }
-    {
-      \@ifpackageloaded { eulervm }
-        { }
-        {
-          \int_const:Nn \c__siunitx_minus_int { 8722 }
-          \tl_set:Nn \c__siunitx_minus_tl
-            { \tex_char:D \c__siunitx_minus_int }
-        }
-    }
-    { }
-}
-\DeclareTextSymbol \c__siunitx_mu_tl { TS1 } { 181 }
-\DeclareTextSymbolDefault \c__siunitx_mu_tl { TS1 }
-\AtBeginDocument {
-  \@ifpackageloaded { fontspec }
-    {
-      \int_const:Nn \c__siunitx_mu_int { 181 }
-      \tl_set:Nn \c__siunitx_mu_tl { \tex_char:D \c__siunitx_mu_int }
-    }
-    { }
-}
-\tl_new:N \g__siunitx_omega_tl
-\tl_gset:Nn \g__siunitx_omega_tl { \Omega }
-\AtBeginDocument {
-  \cs_if_exist:NT \upOmega
-    { \tl_set:Nn \g__siunitx_omega_tl { \upOmega } }
+    { \RequirePackage { textcomp } }
 }
 \cs_new_protected:Npn \__siunitx_tl_put_left_math:Nn #1#2
   { \tl_put_left:Nn #1 { \ensuremath {#2} } }
@@ -327,8 +293,8 @@
       {
         \tl_if_empty_p:f
           {
-            \token_get_prefix_spec:N #1
-            \token_get_arg_spec:N    #1
+            \cs_prefix_spec:N   #1
+            \cs_argument_spec:N #1
           }
       }
       { \bool_not_p:n { \cs_if_exist_p:c { \cs_to_str:N #1 ~ } } }
@@ -354,7 +320,6 @@
         \__siunitx_option_unchanged:Nnn \l__siunitx_qualifier_mode_tl
           { subscript } { brackets }
         \keys_set:nn { siunitx } { mode = text }
-        \tl_set:Nn \c__siunitx_minus_tl { \HCode { &\#x2212; } }
       }
       { }
   }
@@ -836,7 +801,7 @@
 \cs_new_protected:Npn \__siunitx_print_text:
   {
     \tl_replace_all:Nnn \l__siunitx_print_arg_tl { - }
-      { \c__siunitx_minus_tl }
+      { \textminus }
     \__siunitx_print_text_aux:
     \tl_replace_all:Nnn \l__siunitx_print_arg_tl { \mp }
       { \ensuremath { \mp } }
@@ -911,7 +876,7 @@
 \cs_new_protected:Npn \__siunitx_print_text_super:n #1 {
   \tl_set:Nn \l__siunitx_tmpa_tl {#1}
   \tl_replace_all:Nnn \l__siunitx_tmpa_tl { - }
-    { \c__siunitx_minus_tl }
+    { \textminus }
   \tl_set:Nx \l__siunitx_tmpa_tl
     {
       \exp_not:N \ensuremath
@@ -4396,7 +4361,7 @@
 \cs_new_protected:Npn \__siunitx_protect_symbols:N #1 {
   \cs_if_exist:NT #1
     {
-      \tl_if_empty:fT { \token_get_prefix_spec:N #1 }
+      \tl_if_empty:fT { \cs_prefix_spec:N #1 }
         { \cs_set_protected:Npx #1 { \exp_not:V #1 } }
     }
 }
@@ -4939,7 +4904,10 @@
           \exp_not:N \PrintSuperscript
             {
               \__siunitx_unit_format_power_aux:n
-                { \exp_not:V \l__siunitx_tmpa_tl }
+                {
+                  \exp_after:wN \__siunitx_unit_format_power:w
+                    \l__siunitx_tmpa_tl . . \q_stop
+                }
             }
         }
     }
@@ -4955,10 +4923,19 @@
     {
       \tl_set:Nn \l__siunitx_tmpa_tl {#2}
       \tl_replace_all:Nnn \l__siunitx_tmpa_tl { - }
-        { \text { \c__siunitx_minus_tl } }
+        { \text { \textminus } }
       \__siunitx_print:nV {#1} \l__siunitx_tmpa_tl
    }
 }
+\cs_new:Npn \__siunitx_unit_format_power:w  #1 . #2 . #3 \q_stop
+  {
+    \exp_not:n {#1}
+    \tl_if_blank:nF {#2}
+      {
+        \exp_not:V \l__siunitx_output_decimal_tl
+        \exp_not:n {#2}
+      }
+  }
 \cs_new_protected:Npn \__siunitx_unit_format_power_brackets: {
   \tl_set:Nx \l__siunitx_tmpb_tl
     { bracket- \int_use:N \l__siunitx_unit_int }
@@ -6869,46 +6846,51 @@
   {
     \bool_if:NT \l__siunitx_redefine_symbols_bool
       {
-        \@ifpackageloaded { textcomp }
+        \@ifpackageloaded { fourier }
           {
-            \__siunitx_option_unchanged:Nnn \l__siunitx_degree_math_tl
-              { { } ^ { \circ } }
-              { \text { \textdegree } }
-            \__siunitx_option_unchanged:Nnn \l__siunitx_degree_text_tl
-              { \ensuremath { { } ^ { \circ } } }
-              { \textdegree }
-            \@ifpackageloaded { mathptmx }
-              { }
-              {
-                \__siunitx_option_unchanged:Nnn \l__siunitx_micro_text_tl
-                  { \c__siunitx_mu_tl }
-                  { \textmu }
-                \@ifpackageloaded { fourier }
-                  { }
-                  {
-                    \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_text_tl
-                      { \ensuremath { \g__siunitx_omega_tl } }
-                      { \textohm }
-                  }
-              }
-            \str_if_eq:VnT \encodingdefault { OT1 }
-              {
-                \__siunitx_option_unchanged:Nnn \l__siunitx_angstrom_math_tl
-                  { \text { \AA } }
-                  { \text { \capitalring { A } } }
-                \__siunitx_option_unchanged:Nnn \l__siunitx_angstrom_text_tl
-                  { \AA }
-                  { \capitalring { A } }
-              }
+            \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_text_tl
+              { \textohm }
+              { \text { \ensuremath { \l__siunitx_ohm_math_tl } } }
+          }
+          { }
+        \@ifpackageloaded { mathptmx }
+          {
+            \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_text_tl
+              { \textohm }
+              { \text { \ensuremath { \l__siunitx_ohm_math_tl } } }
+          }
+          { }
+        \str_if_eq:VnT \encodingdefault { OT1 }
+          {
+            \__siunitx_option_unchanged:Nnn \l__siunitx_angstrom_math_tl
+              { \text { \AA } }
+              { \text { \capitalring { A } } }
+            \__siunitx_option_unchanged:Nnn \l__siunitx_angstrom_text_tl
+              { \AA }
+              { \capitalring { A } }
+          }
+        \@ifpackageloaded { unicode-math }
+          {
+            \exp_args:NNnx
+              \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_math_tl
+              { \text { \ensuremath { \Omega } } }
+              {  \char_generate:nn { "03A9 } { 12 } }
           }
           { }
         \@ifpackageloaded { upgreek }
           {
             \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_math_tl
-              { \text { \ensuremath { \g__siunitx_omega_tl } } }
-              { \Upomega }
+              { \text { \ensuremath { \Omega } } }
+              { \text { \ensuremath { \Upomega } } }
           }
-          { }
+          {
+            \cs_if_exist:NT \upOmega
+              {
+                \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_math_tl
+                  { \text { \ensuremath { \Omega } } }
+                  { \text { \ensuremath { \upOmega } } }
+              }
+          }
       }
   }
 \keys_define:nn { siunitx } {
@@ -6924,10 +6906,10 @@
   math-angstrom  = \text { \AA },
   math-arcminute = { } ^ { \prime },
   math-arcsecond = { } ^ { \prime \prime },
-  math-celsius   = { } ^ { \circ } \kern - \scriptspace \__siunitx_unit_mathrm:n { C } ,
-  math-degree    = { } ^ { \circ },
-  math-micro     = \text { \c__siunitx_mu_tl },
-  math-ohm       = \text { \ensuremath { \g__siunitx_omega_tl } },
+  math-celsius   = \text { \textdegree } \__siunitx_unit_mathrm:n { C } ,
+  math-degree    = \text { \textdegree },
+  math-micro     = \text { \textmu },
+  math-ohm       = \text { \ensuremath { \Omega } },
 }
 \keys_define:nn { siunitx } {
   text-angstrom  .tl_set:N = \l__siunitx_angstrom_text_tl,
@@ -6942,11 +6924,10 @@
   text-angstrom  = \AA,
   text-arcminute = \ensuremath { { } ^ { \prime } },
   text-arcsecond = \ensuremath { { } ^ { \prime \prime } },
-  text-celsius   =
-    \ensuremath { { } ^ { \circ } } \kern -\scriptspace C ,
-  text-degree    = \ensuremath { { } ^ { \circ } },
-  text-micro     = \c__siunitx_mu_tl ,
-  text-ohm       = \ensuremath { \g__siunitx_omega_tl },
+  text-celsius   = \text { \textdegree } C,
+  text-degree    = \text { \textdegree },
+  text-micro     = \textmu ,
+  text-ohm       = \textohm
 }
 \cs_new_protected:Npn \__siunitx_symbol_new:n #1
   {
@@ -6955,7 +6936,7 @@
          \use:c
            {
              l__siunitx_
-             \str_fold_case:n {#1}
+             \str_foldcase:n {#1}
              _
              \mode_if_math:TF { math } { text }
              _tl
@@ -6969,80 +6950,6 @@
 \__siunitx_symbol_new:n { Degree }
 \__siunitx_symbol_new:n { Micro }
 \__siunitx_symbol_new:n { Ohm }
-\AtBeginDocument
-  {
-    \@ifpackageloaded { fontspec }
-      {
-        \int_const:Nn \c__siunitx_degree_int    { 176 }
-        \int_const:Nn \c__siunitx_micro_int     { "000B5 }
-        \int_const:Nn \c__siunitx_angstrom_int  { "0212B }
-        \int_const:Nn \c__siunitx_ohm_int       { "003A9 }
-        \sys_if_engine_xetex:T
-          {
-            \__siunitx_option_unchanged:Nnn \l__siunitx_angstrom_math_tl
-              { \text { \AA } }
-              { \tex_char:D \c__siunitx_angstrom_int }
-          }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_celsius_math_tl
-          { { } ^ { \circ } \kern - \scriptspace C }
-          {
-            \tex_char:D \c__siunitx_degree_int
-            C
-          }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_degree_math_tl
-          { { } ^ { \circ } }
-          { \tex_char:D \c__siunitx_degree_int }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_micro_math_tl
-          { \text { \c__siunitx_mu_tl } }
-          { \tex_char:D \c__siunitx_micro_int }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_math_tl
-          { \text { \ensuremath { \g__siunitx_omega_tl } } }
-          { \tex_char:D \c__siunitx_ohm_int }
-        \sys_if_engine_xetex:T
-          {
-            \__siunitx_option_unchanged:Nnn \l__siunitx_angstrom_text_tl
-              { \AA }
-              { \tex_char:D \c__siunitx_angstrom_int }
-          }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_celsius_text_tl
-          {
-            \ensuremath
-              { { } ^ { \circ } \kern - \scriptspace C }
-          }
-          {
-            \tex_char:D \c__siunitx_degree_int
-            C
-          }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_degree_text_tl
-          { \ensuremath { { } ^ { \circ } } }
-          { \tex_char:D \c__siunitx_degree_int }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_micro_text_tl
-          { \c__siunitx_mu_tl }
-          { \tex_char:D \c__siunitx_micro_int }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_ohm_text_tl
-          { \ensuremath { \g__siunitx_omega_tl } }
-          { \tex_char:D \c__siunitx_ohm_int }
-      }
-      { }
-    \@ifpackageloaded { unicode-math }
-      {
-        \int_const:Nn \c__siunitx_arcminute_int { 8242 }
-        \int_const:Nn \c__siunitx_arcsecond_int { 8243 }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_arcminute_math_tl
-          { { } ^ { \prime } }
-          { \ensuremath { \tex_char:D \c__siunitx_arcminute_int } }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_arcsecond_math_tl
-          { { } ^ { \prime \prime } }
-          { \ensuremath { \tex_char:D \c__siunitx_arcsecond_int } }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_arcminute_text_tl
-          { \ensuremath { { } ^ { \prime } } }
-          { \ensuremath { \tex_char:D \c__siunitx_arcminute_int } }
-        \__siunitx_option_unchanged:Nnn \l__siunitx_arcsecond_text_tl
-          { \ensuremath { { } ^ { \prime \prime } } }
-          { \ensuremath { \tex_char:D \c__siunitx_arcsecond_int } }
-      }
-      { }
-  }
 \clist_new:N \l__siunitx_pgf_link_clist
 \cs_new_protected:Npn \__siunitx_pgf_link: {
   \clist_clear:N \l__siunitx_pgf_link_clist
@@ -7418,7 +7325,7 @@
     \cs_set:Npn \SIUnitSymbolCelsius   { \textcelsius }
     \cs_set:Npn \SIUnitSymbolDegree    { \textdegree }
     \cs_set:Npn \SIUnitSymbolMicro     { \textmu }
-    \cs_set:Npn \SIUnitSymbolOhm       { [ohm] }
+    \cs_set:Npn \SIUnitSymbolOhm       { \textohm }
   }
 \DeclareExpandableDocumentCommand \numInBookmark { o m } {#2}
 \DeclareExpandableDocumentCommand \numrangeInBookmark { o m m }
@@ -7724,7 +7631,7 @@
     { \__siunitx_unit_create_functions: }
     { \__siunitx_unit_create_empty_functions: }
 }
-%% Copyright (C) 2008-2019 by
+%% Copyright (C) 2008-2020 by
 %%   Joseph Wright <joseph.wright@morningstar2.co.uk>
 %% 
 %% It may be distributed and/or modified under the conditions of

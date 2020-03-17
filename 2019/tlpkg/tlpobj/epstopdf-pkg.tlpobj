@@ -1,18 +1,18 @@
 name epstopdf-pkg
 category Package
-revision 53070
+revision 53546
 shortdesc Call epstopdf "on the fly"
 longdesc The package adds support for EPS files in the graphicx package
 longdesc when running under pdfTeX. If an EPS graphic is detected, the
 longdesc package spawns a process to convert the EPS to PDF, using the
 longdesc script epstopdf. This of course requires that shell escape is
 longdesc enabled for the pdfTeX run.
-containersize 4200
-containerchecksum 92c2c7cbe4ad5c02a41522ef1d938d8ea1a9a30d0b7cd8a92b1fa4b9404690c00695a92ce951456460cae5c73f66fd2694fc63089ed05f8ea49a7ce9cb003dee
-doccontainersize 353844
-doccontainerchecksum 7b641b38853600e893e336b1b5333acc22a01ef060ec0636b5fd54ec63f29e14633e1fbfd3e88e6a10792e7415889a6e41cefde19b7ac2d1a6112591bf69e8b4
-srccontainersize 11944
-srccontainerchecksum 13667a0d7ec0e7e7b82a374c35f05ef4f1b0083499eab02107b430c8a4ebe21904d0004ed33a9c807497f4ae06a2c830eb8bb26bfafb298d8cd6a10c7ab89adb
+containersize 4180
+containerchecksum 3e2177a1c6cbf8850026f981ce3ec5e6a24c4fdf8c40716e3f18ba7233cc7a5115e5b74d60aa077575f41bafc58af966ab55c189de4d06863ab2a38551ff0dca
+doccontainersize 354368
+doccontainerchecksum c098251d55112c0c630e007c85d1c7271e32bba9443ca3c2590b51987053e945e3c52030ef4bd1f6758894cc263e9316bc31683572bd07c24fd0855f01c68be4
+srccontainersize 11992
+srccontainerchecksum 0816a754b15e42d6f43ef333c6f508988c861c04f7f6f53a370777ca85633a981948c10a13f3180797c1f5af1ed156b60a29c608d7387a53756f2e440f38bd99
 runfiles size=6
  texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
  texmf-dist/tex/latex/epstopdf-pkg/epstopdf.sty
@@ -22,4 +22,4 @@ catalogue-contact-repository https://github.com/ho-tex/epstopdf
 catalogue-ctan /macros/latex/contrib/epstopdf-pkg
 catalogue-license lppl1.3
 catalogue-topics graphics-epspdf callback
-catalogue-version 2.10
+catalogue-version 2.11

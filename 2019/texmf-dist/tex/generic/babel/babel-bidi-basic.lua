@@ -7,7 +7,7 @@
 -- babel.dtx  (with options: `basic')
 -- 
 --
--- Copyright (C) 2012-2019 Javier Bezos and Johannes L. Braams.
+-- Copyright (C) 2012-2020 Javier Bezos and Johannes L. Braams.
 -- Copyright (C) 1989-2012 Johannes L. Braams and
 --           any individual authors listed elsewhere in this file.
 -- All rights reserved.
@@ -43,12 +43,6 @@ Babel.fontmap[2] = {}      -- al/an
 
 Babel.bidi_enabled = true
 Babel.mirroring_enabled = true
-
--- Temporary:
-
-if harf then
-  Babel.mirroring_enabled = false
-end
 
 require('babel-data-bidi.lua')
 
@@ -340,7 +334,10 @@ function Babel.bidi(head, ispar, hdir)
         item = nodes[r][1]    -- MIRRORING
         if Babel.mirroring_enabled and item.id == GLYPH
              and temp == 'r' and characters[item.char] then
-          item.char = characters[item.char].m or item.char
+          local font_mode = font.fonts[item.font].properties.mode
+          if font_mode ~= 'harf' and font_mode ~= 'plug' then
+            item.char = characters[item.char].m or item.char
+          end
         end
       end
       first_on = nil

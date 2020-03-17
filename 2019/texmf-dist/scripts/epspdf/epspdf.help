@@ -24,23 +24,26 @@ Epspdf and epspdftk
 5 Troubleshooting
   5.1 No options for output format visible
   5.2 Ghostscript stackunderflow error
-  5.3 Part of the graphic gets cut off
-  5.4 Fonts look ugly
-  5.5 The page has been converted to a bitmap
-  5.6 Temporary files are not removed
-  5.7 Resources for troubleshooting
+  5.3 Error message mentioning failure of pdf_crop
+  5.4 Wrong boundingbox (.eps or .ps output)
+  5.5 Part of the graphic gets cut off
+  5.6 Fonts look ugly
+  5.7 The page has been converted to a bitmap
+  5.8 Temporary files are not removed
+  5.9 Resources for troubleshooting
 Appendix A Requirements
 Appendix B Change history
-  B.1 Version 6.4
-  B.2 Version 0.6
-  B.3 Version 0.5
-  B.4 Version 0.4
+  B.1 Version 0.6.5
+  B.2 Version 0.6.4
+  B.3 Version 0.6
+  B.4 Version 0.5
+  B.5 Version 0.4
 Epspdf and epspdftk
 *******************
 
-This manual is for epspdf and epspdftk, version 0.6.4.
+This manual is for epspdf and epspdftk, version 0.6.5.
 
-Copyright (C) 2006-2019 Siep Kroonenberg.
+Copyright (C) 2006-2020 Siep Kroonenberg.
 
      Copying and distribution of this file, with or without
      modification, are permitted in any medium without royalty provided
@@ -116,6 +119,9 @@ in this screen.  Epspdf looks for a number of PostScript- and pdf
 viewers, from which you can select one, but you can also enter one
 manually.
 
+Some viewers require a plugin for eps and PostScript.  The GUI does not
+check whether such a plugin is actually installed.
+
 For Windows and Mac OS there is no such configuration option.  Epspdf
 will use the program associated with the file type, which can be
 configured outside epspdf.
@@ -163,7 +169,7 @@ elaborate command-line interface.
 
 Below, we assume that there is a suitable wrapper or symlink for epspdf
 on your searchpath.  This is the case if you installed epspdf as a TeX
-Live package.
+Live- or MiKTeX package.
 
 Basic usage of epspdf itself:
 
@@ -346,14 +352,26 @@ when converting to pdf: selecting "printer" as target may lead to an
 error 'stackunderflow in .setdistillerparams'.  If you run into this,
 use the "default" or "prepress" target instead.
 
-5.3 Part of the graphic gets cut off
+5.3 Error message mentioning failure of pdf_crop
+================================================
+
+Problably, the luatex format has not been generated.  Fix this with TeX
+Live Manager or with the MiKTeX Console.
+
+5.4 Wrong boundingbox (.eps or .ps output)
+==========================================
+
+This may be a bug in pdftops.  Do not use pdftops (epspdftk: see
+configuration screen; command-line epspdf: use the "-I" option)
+
+5.5 Part of the graphic gets cut off
 ====================================
 
-If the PostScript file was generated with the Windows PostScript driver,
-experiment with the PostScript Output option.  Don't choose Optimize for
-Speed.
+If the PostScript file was generated with the old Windows PostScript
+driver, experiment with the PostScript Output option.  Don't choose
+Optimize for Speed.
 
-5.4 Fonts look ugly
+5.6 Fonts look ugly
 ===================
 
 If Ghostscript has to do the conversion from pdf to ps then text may not
@@ -362,7 +380,7 @@ tend to do better in this respect than older ones, but as to preserving
 fonts, the pdftops utility may still handle more cases.  It is part of
 the xpdf suite and of the Poppler utilities.
 
-5.5 The page has been converted to a bitmap
+5.7 The page has been converted to a bitmap
 ===========================================
 
 The usual cause is that the page contains features such as transparency
@@ -371,7 +389,7 @@ which are not supported by the target format.
 Otherwise, set pdf target use and target version both to "default" to
 avoid unnecessary conversions: '-T default -N default'
 
-5.6 Temporary files are not removed
+5.8 Temporary files are not removed
 ===================================
 
    * Command-line: make sure that you did not specify the option '-d'.
@@ -382,7 +400,7 @@ avoid unnecessary conversions: '-T default -N default'
      However, you should have no trouble removing temporary files
      manually.
 
-5.7 Resources for troubleshooting
+5.9 Resources for troubleshooting
 =================================
 
 Logfile.  The GUI has a button for viewing log output.  This same output
@@ -429,8 +447,18 @@ creates a menu shortcut and an uninstaller.
 Appendix B Change history
 *************************
 
-B.1 Version 6.4
-===============
+B.1 Version 0.6.5
+=================
+
+Epspdf: Compatibility change for ghostscript 9.50 and later.
+
+Epspdftk: improvements to viewer selection; does not impact Windows or
+MacOS.
+
+A few updates to the manual, mostly for the troubleshooting section.
+
+B.2 Version 0.6.4
+=================
 
 Compatibility changes for luatex 1.9 and later.
 
@@ -443,7 +471,7 @@ The GUI now requires Tcl/Tk version 8.5 or higher.  On Windows,
 epspdf.tlu is now invoked via a batchfile.  This should prevent black
 console windows popping up.
 
-B.2 Version 0.6
+B.3 Version 0.6
 ===============
 
 The command-line backend component has been rewritten in texlua and
@@ -462,7 +490,7 @@ The current version has no provisions for custom Ghostscript- or pdftops
 parameters.  The corresponding command-line options are accepted but
 have no effect.
 
-B.3 Version 0.5
+B.4 Version 0.5
 ===============
 
 The GUI has been rewritten in Tcl/Tk, removing the dependence on the
@@ -496,7 +524,7 @@ the desired pdf version.
 
 The "-info" option now also prints the number of pages for pdf files.
 
-B.4 Version 0.4
+B.5 Version 0.4
 ===============
 
 Hi-res boundingboxes are now supported.  By default, conversion from eps

@@ -7,7 +7,7 @@
 %% babel.dtx  (with options: `xetex')
 %% 
 %%
-%% Copyright (C) 2012-2019 Javier Bezos and Johannes L. Braams.
+%% Copyright (C) 2012-2020 Javier Bezos and Johannes L. Braams.
 %% Copyright (C) 1989-2012 Johannes L. Braams and
 %%           any individual authors listed elsewhere in this file.
 %% All rights reserved.
@@ -113,6 +113,12 @@
 \bbl@trace{Font handling with fontspec}
 \@onlypreamble\babelfont
 \newcommand\babelfont[2][]{%  1=langs/scripts 2=fam
+  \bbl@foreach{#1}{%
+    \expandafter\ifx\csname date##1\endcsname\relax
+    \IfFileExists{babel-##1.tex}%
+      {\babelprovide{##1}}%
+      {}%
+    \fi}%
   \edef\bbl@tempa{#1}%
   \def\bbl@tempb{#2}%  Used by \bbl@bblfont
   \ifx\fontspec\@undefined

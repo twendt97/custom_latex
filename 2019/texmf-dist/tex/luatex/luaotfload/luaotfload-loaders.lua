@@ -8,8 +8,8 @@
 
 local ProvidesLuaModule = { 
     name          = "luaotfload-loaders",
-    version       = "3.11",       --TAGVERSION
-    date          = "2019-11-10", --TAGDATE
+    version       = "3.12",       --TAGVERSION
+    date          = "2020-02-02", --TAGDATE
     description   = "luaotfload submodule / callback handling",
     license       = "GPL v2.0"
 }
@@ -120,10 +120,20 @@ end
 
 local definers --- (string, spec -> size -> id -> tmfdata) hash_t
 do
-  local read = fonts.definers.read
+  local ctx_read = fonts.definers.read
+  local register = fonts.definers.register
+  local function read(specification, size, id)
+    local tfmdata = ctx_read(specification, size, id)
+    if not tfmdata or id or tonumber(tfmdata) then
+      return tfmdata
+    end
+    id = font.define(tfmdata)
+    register(tfmdata, id)
+    return id
+  end
 
   local patch = function (specification, size, id)
-    local fontdata = read (specification, size, id)
+    local fontdata = ctx_read (specification, size, id)
 ----if not fontdata then not_found_msg (specification, size, id) end
     if type (fontdata) == "table" and fontdata.encodingbytes == 2 then
       --- We need to test for `encodingbytes` to avoid passing
@@ -133,7 +143,12 @@ do
     else
       luatexbase.call_callback ("luaotfload.patch_font_unsafe", fontdata, specification, id)
     end
-    return fontdata
+    if not fontdata or id or tonumber(fontdata) then
+      return fontdata
+    end
+    id = font.define(fontdata)
+    register(fontdata, id)
+    return id
   end
 
   local mk_info = function (name)
@@ -209,9 +224,11 @@ local install_callbacks = function ()
   create_callback ("luaotfload.patch_font",        "simple", dummy_function)
   create_callback ("luaotfload.patch_font_unsafe", "simple", dummy_function)
   purge_define_font ()
-  local definer = config.luaotfload.run.definer
+  local definer = config.luaotfload.run.definer or "patch"
+  local selected_definer = definers[definer]
+  luaotfload.define_font = selected_definer
   luatexbase.add_to_callback ("define_font",
-                              definers[definer or "patch"],
+                              selected_definer,
                               "luaotfload.define_font",
                               1)
   return true

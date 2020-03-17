@@ -12,7 +12,7 @@
 %% 
 %% 
 %% graphicx.dtx Copyright (C) 1994      David Carlisle Sebastian Rahtz
-%%              Copyright (C) 1995-2019 David Carlisle, LaTeX3 Project
+%%              Copyright (C) 1995-2020 David Carlisle, LaTeX3 Project
 %%
 %% This file is part of the Standard LaTeX `Graphics Bundle'.
 %% It may be distributed under the terms of the LaTeX Project Public
@@ -21,7 +21,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{graphicx}
-          [2017/06/01 v1.1a  Enhanced LaTeX Graphics (DPC,SPQR)]
+          [2019/11/30 v1.2a  Enhanced LaTeX Graphics (DPC,SPQR)]
 \DeclareOption{unknownkeysallowed}
   {\PassOptionsToPackage\CurrentOption{keyval}}
 \DeclareOption*{\PassOptionsToPackage\CurrentOption{graphics}}
@@ -236,7 +236,7 @@
        \the\toks@
      \endgroup
      \fi}
-\def\rotatebox{%
+\protected\def\rotatebox{%
   \leavevmode
   \@ifnextchar[\Grot@box@kv\Grot@box@std}
 \long\def\Grot@box@std#1#2{%

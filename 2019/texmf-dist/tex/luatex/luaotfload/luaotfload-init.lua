@@ -7,8 +7,8 @@
 
 local ProvidesLuaModule = { 
     name          = "luaotfload-init",
-    version       = "3.11",       --TAGVERSION
-    date          = "2019-11-10", --TAGDATE
+    version       = "3.12",       --TAGVERSION
+    date          = "2020-02-02", --TAGDATE
     description   = "luaotfload submodule / initialization",
     license       = "GPL v2.0"
 }
@@ -190,6 +190,22 @@ local load_context_modules = function (pth)
     end
   end
 
+end
+
+local function verify_context_dir (pth)
+  if lfsisdir(file.join(pth, ltx)) then
+    return true
+  end
+  for _, d in ipairs(ctx) do
+    if lfsisdir(file.join(pth, d)) then
+      return true
+    end
+  end
+  logreport("both", 0, "init", "A directory name has been passed as \z
+    fontloader name but this directory does not acutally seem to contain \z
+    a font loader. I will try to interpret your fontloader name in another \z
+    way for now, but please fix your settings.")
+  return false
 end
 
 local function init_main(early_hook)
@@ -374,7 +390,7 @@ local function init_main(early_hook)
                "Loading Context modules in lookup path.")
     load_context_modules ()
 
-  elseif lfsisdir (fontloader) then
+  elseif lfsisdir (fontloader) and verify_context_dir (fontloader) then
     logreport ("log", 0, "init",
                "Loading Context files under prefix “%s”.",
                fontloader)
@@ -439,6 +455,7 @@ local init_post_install_callbacks = function ()
       direction = tex.get'textdir'
     end
     domultiscript(head, nil, nil, nil, direction)
+    dofallback(head, nil, nil, nil, direction)
     return handler(head, groupcode, nil, nil, direction)
   end
   luatexbase.add_to_callback("pre_linebreak_filter",

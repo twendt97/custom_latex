@@ -12,7 +12,7 @@
 %% 
 %% 
 %% color.dtx Copyright (C) 1994--1999 David Carlisle
-%%           Copyright (C) 2005-2019 David Carlisle, LaTeX3 Project
+%%           Copyright (C) 2005-2020 David Carlisle, LaTeX3 Project
 %%
 %% This file is part of the Standard LaTeX `Graphics Bundle'.
 %% It may be distributed under the terms of the LaTeX Project Public
@@ -23,7 +23,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesPackage{color}
-          [2016/07/10 v1.1e Standard LaTeX Color (DPC)]
+          [2019/11/23 v1.2a Standard LaTeX Color (DPC)]
 \edef\Gin@codes{%
  \catcode`\noexpand\^^A\the\catcode`\^^A\relax
  \catcode`\noexpand\"\the\catcode`\"\relax
@@ -98,28 +98,28 @@
      \csname\string\color @#1\endcsname
      \set@color}%
   \ignorespaces}
-\def\textcolor#1#{\@textcolor{#1}}
+\protected\def\textcolor#1#{\@textcolor{#1}}
 \def\@textcolor#1#2#3{\protect\leavevmode{\color#1{#2}#3}}
-\def\pagecolor{%
+\protected\def\pagecolor{%
   \begingroup
       \let\ignorespaces\endgroup
       \let\set@color\set@page@color
       \color}
-\def\nopagecolor{%
+\protected\def\nopagecolor{%
   \@ifundefined{no@page@color}{%
     \PackageInfo{color}{\string\nopagecolor\space is not supported}%
   }{%
     \no@page@color
   }%
 }
-\def\definecolor#1#2#3{%
+\protected\def\definecolor#1#2#3{%
   \@ifundefined{color@#2}%
     {\c@lor@error{model `#2'}}%
     {\@ifundefined{\string\color @#1}{}%
       {\PackageInfo{color}{Redefining color #1}}%
      \csname color@#2\expandafter\endcsname
          \csname\string\color @#1\endcsname{#3}}}
-\def\DefineNamedColor#1#2#3#4{%
+\protected\def\DefineNamedColor#1#2#3#4{%
   \@ifundefined{define@color@#1}%
     {\c@lor@error{model `#1'}}%
     {\@ifundefined{color@#3}%
@@ -148,13 +148,13 @@
   \@ifundefined{ver@\Gin@driver}{\input{\Gin@driver}}{}
 \fi
 \@ifundefined{c@lor@namefile}{}{\input{\c@lor@namefile}}
-\def\normalcolor{\let\current@color\default@color\set@color}
+\protected\def\normalcolor{\let\current@color\default@color\set@color}
 \AtBeginDocument{\let\default@color\current@color}
 \def\color@block#1#2#3{%
   {\set@color\rlap{\ifcolors@\vrule\@width#1\@height#2\@depth#3\fi}}}
-\def\colorbox#1#{\color@box{#1}}
+\protected\def\colorbox#1#{\color@box{#1}}
 \def\color@box#1#2{\color@b@x\relax{\color#1{#2}}}
-\def\fcolorbox#1#{\color@fbox{#1}}
+\protected\def\fcolorbox#1#{\color@fbox{#1}}
 \def\color@fbox#1#2#3{%
   \color@b@x{\fboxsep\z@\color#1{#2}\fbox}{\color#1{#3}}}
 

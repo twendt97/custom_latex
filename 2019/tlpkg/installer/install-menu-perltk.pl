@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
-# $Id: install-menu-perltk.pl 53076 2019-12-10 06:20:44Z preining $
+# $Id: install-menu-perltk.pl 53428 2020-01-16 23:29:27Z karl $
 #
-# Copyright 2008-2014 Norbert Preining
+# Copyright 2008-2020 Norbert Preining
 # Copyright 2008 Reinhard Kotucha
 # This file is licensed under the GNU General Public License version 2
 # or any later version.
@@ -9,7 +9,7 @@
 use strict;
 $^W = 1;
 
-my $svnrev = '$Revision: 53076 $';
+my $svnrev = '$Revision: 53428 $';
 $svnrev =~ m/: ([0-9]+) /;
 $::menurevision = ($1 ? $1 : 'unknown');
 
