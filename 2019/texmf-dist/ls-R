@@ -2526,6 +2526,7 @@ txsymbol.mf
 amsfonts
 cm
 cmextra
+esint
 etex
 euro-ce
 eurosym
@@ -2763,6 +2764,11 @@ gen.mf
 gen10.mf
 gen8.mf
 gen9.mf
+
+./fonts/source/public/esint:
+bigint.mf
+esint10.mf
+mathint.mf
 
 ./fonts/source/public/etex:
 xbmc10.mf
@@ -4007,6 +4013,7 @@ msyr.tfm
 amsfonts
 cm
 cmextra
+esint
 etex
 euro-ce
 eurosym
@@ -4233,6 +4240,9 @@ diam12.tfm
 gen10.tfm
 gen8.tfm
 gen9.tfm
+
+./fonts/tfm/public/esint:
+esint10.tfm
 
 ./fonts/tfm/public/etex:
 xbmc10.tfm
@@ -10741,6 +10751,7 @@ xstring.sty
 xstring.tex
 
 ./tex/latex:
+accents
 amsfonts
 amsmath
 atveryend
@@ -10753,11 +10764,15 @@ bookmark
 breakurl
 caption
 carlisle
+chemgreek
 chngcntr
 cite
 cm-super
 courier
+csquotes
+enumitem
 epstopdf-pkg
+esint
 eso-pic
 etex-pkg
 etoolbox
@@ -10791,6 +10806,7 @@ lm
 logreq
 marvosym
 mflogo
+mhchem
 microtype
 minted
 ms
@@ -10825,6 +10841,9 @@ xcolor
 xkeyval
 zapfchan
 zapfding
+
+./tex/latex/accents:
+accents.sty
 
 ./tex/latex/amsfonts:
 amsfonts.sty
@@ -10866,6 +10885,7 @@ t1uag.fd
 ts1uag.fd
 
 ./tex/latex/base:
+_region_.tex
 alltt.sty
 ansinew.def
 applemac.def
@@ -11180,6 +11200,9 @@ remreset.sty
 scalefnt.sty
 slashed.sty
 
+./tex/latex/chemgreek:
+chemgreek.sty
+
 ./tex/latex/chngcntr:
 chngcntr.sty
 
@@ -11200,9 +11223,22 @@ ot1ucr.fd
 t1ucr.fd
 ts1ucr.fd
 
+./tex/latex/csquotes:
+csq-compat.def
+csquotes.cfg
+csquotes.def
+csquotes.sty
+
+./tex/latex/enumitem:
+enumitem.sty
+
 ./tex/latex/epstopdf-pkg:
 epstopdf-base.sty
 epstopdf.sty
+
+./tex/latex/esint:
+esint.sty
+uesint.fd
 
 ./tex/latex/eso-pic:
 eso-pic.sty
@@ -11542,6 +11578,11 @@ umvs.fd
 ./tex/latex/mflogo:
 mflogo.sty
 ulogo.fd
+
+./tex/latex/mhchem:
+hpstatement.sty
+mhchem.sty
+rsphrase.sty
 
 ./tex/latex/microtype:
 letterspace.sty

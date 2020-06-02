@@ -183,3 +183,14 @@
 [Tue Mar 17 21:48:48 2020] install: wasysym
 [Tue Mar 17 21:48:48 2020] install: zapfchan
 [Tue Mar 17 21:48:48 2020] install: collection-fontsrecommended
+[Fri Mar 27 10:41:40 2020] install: csquotes
+[Fri Mar 27 12:59:49 2020] install: enumitem
+[Tue Jun  2 14:46:07 2020] install: esint
+[Tue Jun  2 14:47:25 2020] install: chemgreek
+[Tue Jun  2 14:47:25 2020] install: mhchem
+[Tue Jun  2 14:47:37 2020] install: accents
+[Tue Jun  2 14:47:50 2020] failed install: listings
+[Tue Jun  2 14:48:03 2020] failed install: listings
+[Tue Jun  2 14:48:45 2020] failed install: listings
+[Tue Jun  2 14:51:03 2020] failed install: listings
+[Tue Jun  2 14:52:41 2020] failed install: listings

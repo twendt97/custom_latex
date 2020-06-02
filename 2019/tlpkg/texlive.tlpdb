@@ -21,6 +21,26 @@ depend opt_file_assocs:1
 depend opt_desktop_integration:1
 depend setting_available_architectures:x86_64-linux
 
+name accents
+category Package
+revision 51497
+shortdesc Multiple mathematical accents
+longdesc A package for multiple accents in mathematics, with nice
+longdesc features concerning the creation of accents and placement of
+longdesc scripts.
+containersize 2956
+containerchecksum 738e8299148365c0441495664cd97b408b181d192adb718adeacc93d4c63b7e81c12541746777571f3fd0da37348905269b5d7ecfc2d58f88174cd53edbe56b3
+doccontainersize 239048
+doccontainerchecksum 50e5cd01da80113ef3247c4a7c7da703d4a9c3df68822b31ff734da2d755f5fd2bf9f5f8982d84e3628e96905276dfe6cc6699bb625ff1dadbe810b11bf5a35b
+runfiles size=2
+ texmf-dist/tex/latex/accents/accents.sty
+catalogue-contact-home http://www.texnia.com/
+catalogue-contact-repository https://github.com/jbezos
+catalogue-ctan /macros/latex/contrib/accents
+catalogue-license mit
+catalogue-topics maths
+catalogue-version 1.4
+
 name amsfonts
 category Package
 revision 29208
@@ -2442,6 +2462,25 @@ catalogue-ctan /fonts/charter
 catalogue-license other-free
 catalogue-topics font font-serif font-type1
 
+name chemgreek
+category Package
+revision 53437
+shortdesc Upright Greek letters in chemistry
+longdesc The package provides upright Greek letters in support of other
+longdesc chemistry packages (such as chemmacros). The package used to be
+longdesc distributed as a part of chemmacros.
+containersize 7120
+containerchecksum 8e70154271fb921ad9edf6ab5f8a21ce7c229723f88d7e37fe17aedb189c67a5749ea9e622c2dcebeedd614efbf18b9138e0219aea998f7a8ab3087348afa788
+doccontainersize 714860
+doccontainerchecksum 69ef091ed42bb40826af81c9a4ce5536873a5debd971d70d30804f75a3240bc1aea037817cdc42346537cd025306c928fa347938785af9e69022ef51fba20d2d
+runfiles size=12
+ texmf-dist/tex/latex/chemgreek/chemgreek.sty
+catalogue-contact-repository https://github.com/cgnieder/chemgreek/
+catalogue-ctan /macros/latex/contrib/chemgreek
+catalogue-license lppl1.3
+catalogue-topics chemistry
+catalogue-version 1.1a
+
 name chngcntr
 category Package
 revision 47577
@@ -3896,6 +3935,39 @@ catalogue-also tex-gyre
 catalogue-ctan /fonts/urw/base35
 catalogue-license gpl
 catalogue-topics font font-type1 font-collection
+
+name csquotes
+category Package
+revision 53041
+shortdesc Context sensitive quotation facilities
+longdesc This package provides advanced facilities for inline and
+longdesc display quotations. It is designed for a wide range of tasks
+longdesc ranging from the most simple applications to the more complex
+longdesc demands of formal quotations. The facilities include commands,
+longdesc environments, and user-definable 'smart quotes' which
+longdesc dynamically adjust to their context. Quotation marks are
+longdesc switched automatically if quotations are nested and they can be
+longdesc adjusted to the current language if the babel package is
+longdesc available. There are additional facilities designed to cope
+longdesc with the more specific demands of academic writing, especially
+longdesc in the humanities and the social sciences. All quote styles as
+longdesc well as the optional active quotes are freely configurable. The
+longdesc package is dependent on e-TeX, and requires the author's
+longdesc etoolbox package.
+depend etoolbox
+containersize 17904
+containerchecksum 541cefb84ffcb6a398c18d01cab5d7c96bfaa82841b9439c1f77f3b2b4904e0a37fe2e2b355777e4552fdff3ebb054daae9d9d9a6c7436746f44917095be119c
+doccontainersize 315108
+doccontainerchecksum 84407b58454e4e4b235d93b01bef99f7a20a5de4ebac4990c9e00694a14dd67debe27afb6f3a079040330af3ab186db11f1150e97fa9511e782e55c4abe52bcf
+runfiles size=25
+ texmf-dist/tex/latex/csquotes/csq-compat.def
+ texmf-dist/tex/latex/csquotes/csquotes.cfg
+ texmf-dist/tex/latex/csquotes/csquotes.def
+ texmf-dist/tex/latex/csquotes/csquotes.sty
+catalogue-ctan /macros/latex/contrib/csquotes
+catalogue-license lppl1.3c
+catalogue-topics quote-marks etex
+catalogue-version 5.2j
 
 name dehyph
 category Package
@@ -5399,6 +5471,30 @@ catalogue-ctan /systems/enctex
 catalogue-license gpl
 catalogue-topics engine
 
+name enumitem
+category Package
+revision 51423
+shortdesc Control layout of itemize, enumerate, description
+longdesc This package provides user control over the layout of the three
+longdesc basic list environments: enumerate, itemize and description. It
+longdesc supersedes both enumerate and mdwlist (providing
+longdesc well-structured replacements for all their funtionality), and
+longdesc in addition provides functions to compute the layout of labels,
+longdesc and to 'clone' the standard environments, to create new
+longdesc environments with counters of their own.
+containersize 13756
+containerchecksum d49701368b0ce611f5cfb52ec06616edc27b2dedb99230983ffc59c4c1eadc265a8afd3c94f1e57920de875c4ec684fec007dceca59fd4f4008bb5572c13880c
+doccontainersize 163332
+doccontainerchecksum b61f62bb0da61c7124f661739ebfaff6147d73899511d8b1a1d4b98b31bc596c3994acfd73c3c1922f5cc8a05c6a98572254067718be394c48976a10b2351503
+runfiles size=13
+ texmf-dist/tex/latex/enumitem/enumitem.sty
+catalogue-contact-home http://www.texnia.com/enumitem.html
+catalogue-contact-repository https://github.com/jbezos/enumitem
+catalogue-ctan /macros/latex/contrib/enumitem
+catalogue-license mit
+catalogue-topics list
+catalogue-version 3.9
+
 name epspdf
 category Package
 revision 53472
@@ -5499,6 +5595,36 @@ containerchecksum a14c6953be481ae60c1b6ff8657a26cc13cb7c994ca2f003f3c3c4da98032c
 binfiles arch=x86_64-linux size=2
  bin/x86_64-linux/epstopdf
  bin/x86_64-linux/repstopdf
+
+name esint
+category Package
+revision 52240
+shortdesc Extended set of integrals for Computer Modern
+longdesc The esint package permits access to alternate integral symbols
+longdesc when you are using the Computer Modern fonts. In the original
+longdesc set, several integral symbols are missing, such as \oiint. Many
+longdesc of these symbols are available in other font sets (pxfonts,
+longdesc txfonts, etc.), but there is no good solution if you want to
+longdesc use Computer Modern. The package provides Metafont source and
+longdesc LaTeX macro support.
+containersize 5760
+containerchecksum d0eda90d6a890b7813648516f21e3a88213b1374df0c418895301354de402b9634492a1fd89193f34c6db6b9fcc0cdd0f8f46472e0e3a210234c7d8cab1bbed8
+doccontainersize 58132
+doccontainerchecksum aeeaafe3746b8fd75ba80fc36b1610a3e4f7c7f26044ca82c2c8091139e0294275a1dde9dd73fb3e5b013ff04e4d0f26422e8c2a44a88beab167353e7686b3fe
+srccontainersize 6560
+srccontainerchecksum 242e864b822f5deac76740d7a00edab9b6ff77e260b3e1adb6676dda009a8c200b9352e87998b76ac3047f0eacb9bd5ef87ac554c7c20ae649e91f1fcad889b2
+runfiles size=18
+ texmf-dist/fonts/source/public/esint/bigint.mf
+ texmf-dist/fonts/source/public/esint/esint10.mf
+ texmf-dist/fonts/source/public/esint/mathint.mf
+ texmf-dist/fonts/tfm/public/esint/esint10.tfm
+ texmf-dist/tex/latex/esint/esint.sty
+ texmf-dist/tex/latex/esint/uesint.fd
+catalogue-also esint-type1
+catalogue-ctan /macros/latex/contrib/esint
+catalogue-license lppl
+catalogue-topics font font-symbol-maths font-mf font-supp
+catalogue-version 1.2d
 
 name eso-pic
 category Package
@@ -9508,6 +9634,37 @@ binfiles arch=x86_64-linux size=145
  bin/x86_64-linux/mft
  bin/x86_64-linux/pktogf
  bin/x86_64-linux/pktype
+
+name mhchem
+category Package
+revision 52662
+shortdesc Typeset chemical formulae/equations and Risk and Safety phrases
+longdesc The bundle provides three packages: The mhchem package provides
+longdesc commands for typesetting chemical molecular formulae and
+longdesc equations. The hpstatement package provides commands for the
+longdesc official hazard statements and precautionary statements (H and
+longdesc P statements) that are used to label chemicals. The rsphrase
+longdesc package provides commands for the official Risk and Safety (R
+longdesc and S) Phrases that are used to label chemicals. The package
+longdesc requires the expl3 bundle.
+depend amsmath
+depend chemgreek
+depend graphics
+depend l3kernel
+depend l3packages
+depend tools
+containersize 51516
+containerchecksum 32c9a82b2c4f6c2ca5a48d3f781206e4384df91a13d2ee8f7f5ad0ee5ff454e6c70c545eb576b4d8431cda581ed1f8ccd57dbd22d281d764c4872fef28c6626f
+doccontainersize 285504
+doccontainerchecksum 5911b5548fa03abf787ca009b08553e3e575bb0d6601f36d878d7541e5e5cea0fcfceb5c3c69e6459f3aa6b791f8090bc244edb35c116112230bc5928b15f901
+runfiles size=109
+ texmf-dist/tex/latex/mhchem/hpstatement.sty
+ texmf-dist/tex/latex/mhchem/mhchem.sty
+ texmf-dist/tex/latex/mhchem/rsphrase.sty
+catalogue-also r-und-s
+catalogue-ctan /macros/latex/contrib/mhchem
+catalogue-license lppl1.3c
+catalogue-topics safety-notice chemistry
 
 name microtype
 category Package
